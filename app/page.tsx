@@ -1,18 +1,19 @@
 import Link from 'next/link';
-import { ArrowRight, Phone, CheckCircle, ChevronRight } from 'lucide-react';
+import { ArrowRight, Phone, CheckCircle, ChevronRight, Newspaper, BookOpen, BookMarked, FileText, UtensilsCrossed, CreditCard, MonitorPlay } from 'lucide-react';
 import { loadPageContent, getRequestSiteId } from '@/lib/content';
 import homeDataFallback from '@/data/home.json';
+import type { LucideIcon } from 'lucide-react';
 
 type HomeData = typeof homeDataFallback;
 
-const categoryIcons: Record<string, string> = {
-  'newspaper-printing': '📰',
-  'magazine-printing': '📖',
-  'book-printing': '📚',
-  'marketing-print': '📄',
-  'menu-printing': '🍽️',
-  'business-cards': '💳',
-  'large-format': '🖼️',
+const categoryIcons: Record<string, { Icon: LucideIcon; color: string; bg: string }> = {
+  'newspaper-printing':  { Icon: Newspaper,       color: 'text-blue-600',   bg: 'bg-blue-50'   },
+  'magazine-printing':   { Icon: BookOpen,         color: 'text-purple-600', bg: 'bg-purple-50' },
+  'book-printing':       { Icon: BookMarked,       color: 'text-green-600',  bg: 'bg-green-50'  },
+  'marketing-print':     { Icon: FileText,         color: 'text-orange-600', bg: 'bg-orange-50' },
+  'menu-printing':       { Icon: UtensilsCrossed,  color: 'text-rose-600',   bg: 'bg-rose-50'   },
+  'business-cards':      { Icon: CreditCard,       color: 'text-yellow-700', bg: 'bg-yellow-50' },
+  'large-format':        { Icon: MonitorPlay,      color: 'text-teal-600',   bg: 'bg-teal-50'   },
 };
 
 export default async function HomePage() {
@@ -79,24 +80,32 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {categories.map((cat) => (
-              <Link
-                key={cat.slug}
-                href={`/products/${cat.slug}`}
-                className="group bg-white rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300 border border-[var(--border)] hover:border-[var(--gold)] hover:-translate-y-1"
-              >
-                <div className="text-4xl mb-4">{categoryIcons[cat.slug]}</div>
-                <h3 className="font-serif font-semibold text-[var(--navy)] text-lg mb-2 group-hover:text-[var(--gold)] transition-colors">
-                  {cat.name}
-                </h3>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
-                  {cat.desc}
-                </p>
-                <div className="flex items-center gap-1 text-sm font-semibold text-[var(--gold)] group-hover:gap-2 transition-all">
-                  Learn More <ChevronRight className="w-4 h-4" />
-                </div>
-              </Link>
-            ))}
+            {categories.map((cat) => {
+              const meta = categoryIcons[cat.slug];
+              const IconComponent = meta?.Icon;
+              return (
+                <Link
+                  key={cat.slug}
+                  href={`/products/${cat.slug}`}
+                  className="group bg-white rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300 border border-[var(--border)] hover:border-[var(--gold)] hover:-translate-y-1 flex flex-col"
+                >
+                  {IconComponent && (
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 flex-shrink-0 ${meta.bg}`}>
+                      <IconComponent className={`w-6 h-6 ${meta.color}`} />
+                    </div>
+                  )}
+                  <h3 className="font-serif font-semibold text-[var(--navy)] text-lg mb-2 group-hover:text-[var(--gold)] transition-colors">
+                    {cat.name}
+                  </h3>
+                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-4 flex-1">
+                    {cat.desc}
+                  </p>
+                  <div className="flex items-center gap-1 text-sm font-semibold text-[var(--gold)] group-hover:gap-2 transition-all mt-auto">
+                    Learn More <ChevronRight className="w-4 h-4" />
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -135,9 +144,17 @@ export default async function HomePage() {
             {portfolio.map((item, index) => (
               <div key={index} className="group rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 border border-[var(--border)]">
                 <div className="h-48 bg-gradient-to-br from-[var(--navy)] to-[var(--charcoal)] flex items-center justify-center">
-                  <span className="text-4xl opacity-30">
-                    {categoryIcons[item.category === 'Newspapers' ? 'newspaper-printing' : item.category === 'Magazines' ? 'magazine-printing' : item.category === 'Books' ? 'book-printing' : 'menu-printing']}
-                  </span>
+                  {(() => {
+                    const slugMap: Record<string, string> = {
+                      Newspapers: 'newspaper-printing', Magazines: 'magazine-printing',
+                      Books: 'book-printing', Menus: 'menu-printing',
+                      'Marketing Print': 'marketing-print', 'Business Cards': 'business-cards',
+                      'Large Format': 'large-format',
+                    };
+                    const meta = categoryIcons[slugMap[item.category] || 'marketing-print'];
+                    const IC = meta?.Icon;
+                    return IC ? <IC className="w-14 h-14 text-white opacity-20" /> : null;
+                  })()}
                 </div>
                 <div className="p-5">
                   <span className="text-xs font-semibold text-[var(--gold)] uppercase tracking-wider">
