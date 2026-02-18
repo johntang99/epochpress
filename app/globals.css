@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+
+  --navy: #0F1B2D;
+  --navy-dark: #080F1A;
+  --navy-light: #1A2E4A;
+  --charcoal: #2C3E50;
+  --gold: #B8860B;
+  --gold-light: #D4A843;
+  --gold-50: #FDF8EC;
+  --white: #FFFFFF;
+  --surface: #F8F9FA;
+  --text-primary: #1A1A2E;
+  --text-secondary: #5A6977;
+  --border: #E2E8F0;
+  --success: #1B7340;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-inter);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair);
+    color: var(--navy);
+  }
+
+  * {
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  /* Focus styles for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Minimum tap target size */
+  button, a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  a[class*="block"], a[class*="flex"] {
+    min-height: unset;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer utilities {
+  .container-content {
+    @apply mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 lg:py-24;
+  }
+
+  .section-padding-sm {
+    @apply py-10 lg:py-16;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-navy-gradient {
+    background: linear-gradient(135deg, #0F1B2D 0%, #1A2E4A 100%);
+  }
+
+  .bg-gold-gradient {
+    background: linear-gradient(135deg, #B8860B 0%, #D4A843 100%);
+  }
+
+  /* Prevent horizontal scroll on mobile */
+  .container-content {
+    @apply mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8;
+    width: 100%;
+  }
+
+  /* Prose styles for blog body */
+  .prose p { margin-bottom: 1.25rem; }
+  .prose h2 { font-family: var(--font-playfair); color: var(--navy); margin-top: 2rem; margin-bottom: 1rem; font-size: 1.5rem; }
+  .prose h3 { font-family: var(--font-playfair); color: var(--navy); margin-top: 1.5rem; margin-bottom: 0.75rem; font-size: 1.2rem; }
+  .prose ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { margin-bottom: 0.4rem; color: var(--text-secondary); }
+  .prose strong { color: var(--navy); }
+}

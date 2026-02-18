@@ -1,0 +1,43 @@
+{
+  "brand": {
+    "name": "Epoch Press",
+    "logoText": "EP",
+    "description": "Premium commercial printing for publishers, businesses, and agencies. Quality that speaks for itself."
+  },
+  "contact": {
+    "phone": "(212) 555-0100",
+    "phoneLink": "tel:+12125550100",
+    "email": "info@epochpress.com",
+    "emailLink": "mailto:info@epochpress.com",
+    "addressLines": [
+      "123 Press Way",
+      "New York, NY 10001"
+    ]
+  },
+  "hours": [
+    "Mon–Fri: 8:00 AM – 6:00 PM",
+    "Sat: 9:00 AM – 2:00 PM"
+  ],
+  "services": [
+    { "text": "Newspaper Printing", "url": "/products/newspaper-printing" },
+    { "text": "Magazine Printing", "url": "/products/magazine-printing" },
+    { "text": "Book Printing", "url": "/products/book-printing" },
+    { "text": "Marketing Print", "url": "/products/marketing-print" },
+    { "text": "Menu Printing", "url": "/products/menu-printing" },
+    { "text": "Business Cards", "url": "/products/business-cards" },
+    { "text": "Large Format", "url": "/products/large-format" }
+  ],
+  "quickLinks": [
+    { "text": "About Us", "url": "/about" },
+    { "text": "Portfolio", "url": "/portfolio" },
+    { "text": "Blog", "url": "/blog" },
+    { "text": "File Guidelines", "url": "/file-guidelines" },
+    { "text": "FAQ", "url": "/faq" },
+    { "text": "Contact", "url": "/contact" }
+  ],
+  "copyright": "© {year} Epoch Press. All rights reserved.",
+  "legalLinks": [
+    { "text": "Privacy Policy", "url": "/privacy" },
+    { "text": "Terms of Service", "url": "/terms" }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "sites": [
+    {
+      "id": "epoch-press",
+      "name": "Epoch Press",
+      "domain": "epochpress.com",
+      "enabled": true,
+      "defaultLocale": "en",
+      "supportedLocales": ["en"],
+      "createdAt": "2026-02-18T00:00:00Z",
+      "updatedAt": "2026-02-18T00:00:00Z"
+    }
+  ]
+}

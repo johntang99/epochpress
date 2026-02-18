@@ -1,0 +1,84 @@
+{
+  "products": {
+    "newspaper-printing": {
+      "label": "Newspapers",
+      "fields": [
+        { "id": "format", "label": "Format", "type": "radio", "options": ["Broadsheet", "Tabloid", "Berliner"] },
+        { "id": "pageCount", "label": "Number of Pages", "type": "number", "placeholder": "e.g. 16" },
+        { "id": "paperStock", "label": "Paper Stock", "type": "select", "options": ["Newsprint 30#", "Improved Newsprint 35#", "Premium Newsprint 40#"] },
+        { "id": "color", "label": "Color", "type": "radio", "options": ["Black & White", "Full Color", "Color Cover + B&W Interior"] },
+        { "id": "quantity", "label": "Quantity", "type": "number", "placeholder": "e.g. 5000" },
+        { "id": "frequency", "label": "Frequency", "type": "radio", "options": ["One-time", "Weekly", "Monthly", "Other"] },
+        { "id": "turnaround", "label": "Desired Turnaround", "type": "select", "options": ["Standard (3–5 days)", "Rush (48 hours)", "Flexible"] }
+      ]
+    },
+    "magazine-printing": {
+      "label": "Magazines",
+      "fields": [
+        { "id": "binding", "label": "Binding Type", "type": "radio", "options": ["Saddle Stitch", "Perfect Bind", "Spiral", "Case Bound"] },
+        { "id": "pageCount", "label": "Page Count", "type": "number", "placeholder": "e.g. 64" },
+        { "id": "coverFinish", "label": "Cover Finish", "type": "select", "options": ["Gloss UV", "Matte Laminate", "Soft Touch", "Spot UV"] },
+        { "id": "quantity", "label": "Quantity", "type": "number", "placeholder": "e.g. 1000" },
+        { "id": "turnaround", "label": "Turnaround", "type": "select", "options": ["Standard (7–10 days)", "Rush (3–5 days)", "Flexible"] }
+      ]
+    },
+    "book-printing": {
+      "label": "Books",
+      "fields": [
+        { "id": "binding", "label": "Binding", "type": "radio", "options": ["Perfect Bound (Softcover)", "Case Bound (Hardcover)", "Spiral", "Saddle Stitch"] },
+        { "id": "pageCount", "label": "Page Count", "type": "number", "placeholder": "e.g. 200" },
+        { "id": "coverFinish", "label": "Cover Finish", "type": "select", "options": ["Gloss Laminate", "Matte Laminate", "Soft Touch"] },
+        { "id": "interior", "label": "Interior", "type": "radio", "options": ["Black & White", "Full Color", "Mixed (Color Sections)"] },
+        { "id": "quantity", "label": "Quantity", "type": "number", "placeholder": "e.g. 500" },
+        { "id": "turnaround", "label": "Turnaround", "type": "select", "options": ["Standard (10–14 days)", "Rush (5–7 days)", "Flexible"] }
+      ]
+    },
+    "business-cards": {
+      "label": "Business Cards",
+      "fields": [
+        { "id": "quantity", "label": "Quantity", "type": "radio", "options": ["250", "500", "1000", "2500", "5000", "Custom"] },
+        { "id": "stock", "label": "Paper Stock", "type": "radio", "options": ["Standard 14pt", "Premium 16pt", "Ultra 32pt"] },
+        { "id": "finish", "label": "Finish", "type": "radio", "options": ["Gloss", "Matte", "Silk", "Uncoated", "Soft Touch"] },
+        { "id": "effects", "label": "Special Effects", "type": "checkbox", "options": ["None", "Foil Stamping", "Embossing", "Spot UV", "Raised Ink", "Die-Cut"] },
+        { "id": "sides", "label": "Sides", "type": "radio", "options": ["Single-sided", "Double-sided"] },
+        { "id": "turnaround", "label": "Turnaround", "type": "radio", "options": ["Standard (3–5 days)", "Rush (2–3 days)"] }
+      ]
+    },
+    "marketing-print": {
+      "label": "Marketing Print",
+      "fields": [
+        { "id": "product", "label": "Product Type", "type": "select", "options": ["Flyers", "Brochures", "Postcards", "Posters", "Banners"] },
+        { "id": "size", "label": "Size", "type": "select", "options": ["Letter (8.5×11)", "Legal (8.5×14)", "Tabloid (11×17)", "5×7 Postcard", "4×6 Postcard", "Custom"] },
+        { "id": "fold", "label": "Fold Type", "type": "select", "options": ["No Fold", "Bi-fold", "Tri-fold", "Z-fold", "Gate-fold"] },
+        { "id": "paper", "label": "Paper", "type": "select", "options": ["80 lb Gloss Text", "100 lb Gloss Text", "100 lb Cover / 14pt", "80 lb Uncoated"] },
+        { "id": "quantity", "label": "Quantity", "type": "number", "placeholder": "e.g. 1000" },
+        { "id": "turnaround", "label": "Turnaround", "type": "select", "options": ["Standard (3–5 days)", "Rush (48–72 hours)", "Flexible"] }
+      ]
+    },
+    "menu-printing": {
+      "label": "Menu Printing",
+      "fields": [
+        { "id": "style", "label": "Menu Style", "type": "radio", "options": ["Dine-in", "Takeout/Delivery", "Trifold", "Oversized"] },
+        { "id": "lamination", "label": "Lamination", "type": "radio", "options": ["Gloss Laminate", "Matte Laminate", "Soft Touch", "No Lamination"] },
+        { "id": "quantity", "label": "Quantity", "type": "number", "placeholder": "e.g. 100" },
+        { "id": "turnaround", "label": "Turnaround", "type": "select", "options": ["Standard (3–5 days)", "Rush (48 hours)", "Flexible"] }
+      ]
+    },
+    "large-format": {
+      "label": "Large Format",
+      "fields": [
+        { "id": "product", "label": "Product Type", "type": "select", "options": ["Vinyl Banner", "Fabric Display", "Foam Board", "Acrylic", "Wall Graphic", "Retractable Banner"] },
+        { "id": "size", "label": "Size", "type": "text", "placeholder": "e.g. 4ft × 8ft or custom dimensions" },
+        { "id": "material", "label": "Material", "type": "select", "options": ["13 oz Vinyl (standard)", "18 oz Vinyl (heavy duty)", "Mesh Vinyl (wind-resistant)", "Polyester Fabric", "Coroplast (rigid)"] },
+        { "id": "quantity", "label": "Quantity", "type": "number", "placeholder": "e.g. 5" },
+        { "id": "turnaround", "label": "Turnaround", "type": "select", "options": ["Standard (3–5 days)", "Rush (24–48 hours)", "Flexible"] }
+      ]
+    },
+    "other": {
+      "label": "Other / Not Sure",
+      "fields": [
+        { "id": "description", "label": "Project Description", "type": "textarea", "placeholder": "Tell us about your project — what you need, approximate quantities, and any special requirements." }
+      ]
+    }
+  }
+}

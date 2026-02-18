@@ -1,0 +1,28 @@
+{
+  "headline": "About Epoch Press",
+  "subline": "25 years of printing excellence. Trusted by publishers, businesses, and agencies across the United States.",
+  "story": [
+    "Epoch Press was founded in 1999 by master printer Thomas Yuen with a single sheet-fed offset press and a commitment to uncompromising quality. What began as a small neighborhood print shop grew into one of the Northeast's leading commercial print facilities.",
+    "Today, Epoch Press operates a 60,000 sq ft state-of-the-art facility in New York, producing over 50 million pages annually for publishers, restaurants, agencies, and corporations nationwide.",
+    "We believe print endures. In an age of digital noise, a well-printed piece commands attention, conveys credibility, and creates lasting impressions. That belief drives every job that runs through our presses."
+  ],
+  "equipment": [
+    { "name": "Web Offset Presses", "capability": "High-volume newspaper and publication printing", "stat": "Up to 80,000 impressions/hour" },
+    { "name": "Sheet-Fed Offset Presses", "capability": "Magazines, books, high-quality marketing", "stat": "Up to 18,000 sheets/hour" },
+    { "name": "Digital Presses", "capability": "Short runs, variable data, POD", "stat": "1,200 DPI output quality" },
+    { "name": "Wide Format Printers", "capability": "Banners, signage, displays up to 10ft wide", "stat": "UV-resistant weatherproof inks" },
+    { "name": "Finishing Equipment", "capability": "Binding, folding, laminating, die-cutting", "stat": "Full inline finishing" }
+  ],
+  "certifications": [
+    { "name": "ISO 9001:2015", "desc": "Certified quality management system" },
+    { "name": "FSC Certified", "desc": "Forest Stewardship Council chain of custody" },
+    { "name": "G7 Color Certified", "desc": "Consistent color across presses and runs" },
+    { "name": "USPS Certified Mailer", "desc": "Direct mail production and processing" }
+  ],
+  "stats": [
+    { "value": "1999", "label": "Founded" },
+    { "value": "60K sq ft", "label": "Production Facility" },
+    { "value": "500+", "label": "Active Clients" },
+    { "value": "50M+", "label": "Pages Per Year" }
+  ]
+}

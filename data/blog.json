@@ -1,0 +1,78 @@
+{
+  "categories": [
+    { "id": "all", "name": "All Posts" },
+    { "id": "industry-trends", "name": "Industry Trends" },
+    { "id": "print-tips", "name": "Print Tips" },
+    { "id": "our-services", "name": "Our Services" },
+    { "id": "case-studies", "name": "Case Studies" },
+    { "id": "sustainability", "name": "Sustainability" }
+  ],
+  "posts": [
+    {
+      "slug": "offset-vs-digital-printing-2025",
+      "title": "Offset vs. Digital Printing in 2025: Which Is Right for Your Project?",
+      "excerpt": "With digital printing technology advancing rapidly, the choice between offset and digital is no longer simply about quantity. We break down the real differences.",
+      "category": "industry-trends",
+      "type": "article",
+      "readTime": "7 min read",
+      "publishDate": "2026-02-10",
+      "featured": true,
+      "tags": ["offset", "digital", "printing technology"]
+    },
+    {
+      "slug": "preparing-files-for-newspaper-printing",
+      "title": "How to Prepare Print-Ready Files for Newspaper Printing",
+      "excerpt": "Newspaper printing has unique file requirements. From resolution to newsprint paper profiles, here's everything you need to know before submitting.",
+      "category": "print-tips",
+      "type": "article",
+      "readTime": "5 min read",
+      "publishDate": "2026-02-05",
+      "featured": false,
+      "tags": ["newspaper", "file prep", "print-ready"]
+    },
+    {
+      "slug": "magazine-cover-design-trends-2026",
+      "title": "Magazine Cover Design Trends Shaping 2026",
+      "excerpt": "From bold typography to interactive QR integrations, magazine cover design is evolving fast. We look at what the top publishers are doing.",
+      "category": "industry-trends",
+      "type": "article",
+      "readTime": "6 min read",
+      "publishDate": "2026-01-28",
+      "featured": false,
+      "tags": ["magazine", "design trends", "2026"]
+    },
+    {
+      "slug": "restaurant-menu-printing-guide",
+      "title": "The Complete Guide to Restaurant Menu Printing",
+      "excerpt": "Dine-in, takeout, or digital-hybrid — what menu format works best for your restaurant? We cover paper types, lamination, and design tips.",
+      "category": "our-services",
+      "type": "article",
+      "readTime": "8 min read",
+      "publishDate": "2026-01-20",
+      "featured": false,
+      "tags": ["menu", "restaurant", "printing guide"]
+    },
+    {
+      "slug": "metro-daily-herald-case-study",
+      "title": "Case Study: How We Helped Metro Daily Herald Scale from 20K to 60K Copies",
+      "excerpt": "When a regional newspaper needed to triple its print run in under 90 days, Epoch Press stepped in with a dedicated press plan and guaranteed SLA.",
+      "category": "case-studies",
+      "type": "article",
+      "readTime": "5 min read",
+      "publishDate": "2026-01-15",
+      "featured": true,
+      "tags": ["case study", "newspaper", "scale"]
+    },
+    {
+      "slug": "fsc-certified-paper-printing",
+      "title": "Why FSC-Certified Paper Matters for Your Brand",
+      "excerpt": "Sustainable printing isn't just good for the environment — it's good for business. We explain our FSC certification and how it benefits your clients.",
+      "category": "sustainability",
+      "type": "article",
+      "readTime": "4 min read",
+      "publishDate": "2026-01-08",
+      "featured": false,
+      "tags": ["sustainability", "FSC", "green printing"]
+    }
+  ]
+}

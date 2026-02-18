@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "headline": "Premium Printing. Exceptional Results.",
+    "subline": "Full-service commercial printing for publishers, businesses, and agencies across the US. Newspapers, magazines, books, marketing print, and more.",
+    "primaryCta": { "text": "Get a Quote", "href": "/quote" },
+    "secondaryCta": { "text": "Call Us: (212) 555-0100", "href": "tel:+12125550100" },
+    "badge": "25+ Years of Print Excellence"
+  },
+  "categories": [
+    { "name": "Newspapers", "slug": "newspaper-printing", "desc": "Broadsheet, tabloid, community papers and inserts" },
+    { "name": "Magazines", "slug": "magazine-printing", "desc": "High-end perfect bind, saddle stitch, UV coated covers" },
+    { "name": "Books", "slug": "book-printing", "desc": "Offset, digital, and print-on-demand for every genre" },
+    { "name": "Marketing Print", "slug": "marketing-print", "desc": "Flyers, brochures, postcards, posters and banners" },
+    { "name": "Menus", "slug": "menu-printing", "desc": "Dine-in, takeout, laminated and oversized menus" },
+    { "name": "Business Cards", "slug": "business-cards", "desc": "Standard to luxury: foil, embossed, spot UV finishes" },
+    { "name": "Large Format", "slug": "large-format", "desc": "Banners, signage, trade show displays and wall graphics" }
+  ],
+  "stats": [
+    { "value": "25+", "label": "Years of Experience" },
+    { "value": "50M+", "label": "Pages Printed Annually" },
+    { "value": "500+", "label": "Business Clients" },
+    { "value": "48hr", "label": "Rush Available" }
+  ],
+  "portfolio": [
+    { "title": "Metro Daily Newspaper", "category": "Newspapers", "desc": "Daily broadsheet for a regional publisher, 50,000 print run." },
+    { "title": "Architecture Quarterly", "category": "Magazines", "desc": "120-page perfect-bound magazine with UV-coated cover." },
+    { "title": "Restaurant Group Menu Suite", "category": "Menus", "desc": "Custom laminated menus across 12 locations." },
+    { "title": "Independent Publisher Series", "category": "Books", "desc": "Short-run offset for a literary fiction publisher." }
+  ],
+  "process": [
+    { "step": 1, "title": "Submit Files", "desc": "Upload your print-ready files or get help from our prepress team." },
+    { "step": 2, "title": "Proof Review", "desc": "Review your digital proof and approve for press." },
+    { "step": 3, "title": "Production", "desc": "Your project goes on press with our state-of-the-art equipment." },
+    { "step": 4, "title": "Delivery", "desc": "On-time delivery nationwide. Rush options available." }
+  ],
+  "cta": {
+    "headline": "Ready to Start Your Project?",
+    "subline": "Get a custom quote in minutes. Our team responds within 24 hours.",
+    "primaryCta": { "text": "Request a Quote", "href": "/quote" },
+    "secondaryCta": { "text": "(212) 555-0100", "href": "tel:+12125550100" }
+  }
+}

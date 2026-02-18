@@ -1,0 +1,17 @@
+{
+  "items": [
+    { "id": 1, "title": "Metro Daily Herald", "client": "Regional Publisher", "category": "Newspapers", "desc": "Daily broadsheet, 60,000 print run, full color. 5-day weekly production schedule.", "featured": true },
+    { "id": 2, "title": "Architecture & Design Quarterly", "client": "Trade Publisher", "category": "Magazines", "desc": "120-page perfect-bound with UV-coated cover, 80lb gloss interior. 5,000 copies.", "featured": true },
+    { "id": 3, "title": "Harvest Fiction Series", "client": "Independent Publisher", "category": "Books", "desc": "Literary fiction short run, perfect bound, cream interior, matte laminate. 500 copies.", "featured": false },
+    { "id": 4, "title": "Metropolitan Restaurant Group", "client": "F&B Chain", "category": "Menus", "desc": "Dine-in and takeout menus for 12 locations, soft-touch laminated, bilingual.", "featured": true },
+    { "id": 5, "title": "Spring Campaign Suite", "client": "Fashion Brand", "category": "Marketing Print", "desc": "Tri-fold brochures and 5×7 postcards, gloss coated, 10,000 units.", "featured": false },
+    { "id": 6, "title": "Elevate Financial", "client": "Financial Services", "category": "Business Cards", "desc": "Executive cards, 32pt ultra stock with soft touch laminate and foil logo. 5,000 cards.", "featured": false },
+    { "id": 7, "title": "Tech Expo Trade Show", "client": "Event Organizer", "category": "Large Format", "desc": "20 retractable banners, 6 step-and-repeat backdrops, 8×10 tension fabric displays.", "featured": true },
+    { "id": 8, "title": "Community Gazette", "client": "Local News Publisher", "category": "Newspapers", "desc": "Weekly tabloid, BW interior with color front page, 8,000 copies weekly.", "featured": false },
+    { "id": 9, "title": "Medical Journal Quarterly", "client": "Academic Publisher", "category": "Magazines", "desc": "Peer-reviewed journal, saddle stitch, 80lb uncoated interior, 1,500 copies.", "featured": false },
+    { "id": 10, "title": "Self-Publishing Author", "client": "Individual Author", "category": "Books", "desc": "Memoir, hardcover, 200 copies. Perfect-bound interior with foil stamped cloth cover.", "featured": false },
+    { "id": 11, "title": "City Running Club", "client": "Nonprofit", "category": "Marketing Print", "desc": "Event flyers and race programs, 4-color, 3,000 units.", "featured": false },
+    { "id": 12, "title": "Hotel Brand Refresh", "client": "Hospitality Group", "category": "Large Format", "desc": "Lobby wall graphics, room door signs, and wayfinding — 3 hotel locations.", "featured": false }
+  ],
+  "categories": ["All", "Newspapers", "Magazines", "Books", "Marketing Print", "Menus", "Business Cards", "Large Format"]
+}

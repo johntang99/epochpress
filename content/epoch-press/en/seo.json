@@ -1,0 +1,30 @@
+{
+  "title": "Epoch Press",
+  "description": "Full-service commercial printing. Newspapers, magazines, books, marketing print, and more. Serving the Northeast and nationwide.",
+  "home": {
+    "title": "Epoch Press — Premium Commercial Printing | New York",
+    "description": "Full-service commercial printing for publishers, businesses, and agencies. High quality, competitive pricing. Serving the Northeast and nationwide."
+  },
+  "pages": {
+    "products": {
+      "title": "Printing Services | Epoch Press",
+      "description": "Comprehensive commercial printing: newspapers, magazines, books, marketing print, menus, business cards, and large format."
+    },
+    "about": {
+      "title": "About Epoch Press | 25+ Years of Printing Excellence",
+      "description": "Learn about Epoch Press — full-service commercial printing in New York since 1999."
+    },
+    "portfolio": {
+      "title": "Our Work | Epoch Press Portfolio",
+      "description": "See completed print projects from Epoch Press across 500+ clients and 7 product categories."
+    },
+    "contact": {
+      "title": "Contact Epoch Press | Get a Custom Quote",
+      "description": "Get in touch with our team. Request a quote, ask a question, or visit our New York facility."
+    },
+    "quote": {
+      "title": "Request a Print Quote | Epoch Press",
+      "description": "Get a custom quote for your printing project. We respond within 24 hours."
+    }
+  }
+}

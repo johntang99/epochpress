@@ -1,0 +1,33 @@
+{
+  "typography": {
+    "display": "clamp(2.8rem, 5vw, 4.5rem)",
+    "heading": "clamp(1.75rem, 3vw, 2.5rem)",
+    "subheading": "clamp(1.25rem, 2vw, 1.5rem)",
+    "body": "1rem",
+    "small": "0.875rem",
+    "fonts": {
+      "display": "'Playfair Display', Georgia, serif",
+      "heading": "'Playfair Display', Georgia, serif",
+      "body": "'Inter', system-ui, sans-serif"
+    }
+  },
+  "colors": {
+    "primary": {
+      "DEFAULT": "#0F1B2D",
+      "dark": "#080F1A",
+      "light": "#1A2E4A",
+      "50": "#EEF1F5",
+      "100": "#D0D9E6"
+    },
+    "secondary": {
+      "DEFAULT": "#B8860B",
+      "dark": "#8B6508",
+      "light": "#D4A843",
+      "50": "#FDF8EC"
+    },
+    "backdrop": {
+      "primary": "#F8F9FA",
+      "secondary": "#FDF8EC"
+    }
+  }
+}

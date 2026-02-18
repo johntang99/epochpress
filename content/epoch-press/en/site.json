@@ -1,0 +1,23 @@
+{
+  "businessName": "Epoch Press",
+  "tagline": "Premium Commercial Printing",
+  "description": "Full-service commercial printing for publishers, businesses, and agencies. Newspapers, magazines, books, marketing print, and more.",
+  "address": "123 Press Way",
+  "city": "New York",
+  "state": "NY",
+  "zip": "10001",
+  "phone": "(212) 555-0100",
+  "email": "info@epochpress.com",
+  "addressMapUrl": "https://maps.google.com/?q=123+Press+Way+New+York+NY+10001",
+  "social": {
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "youtube": ""
+  },
+  "businessHours": {
+    "weekdays": "Mon–Fri: 8:00 AM – 6:00 PM",
+    "saturday": "Sat: 9:00 AM – 2:00 PM",
+    "sunday": "Closed"
+  }
+}

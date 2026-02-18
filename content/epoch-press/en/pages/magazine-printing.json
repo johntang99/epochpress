@@ -1,0 +1,69 @@
+{
+  "slug": "magazine-printing",
+  "name": "Magazine Printing",
+  "tagline": "Premium magazine printing for publishers who demand the best.",
+  "description": "From independent literary journals to high-gloss consumer magazines, we print with the quality your readers expect. Perfect binding, saddle stitch, UV coated covers, and more.",
+  "specs": [
+    {
+      "tab": "Binding",
+      "items": [
+        { "label": "Saddle Stitch", "value": "Up to 80 pages — stapled spine" },
+        { "label": "Perfect Bind", "value": "48+ pages — glued flat spine" },
+        { "label": "Spiral Bound", "value": "Any page count — coil binding" },
+        { "label": "Case Bound", "value": "Hardcover for premium editions" }
+      ]
+    },
+    {
+      "tab": "Cover Finishes",
+      "items": [
+        { "label": "Gloss UV", "value": "High shine, premium feel" },
+        { "label": "Matte Laminate", "value": "Sophisticated, fingerprint-resistant" },
+        { "label": "Soft Touch", "value": "Velvet texture, ultra-premium" },
+        { "label": "Spot UV", "value": "Selective gloss over matte base" }
+      ]
+    },
+    {
+      "tab": "Paper",
+      "items": [
+        { "label": "Cover Stock", "value": "80–100 lb cover, coated or uncoated" },
+        { "label": "Interior Pages", "value": "60–80 lb text, coated or uncoated" },
+        { "label": "Premium Interior", "value": "100 lb gloss or silk for photography" },
+        { "label": "Recycled Options", "value": "FSC-certified paper available" }
+      ]
+    },
+    {
+      "tab": "Quantities",
+      "items": [
+        { "label": "Short Run", "value": "From 250 copies (digital)" },
+        { "label": "Standard", "value": "1,000 – 10,000 (offset)" },
+        { "label": "High Volume", "value": "10,000 – 100,000+" },
+        { "label": "Frequency", "value": "Monthly, quarterly, annual, one-time" }
+      ]
+    }
+  ],
+  "priceTiers": [
+    { "qty": "250–499", "note": "Digital short run, fast turnaround" },
+    { "qty": "500–2,499", "note": "Offset or hybrid printing" },
+    { "qty": "2,500–9,999", "note": "Sheet-fed offset, cost-efficient" },
+    { "qty": "10,000+", "note": "Volume pricing, dedicated scheduling" }
+  ],
+  "process": [
+    { "step": 1, "title": "File Submission", "desc": "Submit your print-ready PDF with proper bleeds and color profiles." },
+    { "step": 2, "title": "Cover Proof", "desc": "We provide a cover proof for approval before going to press." },
+    { "step": 3, "title": "Interior Production", "desc": "Interior pages printed and ready for binding." },
+    { "step": 4, "title": "Cover Finishing", "desc": "Lamination or UV coating applied to covers." },
+    { "step": 5, "title": "Binding & Delivery", "desc": "Bound, quality checked, and shipped to your address or distributor." }
+  ],
+  "faq": [
+    { "q": "What is the minimum page count for perfect binding?", "a": "Perfect binding requires a minimum of 48 pages to create a readable spine." },
+    { "q": "Can I have a different paper for cover vs interior?", "a": "Yes. We recommend heavier cover stock (80–100 lb) with lighter interior (60–80 lb)." },
+    { "q": "Do you offer UV coating on covers?", "a": "Yes. Gloss UV, matte laminate, soft touch, and spot UV are all available for covers." },
+    { "q": "What turnaround should I expect for 1,000 magazines?", "a": "Standard turnaround for 1,000 magazines is 7–10 business days from approved proof." },
+    { "q": "Can you match Pantone colors for my brand?", "a": "Yes, Pantone matching is available for covers and spot color elements." }
+  ],
+  "cta": {
+    "headline": "Ready to print your magazine?",
+    "primaryCta": { "text": "Get a Quote", "href": "/quote?product=magazine-printing" },
+    "secondaryCta": { "text": "Call Us", "href": "tel:+12125550100" }
+  }
+}

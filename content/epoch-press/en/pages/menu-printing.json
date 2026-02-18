@@ -1,0 +1,29 @@
+{
+  "slug": "menu-printing",
+  "name": "Menu Printing",
+  "tagline": "Restaurant menus that reflect the quality of your food.",
+  "description": "Durable, beautiful menus for restaurants, cafes, bars, and caterers. Laminated for longevity, available in all sizes and fold styles.",
+  "specs": [
+    {"tab":"Types","items":[{"label":"Dine-In","value":"Single, bi-fold, or booklet"},{"label":"Takeout/Delivery","value":"Flyer-weight, quantity discounts"},{"label":"Trifold","value":"Compact, easy to handle"},{"label":"Oversized","value":"Tabletop statement menus"}]},
+    {"tab":"Lamination","items":[{"label":"Gloss Laminate","value":"Bright, easy to clean"},{"label":"Matte Laminate","value":"Elegant, non-glare"},{"label":"Soft Touch","value":"Premium velvet feel"},{"label":"No Lamination","value":"Eco option, replace more often"}]},
+    {"tab":"Paper","items":[{"label":"100 lb Gloss","value":"Standard menu weight"},{"label":"14pt Card Stock","value":"Sturdy, upscale"},{"label":"Synthetic/Waterproof","value":"Ultra-durable for high-use"},{"label":"Recycled","value":"FSC-certified available"}]},
+    {"tab":"Quantities","items":[{"label":"Small Restaurant","value":"25–99 copies"},{"label":"Standard","value":"100–499"},{"label":"Multi-Location","value":"500–5,000+"},{"label":"Rush","value":"48-hour available"}]}
+  ],
+  "priceTiers": [
+    {"qty":"25–99","note":"Short-run digital"},{"qty":"100–499","note":"Standard offset"},{"qty":"500–1,999","note":"Volume pricing"},{"qty":"2,000+","note":"Best unit price"}
+  ],
+  "process": [
+    {"step":1,"title":"Choose Size & Style","desc":"Select menu size, fold, and lamination."},
+    {"step":2,"title":"Submit Design","desc":"Upload your menu design as a print-ready PDF."},
+    {"step":3,"title":"Proof Review","desc":"Approve digital proof before printing."},
+    {"step":4,"title":"Print & Laminate","desc":"Printed, laminated, and cut."},
+    {"step":5,"title":"Deliver","desc":"Shipped to your restaurant or picked up."}
+  ],
+  "faq": [
+    {"q":"What is the minimum quantity for menu printing?","a":"Minimum is 25 copies for most menu styles."},
+    {"q":"How durable are your laminated menus?","a":"Gloss and matte laminated menus are wipe-clean and designed for high daily use."},
+    {"q":"Can you print menus in different languages?","a":"Yes. We can print bilingual or multilingual menus as separate files or combined."},
+    {"q":"How fast can I get my menus?","a":"Standard is 3–5 business days. Rush 48-hour service available."}
+  ],
+  "cta":{"headline":"Ready to print your menus?","primaryCta":{"text":"Get a Quote","href":"/quote?product=menu-printing"},"secondaryCta":{"text":"Call Us","href":"tel:+12125550100"}}
+}

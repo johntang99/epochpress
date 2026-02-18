@@ -1,0 +1,29 @@
+{
+  "slug": "business-cards",
+  "name": "Business Cards",
+  "tagline": "Make a lasting first impression with cards that stand out.",
+  "description": "From clean standard cards to ultra-premium luxury finishes. Foil stamping, embossing, spot UV, raised ink, and die-cutting available for cards that get remembered.",
+  "specs": [
+    {"tab":"Stock","items":[{"label":"Standard 14pt","value":"Most popular, durable"},{"label":"Premium 16pt","value":"Noticeably thicker"},{"label":"Ultra 32pt","value":"Luxury, impressive thickness"},{"label":"Soft Touch 14pt","value":"Velvet coating, tactile"}]},
+    {"tab":"Finish","items":[{"label":"Gloss Coating","value":"Bright, professional"},{"label":"Matte Coating","value":"Elegant, non-glare"},{"label":"Silk/Satin","value":"Between gloss and matte"},{"label":"Uncoated","value":"Writeable, natural feel"}]},
+    {"tab":"Special Effects","items":[{"label":"Foil Stamping","value":"Gold, silver, or custom foil"},{"label":"Embossing","value":"Raised design elements"},{"label":"Spot UV","value":"Selective gloss over matte"},{"label":"Raised Ink","value":"Thermographic raised print"},{"label":"Die-Cut","value":"Custom shapes and rounded corners"}]},
+    {"tab":"Quantities","items":[{"label":"Starter","value":"250 cards"},{"label":"Standard","value":"500 or 1,000 cards"},{"label":"Team","value":"2,500 or 5,000 cards"},{"label":"Enterprise","value":"10,000+ cards"}]}
+  ],
+  "priceTiers": [
+    {"qty":"250","note":"Digital, fast turnaround"},{"qty":"500–1,000","note":"Best balance of cost and quality"},{"qty":"2,500–5,000","note":"Volume savings"},{"qty":"10,000+","note":"Enterprise pricing"}
+  ],
+  "process": [
+    {"step":1,"title":"Choose Specs","desc":"Select stock, finish, effects, and quantity."},
+    {"step":2,"title":"Submit Design","desc":"Upload a print-ready PDF at 300 DPI."},
+    {"step":3,"title":"Proof Approval","desc":"Approve digital or hard-copy proof."},
+    {"step":4,"title":"Production","desc":"Printed, finished, and cut."},
+    {"step":5,"title":"Delivery","desc":"Boxed and shipped or ready for pickup."}
+  ],
+  "faq": [
+    {"q":"What is the standard business card size?","a":"Standard US size is 3.5\" × 2\". We also offer European (85mm × 55mm), square (2.5\" × 2.5\"), and custom sizes."},
+    {"q":"Can I mix foil and spot UV on the same card?","a":"Yes. Combining foil stamping with spot UV over a matte base is one of our most popular premium combinations."},
+    {"q":"Do you offer double-sided printing?","a":"Yes. Single or double-sided printing is available. Many clients print contact info front and a design or texture back."},
+    {"q":"How long does it take?","a":"Standard cards ship in 3–5 days. Premium effects (foil, emboss, spot UV) typically 7–10 days."}
+  ],
+  "cta":{"headline":"Ready to print your business cards?","primaryCta":{"text":"Get a Quote","href":"/quote?product=business-cards"},"secondaryCta":{"text":"Call Us","href":"tel:+12125550100"}}
+}

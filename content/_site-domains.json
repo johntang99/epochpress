@@ -1,0 +1,16 @@
+{
+  "domains": [
+    {
+      "siteId": "epoch-press",
+      "domain": "epochpress.com",
+      "environment": "prod",
+      "enabled": true
+    },
+    {
+      "siteId": "epoch-press",
+      "domain": "epochpress.local",
+      "environment": "dev",
+      "enabled": true
+    }
+  ]
+}

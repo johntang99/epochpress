@@ -1,0 +1,29 @@
+{
+  "slug": "marketing-print",
+  "name": "Marketing Print",
+  "tagline": "Print marketing materials that demand attention and drive results.",
+  "description": "Flyers, brochures, postcards, posters, and more. All sizes, all fold types, all paper stocks. Fast turnaround for campaigns with real deadlines.",
+  "specs": [
+    { "tab": "Products", "items": [{"label":"Flyers","value":"Letter, legal, A5, custom"},{"label":"Brochures","value":"Tri-fold, bi-fold, z-fold, gate-fold"},{"label":"Postcards","value":"4×6, 5×7, 6×9, custom"},{"label":"Posters","value":"11×17, 18×24, 24×36, custom"}] },
+    { "tab": "Paper", "items": [{"label":"Standard","value":"80 lb gloss or matte text"},{"label":"Premium","value":"100 lb silk or gloss text"},{"label":"Heavy","value":"100 lb cover, 14pt, 16pt"},{"label":"Uncoated","value":"60–80 lb offset"}] },
+    { "tab": "Finishing", "items": [{"label":"Gloss Coating","value":"Bright, protective"},{"label":"Matte Coating","value":"Non-glare, elegant"},{"label":"Spot UV","value":"Selective gloss highlights"},{"label":"Folding","value":"Machine folding included"}] },
+    { "tab": "Quantities", "items": [{"label":"Small","value":"100–499"},{"label":"Standard","value":"500–4,999"},{"label":"Large","value":"5,000–50,000+"},{"label":"Rush","value":"48–72 hour options"}] }
+  ],
+  "priceTiers": [
+    {"qty":"100–499","note":"Digital, fast turnaround"},{"qty":"500–2,499","note":"Offset or digital"},{"qty":"2,500–9,999","note":"Sheet-fed offset"},{"qty":"10,000+","note":"Volume pricing"}
+  ],
+  "process": [
+    {"step":1,"title":"Choose Product & Specs","desc":"Select size, paper, fold, and finish."},
+    {"step":2,"title":"Submit Files","desc":"Upload print-ready PDFs."},
+    {"step":3,"title":"Proof Approval","desc":"Approve digital proof."},
+    {"step":4,"title":"Print & Finish","desc":"Printed, folded, and finished."},
+    {"step":5,"title":"Delivery","desc":"Shipped or picked up."}
+  ],
+  "faq": [
+    {"q":"What fold types do you offer for brochures?","a":"Bi-fold, tri-fold (letter fold), z-fold, gate-fold, roll fold, and custom folds."},
+    {"q":"Can you print postcards for direct mail?","a":"Yes. We print USPS-compliant postcards and can coordinate with mailing services."},
+    {"q":"What is the minimum for flyers?","a":"Minimum order is 100 flyers."},
+    {"q":"How fast can you turn around marketing materials?","a":"Standard is 3–5 days. Rush 48–72 hour options available for most products."}
+  ],
+  "cta": {"headline":"Ready to print your marketing materials?","primaryCta":{"text":"Get a Quote","href":"/quote?product=marketing-print"},"secondaryCta":{"text":"Call Us","href":"tel:+12125550100"}}
+}

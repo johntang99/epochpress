@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build
+.next/
+out/
+build/
+
+# Env files — never commit real secrets
+.env.local
+.env.production
+.env.staging
+
+# Keep examples
+!.env.local.example
+!.env.staging.example
+!.env.production.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Uploads
+public/uploads/
+
+# Admin seed password file
+content/_admin/users.json
