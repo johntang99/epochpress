@@ -72,34 +72,45 @@ export function Header() {
                 >
                   <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-[var(--charcoal)] hover:text-[var(--navy)] transition-colors rounded-lg hover:bg-[var(--surface)]">
                     {link.name}
-                    <ChevronDown className={clsx('w-4 h-4 transition-transform', dropdownOpen && 'rotate-180')} />
+                    <ChevronDown className={clsx('w-4 h-4 transition-transform duration-200', dropdownOpen && 'rotate-180')} />
                   </button>
-                  {dropdownOpen && (
-                    <div className="absolute top-full left-0 w-72 bg-white border border-[var(--border)] rounded-xl shadow-card overflow-hidden mt-1">
-                      <div className="p-2">
-                        {products.map((product) => (
-                          <Link
-                            key={product.slug}
-                            href={`/products/${product.slug}`}
-                            className="flex flex-col px-3 py-2.5 rounded-lg hover:bg-[var(--surface)] transition-colors group"
-                          >
-                            <span className="text-sm font-semibold text-[var(--navy)] group-hover:text-[var(--gold)]">
-                              {product.name}
-                            </span>
-                            <span className="text-xs text-[var(--text-secondary)]">{product.desc}</span>
-                          </Link>
-                        ))}
-                      </div>
-                      <div className="border-t border-[var(--border)] p-2">
+
+                  {/* Invisible bridge fills the gap so mouse doesn't leave the wrapper */}
+                  <div className="absolute top-full left-0 h-2 w-full" />
+
+                  <div
+                    className={clsx(
+                      'absolute top-[calc(100%+0.5rem)] left-0 w-72 bg-white border border-[var(--border)] rounded-xl shadow-card overflow-hidden transition-all duration-150 origin-top',
+                      dropdownOpen
+                        ? 'opacity-100 scale-y-100 pointer-events-auto'
+                        : 'opacity-0 scale-y-95 pointer-events-none'
+                    )}
+                  >
+                    <div className="p-2">
+                      {products.map((product) => (
                         <Link
-                          href="/products"
-                          className="flex items-center justify-center px-3 py-2 text-sm font-semibold text-[var(--gold)] hover:text-[var(--gold-light)] transition-colors"
+                          key={product.slug}
+                          href={`/products/${product.slug}`}
+                          className="flex flex-col px-3 py-2.5 rounded-lg hover:bg-[var(--surface)] transition-colors group"
+                          onClick={() => setDropdownOpen(false)}
                         >
-                          View All Products →
+                          <span className="text-sm font-semibold text-[var(--navy)] group-hover:text-[var(--gold)]">
+                            {product.name}
+                          </span>
+                          <span className="text-xs text-[var(--text-secondary)]">{product.desc}</span>
                         </Link>
-                      </div>
+                      ))}
                     </div>
-                  )}
+                    <div className="border-t border-[var(--border)] p-2">
+                      <Link
+                        href="/products"
+                        className="flex items-center justify-center px-3 py-2 text-sm font-semibold text-[var(--gold)] hover:text-[var(--gold-light)] transition-colors"
+                        onClick={() => setDropdownOpen(false)}
+                      >
+                        View All Products →
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <Link
