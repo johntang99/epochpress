@@ -4,6 +4,7 @@ import { getRequestSiteId, loadPageContent } from '@/lib/content';
 import portfolioData from '@/data/portfolio.json';
 import fs from 'fs';
 import path from 'path';
+import { normalizeImageUrl, resolveRenderableImageUrl } from '@/lib/renderableImage';
 
 type PortfolioData = typeof portfolioData & {
   hero?: {
@@ -62,12 +63,6 @@ const portfolioFallbackImages: Record<string, string> = {
     'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1400&q=80',
 };
 
-function normalizeImageUrl(value: unknown): string | null {
-  if (typeof value !== 'string') return null;
-  const trimmed = value.trim();
-  return trimmed || null;
-}
-
 function resolveRenderableImage(item: { image?: string; category: string }): string | null {
   const image = normalizeImageUrl(item.image);
   if (image && !image.startsWith('/uploads/')) return image;
@@ -89,8 +84,8 @@ export default async function PortfolioPage({
   const active = searchParams?.category || 'All';
   const { items, categories } = data;
   const filtered = active === 'All' ? items : items.filter((i) => i.category === active);
-  const heroBackgroundImage = normalizeImageUrl(data.hero?.backgroundImage);
-  const heroImage = normalizeImageUrl(data.hero?.image);
+  const heroBackgroundImage = resolveRenderableImageUrl(data.hero?.backgroundImage);
+  const heroImage = resolveRenderableImageUrl(data.hero?.image);
   const hasHeroMedia = Boolean(heroBackgroundImage || heroImage);
 
   return (

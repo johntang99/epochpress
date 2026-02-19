@@ -2,14 +2,9 @@ import Link from 'next/link';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import { loadPageContent, getRequestSiteId } from '@/lib/content';
 import productsDataFallback from '@/data/products.json';
+import { resolveRenderableImageUrl } from '@/lib/renderableImage';
 
 type ProductsData = typeof productsDataFallback;
-
-function normalizeImageUrl(value: unknown): string | null {
-  if (typeof value !== 'string') return null;
-  const trimmed = value.trim();
-  return trimmed || null;
-}
 
 export const metadata = {
   title: 'Printing Services',
@@ -20,8 +15,10 @@ export default async function ProductsPage() {
   const siteId = await getRequestSiteId();
   const dbContent = await loadPageContent<ProductsData>('products', 'en', siteId);
   const { hero, categories } = dbContent ?? productsDataFallback;
-  const heroBackgroundImage = normalizeImageUrl((hero as Record<string, unknown>)?.backgroundImage);
-  const heroImage = normalizeImageUrl((hero as Record<string, unknown>)?.image);
+  const heroBackgroundImage = resolveRenderableImageUrl(
+    (hero as Record<string, unknown>)?.backgroundImage
+  );
+  const heroImage = resolveRenderableImageUrl((hero as Record<string, unknown>)?.image);
   const hasHeroMedia = Boolean(heroBackgroundImage || heroImage);
 
   return (

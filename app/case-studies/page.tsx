@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowRight, Quote } from 'lucide-react';
 import { getRequestSiteId, loadPageContent } from '@/lib/content';
 import caseStudiesFallback from '@/data/pages/case-studies.json';
+import { resolveRenderableImageUrl } from '@/lib/renderableImage';
 
 type CaseStudiesData = typeof caseStudiesFallback;
 
@@ -14,12 +15,6 @@ const categoryTone: Record<string, string> = {
   'Multi-Location Rollout': 'bg-teal-100 text-teal-800',
 };
 
-function normalizeImageUrl(value: unknown): string | null {
-  if (typeof value !== 'string') return null;
-  const trimmed = value.trim();
-  return trimmed || null;
-}
-
 export default async function CaseStudiesPage({
   searchParams,
 }: {
@@ -28,10 +23,10 @@ export default async function CaseStudiesPage({
   const siteId = await getRequestSiteId();
   const dbContent = await loadPageContent<CaseStudiesData>('case-studies', 'en', siteId);
   const data = dbContent ?? caseStudiesFallback;
-  const heroBackgroundImage = normalizeImageUrl(
+  const heroBackgroundImage = resolveRenderableImageUrl(
     (data.hero as Record<string, unknown>)?.backgroundImage
   );
-  const heroImage = normalizeImageUrl((data.hero as Record<string, unknown>)?.image);
+  const heroImage = resolveRenderableImageUrl((data.hero as Record<string, unknown>)?.image);
   const hasHeroMedia = Boolean(heroBackgroundImage || heroImage);
   const selectedCategory = searchParams?.category || 'All Cases';
   const filteredStories =

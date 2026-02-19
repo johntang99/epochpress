@@ -6,6 +6,7 @@ import type { LucideIcon } from 'lucide-react';
 import Image from 'next/image';
 import fs from 'fs';
 import path from 'path';
+import { resolveRenderableImageUrl } from '@/lib/renderableImage';
 
 type HomeData = typeof homeDataFallback;
 type BlogPreviewPost = {
@@ -128,8 +129,10 @@ export default async function HomePage() {
     loadPageContent<PortfolioPageData>('portfolio', 'en', siteId),
   ]);
   const { hero, categories, servicesSection, whyChooseUs, stats, portfolio, process, blogPreview, cta } = dbContent ?? homeDataFallback;
-  const heroBackgroundImage = normalizeImageUrl((hero as Record<string, unknown>)?.backgroundImage);
-  const heroImage = normalizeImageUrl((hero as Record<string, unknown>)?.image);
+  const heroBackgroundImage = resolveRenderableImageUrl(
+    (hero as Record<string, unknown>)?.backgroundImage
+  );
+  const heroImage = resolveRenderableImageUrl((hero as Record<string, unknown>)?.image);
   const hasHeroMedia = Boolean(heroBackgroundImage || heroImage);
   const featuredServiceSlug = servicesSection?.featuredSlug || categories?.[0]?.slug;
   const featuredService = categories.find((cat) => cat.slug === featuredServiceSlug) || categories[0];

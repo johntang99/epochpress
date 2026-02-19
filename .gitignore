@@ -31,7 +31,10 @@ npm-debug.log*
 next-env.d.ts
 
 # Uploads
-public/uploads/
+# Keep other uploads ignored, but allow epoch-press assets for production deploys.
+public/uploads/*
+!public/uploads/epoch-press/
+!public/uploads/epoch-press/**
 
 # Admin seed password file
 content/_admin/users.json

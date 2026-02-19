@@ -13,7 +13,8 @@ git commit -m "Update: describe your changes"
 git push
 
 
-curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_nauWisxUnYXYgXZFyQ8wgxLz6Y1L/erh5dPp37K
+curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_8fXhdR9AePN4VgAiqsDwZjxnPw1Y/odb8Ikwerb
+
 
 
 > Full-service commercial printing platform built with Next.js 14 App Router, Supabase, and Tailwind CSS.

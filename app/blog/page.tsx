@@ -5,6 +5,7 @@ import blogPageFallback from '@/data/pages/blog.json';
 import { getRequestSiteId, loadAllItems, loadPageContent } from '@/lib/content';
 import fs from 'fs';
 import path from 'path';
+import { resolveRenderableImageUrl } from '@/lib/renderableImage';
 
 const categoryColors: Record<string, string> = {
   'industry-trends': 'bg-blue-100 text-blue-800',
@@ -58,13 +59,6 @@ function toCategoryLabel(value: string): string {
     .join(' ');
 }
 
-function normalizeImageUrl(value: unknown): string | null {
-  if (typeof value !== 'string') return null;
-  const trimmed = value.trim();
-  if (!trimmed) return null;
-  return trimmed;
-}
-
 type BlogPost = (typeof blogData.posts)[number] & {
   image?: string;
   coverImage?: string;
@@ -84,10 +78,12 @@ export default async function BlogPage({
     loadPageContent<BlogPageContent>('blog', 'en', siteId),
   ]);
   const pageContent = blogPageContent ?? blogPageFallback;
-  const heroBackgroundImage = normalizeImageUrl(
+  const heroBackgroundImage = resolveRenderableImageUrl(
     (pageContent as Record<string, any>)?.hero?.backgroundImage
   );
-  const heroImage = normalizeImageUrl((pageContent as Record<string, any>)?.hero?.image);
+  const heroImage = resolveRenderableImageUrl(
+    (pageContent as Record<string, any>)?.hero?.image
+  );
   const hasHeroMedia = Boolean(heroBackgroundImage || heroImage);
   const posts = dbPosts.length > 0 ? dbPosts : (blogData.posts as BlogPost[]);
   const categories =

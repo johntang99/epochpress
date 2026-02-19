@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowRight, Phone, CheckCircle, ChevronDown } from 'lucide-react';
 import { loadPageContent, getRequestSiteId } from '@/lib/content';
+import { resolveRenderableImageUrl } from '@/lib/renderableImage';
 
 const productFiles: Record<string, () => Promise<{ default: ProductData }>> = {
   'newspaper-printing': () => import('@/data/pages/newspaper-printing.json'),
@@ -60,12 +61,6 @@ const productHeroFallbackImages: Record<string, string> = {
     'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1800&q=80',
 };
 
-function normalizeImageUrl(value: unknown): string | null {
-  if (typeof value !== 'string') return null;
-  const trimmed = value.trim();
-  return trimmed || null;
-}
-
 export async function generateStaticParams() {
   return Object.keys(productFiles).map((slug) => ({ slug }));
 }
@@ -92,12 +87,12 @@ export default async function ProductDetailPage({ params }: { params: { slug: st
   const heroSubtitle = product.hero?.subtitle || product.tagline;
   const heroDescription = product.hero?.description || product.description;
   const heroBackgroundImage =
-    normalizeImageUrl(product.hero?.backgroundImage) ||
-    normalizeImageUrl(product.backgroundImage) ||
+    resolveRenderableImageUrl(product.hero?.backgroundImage) ||
+    resolveRenderableImageUrl(product.backgroundImage) ||
     null;
   const heroImage =
-    normalizeImageUrl(product.hero?.image) ||
-    normalizeImageUrl(product.image) ||
+    resolveRenderableImageUrl(product.hero?.image) ||
+    resolveRenderableImageUrl(product.image) ||
     productHeroFallbackImages[product.slug] ||
     null;
   const hasHeroMedia = Boolean(heroBackgroundImage || heroImage);

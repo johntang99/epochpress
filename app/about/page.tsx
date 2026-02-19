@@ -2,14 +2,9 @@ import Link from 'next/link';
 import { Award, CheckCircle, ArrowRight } from 'lucide-react';
 import { loadPageContent, getRequestSiteId } from '@/lib/content';
 import aboutDataFallback from '@/data/pages/about.json';
+import { resolveRenderableImageUrl } from '@/lib/renderableImage';
 
 type AboutData = typeof aboutDataFallback;
-
-function normalizeImageUrl(value: unknown): string | null {
-  if (typeof value !== 'string') return null;
-  const trimmed = value.trim();
-  return trimmed || null;
-}
 
 function getString(value: unknown): string {
   return typeof value === 'string' ? value : '';
@@ -27,10 +22,12 @@ export default async function AboutPage() {
     dbContent ?? aboutDataFallback;
   const heroTitle = getString((hero as Record<string, unknown> | undefined)?.title) || headline || 'About Epoch Press';
   const heroSubtitle = getString((hero as Record<string, unknown> | undefined)?.subtitle) || subline || '';
-  const heroBackgroundImage = normalizeImageUrl(
+  const heroBackgroundImage = resolveRenderableImageUrl(
     (hero as Record<string, unknown> | undefined)?.backgroundImage
   );
-  const heroImage = normalizeImageUrl((hero as Record<string, unknown> | undefined)?.image);
+  const heroImage = resolveRenderableImageUrl(
+    (hero as Record<string, unknown> | undefined)?.image
+  );
   const hasHeroMedia = Boolean(heroBackgroundImage || heroImage);
 
   return (
