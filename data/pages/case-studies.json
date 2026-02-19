@@ -1,0 +1,99 @@
+{
+  "hero": {
+    "title": "Client Success Stories",
+    "subtitle": "Real outcomes from organizations that trusted Epoch Press for mission-critical print projects.",
+    "disclaimer": "Each engagement has unique variables. Results shown reflect real client feedback and project outcomes, but timelines and performance may vary by scope, files, and logistics."
+  },
+  "categories": [
+    "All Cases",
+    "Newspapers",
+    "Magazines",
+    "Books",
+    "Marketing Print",
+    "Direct Mail",
+    "Multi-Location Rollout"
+  ],
+  "stories": [
+    {
+      "id": "cs-1",
+      "category": "Newspapers",
+      "title": "Regional Daily Turnaround Stabilized",
+      "client": "Northeast Media Group",
+      "challenge": "Late-night editorial changes repeatedly threatened print deadlines and carrier windows.",
+      "solution": "Epoch Press implemented a tighter prepress validation workflow, revised cutoff protocol, and dedicated rush lane.",
+      "result": "On-time release rate improved from 86% to 98% in one quarter.",
+      "quote": "Epoch Press gave us operational confidence when timing mattered most.",
+      "author": "Operations Director",
+      "featured": true
+    },
+    {
+      "id": "cs-2",
+      "category": "Magazines",
+      "title": "Premium Color Consistency Across Issues",
+      "client": "Avenue Living Magazine",
+      "challenge": "Inconsistent brand tones across monthly issues reduced visual continuity for advertisers.",
+      "solution": "G7-calibrated color controls and tighter proofing checkpoints across covers and interior signatures.",
+      "result": "Brand color variance dropped significantly and ad client satisfaction scores increased.",
+      "quote": "The consistency is obvious issue to issue. It elevated our brand instantly.",
+      "author": "Publisher",
+      "featured": true
+    },
+    {
+      "id": "cs-3",
+      "category": "Books",
+      "title": "Short-Run Book Program Scaled Profitably",
+      "client": "Independent Education Publisher",
+      "challenge": "Frequent content revisions made large runs risky and costly.",
+      "solution": "Epoch Press structured a hybrid short-run program with staged quantities and repeatable finishing specs.",
+      "result": "Inventory waste reduced by 32% while maintaining launch schedules.",
+      "quote": "We moved faster with less risk and better unit economics.",
+      "author": "Head of Production"
+    },
+    {
+      "id": "cs-4",
+      "category": "Marketing Print",
+      "title": "Luxury Brand Campaign Delivered in 10 Days",
+      "client": "National Retail Brand",
+      "challenge": "A multi-format launch needed premium print quality under an aggressive timeline.",
+      "solution": "Parallel production planning across brochures, inserts, and point-of-sale assets with coordinated QC.",
+      "result": "Campaign launched on schedule across all target markets.",
+      "quote": "Fast execution without sacrificing quality. Exactly what we needed.",
+      "author": "Brand Marketing Lead",
+      "featured": true
+    },
+    {
+      "id": "cs-5",
+      "category": "Direct Mail",
+      "title": "Acquisition Mailer Improved Response Efficiency",
+      "client": "Healthcare Network",
+      "challenge": "Prior vendors produced variable quality and mailing delays across waves.",
+      "solution": "Epoch Press aligned print, personalization, and drop-date sequencing with USPS-ready workflows.",
+      "result": "Delivery consistency improved and campaign response efficiency increased.",
+      "quote": "The process discipline made forecasting much easier for our team.",
+      "author": "Campaign Manager"
+    },
+    {
+      "id": "cs-6",
+      "category": "Multi-Location Rollout",
+      "title": "Franchise Print Standardization at Scale",
+      "client": "Hospitality Franchise Group",
+      "challenge": "Store-level print quality varied by market, weakening brand presentation.",
+      "solution": "Standardized templates, controlled production specs, and synchronized fulfillment by location.",
+      "result": "Visual consistency improved across 40+ locations within one rollout cycle.",
+      "quote": "Epoch Press turned a fragmented print operation into a reliable system.",
+      "author": "Procurement Director"
+    }
+  ],
+  "cta": {
+    "title": "Want Results Like These?",
+    "subtitle": "Tell us your timeline, quality targets, and delivery requirements. We will build a print plan that works.",
+    "primary": {
+      "text": "Request a Quote",
+      "href": "/quote"
+    },
+    "secondary": {
+      "text": "View Portfolio",
+      "href": "/portfolio"
+    }
+  }
+}

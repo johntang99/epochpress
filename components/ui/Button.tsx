@@ -31,10 +31,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
     
     const variants = {
-      primary: 'bg-primary text-white hover:bg-primary-dark focus:ring-primary shadow-sm hover:shadow-md',
-      secondary: 'bg-secondary text-white hover:bg-secondary-dark focus:ring-secondary shadow-sm hover:shadow-md',
-      outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary',
-      ghost: 'text-primary hover:bg-primary-50 focus:ring-primary',
+      primary:
+        'bg-[var(--primary)] text-white hover:bg-[var(--primary-dark)] focus:ring-[var(--primary)] shadow-sm hover:shadow-md',
+      secondary:
+        'bg-[var(--secondary)] text-white hover:opacity-90 focus:ring-[var(--secondary)] shadow-sm hover:shadow-md',
+      outline:
+        'border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white focus:ring-[var(--primary)]',
+      ghost: 'text-[var(--primary)] hover:bg-[var(--gold-50)] focus:ring-[var(--primary)]',
     };
     
     const sizes = {

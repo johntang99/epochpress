@@ -1,29 +1,63 @@
 {
+  "cta": {
+    "link": "/quote",
+    "text": "Get a Quote"
+  },
   "menu": {
     "logo": {
       "text": "EPOCH PRESS",
       "subtext": "Commercial Printing"
     },
     "items": [
-      { "text": "Products", "url": "/products" },
-      { "text": "About", "url": "/about" },
-      { "text": "Portfolio", "url": "/portfolio" },
-      { "text": "Blog", "url": "/blog" },
-      { "text": "Contact", "url": "/contact" }
+      {
+        "url": "/",
+        "text": "Home"
+      },
+      {
+        "url": "/products",
+        "text": "Products"
+      },
+      {
+        "url": "/about",
+        "text": "About"
+      },
+      {
+        "url": "/portfolio",
+        "text": "Portfolio"
+      },
+      {
+        "url": "/case-studies",
+        "text": "Case Studies"
+      },
+      {
+        "url": "/blog",
+        "text": "Blog"
+      },
+      {
+        "url": "/contact",
+        "text": "Contact"
+      }
     ],
     "variant": "default",
     "fontWeight": "semibold"
   },
-  "cta": {
-    "text": "Get a Quote",
-    "link": "/quote"
-  },
   "topbar": {
-    "phone": "(212) 555-0100",
-    "phoneHref": "tel:+12125550100",
-    "address": "123 Press Way, New York, NY 10001",
+    "badge": "Rush Options Available",
+    "email": "info@epoch-press.com",
     "hours": "Mon–Fri 8:00–18:00",
-    "badge": "Rush Options Available"
+    "phone": "973.694.3600",
+    "social": {
+      "youtube": "",
+      "facebook": "",
+      "linkedin": "",
+      "instagram": ""
+    },
+    "address": "7 Highpoint Drive, Wayne, NJ 07470",
+    "emailHref": "mailto:info@epoch-press.com",
+    "phoneHref": "tel:+19736943600",
+    "addressHref": "https://maps.google.com/?q=7+Highpoint+Drive+Wayne+NJ+07470"
   },
-  "languages": ["en"]
+  "languages": [
+    "en"
+  ]
 }

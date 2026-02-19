@@ -2,42 +2,87 @@
   "brand": {
     "name": "Epoch Press",
     "logoText": "EP",
-    "description": "Premium commercial printing for publishers, businesses, and agencies. Quality that speaks for itself."
-  },
-  "contact": {
-    "phone": "(212) 555-0100",
-    "phoneLink": "tel:+12125550100",
-    "email": "info@epochpress.com",
-    "emailLink": "mailto:info@epochpress.com",
-    "addressLines": [
-      "123 Press Way",
-      "New York, NY 10001"
-    ]
+    "description": "Modern commercial printing for publishers, brands, and agencies. Precision production, reliable timelines, and service built for growth."
   },
   "hours": [
     "Mon–Fri: 8:00 AM – 6:00 PM",
     "Sat: 9:00 AM – 2:00 PM"
   ],
+  "contact": {
+    "email": "info@epoch-press.com",
+    "phone": "973.694.3600",
+    "emailLink": "mailto:info@epoch-press.com",
+    "phoneLink": "tel:+19736943600",
+    "addressLines": [
+      "7 Highpoint Drive",
+      "Wayne, NJ 07470"
+    ]
+  },
   "services": [
-    { "text": "Newspaper Printing", "url": "/products/newspaper-printing" },
-    { "text": "Magazine Printing", "url": "/products/magazine-printing" },
-    { "text": "Book Printing", "url": "/products/book-printing" },
-    { "text": "Marketing Print", "url": "/products/marketing-print" },
-    { "text": "Menu Printing", "url": "/products/menu-printing" },
-    { "text": "Business Cards", "url": "/products/business-cards" },
-    { "text": "Large Format", "url": "/products/large-format" }
-  ],
-  "quickLinks": [
-    { "text": "About Us", "url": "/about" },
-    { "text": "Portfolio", "url": "/portfolio" },
-    { "text": "Blog", "url": "/blog" },
-    { "text": "File Guidelines", "url": "/file-guidelines" },
-    { "text": "FAQ", "url": "/faq" },
-    { "text": "Contact", "url": "/contact" }
+    {
+      "url": "/products/newspaper-printing",
+      "text": "Newspaper Printing"
+    },
+    {
+      "url": "/products/magazine-printing",
+      "text": "Magazine Printing"
+    },
+    {
+      "url": "/products/book-printing",
+      "text": "Book Printing"
+    },
+    {
+      "url": "/products/marketing-print",
+      "text": "Marketing Print"
+    },
+    {
+      "url": "/products/menu-printing",
+      "text": "Menu Printing"
+    },
+    {
+      "url": "/products/business-cards",
+      "text": "Business Cards"
+    },
+    {
+      "url": "/products/large-format",
+      "text": "Large Format"
+    }
   ],
   "copyright": "© {year} Epoch Press. All rights reserved.",
   "legalLinks": [
-    { "text": "Privacy Policy", "url": "/privacy" },
-    { "text": "Terms of Service", "url": "/terms" }
+    {
+      "url": "/privacy",
+      "text": "Privacy Policy"
+    },
+    {
+      "url": "/terms",
+      "text": "Terms of Service"
+    }
+  ],
+  "quickLinks": [
+    {
+      "url": "/about",
+      "text": "About Us"
+    },
+    {
+      "url": "/portfolio",
+      "text": "Portfolio"
+    },
+    {
+      "url": "/blog",
+      "text": "Blog"
+    },
+    {
+      "url": "/file-guidelines",
+      "text": "File Guidelines"
+    },
+    {
+      "url": "/faq",
+      "text": "FAQ"
+    },
+    {
+      "url": "/contact",
+      "text": "Contact"
+    }
   ]
 }

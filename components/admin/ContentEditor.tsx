@@ -622,6 +622,7 @@ export function ContentEditor({
   const isHeaderFile = activeFile?.path === 'header.json';
   const isThemeFile = activeFile?.path === 'theme.json';
   const isHomePageFile = activeFile?.path === 'pages/home.json';
+  const isPortfolioPageFile = activeFile?.path === 'pages/portfolio.json';
   const allowCreateOrDuplicate = fileFilter !== 'siteSettings';
   const variantSections = formData
     ? Object.entries(SECTION_VARIANT_OPTIONS).filter(
@@ -646,6 +647,17 @@ export function ContentEditor({
           name: typeof category?.name === 'string' ? category.name : '',
         }))
         .filter((category: any) => category.id && category.name)
+    : [];
+  const portfolioCategoryOptions = Array.isArray(formData?.categories)
+    ? formData.categories
+        .map((category: any) =>
+          typeof category === 'string'
+            ? category
+            : typeof category?.name === 'string'
+            ? category.name
+            : ''
+        )
+        .filter((category: string) => Boolean(category))
     : [];
   const homePhotoFields = useMemo(() => {
     if (!isHomePageFile || !formData) return [] as Array<{ path: string[]; label: string }>;
@@ -774,6 +786,49 @@ export function ContentEditor({
     const images = [...formData.images];
     images.splice(index, 1);
     updateFormValue(['images'], images);
+  };
+
+  const addPortfolioItem = () => {
+    if (!formData) return;
+    const items = Array.isArray(formData.items) ? [...formData.items] : [];
+    const categories = Array.isArray(formData.categories) ? formData.categories : [];
+    const firstCategory =
+      categories.find((category: any) => typeof category === 'string' && category !== 'All') ||
+      categories.find((category: any) => typeof category === 'string') ||
+      '';
+    items.push({
+      id: `portfolio-${Date.now()}`,
+      title: '',
+      client: '',
+      category: firstCategory,
+      desc: '',
+      image: '',
+      featured: false,
+    });
+    updateFormValue(['items'], items);
+  };
+
+  const removePortfolioItem = (index: number) => {
+    if (!formData || !Array.isArray(formData.items)) return;
+    const items = [...formData.items];
+    items.splice(index, 1);
+    updateFormValue(['items'], items);
+  };
+
+  const addPortfolioCategory = () => {
+    if (!formData) return;
+    const value = window.prompt('Category name');
+    if (!value || !value.trim()) return;
+    const categories = Array.isArray(formData.categories) ? [...formData.categories] : [];
+    categories.push(value.trim());
+    updateFormValue(['categories'], categories);
+  };
+
+  const removePortfolioCategory = (index: number) => {
+    if (!formData || !Array.isArray(formData.categories)) return;
+    const categories = [...formData.categories];
+    categories.splice(index, 1);
+    updateFormValue(['categories'], categories);
   };
 
   const addHeaderMenuItem = () => {
@@ -1868,53 +1923,51 @@ export function ContentEditor({
                       />
                     </div>
                   )}
-                  {'backgroundImage' in formData.hero && (
-                    <div>
-                      <label className="block text-xs text-gray-500">
-                        Background Image
-                      </label>
-                      <div className="mt-1 flex gap-2">
-                        <input
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.hero.backgroundImage || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['hero', 'backgroundImage'],
-                              event.target.value
-                            )
-                          }
-                        />
-                        <button
-                          type="button"
-                          onClick={() => openImagePicker(['hero', 'backgroundImage'])}
-                          className="px-3 rounded-md border border-gray-200 text-xs"
-                        >
-                          Choose
-                        </button>
-                      </div>
+                  <div>
+                    <label className="block text-xs text-gray-500">
+                      Background Image
+                    </label>
+                    <div className="mt-1 flex gap-2">
+                      <input
+                        className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        value={formData.hero.backgroundImage || ''}
+                        onChange={(event) =>
+                          updateFormValue(
+                            ['hero', 'backgroundImage'],
+                            event.target.value
+                          )
+                        }
+                        placeholder="/uploads/..."
+                      />
+                      <button
+                        type="button"
+                        onClick={() => openImagePicker(['hero', 'backgroundImage'])}
+                        className="px-3 rounded-md border border-gray-200 text-xs"
+                      >
+                        Choose
+                      </button>
                     </div>
-                  )}
-                  {'image' in formData.hero && (
-                    <div className="mt-3">
-                      <label className="block text-xs text-gray-500">Image</label>
-                      <div className="mt-1 flex gap-2">
-                        <input
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.hero.image || ''}
-                          onChange={(event) =>
-                            updateFormValue(['hero', 'image'], event.target.value)
-                          }
-                        />
-                        <button
-                          type="button"
-                          onClick={() => openImagePicker(['hero', 'image'])}
-                          className="px-3 rounded-md border border-gray-200 text-xs"
-                        >
-                          Choose
-                        </button>
-                      </div>
+                  </div>
+                  <div className="mt-3">
+                    <label className="block text-xs text-gray-500">Hero Image</label>
+                    <div className="mt-1 flex gap-2">
+                      <input
+                        className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        value={formData.hero.image || ''}
+                        onChange={(event) =>
+                          updateFormValue(['hero', 'image'], event.target.value)
+                        }
+                        placeholder="/uploads/..."
+                      />
+                      <button
+                        type="button"
+                        onClick={() => openImagePicker(['hero', 'image'])}
+                        className="px-3 rounded-md border border-gray-200 text-xs"
+                      >
+                        Choose
+                      </button>
                     </div>
-                  )}
+                  </div>
                 </div>
               )}
 
@@ -2519,6 +2572,191 @@ export function ContentEditor({
                         </div>
                       </div>
                     ))}
+                  </div>
+                </div>
+              )}
+
+              {isPortfolioPageFile && (
+                <div className="border border-gray-200 rounded-lg p-4 space-y-4">
+                  {!formData?.hero && (
+                    <div className="rounded-md border border-dashed border-gray-300 p-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <p className="text-xs text-gray-600">
+                          Portfolio hero is not set in this JSON yet.
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            updateFormValue(['hero'], {
+                              title: '',
+                              subtitle: '',
+                              backgroundImage: '',
+                              image: '',
+                            })
+                          }
+                          className="text-xs px-2 py-1 rounded border border-gray-200 hover:bg-gray-50"
+                        >
+                          Add Hero
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between">
+                    <div className="text-xs font-semibold text-gray-500 uppercase">
+                      Portfolio Categories
+                    </div>
+                    <button
+                      type="button"
+                      onClick={addPortfolioCategory}
+                      className="text-xs px-2 py-1 rounded border border-gray-200 hover:bg-gray-50"
+                    >
+                      Add Category
+                    </button>
+                  </div>
+                  <div className="space-y-2">
+                    {Array.isArray(formData?.categories) &&
+                      formData.categories.map((category: any, index: number) => (
+                        <div key={`${category}-${index}`} className="flex gap-2">
+                          <input
+                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                            value={typeof category === 'string' ? category : ''}
+                            onChange={(event) =>
+                              updateFormValue(
+                                ['categories', String(index)],
+                                event.target.value
+                              )
+                            }
+                          />
+                          <button
+                            type="button"
+                            onClick={() => removePortfolioCategory(index)}
+                            className="px-3 rounded-md border border-gray-200 text-xs"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      ))}
+                  </div>
+
+                  <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+                    <div className="text-xs font-semibold text-gray-500 uppercase">
+                      Portfolio Items
+                    </div>
+                    <button
+                      type="button"
+                      onClick={addPortfolioItem}
+                      className="text-xs px-2 py-1 rounded border border-gray-200 hover:bg-gray-50"
+                    >
+                      Add Item
+                    </button>
+                  </div>
+                  <div className="space-y-4">
+                    {Array.isArray(formData?.items) &&
+                      formData.items.map((item: any, index: number) => (
+                        <div key={item.id || index} className="border rounded-md p-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="text-xs text-gray-500">
+                              {item.title || `Item ${index + 1}`}
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => removePortfolioItem(index)}
+                              className="text-xs px-2 py-1 rounded border border-gray-200 hover:bg-gray-50"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                          <div className="grid gap-2 md:grid-cols-2">
+                            <input
+                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                              placeholder="Title"
+                              value={item.title || ''}
+                              onChange={(event) =>
+                                updateFormValue(
+                                  ['items', String(index), 'title'],
+                                  event.target.value
+                                )
+                              }
+                            />
+                            <input
+                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                              placeholder="Client"
+                              value={item.client || ''}
+                              onChange={(event) =>
+                                updateFormValue(
+                                  ['items', String(index), 'client'],
+                                  event.target.value
+                                )
+                              }
+                            />
+                          </div>
+                          <div className="mt-2">
+                            <label className="block text-xs text-gray-500 mb-1">Category</label>
+                            <select
+                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                              value={item.category || ''}
+                              onChange={(event) =>
+                                updateFormValue(
+                                  ['items', String(index), 'category'],
+                                  event.target.value
+                                )
+                              }
+                            >
+                              <option value="">Select category</option>
+                              {portfolioCategoryOptions.map((category: string) => (
+                                <option key={category} value={category}>
+                                  {category}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                          <textarea
+                            className="mt-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                            placeholder="Description"
+                            value={item.desc || ''}
+                            onChange={(event) =>
+                              updateFormValue(
+                                ['items', String(index), 'desc'],
+                                event.target.value
+                              )
+                            }
+                          />
+                          <div className="mt-2 flex gap-2">
+                            <input
+                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                              placeholder="Image"
+                              value={item.image || ''}
+                              onChange={(event) =>
+                                updateFormValue(
+                                  ['items', String(index), 'image'],
+                                  event.target.value
+                                )
+                              }
+                            />
+                            <button
+                              type="button"
+                              onClick={() => openImagePicker(['items', String(index), 'image'])}
+                              className="px-3 rounded-md border border-gray-200 text-xs"
+                            >
+                              Choose
+                            </button>
+                          </div>
+                          <label className="mt-2 inline-flex items-center gap-2 text-sm text-gray-700">
+                            <input
+                              type="checkbox"
+                              className="rounded border-gray-300"
+                              checked={Boolean(item.featured)}
+                              onChange={(event) =>
+                                updateFormValue(
+                                  ['items', String(index), 'featured'],
+                                  event.target.checked
+                                )
+                              }
+                            />
+                            Featured
+                          </label>
+                        </div>
+                      ))}
                   </div>
                 </div>
               )}

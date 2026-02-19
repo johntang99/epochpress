@@ -5,6 +5,16 @@ import aboutDataFallback from '@/data/pages/about.json';
 
 type AboutData = typeof aboutDataFallback;
 
+function normalizeImageUrl(value: unknown): string | null {
+  if (typeof value !== 'string') return null;
+  const trimmed = value.trim();
+  return trimmed || null;
+}
+
+function getString(value: unknown): string {
+  return typeof value === 'string' ? value : '';
+}
+
 export const metadata = {
   title: 'About Epoch Press',
   description: '25 years of commercial printing excellence. Serving publishers, businesses, and agencies nationwide.',
@@ -13,18 +23,48 @@ export const metadata = {
 export default async function AboutPage() {
   const siteId = await getRequestSiteId();
   const dbContent = await loadPageContent<AboutData>('about', 'en', siteId);
-  const { headline, subline, story, equipment, certifications, stats } = dbContent ?? aboutDataFallback;
+  const { hero, headline, subline, story, equipment, certifications, stats } =
+    dbContent ?? aboutDataFallback;
+  const heroTitle = getString((hero as Record<string, unknown> | undefined)?.title) || headline || 'About Epoch Press';
+  const heroSubtitle = getString((hero as Record<string, unknown> | undefined)?.subtitle) || subline || '';
+  const heroBackgroundImage = normalizeImageUrl(
+    (hero as Record<string, unknown> | undefined)?.backgroundImage
+  );
+  const heroImage = normalizeImageUrl((hero as Record<string, unknown> | undefined)?.image);
+  const hasHeroMedia = Boolean(heroBackgroundImage || heroImage);
 
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy-gradient pt-28 pb-16">
-        <div className="container-content">
-          <div className="max-w-3xl">
-            <h1 className="font-serif text-white mb-5" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
-              {headline}
-            </h1>
-            <p className="text-blue-200 text-lg leading-relaxed">{subline}</p>
+      <section
+        className={`relative pt-36 md:pt-40 pb-16 overflow-hidden ${
+          hasHeroMedia ? 'bg-[var(--navy)]' : 'bg-navy-gradient'
+        }`}
+      >
+        {heroBackgroundImage && (
+          <>
+            <img
+              src={heroBackgroundImage}
+              alt="About hero background"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-[var(--navy)]/70" />
+          </>
+        )}
+
+        <div className="container-content relative z-10">
+          <div className={heroImage ? 'grid gap-8 lg:grid-cols-2 items-center' : 'max-w-3xl'}>
+            <div>
+              <h1 className="font-serif text-white mb-5" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+                {heroTitle}
+              </h1>
+              <p className="text-blue-200 text-lg leading-relaxed">{heroSubtitle}</p>
+            </div>
+            {heroImage && (
+              <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/20">
+                <img src={heroImage} alt={heroTitle} className="h-full w-full object-cover" />
+              </div>
+            )}
           </div>
         </div>
       </section>

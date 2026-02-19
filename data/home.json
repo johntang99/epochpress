@@ -15,6 +15,35 @@
     { "name": "Business Cards", "slug": "business-cards", "desc": "Standard to luxury: foil, embossed, spot UV finishes" },
     { "name": "Large Format", "slug": "large-format", "desc": "Banners, signage, trade show displays and wall graphics" }
   ],
+  "servicesSection": {
+    "badge": "Core Capabilities",
+    "title": "Our Printing Solutions",
+    "subtitle": "Comprehensive production across publications, commercial collateral, and specialty print.",
+    "featuredSlug": "newspaper-printing"
+  },
+  "whyChooseUs": {
+    "badge": "Why Choose Us",
+    "title": "Experience the Epoch Press Advantage",
+    "subtitle": "Built for teams that value precision, predictability, and premium output.",
+    "points": [
+      {
+        "title": "Quality Control at Every Stage",
+        "description": "Color-managed prepress, disciplined press checks, and finishing QA standards protect brand consistency."
+      },
+      {
+        "title": "Reliable Deadlines for Critical Campaigns",
+        "description": "We run with operational rigor so launch schedules, distribution windows, and approvals stay on track."
+      },
+      {
+        "title": "High-Touch Service, Senior-Level Attention",
+        "description": "You work with experienced print specialists who anticipate risk and solve issues before they escalate."
+      },
+      {
+        "title": "Scalable Production for Growth",
+        "description": "From short runs to high-volume programs, we scale output without compromising quality standards."
+      }
+    ]
+  },
   "stats": [
     { "value": "25+", "label": "Years of Experience" },
     { "value": "50M+", "label": "Pages Printed Annually" },
@@ -33,6 +62,13 @@
     { "step": 3, "title": "Production", "desc": "Your project goes on press with our state-of-the-art equipment." },
     { "step": 4, "title": "Delivery", "desc": "On-time delivery nationwide. Rush options available." }
   ],
+  "blogPreview": {
+    "badge": "Insights",
+    "title": "Latest from Our Blog & Media",
+    "subtitle": "Practical guidance, market trends, and print strategy insights from our team.",
+    "ctaText": "Explore All Articles",
+    "ctaHref": "/blog"
+  },
   "cta": {
     "headline": "Ready to Start Your Project?",
     "subline": "Get a custom quote in minutes. Our team responds within 24 hours.",

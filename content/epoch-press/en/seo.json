@@ -1,30 +1,30 @@
 {
-  "title": "Epoch Press",
-  "description": "Full-service commercial printing. Newspapers, magazines, books, marketing print, and more. Serving the Northeast and nationwide.",
   "home": {
-    "title": "Epoch Press — Premium Commercial Printing | New York",
-    "description": "Full-service commercial printing for publishers, businesses, and agencies. High quality, competitive pricing. Serving the Northeast and nationwide."
+    "title": "Epoch Press | Full-Service Commercial Printing in Wayne, NJ",
+    "description": "From prepress to post press, Epoch Press helps publishers, organizations, and brands produce high-impact print with modern workflows, consistent color, and on-time delivery."
   },
   "pages": {
-    "products": {
-      "title": "Printing Services | Epoch Press",
-      "description": "Comprehensive commercial printing: newspapers, magazines, books, marketing print, menus, business cards, and large format."
-    },
     "about": {
       "title": "About Epoch Press | 25+ Years of Printing Excellence",
-      "description": "Learn about Epoch Press — full-service commercial printing in New York since 1999."
-    },
-    "portfolio": {
-      "title": "Our Work | Epoch Press Portfolio",
-      "description": "See completed print projects from Epoch Press across 500+ clients and 7 product categories."
-    },
-    "contact": {
-      "title": "Contact Epoch Press | Get a Custom Quote",
-      "description": "Get in touch with our team. Request a quote, ask a question, or visit our New York facility."
+      "description": "Learn how Epoch Press combines experienced press teams, advanced equipment, and responsive support to deliver dependable commercial print outcomes."
     },
     "quote": {
       "title": "Request a Print Quote | Epoch Press",
       "description": "Get a custom quote for your printing project. We respond within 24 hours."
+    },
+    "contact": {
+      "title": "Contact Epoch Press | Get a Custom Quote",
+      "description": "Contact Epoch Press at 7 Highpoint Drive, Wayne, NJ 07470 or call 973.694.3600 to discuss your project and timeline."
+    },
+    "products": {
+      "title": "Printing Services | Epoch Press",
+      "description": "Explore Epoch Press printing services including newspapers, magazines, books, marketing print, menus, business cards, and large-format applications."
+    },
+    "portfolio": {
+      "title": "Our Work | Epoch Press Portfolio",
+      "description": "Review selected projects that show the quality, consistency, and versatility of Epoch Press production capabilities."
     }
-  }
+  },
+  "title": "Epoch Press",
+  "description": "Epoch Press is a full-service commercial printing company in Wayne, NJ. We print newspapers, magazines, books, marketing collateral, and more with dependable quality and turnaround."
 }

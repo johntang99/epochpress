@@ -48,7 +48,7 @@ const config: Config = {
       boxShadow: {
         card: '0 4px 20px rgba(15,27,45,0.08)',
         'card-hover': '0 8px 40px rgba(15,27,45,0.15)',
-        gold: '0 4px 20px rgba(184,134,11,0.25)',
+        gold: '0 2px 10px rgba(184,134,11,0.16)',
       },
       backgroundImage: {
         'navy-gradient': 'linear-gradient(135deg, #0F1B2D 0%, #1A2E4A 100%)',

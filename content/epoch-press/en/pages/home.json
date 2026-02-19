@@ -1,42 +1,163 @@
 {
-  "hero": {
-    "headline": "Premium Printing. Exceptional Results.",
-    "subline": "Full-service commercial printing for publishers, businesses, and agencies across the US. Newspapers, magazines, books, marketing print, and more.",
-    "primaryCta": { "text": "Get a Quote", "href": "/quote" },
-    "secondaryCta": { "text": "Call Us: (212) 555-0100", "href": "tel:+12125550100" },
-    "badge": "25+ Years of Print Excellence"
+  "cta": {
+    "subline": "Choose a partner built for quality, consistency, and executive-level reliability.",
+    "headline": "Ready to Raise Print Standards?",
+    "primaryCta": {
+      "href": "/quote",
+      "text": "Request a Quote"
+    },
+    "secondaryCta": {
+      "href": "tel:+19736943600",
+      "text": "973.694.3600"
+    }
   },
-  "categories": [
-    { "name": "Newspapers", "slug": "newspaper-printing", "desc": "Broadsheet, tabloid, community papers and inserts" },
-    { "name": "Magazines", "slug": "magazine-printing", "desc": "High-end perfect bind, saddle stitch, UV coated covers" },
-    { "name": "Books", "slug": "book-printing", "desc": "Offset, digital, and print-on-demand for every genre" },
-    { "name": "Marketing Print", "slug": "marketing-print", "desc": "Flyers, brochures, postcards, posters and banners" },
-    { "name": "Menus", "slug": "menu-printing", "desc": "Dine-in, takeout, laminated and oversized menus" },
-    { "name": "Business Cards", "slug": "business-cards", "desc": "Standard to luxury: foil, embossed, spot UV finishes" },
-    { "name": "Large Format", "slug": "large-format", "desc": "Banners, signage, trade show displays and wall graphics" }
-  ],
+  "hero": {
+    "badge": "Engineered for High-Stakes Print",
+    "subline": "Global conditions are tougher. Expectations are higher. Epoch Press protects your brand with precise execution, dependable quality, and disciplined turnaround.",
+    "headline": "Premium Print. Executive Confidence.",
+    "primaryCta": {
+      "href": "/quote",
+      "text": "Get a Quote"
+    },
+    "secondaryCta": {
+      "href": "tel:+19736943600",
+      "text": "Call Us: 973.694.3600"
+    },
+    "image": "/uploads/epoch-press/general/1771479825282-jakub-zerdzicki-da9qsu-0a00-unsplash.jpg"
+  },
   "stats": [
-    { "value": "25+", "label": "Years of Experience" },
-    { "value": "50M+", "label": "Pages Printed Annually" },
-    { "value": "500+", "label": "Business Clients" },
-    { "value": "48hr", "label": "Rush Available" }
-  ],
-  "portfolio": [
-    { "title": "Metro Daily Newspaper", "category": "Newspapers", "desc": "Daily broadsheet for a regional publisher, 50,000 print run." },
-    { "title": "Architecture Quarterly", "category": "Magazines", "desc": "120-page perfect-bound magazine with UV-coated cover." },
-    { "title": "Restaurant Group Menu Suite", "category": "Menus", "desc": "Custom laminated menus across 12 locations." },
-    { "title": "Independent Publisher Series", "category": "Books", "desc": "Short-run offset for a literary fiction publisher." }
+    {
+      "label": "Years of Experience",
+      "value": "25+"
+    },
+    {
+      "label": "Pages Printed Annually",
+      "value": "50M+"
+    },
+    {
+      "label": "Business Clients",
+      "value": "500+"
+    },
+    {
+      "label": "Rush Available",
+      "value": "48hr"
+    }
   ],
   "process": [
-    { "step": 1, "title": "Submit Files", "desc": "Upload your print-ready files or get help from our prepress team." },
-    { "step": 2, "title": "Proof Review", "desc": "Review your digital proof and approve for press." },
-    { "step": 3, "title": "Production", "desc": "Your project goes on press with our state-of-the-art equipment." },
-    { "step": 4, "title": "Delivery", "desc": "On-time delivery nationwide. Rush options available." }
+    {
+      "desc": "We define scope, standards, and schedule up front.",
+      "step": 1,
+      "title": "Strategic Intake"
+    },
+    {
+      "desc": "Files are validated, color is calibrated, risk is reduced.",
+      "step": 2,
+      "title": "Prepress Precision"
+    },
+    {
+      "desc": "Press and finishing run under strict quality controls.",
+      "step": 3,
+      "title": "Controlled Production"
+    },
+    {
+      "desc": "Deadlines are met with responsive, accountable support.",
+      "step": 4,
+      "title": "Reliable Fulfillment"
+    }
   ],
-  "cta": {
-    "headline": "Ready to Start Your Project?",
-    "subline": "Get a custom quote in minutes. Our team responds within 24 hours.",
-    "primaryCta": { "text": "Request a Quote", "href": "/quote" },
-    "secondaryCta": { "text": "(212) 555-0100", "href": "tel:+12125550100" }
+  "portfolio": [
+    {
+      "desc": "Daily broadsheet for a regional publisher, 50,000 print run.",
+      "title": "Metro Daily Newspaper",
+      "category": "Newspapers"
+    },
+    {
+      "desc": "120-page perfect-bound magazine with UV-coated cover.",
+      "title": "Architecture Quarterly",
+      "category": "Magazines"
+    },
+    {
+      "desc": "Custom laminated menus across 12 locations.",
+      "title": "Restaurant Group Menu Suite",
+      "category": "Menus"
+    },
+    {
+      "desc": "Short-run offset for a literary fiction publisher.",
+      "title": "Independent Publisher Series",
+      "category": "Books"
+    }
+  ],
+  "categories": [
+    {
+      "desc": "Broadsheet, tabloid, community papers and inserts",
+      "name": "Newspapers",
+      "slug": "newspaper-printing"
+    },
+    {
+      "desc": "High-end perfect bind, saddle stitch, UV coated covers",
+      "name": "Magazines",
+      "slug": "magazine-printing"
+    },
+    {
+      "desc": "Offset, digital, and print-on-demand for every genre",
+      "name": "Books",
+      "slug": "book-printing"
+    },
+    {
+      "desc": "Flyers, brochures, postcards, posters and banners",
+      "name": "Marketing Print",
+      "slug": "marketing-print"
+    },
+    {
+      "desc": "Dine-in, takeout, laminated and oversized menus",
+      "name": "Menus",
+      "slug": "menu-printing"
+    },
+    {
+      "desc": "Standard to luxury: foil, embossed, spot UV finishes",
+      "name": "Business Cards",
+      "slug": "business-cards"
+    },
+    {
+      "desc": "Banners, signage, trade show displays and wall graphics",
+      "name": "Large Format",
+      "slug": "large-format"
+    }
+  ],
+  "blogPreview": {
+    "badge": "Insights",
+    "title": "Latest from Our Blog & Media",
+    "ctaHref": "/blog",
+    "ctaText": "Explore All Articles",
+    "subtitle": "Practical guidance, market trends, and print strategy insights from our team."
+  },
+  "whyChooseUs": {
+    "badge": "Why Choose Us",
+    "title": "Experience the Epoch Press Advantage",
+    "points": [
+      {
+        "title": "Quality Control at Every Stage",
+        "description": "Color-managed prepress, disciplined press checks, and finishing QA standards protect brand consistency."
+      },
+      {
+        "title": "Reliable Deadlines for Critical Campaigns",
+        "description": "We run with operational rigor so launch schedules, distribution windows, and approvals stay on track."
+      },
+      {
+        "title": "High-Touch Service, Senior-Level Attention",
+        "description": "You work with experienced print specialists who anticipate risk and solve issues before they escalate."
+      },
+      {
+        "title": "Scalable Production for Growth",
+        "description": "From short runs to high-volume programs, we scale output without compromising quality standards."
+      }
+    ],
+    "subtitle": "Built for teams that value precision, predictability, and premium output."
+  },
+  "servicesSection": {
+    "badge": "Core Capabilities",
+    "title": "Our Printing Solutions",
+    "subtitle": "Comprehensive production across publications, commercial collateral, and specialty print.",
+    "featuredSlug": "newspaper-printing"
   }
 }

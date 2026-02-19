@@ -1,29 +1,174 @@
 {
-  "slug": "large-format",
-  "name": "Large Format Printing",
-  "tagline": "Make a big impression with large format prints that command attention.",
-  "description": "Banners, trade show displays, retail signage, wall graphics, and outdoor advertising. Vinyl, fabric, foam board, and acrylic. Indoor and outdoor options with weather-resistant inks.",
-  "specs": [
-    {"tab":"Products","items":[{"label":"Vinyl Banners","value":"Indoor and outdoor, grommets included"},{"label":"Fabric Displays","value":"Trade show tension fabric"},{"label":"Foam Board","value":"Lightweight indoor signage"},{"label":"Acrylic","value":"Premium glass-like display"},{"label":"Wall Graphics","value":"Removable or permanent"}]},
-    {"tab":"Materials","items":[{"label":"13 oz Vinyl","value":"Standard banner material"},{"label":"18 oz Vinyl","value":"Heavy-duty outdoor"},{"label":"Mesh Vinyl","value":"Wind-resistant outdoor"},{"label":"Polyester Fabric","value":"Wrinkle-free trade show"},{"label":"Coroplast","value":"Rigid lightweight signage"}]},
-    {"tab":"Finishing","items":[{"label":"Grommets","value":"Every 2 feet standard"},{"label":"Pole Pockets","value":"Top, bottom or both"},{"label":"Hemmed Edges","value":"Reinforced perimeter"},{"label":"Mounting Hardware","value":"Stands and frames available"}]},
-    {"tab":"Sizes","items":[{"label":"Banners","value":"2×4 up to 10×20 ft and custom"},{"label":"Retractable","value":"33\" × 78\" standard"},{"label":"Backdrops","value":"8×8 to 10×20 ft"},{"label":"Custom","value":"Any size, no maximum"}]}
+  "cta": {
+    "headline": "Ready for large format printing?",
+    "primaryCta": {
+      "href": "/quote?product=large-format",
+      "text": "Get a Quote"
+    },
+    "secondaryCta": {
+      "href": "tel:+12125550100",
+      "text": "Call Us"
+    }
+  },
+  "faq": [
+    {
+      "a": "For banners viewed at distance (6+ feet), 150 DPI at final print size is sufficient. For close-view signage, 300 DPI is recommended.",
+      "q": "What resolution do I need for large format printing?"
+    },
+    {
+      "a": "Yes. We use UV-resistant, weather-proof inks on outdoor-rated vinyl. Grommets are standard.",
+      "q": "Are your vinyl banners outdoor-safe?"
+    },
+    {
+      "a": "Yes. We offer tension fabric pop-up displays, step-and-repeat backdrops, and curved display systems.",
+      "q": "Can you print trade show backdrops?"
+    },
+    {
+      "a": "Standard is 3–5 business days. Rush 24–48 hour options available for most products.",
+      "q": "What is the turnaround for large format?"
+    }
   ],
-  "priceTiers": [
-    {"qty":"1–5","note":"Custom print, standard turnaround"},{"qty":"6–20","note":"Slight volume savings"},{"qty":"21–50","note":"Event and campaign pricing"},{"qty":"51+","note":"Volume and repeat pricing"}
+  "name": "Large Format Printing",
+  "slug": "large-format",
+  "specs": [
+    {
+      "tab": "Products",
+      "items": [
+        {
+          "label": "Vinyl Banners",
+          "value": "Indoor and outdoor, grommets included"
+        },
+        {
+          "label": "Fabric Displays",
+          "value": "Trade show tension fabric"
+        },
+        {
+          "label": "Foam Board",
+          "value": "Lightweight indoor signage"
+        },
+        {
+          "label": "Acrylic",
+          "value": "Premium glass-like display"
+        },
+        {
+          "label": "Wall Graphics",
+          "value": "Removable or permanent"
+        }
+      ]
+    },
+    {
+      "tab": "Materials",
+      "items": [
+        {
+          "label": "13 oz Vinyl",
+          "value": "Standard banner material"
+        },
+        {
+          "label": "18 oz Vinyl",
+          "value": "Heavy-duty outdoor"
+        },
+        {
+          "label": "Mesh Vinyl",
+          "value": "Wind-resistant outdoor"
+        },
+        {
+          "label": "Polyester Fabric",
+          "value": "Wrinkle-free trade show"
+        },
+        {
+          "label": "Coroplast",
+          "value": "Rigid lightweight signage"
+        }
+      ]
+    },
+    {
+      "tab": "Finishing",
+      "items": [
+        {
+          "label": "Grommets",
+          "value": "Every 2 feet standard"
+        },
+        {
+          "label": "Pole Pockets",
+          "value": "Top, bottom or both"
+        },
+        {
+          "label": "Hemmed Edges",
+          "value": "Reinforced perimeter"
+        },
+        {
+          "label": "Mounting Hardware",
+          "value": "Stands and frames available"
+        }
+      ]
+    },
+    {
+      "tab": "Sizes",
+      "items": [
+        {
+          "label": "Banners",
+          "value": "2×4 up to 10×20 ft and custom"
+        },
+        {
+          "label": "Retractable",
+          "value": "33\" × 78\" standard"
+        },
+        {
+          "label": "Backdrops",
+          "value": "8×8 to 10×20 ft"
+        },
+        {
+          "label": "Custom",
+          "value": "Any size, no maximum"
+        }
+      ]
+    }
   ],
   "process": [
-    {"step":1,"title":"Define Size & Material","desc":"Choose your product, size, and material type."},
-    {"step":2,"title":"Submit High-Res File","desc":"Provide a high-resolution PDF or image file at proper DPI."},
-    {"step":3,"title":"Proof Review","desc":"Approve your layout at scale."},
-    {"step":4,"title":"Wide Format Print","desc":"Printed on wide-format inkjet press with UV-resistant inks."},
-    {"step":5,"title":"Finishing & Delivery","desc":"Hemmed, grommeted, or mounted and shipped."}
+    {
+      "desc": "Choose your product, size, and material type.",
+      "step": 1,
+      "title": "Define Size & Material"
+    },
+    {
+      "desc": "Provide a high-resolution PDF or image file at proper DPI.",
+      "step": 2,
+      "title": "Submit High-Res File"
+    },
+    {
+      "desc": "Approve your layout at scale.",
+      "step": 3,
+      "title": "Proof Review"
+    },
+    {
+      "desc": "Printed on wide-format inkjet press with UV-resistant inks.",
+      "step": 4,
+      "title": "Wide Format Print"
+    },
+    {
+      "desc": "Hemmed, grommeted, or mounted and shipped.",
+      "step": 5,
+      "title": "Finishing & Delivery"
+    }
   ],
-  "faq": [
-    {"q":"What resolution do I need for large format printing?","a":"For banners viewed at distance (6+ feet), 150 DPI at final print size is sufficient. For close-view signage, 300 DPI is recommended."},
-    {"q":"Are your vinyl banners outdoor-safe?","a":"Yes. We use UV-resistant, weather-proof inks on outdoor-rated vinyl. Grommets are standard."},
-    {"q":"Can you print trade show backdrops?","a":"Yes. We offer tension fabric pop-up displays, step-and-repeat backdrops, and curved display systems."},
-    {"q":"What is the turnaround for large format?","a":"Standard is 3–5 business days. Rush 24–48 hour options available for most products."}
+  "tagline": "Make a big impression with large format prints that command attention.",
+  "priceTiers": [
+    {
+      "qty": "1–5",
+      "note": "Custom print, standard turnaround"
+    },
+    {
+      "qty": "6–20",
+      "note": "Slight volume savings"
+    },
+    {
+      "qty": "21–50",
+      "note": "Event and campaign pricing"
+    },
+    {
+      "qty": "51+",
+      "note": "Volume and repeat pricing"
+    }
   ],
-  "cta":{"headline":"Ready for large format printing?","primaryCta":{"text":"Get a Quote","href":"/quote?product=large-format"},"secondaryCta":{"text":"Call Us","href":"tel:+12125550100"}}
+  "description": "Banners, trade show displays, retail signage, wall graphics, and outdoor advertising. Vinyl, fabric, foam board, and acrylic. Indoor and outdoor options with weather-resistant inks."
 }

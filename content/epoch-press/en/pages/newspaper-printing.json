@@ -1,69 +1,170 @@
 {
-  "slug": "newspaper-printing",
+  "cta": {
+    "headline": "Ready to print your newspaper?",
+    "primaryCta": {
+      "href": "/quote?product=newspaper-printing",
+      "text": "Get a Quote"
+    },
+    "secondaryCta": {
+      "href": "tel:+12125550100",
+      "text": "Call Us"
+    }
+  },
+  "faq": [
+    {
+      "a": "Our minimum for newspaper printing is 500 copies. For runs under 500, we recommend digital alternatives.",
+      "q": "What is the minimum print run for a newspaper?"
+    },
+    {
+      "a": "Yes. We offer full 4-color CMYK printing on all newspaper formats, including broadsheet and tabloid.",
+      "q": "Do you print full-color newspapers?"
+    },
+    {
+      "a": "Yes. We print inserts in custom sizes that can be included in the newspaper or distributed separately.",
+      "q": "Can I print newspaper inserts?"
+    },
+    {
+      "a": "Standard turnaround is 3–5 business days from approved proof. Rush options as fast as 24–48 hours are available.",
+      "q": "What is the standard turnaround time?"
+    },
+    {
+      "a": "Yes. We specialize in recurring weekly and daily newspaper contracts with dedicated scheduling and pricing.",
+      "q": "Do you handle recurring print contracts?"
+    }
+  ],
   "name": "Newspaper Printing",
-  "tagline": "High-volume newspaper printing for publishers of all sizes.",
-  "description": "From community weeklies to major regional dailies, we deliver fast, reliable newspaper printing. Web offset and digital capabilities, broadsheet and tabloid formats, black-and-white and full color.",
+  "slug": "newspaper-printing",
   "specs": [
     {
       "tab": "Formats",
       "items": [
-        { "label": "Broadsheet", "value": "22\" × 28\" (full), 11\" × 22\" (half page)" },
-        { "label": "Tabloid", "value": "11\" × 17\" standard" },
-        { "label": "Berliner", "value": "12.4\" × 18.5\"" },
-        { "label": "Inserts", "value": "Custom sizes available" }
+        {
+          "label": "Broadsheet",
+          "value": "22\" × 28\" (full), 11\" × 22\" (half page)"
+        },
+        {
+          "label": "Tabloid",
+          "value": "11\" × 17\" standard"
+        },
+        {
+          "label": "Berliner",
+          "value": "12.4\" × 18.5\""
+        },
+        {
+          "label": "Inserts",
+          "value": "Custom sizes available"
+        }
       ]
     },
     {
       "tab": "Paper",
       "items": [
-        { "label": "Standard Newsprint", "value": "30 lb — economy daily run" },
-        { "label": "Improved Newsprint", "value": "35 lb — enhanced print quality" },
-        { "label": "Premium Newsprint", "value": "40 lb — sharper photos, cleaner ink" },
-        { "label": "Color Sections", "value": "Uncoated offset 50–60 lb available" }
+        {
+          "label": "Standard Newsprint",
+          "value": "30 lb — economy daily run"
+        },
+        {
+          "label": "Improved Newsprint",
+          "value": "35 lb — enhanced print quality"
+        },
+        {
+          "label": "Premium Newsprint",
+          "value": "40 lb — sharper photos, cleaner ink"
+        },
+        {
+          "label": "Color Sections",
+          "value": "Uncoated offset 50–60 lb available"
+        }
       ]
     },
     {
       "tab": "Color",
       "items": [
-        { "label": "Black & White", "value": "Single or dual web" },
-        { "label": "Spot Color", "value": "1–3 spot colors" },
-        { "label": "Full Color", "value": "4-color process (CMYK)" },
-        { "label": "Mixed", "value": "Color cover/inside + B&W interior" }
+        {
+          "label": "Black & White",
+          "value": "Single or dual web"
+        },
+        {
+          "label": "Spot Color",
+          "value": "1–3 spot colors"
+        },
+        {
+          "label": "Full Color",
+          "value": "4-color process (CMYK)"
+        },
+        {
+          "label": "Mixed",
+          "value": "Color cover/inside + B&W interior"
+        }
       ]
     },
     {
       "tab": "Quantities",
       "items": [
-        { "label": "Minimum", "value": "500 copies" },
-        { "label": "Standard", "value": "1,000 – 100,000" },
-        { "label": "High Volume", "value": "100,000 – 500,000+" },
-        { "label": "Frequency", "value": "Daily, weekly, monthly, one-time" }
+        {
+          "label": "Minimum",
+          "value": "500 copies"
+        },
+        {
+          "label": "Standard",
+          "value": "1,000 – 100,000"
+        },
+        {
+          "label": "High Volume",
+          "value": "100,000 – 500,000+"
+        },
+        {
+          "label": "Frequency",
+          "value": "Daily, weekly, monthly, one-time"
+        }
       ]
     }
   ],
-  "priceTiers": [
-    { "qty": "500–999", "note": "Digital printing, fast turnaround" },
-    { "qty": "1,000–4,999", "note": "Offset or digital depending on spec" },
-    { "qty": "5,000–49,999", "note": "Web offset, best unit cost" },
-    { "qty": "50,000+", "note": "Custom pricing, dedicated press run" }
-  ],
   "process": [
-    { "step": 1, "title": "Submit PDF Files", "desc": "Provide print-ready PDFs per our file guidelines." },
-    { "step": 2, "title": "Prepress Review", "desc": "Our team checks files for resolution, bleed, and color." },
-    { "step": 3, "title": "Plate Making", "desc": "Printing plates are made for offset press." },
-    { "step": 4, "title": "Press Run", "desc": "High-speed web offset or digital press production." },
-    { "step": 5, "title": "Folding & Delivery", "desc": "Collated, folded, and shipped or delivered." }
+    {
+      "desc": "Provide print-ready PDFs per our file guidelines.",
+      "step": 1,
+      "title": "Submit PDF Files"
+    },
+    {
+      "desc": "Our team checks files for resolution, bleed, and color.",
+      "step": 2,
+      "title": "Prepress Review"
+    },
+    {
+      "desc": "Printing plates are made for offset press.",
+      "step": 3,
+      "title": "Plate Making"
+    },
+    {
+      "desc": "High-speed web offset or digital press production.",
+      "step": 4,
+      "title": "Press Run"
+    },
+    {
+      "desc": "Collated, folded, and shipped or delivered.",
+      "step": 5,
+      "title": "Folding & Delivery"
+    }
   ],
-  "faq": [
-    { "q": "What is the minimum print run for a newspaper?", "a": "Our minimum for newspaper printing is 500 copies. For runs under 500, we recommend digital alternatives." },
-    { "q": "Do you print full-color newspapers?", "a": "Yes. We offer full 4-color CMYK printing on all newspaper formats, including broadsheet and tabloid." },
-    { "q": "Can I print newspaper inserts?", "a": "Yes. We print inserts in custom sizes that can be included in the newspaper or distributed separately." },
-    { "q": "What is the standard turnaround time?", "a": "Standard turnaround is 3–5 business days from approved proof. Rush options as fast as 24–48 hours are available." },
-    { "q": "Do you handle recurring print contracts?", "a": "Yes. We specialize in recurring weekly and daily newspaper contracts with dedicated scheduling and pricing." }
+  "tagline": "High-volume newspaper printing for publishers of all sizes.",
+  "priceTiers": [
+    {
+      "qty": "500–999",
+      "note": "Digital printing, fast turnaround"
+    },
+    {
+      "qty": "1,000–4,999",
+      "note": "Offset or digital depending on spec"
+    },
+    {
+      "qty": "5,000–49,999",
+      "note": "Web offset, best unit cost"
+    },
+    {
+      "qty": "50,000+",
+      "note": "Custom pricing, dedicated press run"
+    }
   ],
-  "cta": {
-    "headline": "Ready to print your newspaper?",
-    "primaryCta": { "text": "Get a Quote", "href": "/quote?product=newspaper-printing" },
-    "secondaryCta": { "text": "Call Us", "href": "tel:+12125550100" }
-  }
+  "description": "From community weeklies to major regional dailies, we deliver fast, reliable newspaper printing. Web offset and digital capabilities, broadsheet and tabloid formats, black-and-white and full color."
 }

@@ -3,7 +3,7 @@
     {
       "id": "epoch-press",
       "name": "Epoch Press",
-      "domain": "epochpress.com",
+      "domain": "epoch-press.com",
       "enabled": true,
       "defaultLocale": "en",
       "supportedLocales": ["en"],

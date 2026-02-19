@@ -1,0 +1,17 @@
+{
+  "hero": {
+    "title": "Insights & Resources",
+    "subtitle": "Industry trends, print tips, case studies, and behind-the-scenes at Epoch Press. Everything you need to make smarter printing decisions."
+  },
+  "labels": {
+    "featuredArticle": "Featured Article",
+    "allPosts": "All Posts",
+    "noPosts": "No posts in this category yet."
+  },
+  "cta": {
+    "title": "Ready to Start Printing?",
+    "subtitle": "From a single business card run to a full newspaper contract - we handle it all.",
+    "buttonText": "Request a Quote",
+    "buttonHref": "/quote"
+  }
+}

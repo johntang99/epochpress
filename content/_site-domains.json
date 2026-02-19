@@ -2,7 +2,7 @@
   "domains": [
     {
       "siteId": "epoch-press",
-      "domain": "epochpress.com",
+      "domain": "epoch-press.com",
       "environment": "prod",
       "enabled": true
     },

@@ -1,15 +1,16 @@
 {
   "slug": "restaurant-menu-printing-guide",
-  "title": "The Complete Guide to Restaurant Menu Printing",
-  "excerpt": "Dine-in, takeout, or digital-hybrid — what menu format works best for your restaurant? We cover paper types, lamination, and design tips.",
-  "category": "our-services",
-  "type": "article",
-  "readTime": "8 min read",
-  "publishDate": "2026-01-20",
-  "featured": false,
   "tags": [
     "menu",
     "restaurant",
     "printing guide"
-  ]
+  ],
+  "type": "article",
+  "image": "/uploads/epoch-press/general/geri-sakti-g9_KP2fvFII-unsplash.jpg",
+  "title": "The Complete Guide to Restaurant Menu Printing",
+  "excerpt": "Dine-in, takeout, or digital-hybrid — what menu format works best for your restaurant? We cover paper types, lamination, and design tips.",
+  "category": "our-services",
+  "featured": false,
+  "readTime": "8 min read",
+  "publishDate": "2026-01-20"
 }

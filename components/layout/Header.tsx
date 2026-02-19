@@ -2,8 +2,21 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Phone, PrinterIcon } from 'lucide-react';
+import {
+  Menu,
+  X,
+  ChevronDown,
+  Phone,
+  PrinterIcon,
+  Mail,
+  MapPin,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Youtube,
+} from 'lucide-react';
 import clsx from 'clsx';
+import type { SiteInfo } from '@/lib/types';
 
 const products = [
   { name: 'Newspapers', slug: 'newspaper-printing', desc: 'Broadsheet, tabloid, inserts' },
@@ -15,7 +28,7 @@ const products = [
   { name: 'Large Format', slug: 'large-format', desc: 'Banners, signage, displays' },
 ];
 
-const navLinks = [
+const fallbackNavLinks = [
   { name: 'Products', href: '/products', hasDropdown: true },
   { name: 'About', href: '/about', hasDropdown: false },
   { name: 'Portfolio', href: '/portfolio', hasDropdown: false },
@@ -23,10 +36,76 @@ const navLinks = [
   { name: 'Contact', href: '/contact', hasDropdown: false },
 ];
 
-export function Header() {
+type HeaderConfig = {
+  menu?: {
+    logo?: { text?: string; subtext?: string };
+    items?: Array<{ text?: string; url?: string }>;
+  };
+  cta?: { text?: string; link?: string };
+  topbar?: {
+    phone?: string;
+    phoneHref?: string;
+    email?: string;
+    emailHref?: string;
+    address?: string;
+    addressHref?: string;
+    social?: {
+      facebook?: string;
+      instagram?: string;
+      linkedin?: string;
+      youtube?: string;
+    };
+  };
+};
+
+export function Header({
+  config,
+  siteInfo,
+}: {
+  config?: HeaderConfig | null;
+  siteInfo?: SiteInfo | null;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const logoText = config?.menu?.logo?.text || 'EPOCH PRESS';
+  const logoSubtext = config?.menu?.logo?.subtext || 'Commercial Printing';
+  const phoneText = siteInfo?.phone || config?.topbar?.phone || '(212) 555-0100';
+  const phoneHref =
+    config?.topbar?.phoneHref ||
+    (phoneText ? `tel:${phoneText.replace(/[^\d+]/g, '')}` : 'tel:+12125550100');
+  const ctaText = config?.cta?.text || 'Get a Quote';
+  const ctaHref = config?.cta?.link || '/quote';
+  const emailText = config?.topbar?.email || siteInfo?.email || '';
+  const emailHref = config?.topbar?.emailHref || (emailText ? `mailto:${emailText}` : '');
+  const addressText =
+    config?.topbar?.address ||
+    [siteInfo?.address, [siteInfo?.city, siteInfo?.state, siteInfo?.zip].filter(Boolean).join(' ')]
+      .filter(Boolean)
+      .join(', ');
+  const addressHref = config?.topbar?.addressHref || siteInfo?.addressMapUrl || '';
+  const socialLinks = {
+    facebook: config?.topbar?.social?.facebook || siteInfo?.social?.facebook || '',
+    instagram: config?.topbar?.social?.instagram || siteInfo?.social?.instagram || '',
+    linkedin: config?.topbar?.social?.linkedin || '',
+    youtube: config?.topbar?.social?.youtube || siteInfo?.social?.youtube || '',
+  };
+  const hasTopbar =
+    Boolean(phoneText) ||
+    Boolean(emailText) ||
+    Boolean(addressText) ||
+    Boolean(socialLinks.facebook || socialLinks.instagram || socialLinks.linkedin || socialLinks.youtube);
+  const navLinks =
+    config?.menu?.items?.length
+      ? config.menu.items
+          .filter((item) => Boolean(item?.text && item?.url))
+          .map((item) => ({
+            name: item.text as string,
+            href: item.url as string,
+            hasDropdown: (item.url || '').toLowerCase() === '/products',
+          }))
+      : fallbackNavLinks;
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -43,6 +122,91 @@ export function Header() {
           : 'bg-white/95 backdrop-blur-sm'
       )}
     >
+      {hasTopbar && (
+        <div className="hidden md:block border-b border-white/10 bg-[var(--primary-dark)] text-white">
+          <div className="container-content">
+            <div className="flex min-h-10 items-center justify-between gap-4 py-1.5 text-xs">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-blue-100">
+                {addressText && (
+                  <a
+                    href={addressHref || '#'}
+                    target={addressHref ? '_blank' : undefined}
+                    rel={addressHref ? 'noreferrer' : undefined}
+                    className="inline-flex items-center gap-1.5 hover:text-[var(--gold-light)] transition-colors"
+                  >
+                    <MapPin className="h-3.5 w-3.5 text-[var(--gold)]" />
+                    {addressText}
+                  </a>
+                )}
+                {phoneText && (
+                  <a
+                    href={phoneHref}
+                    className="inline-flex items-center gap-1.5 hover:text-[var(--gold-light)] transition-colors"
+                  >
+                    <Phone className="h-3.5 w-3.5 text-[var(--gold)]" />
+                    {phoneText}
+                  </a>
+                )}
+                {emailText && (
+                  <a
+                    href={emailHref}
+                    className="inline-flex items-center gap-1.5 hover:text-[var(--gold-light)] transition-colors"
+                  >
+                    <Mail className="h-3.5 w-3.5 text-[var(--gold)]" />
+                    {emailText}
+                  </a>
+                )}
+              </div>
+              <div className="flex items-center gap-3 text-blue-100">
+                {socialLinks.facebook && (
+                  <a
+                    href={socialLinks.facebook}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Facebook"
+                    className="hover:text-[var(--gold-light)] transition-colors"
+                  >
+                    <Facebook className="h-3.5 w-3.5" />
+                  </a>
+                )}
+                {socialLinks.instagram && (
+                  <a
+                    href={socialLinks.instagram}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Instagram"
+                    className="hover:text-[var(--gold-light)] transition-colors"
+                  >
+                    <Instagram className="h-3.5 w-3.5" />
+                  </a>
+                )}
+                {socialLinks.linkedin && (
+                  <a
+                    href={socialLinks.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="LinkedIn"
+                    className="hover:text-[var(--gold-light)] transition-colors"
+                  >
+                    <Linkedin className="h-3.5 w-3.5" />
+                  </a>
+                )}
+                {socialLinks.youtube && (
+                  <a
+                    href={socialLinks.youtube}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="YouTube"
+                    className="hover:text-[var(--gold-light)] transition-colors"
+                  >
+                    <Youtube className="h-3.5 w-3.5" />
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="container-content">
         <div className="flex items-center justify-between h-18 py-3">
           {/* Logo */}
@@ -52,10 +216,10 @@ export function Header() {
             </div>
             <div className="flex flex-col leading-tight">
               <span className="font-serif font-700 text-[var(--navy)] text-lg tracking-wide">
-                EPOCH PRESS
+                {logoText}
               </span>
               <span className="text-[10px] text-[var(--text-secondary)] tracking-widest uppercase">
-                Commercial Printing
+                {logoSubtext}
               </span>
             </div>
           </Link>
@@ -124,20 +288,13 @@ export function Header() {
             )}
           </nav>
 
-          {/* Right: Phone + CTA */}
+          {/* Right: CTA */}
           <div className="hidden lg:flex items-center gap-4">
-            <a
-              href="tel:+12125550100"
-              className="flex items-center gap-2 text-sm font-medium text-[var(--charcoal)] hover:text-[var(--navy)] transition-colors"
-            >
-              <Phone className="w-4 h-4 text-[var(--gold)]" />
-              (212) 555-0100
-            </a>
             <Link
-              href="/quote"
+              href={ctaHref}
               className="bg-gold-gradient text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity shadow-gold"
             >
-              Get a Quote
+              {ctaText}
             </Link>
           </div>
 
@@ -170,7 +327,7 @@ export function Header() {
         aria-label="Mobile navigation"
       >
         <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--border)]">
-          <span className="font-serif font-bold text-[var(--navy)]">EPOCH PRESS</span>
+          <span className="font-serif font-bold text-[var(--navy)]">{logoText}</span>
           <button
             onClick={() => setMobileOpen(false)}
             className="p-2 rounded-lg hover:bg-[var(--surface)] text-[var(--navy)]"
@@ -182,11 +339,11 @@ export function Header() {
 
         <div className="p-4 space-y-1">
           <a
-            href="tel:+12125550100"
+            href={phoneHref}
             className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-[var(--charcoal)] bg-[var(--surface)] rounded-xl mb-3"
           >
             <Phone className="w-4 h-4 text-[var(--gold)]" />
-            (212) 555-0100
+            {phoneText}
           </a>
 
           {navLinks.map((link) => (
@@ -218,11 +375,11 @@ export function Header() {
 
           <div className="pt-4 border-t border-[var(--border)] mt-2">
             <Link
-              href="/quote"
+              href={ctaHref}
               className="flex items-center justify-center bg-gold-gradient text-white font-semibold px-6 py-3.5 rounded-xl hover:opacity-90 transition-opacity"
               onClick={() => setMobileOpen(false)}
             >
-              Get a Quote →
+              {ctaText} →
             </Link>
           </div>
         </div>

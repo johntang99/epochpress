@@ -5,6 +5,12 @@ import productsDataFallback from '@/data/products.json';
 
 type ProductsData = typeof productsDataFallback;
 
+function normalizeImageUrl(value: unknown): string | null {
+  if (typeof value !== 'string') return null;
+  const trimmed = value.trim();
+  return trimmed || null;
+}
+
 export const metadata = {
   title: 'Printing Services',
   description: 'Full-service commercial printing: newspapers, magazines, books, marketing, menus, business cards, and large format.',
@@ -14,18 +20,52 @@ export default async function ProductsPage() {
   const siteId = await getRequestSiteId();
   const dbContent = await loadPageContent<ProductsData>('products', 'en', siteId);
   const { hero, categories } = dbContent ?? productsDataFallback;
+  const heroBackgroundImage = normalizeImageUrl((hero as Record<string, unknown>)?.backgroundImage);
+  const heroImage = normalizeImageUrl((hero as Record<string, unknown>)?.image);
+  const hasHeroMedia = Boolean(heroBackgroundImage || heroImage);
 
   return (
     <>
       {/* Hero */}
-      <section className="bg-[var(--surface)] pt-28 pb-16 border-b border-[var(--border)]">
-        <div className="container-content text-center">
-          <h1 className="font-serif text-[var(--navy)] mb-5" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
-            {hero.headline}
-          </h1>
-          <p className="text-[var(--text-secondary)] max-w-2xl mx-auto text-lg leading-relaxed">
-            {hero.subline}
-          </p>
+      <section
+        className={`relative pt-28 pb-16 border-b border-[var(--border)] overflow-hidden ${
+          hasHeroMedia ? 'bg-[var(--navy)]' : 'bg-[var(--surface)]'
+        }`}
+      >
+        {heroBackgroundImage && (
+          <>
+            <img
+              src={heroBackgroundImage}
+              alt="Products hero background"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-[var(--navy)]/70" />
+          </>
+        )}
+
+        <div className="container-content relative z-10">
+          <div className={heroImage ? 'grid gap-8 lg:grid-cols-2 items-center' : 'text-center'}>
+            <div className={heroImage ? '' : 'max-w-2xl mx-auto'}>
+              <h1
+                className={`font-serif mb-5 ${hasHeroMedia ? 'text-white' : 'text-[var(--navy)]'}`}
+                style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}
+              >
+                {hero.headline}
+              </h1>
+              <p
+                className={`max-w-2xl text-lg leading-relaxed ${
+                  hasHeroMedia ? 'text-blue-100' : 'text-[var(--text-secondary)]'
+                } ${heroImage ? '' : 'mx-auto'}`}
+              >
+                {hero.subline}
+              </p>
+            </div>
+            {heroImage && (
+              <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/20">
+                <img src={heroImage} alt={hero.headline} className="h-full w-full object-cover" />
+              </div>
+            )}
+          </div>
         </div>
       </section>
 

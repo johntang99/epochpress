@@ -1,15 +1,16 @@
 {
   "slug": "fsc-certified-paper-printing",
-  "title": "Why FSC-Certified Paper Matters for Your Brand",
-  "excerpt": "Sustainable printing isn't just good for the environment — it's good for business. We explain our FSC certification and how it benefits your clients.",
-  "category": "sustainability",
-  "type": "article",
-  "readTime": "4 min read",
-  "publishDate": "2026-01-08",
-  "featured": false,
   "tags": [
     "sustainability",
     "FSC",
     "green printing"
-  ]
+  ],
+  "type": "article",
+  "image": "/uploads/epoch-press/general/geri-sakti-CYrYxz-uvE4-unsplash.jpg",
+  "title": "Why FSC-Certified Paper Matters for Your Brand",
+  "excerpt": "Sustainable printing isn't just good for the environment — it's good for business. We explain our FSC certification and how it benefits your clients.",
+  "category": "sustainability",
+  "featured": false,
+  "readTime": "4 min read",
+  "publishDate": "2026-01-08"
 }

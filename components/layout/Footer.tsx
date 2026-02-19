@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Phone, Mail, MapPin, PrinterIcon } from 'lucide-react';
+import type { FooterSection, SiteInfo } from '@/lib/types';
 
 const productLinks = [
   { name: 'Newspaper Printing', href: '/products/newspaper-printing' },
@@ -20,8 +21,67 @@ const companyLinks = [
   { name: 'Contact', href: '/contact' },
 ];
 
-export function Footer() {
+const fallbackFooter: FooterSection = {
+  brand: {
+    name: 'Epoch Press',
+    logoText: 'EP',
+    description: 'Premium commercial printing for businesses, publishers, and agencies.',
+  },
+  contact: {
+    phone: '(212) 555-0100',
+    phoneLink: 'tel:+12125550100',
+    email: 'info@epochpress.com',
+    emailLink: 'mailto:info@epochpress.com',
+    addressLines: ['123 Press Way', 'New York, NY 10001'],
+  },
+  hours: ['Mon–Fri: 8:00 AM – 6:00 PM', 'Sat: 9:00 AM – 2:00 PM'],
+  services: productLinks.map((item) => ({ text: item.name, url: item.href })),
+  quickLinks: companyLinks.map((item) => ({ text: item.name, url: item.href })),
+  legalLinks: [
+    { text: 'Privacy Policy', url: '/privacy' },
+    { text: 'Terms of Service', url: '/terms' },
+  ],
+  copyright: '© {year} Epoch Press. All rights reserved.',
+};
+
+export function Footer({
+  config,
+  siteInfo,
+}: {
+  config?: Record<string, unknown> | null;
+  siteInfo?: SiteInfo | null;
+}) {
   const year = new Date().getFullYear();
+  const footer = (config as FooterSection | null) ?? fallbackFooter;
+  const brandName = footer.brand?.name || fallbackFooter.brand.name;
+  const brandDescription = footer.brand?.description || fallbackFooter.brand.description;
+  const phone = siteInfo?.phone || footer.contact?.phone || fallbackFooter.contact.phone;
+  const phoneLink = footer.contact?.phoneLink || `tel:${phone.replace(/[^\d+]/g, '')}`;
+  const email = siteInfo?.email || footer.contact?.email || fallbackFooter.contact.email;
+  const emailLink = footer.contact?.emailLink || `mailto:${email}`;
+  const siteAddressLine = [siteInfo?.address, [siteInfo?.city, siteInfo?.state, siteInfo?.zip].filter(Boolean).join(' ')]
+    .filter(Boolean) as string[];
+  const address =
+    siteAddressLine.length > 0
+      ? siteAddressLine
+      : footer.contact?.addressLines || fallbackFooter.contact.addressLines;
+  const footerHours = footer.hours?.length ? footer.hours : fallbackFooter.hours;
+  const quickLinks = footer.quickLinks?.length
+    ? footer.quickLinks.map((item) => ({ name: item.text, href: item.url }))
+    : companyLinks;
+  const services = footer.services?.length
+    ? footer.services.map((item) => ({ name: item.text, href: item.url }))
+    : productLinks;
+  const legalLinks = footer.legalLinks?.length
+    ? footer.legalLinks.map((item) => ({ name: item.text, href: item.url }))
+    : [
+        { name: 'Privacy Policy', href: '/privacy' },
+        { name: 'Terms of Service', href: '/terms' },
+      ];
+  const copyright = (footer.copyright || fallbackFooter.copyright).replace(
+    '{year}',
+    String(year)
+  );
 
   return (
     <footer className="bg-[var(--navy)] text-white">
@@ -34,30 +94,30 @@ export function Footer() {
                 <PrinterIcon className="w-5 h-5 text-white" />
               </div>
               <span className="font-serif font-bold text-lg text-white tracking-wide">
-                EPOCH PRESS
+                {brandName.toUpperCase()}
               </span>
             </div>
             <p className="text-sm text-blue-200 leading-relaxed mb-6">
-              Premium commercial printing for businesses, publishers, and agencies. Quality that speaks for itself.
+              {brandDescription}
             </p>
             <div className="space-y-3">
               <a
-                href="tel:+12125550100"
+                href={phoneLink}
                 className="flex items-center gap-2 text-sm text-blue-100 hover:text-[var(--gold-light)] transition-colors"
               >
                 <Phone className="w-4 h-4 text-[var(--gold)]" />
-                (212) 555-0100
+                {phone}
               </a>
               <a
-                href="mailto:info@epochpress.com"
+                href={emailLink}
                 className="flex items-center gap-2 text-sm text-blue-100 hover:text-[var(--gold-light)] transition-colors"
               >
                 <Mail className="w-4 h-4 text-[var(--gold)]" />
-                info@epochpress.com
+                {email}
               </a>
               <div className="flex items-start gap-2 text-sm text-blue-100">
                 <MapPin className="w-4 h-4 text-[var(--gold)] mt-0.5 flex-shrink-0" />
-                <span>123 Press Way, New York, NY 10001</span>
+                <span>{address.join(', ')}</span>
               </div>
             </div>
           </div>
@@ -67,12 +127,12 @@ export function Footer() {
             <h4 className="font-serif font-semibold text-white mb-5 text-sm tracking-wider uppercase">
               Products
             </h4>
-            <ul className="space-y-2.5">
-              {productLinks.map((link) => (
+            <ul className="space-y-1.5">
+              {services.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-blue-200 hover:text-[var(--gold-light)] transition-colors"
+                    className="inline-flex min-h-0 py-0.5 text-sm text-blue-200 hover:text-[var(--gold-light)] transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -86,12 +146,12 @@ export function Footer() {
             <h4 className="font-serif font-semibold text-white mb-5 text-sm tracking-wider uppercase">
               Company
             </h4>
-            <ul className="space-y-2.5">
-              {companyLinks.map((link) => (
+            <ul className="space-y-1.5">
+              {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-blue-200 hover:text-[var(--gold-light)] transition-colors"
+                    className="inline-flex min-h-0 py-0.5 text-sm text-blue-200 hover:text-[var(--gold-light)] transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -116,8 +176,11 @@ export function Footer() {
             </Link>
             <div className="mt-5 pt-5 border-t border-white/10">
               <p className="text-xs text-blue-200 mb-1">Business Hours</p>
-              <p className="text-sm text-white">Mon–Fri: 8:00 AM – 6:00 PM</p>
-              <p className="text-sm text-white">Sat: 9:00 AM – 2:00 PM</p>
+              {footerHours.map((line) => (
+                <p key={line} className="text-sm text-white">
+                  {line}
+                </p>
+              ))}
             </div>
           </div>
         </div>
@@ -128,18 +191,18 @@ export function Footer() {
         <div className="container-content py-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-xs text-blue-300">
-              © {year} Epoch Press. All rights reserved.
+              {copyright}
             </p>
             <div className="flex items-center gap-5">
-              <Link href="/privacy" className="text-xs text-blue-300 hover:text-white transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="text-xs text-blue-300 hover:text-white transition-colors">
-                Terms of Service
-              </Link>
-              <Link href="/file-guidelines" className="text-xs text-blue-300 hover:text-white transition-colors">
-                File Guidelines
-              </Link>
+              {legalLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-xs text-blue-300 hover:text-white transition-colors"
+                >
+                  {link.name}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

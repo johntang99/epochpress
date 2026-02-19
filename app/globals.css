@@ -95,6 +95,11 @@
     background: linear-gradient(135deg, #B8860B 0%, #D4A843 100%);
   }
 
+  /* Keep CTA glow subtle and premium (avoid heavy blur). */
+  .shadow-gold {
+    box-shadow: 0 1px 6px rgba(184, 134, 11, 0.12) !important;
+  }
+
   /* Prevent horizontal scroll on mobile */
   .container-content {
     @apply mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8;

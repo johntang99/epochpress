@@ -1,21 +1,62 @@
 {
   "items": [
     {
-      "text": "Products",
+      "url": "/",
+      "text": "Home"
+    },
+    {
       "url": "/products",
+      "text": "Products",
       "children": [
-        { "text": "Newspaper Printing", "url": "/products/newspaper-printing" },
-        { "text": "Magazine Printing", "url": "/products/magazine-printing" },
-        { "text": "Book Printing", "url": "/products/book-printing" },
-        { "text": "Marketing Print", "url": "/products/marketing-print" },
-        { "text": "Menu Printing", "url": "/products/menu-printing" },
-        { "text": "Business Cards", "url": "/products/business-cards" },
-        { "text": "Large Format", "url": "/products/large-format" }
+        {
+          "url": "/products/newspaper-printing",
+          "text": "Newspaper Printing"
+        },
+        {
+          "url": "/products/magazine-printing",
+          "text": "Magazine Printing"
+        },
+        {
+          "url": "/products/book-printing",
+          "text": "Book Printing"
+        },
+        {
+          "url": "/products/marketing-print",
+          "text": "Marketing Print"
+        },
+        {
+          "url": "/products/menu-printing",
+          "text": "Menu Printing"
+        },
+        {
+          "url": "/products/business-cards",
+          "text": "Business Cards"
+        },
+        {
+          "url": "/products/large-format",
+          "text": "Large Format"
+        }
       ]
     },
-    { "text": "About", "url": "/about" },
-    { "text": "Portfolio", "url": "/portfolio" },
-    { "text": "Blog", "url": "/blog" },
-    { "text": "Contact", "url": "/contact" }
+    {
+      "url": "/about",
+      "text": "About"
+    },
+    {
+      "url": "/portfolio",
+      "text": "Portfolio"
+    },
+    {
+      "url": "/case-studies",
+      "text": "Case Studies"
+    },
+    {
+      "url": "/blog",
+      "text": "Blog"
+    },
+    {
+      "url": "/contact",
+      "text": "Contact"
+    }
   ]
 }

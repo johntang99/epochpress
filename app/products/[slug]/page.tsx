@@ -23,6 +23,15 @@ interface ProductData {
   name: string;
   tagline: string;
   description: string;
+  image?: string;
+  backgroundImage?: string;
+  hero?: {
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    image?: string;
+    backgroundImage?: string;
+  };
   specs: SpecTab[];
   priceTiers: { qty: string; note: string }[];
   process: { step: number; title: string; desc: string }[];
@@ -32,6 +41,29 @@ interface ProductData {
     primaryCta: { text: string; href: string };
     secondaryCta: { text: string; href: string };
   };
+}
+
+const productHeroFallbackImages: Record<string, string> = {
+  'newspaper-printing':
+    'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1800&q=80',
+  'magazine-printing':
+    'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=1800&q=80',
+  'book-printing':
+    'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1800&q=80',
+  'marketing-print':
+    'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1800&q=80',
+  'menu-printing':
+    'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=80',
+  'business-cards':
+    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1800&q=80',
+  'large-format':
+    'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1800&q=80',
+};
+
+function normalizeImageUrl(value: unknown): string | null {
+  if (typeof value !== 'string') return null;
+  const trimmed = value.trim();
+  return trimmed || null;
 }
 
 export async function generateStaticParams() {
@@ -56,29 +88,69 @@ export default async function ProductDetailPage({ params }: { params: { slug: st
   const siteId = await getRequestSiteId();
   const dbProduct = await loadPageContent<ProductData>(params.slug, 'en', siteId);
   const product = dbProduct ?? fallbackProduct;
+  const heroTitle = product.hero?.title || product.name;
+  const heroSubtitle = product.hero?.subtitle || product.tagline;
+  const heroDescription = product.hero?.description || product.description;
+  const heroBackgroundImage =
+    normalizeImageUrl(product.hero?.backgroundImage) ||
+    normalizeImageUrl(product.backgroundImage) ||
+    null;
+  const heroImage =
+    normalizeImageUrl(product.hero?.image) ||
+    normalizeImageUrl(product.image) ||
+    productHeroFallbackImages[product.slug] ||
+    null;
+  const hasHeroMedia = Boolean(heroBackgroundImage || heroImage);
 
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy-gradient pt-28 pb-16">
-        <div className="container-content">
-          <div className="max-w-3xl">
-            <Link href="/products" className="inline-flex items-center gap-1 text-blue-300 text-sm hover:text-white transition-colors mb-6">
-              ← All Products
-            </Link>
-            <h1 className="font-serif text-white mb-4" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
-              {product.name}
-            </h1>
-            <p className="text-[var(--gold-light)] text-lg font-medium mb-4">{product.tagline}</p>
-            <p className="text-blue-200 leading-relaxed mb-8 max-w-2xl">{product.description}</p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href={product.cta.primaryCta.href} className="inline-flex items-center justify-center gap-2 bg-gold-gradient text-white font-semibold px-7 py-3.5 rounded-xl hover:opacity-90 transition-opacity shadow-gold">
-                {product.cta.primaryCta.text} <ArrowRight className="w-4 h-4" />
+      <section
+        className={`relative pt-36 md:pt-40 pb-16 overflow-hidden ${
+          hasHeroMedia ? 'bg-[var(--navy)]' : 'bg-navy-gradient'
+        }`}
+      >
+        {heroBackgroundImage && (
+          <>
+            <img
+              src={heroBackgroundImage}
+              alt={`${product.name} background`}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-[var(--navy)]/70" />
+          </>
+        )}
+
+        <div className="container-content relative z-10">
+          <div className={heroImage ? 'grid gap-8 lg:grid-cols-2 items-center' : 'max-w-3xl'}>
+            <div>
+              <Link href="/products" className="inline-flex items-center gap-1 text-blue-300 text-sm hover:text-white transition-colors mb-6">
+                ← All Products
               </Link>
-              <a href={product.cta.secondaryCta.href} className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white font-semibold px-7 py-3.5 rounded-xl hover:border-white/60 transition-all">
-                <Phone className="w-4 h-4 text-[var(--gold-light)]" /> {product.cta.secondaryCta.text}
-              </a>
+              <h1 className="font-serif text-white mb-4" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+                {heroTitle}
+              </h1>
+              <p className="text-[var(--gold-light)] text-lg font-medium mb-4">{heroSubtitle}</p>
+              <p className="text-blue-200 leading-relaxed mb-8 max-w-2xl">{heroDescription}</p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href={product.cta.primaryCta.href} className="inline-flex items-center justify-center gap-2 bg-gold-gradient text-white font-semibold px-7 py-3.5 rounded-xl hover:opacity-90 transition-opacity shadow-gold">
+                  {product.cta.primaryCta.text} <ArrowRight className="w-4 h-4" />
+                </Link>
+                <a href={product.cta.secondaryCta.href} className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white font-semibold px-7 py-3.5 rounded-xl hover:border-white/60 transition-all">
+                  <Phone className="w-4 h-4 text-[var(--gold-light)]" /> {product.cta.secondaryCta.text}
+                </a>
+              </div>
             </div>
+            {heroImage && (
+              <div className="relative w-full overflow-hidden rounded-2xl border border-white/20">
+                <img
+                  src={heroImage}
+                  alt={heroTitle}
+                  className="block w-full h-auto object-cover"
+                  loading="eager"
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>

@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
 import { Suspense } from 'react';
-import { getRequestSiteId, loadTheme, loadSeo } from '@/lib/content';
-import type { SeoConfig } from '@/lib/types';
+import { getRequestSiteId, loadTheme, loadSeo, loadContent, loadFooter, loadSiteInfo } from '@/lib/content';
+import type { SeoConfig, SiteInfo } from '@/lib/types';
+import { SiteChrome } from '@/components/layout/SiteChrome';
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteId = await getRequestSiteId();
@@ -31,7 +30,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const siteId = await getRequestSiteId();
-  const theme = await loadTheme(siteId);
+  const [theme, headerConfig, footerConfig, siteInfo] = await Promise.all([
+    loadTheme(siteId),
+    loadContent(siteId, 'en', 'header.json'),
+    loadFooter(siteId, 'en'),
+    loadSiteInfo(siteId, 'en'),
+  ]);
 
   const cssVars = theme?.colors
     ? `
@@ -54,11 +58,13 @@ export default async function RootLayout({
     <html lang="en">
       <head>{cssVars && <style dangerouslySetInnerHTML={{ __html: cssVars }} />}</head>
       <body className="bg-white text-[var(--text-primary)] font-sans antialiased">
-        <Header />
-        <main className="min-h-screen overflow-x-hidden">
+        <SiteChrome
+          headerConfig={headerConfig as Record<string, unknown> | null}
+          footerConfig={footerConfig as Record<string, unknown> | null}
+          siteInfo={siteInfo as SiteInfo | null}
+        >
           <Suspense>{children}</Suspense>
-        </main>
-        <Footer />
+        </SiteChrome>
       </body>
     </html>
   );

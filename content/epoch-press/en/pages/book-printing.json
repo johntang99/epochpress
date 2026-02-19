@@ -1,69 +1,170 @@
 {
-  "slug": "book-printing",
+  "cta": {
+    "headline": "Ready to print your book?",
+    "primaryCta": {
+      "href": "/quote?product=book-printing",
+      "text": "Get a Quote"
+    },
+    "secondaryCta": {
+      "href": "tel:+12125550100",
+      "text": "Call Us"
+    }
+  },
+  "faq": [
+    {
+      "a": "Yes. Our print-on-demand service allows single copy orders with no minimum.",
+      "q": "Can I print just one copy of my book?"
+    },
+    {
+      "a": "Yes. We can add ISBN barcodes to your cover file or help you source an ISBN through our publishing partners.",
+      "q": "Do you offer ISBN and barcode services?"
+    },
+    {
+      "a": "We accept print-ready PDF files. Interior and cover should be separate files with appropriate bleed settings.",
+      "q": "What file format do you need for book printing?"
+    },
+    {
+      "a": "POD orders: 2–3 business days. Short run (50–499): 5–7 days. Standard offset run: 10–14 days from approved proof.",
+      "q": "How long does book printing take?"
+    },
+    {
+      "a": "Yes. Full color interior on 100 lb gloss or silk is ideal for illustrated children's books.",
+      "q": "Can you print children's books with full color throughout?"
+    }
+  ],
   "name": "Book Printing",
-  "tagline": "Professional book printing for publishers, authors, and institutions.",
-  "description": "Offset and digital book printing with hardcover, softcover, and print-on-demand options. Short and long runs. ISBN and barcode services. Trusted by publishers, universities, and self-publishing authors.",
+  "slug": "book-printing",
   "specs": [
     {
       "tab": "Binding Types",
       "items": [
-        { "label": "Perfect Bound (Softcover)", "value": "Glued flat spine — most common" },
-        { "label": "Case Bound (Hardcover)", "value": "Sewn and glued — premium durability" },
-        { "label": "Spiral / Coil", "value": "Lay-flat — ideal for manuals, workbooks" },
-        { "label": "Saddle Stitch", "value": "Stapled — for short books up to 80 pages" }
+        {
+          "label": "Perfect Bound (Softcover)",
+          "value": "Glued flat spine — most common"
+        },
+        {
+          "label": "Case Bound (Hardcover)",
+          "value": "Sewn and glued — premium durability"
+        },
+        {
+          "label": "Spiral / Coil",
+          "value": "Lay-flat — ideal for manuals, workbooks"
+        },
+        {
+          "label": "Saddle Stitch",
+          "value": "Stapled — for short books up to 80 pages"
+        }
       ]
     },
     {
       "tab": "Cover Finishes",
       "items": [
-        { "label": "Gloss Laminate", "value": "Bright, eye-catching" },
-        { "label": "Matte Laminate", "value": "Understated, professional" },
-        { "label": "Soft Touch", "value": "Tactile, premium feel" },
-        { "label": "Cloth Hardcover", "value": "Linen texture for special editions" }
+        {
+          "label": "Gloss Laminate",
+          "value": "Bright, eye-catching"
+        },
+        {
+          "label": "Matte Laminate",
+          "value": "Understated, professional"
+        },
+        {
+          "label": "Soft Touch",
+          "value": "Tactile, premium feel"
+        },
+        {
+          "label": "Cloth Hardcover",
+          "value": "Linen texture for special editions"
+        }
       ]
     },
     {
       "tab": "Interior",
       "items": [
-        { "label": "Black & White", "value": "60 lb natural or white" },
-        { "label": "Full Color Interior", "value": "100 lb gloss or silk text" },
-        { "label": "Uncoated Natural", "value": "70 lb cream — preferred for novels" },
-        { "label": "Page Count", "value": "Minimum 48 pages, no maximum" }
+        {
+          "label": "Black & White",
+          "value": "60 lb natural or white"
+        },
+        {
+          "label": "Full Color Interior",
+          "value": "100 lb gloss or silk text"
+        },
+        {
+          "label": "Uncoated Natural",
+          "value": "70 lb cream — preferred for novels"
+        },
+        {
+          "label": "Page Count",
+          "value": "Minimum 48 pages, no maximum"
+        }
       ]
     },
     {
       "tab": "Quantities",
       "items": [
-        { "label": "Print-on-Demand", "value": "1–49 copies (digital)" },
-        { "label": "Short Run", "value": "50–499 copies (digital offset)" },
-        { "label": "Standard Run", "value": "500–4,999 copies (offset)" },
-        { "label": "Long Run", "value": "5,000+ copies (volume pricing)" }
+        {
+          "label": "Print-on-Demand",
+          "value": "1–49 copies (digital)"
+        },
+        {
+          "label": "Short Run",
+          "value": "50–499 copies (digital offset)"
+        },
+        {
+          "label": "Standard Run",
+          "value": "500–4,999 copies (offset)"
+        },
+        {
+          "label": "Long Run",
+          "value": "5,000+ copies (volume pricing)"
+        }
       ]
     }
   ],
-  "priceTiers": [
-    { "qty": "1–49", "note": "Print-on-demand, no minimum" },
-    { "qty": "50–499", "note": "Short-run digital, fast turnaround" },
-    { "qty": "500–4,999", "note": "Offset printing, cost-effective" },
-    { "qty": "5,000+", "note": "Volume pricing, best unit cost" }
-  ],
   "process": [
-    { "step": 1, "title": "File Preparation", "desc": "Submit print-ready interior PDF and cover file with correct trim sizes." },
-    { "step": 2, "title": "Proof & Approval", "desc": "Digital proof for review. Physical proof optional for first-time orders." },
-    { "step": 3, "title": "Interior Printing", "desc": "Pages printed on high-quality press equipment." },
-    { "step": 4, "title": "Cover Production", "desc": "Cover printed, laminated, and prepared for binding." },
-    { "step": 5, "title": "Binding & Shipping", "desc": "Books bound, quality inspected, and delivered." }
+    {
+      "desc": "Submit print-ready interior PDF and cover file with correct trim sizes.",
+      "step": 1,
+      "title": "File Preparation"
+    },
+    {
+      "desc": "Digital proof for review. Physical proof optional for first-time orders.",
+      "step": 2,
+      "title": "Proof & Approval"
+    },
+    {
+      "desc": "Pages printed on high-quality press equipment.",
+      "step": 3,
+      "title": "Interior Printing"
+    },
+    {
+      "desc": "Cover printed, laminated, and prepared for binding.",
+      "step": 4,
+      "title": "Cover Production"
+    },
+    {
+      "desc": "Books bound, quality inspected, and delivered.",
+      "step": 5,
+      "title": "Binding & Shipping"
+    }
   ],
-  "faq": [
-    { "q": "Can I print just one copy of my book?", "a": "Yes. Our print-on-demand service allows single copy orders with no minimum." },
-    { "q": "Do you offer ISBN and barcode services?", "a": "Yes. We can add ISBN barcodes to your cover file or help you source an ISBN through our publishing partners." },
-    { "q": "What file format do you need for book printing?", "a": "We accept print-ready PDF files. Interior and cover should be separate files with appropriate bleed settings." },
-    { "q": "How long does book printing take?", "a": "POD orders: 2–3 business days. Short run (50–499): 5–7 days. Standard offset run: 10–14 days from approved proof." },
-    { "q": "Can you print children's books with full color throughout?", "a": "Yes. Full color interior on 100 lb gloss or silk is ideal for illustrated children's books." }
+  "tagline": "Professional book printing for publishers, authors, and institutions.",
+  "priceTiers": [
+    {
+      "qty": "1–49",
+      "note": "Print-on-demand, no minimum"
+    },
+    {
+      "qty": "50–499",
+      "note": "Short-run digital, fast turnaround"
+    },
+    {
+      "qty": "500–4,999",
+      "note": "Offset printing, cost-effective"
+    },
+    {
+      "qty": "5,000+",
+      "note": "Volume pricing, best unit cost"
+    }
   ],
-  "cta": {
-    "headline": "Ready to print your book?",
-    "primaryCta": { "text": "Get a Quote", "href": "/quote?product=book-printing" },
-    "secondaryCta": { "text": "Call Us", "href": "tel:+12125550100" }
-  }
+  "description": "Offset and digital book printing with hardcover, softcover, and print-on-demand options. Short and long runs. ISBN and barcode services. Trusted by publishers, universities, and self-publishing authors."
 }

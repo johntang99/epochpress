@@ -1,15 +1,16 @@
 {
   "slug": "magazine-cover-design-trends-2026",
-  "title": "Magazine Cover Design Trends Shaping 2026",
-  "excerpt": "From bold typography to interactive QR integrations, magazine cover design is evolving fast. We look at what the top publishers are doing.",
-  "category": "industry-trends",
-  "type": "article",
-  "readTime": "6 min read",
-  "publishDate": "2026-01-28",
-  "featured": false,
   "tags": [
     "magazine",
     "design trends",
     "2026"
-  ]
+  ],
+  "type": "article",
+  "image": "/uploads/epoch-press/general/mika-baumeister-PtabTe6iJ_8-unsplash.jpg",
+  "title": "Magazine Cover Design Trends Shaping 2026",
+  "excerpt": "From bold typography to interactive QR integrations, magazine cover design is evolving fast. We look at what the top publishers are doing.",
+  "category": "industry-trends",
+  "featured": false,
+  "readTime": "6 min read",
+  "publishDate": "2026-01-28"
 }

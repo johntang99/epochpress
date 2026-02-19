@@ -1,0 +1,20 @@
+{
+  "cta": {
+    "title": "Ready to Start Printing?",
+    "subtitle": "From a single business card run to a full newspaper contract - we handle it all.",
+    "buttonHref": "/quote",
+    "buttonText": "Request a Quote"
+  },
+  "hero": {
+    "image": "/uploads/epoch-press/general/mika-baumeister-PtabTe6iJ_8-unsplash.jpg",
+    "title": "Insights & Resources",
+    "variant": "split-photo-right",
+    "subtitle": "Industry trends, print tips, case studies, and behind-the-scenes at Epoch Press. Everything you need to make smarter printing decisions.",
+    "backgroundImage": ""
+  },
+  "labels": {
+    "noPosts": "No posts in this category yet.",
+    "allPosts": "All Posts",
+    "featuredArticle": "Featured Article"
+  }
+}

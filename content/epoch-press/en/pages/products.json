@@ -1,57 +1,85 @@
 {
   "hero": {
-    "headline": "Our Printing Services",
-    "subline": "Comprehensive commercial printing capabilities for every project size, deadline, and budget. All products printed with precision on premium equipment."
+    "subline": "Comprehensive commercial printing capabilities for every project size, deadline, and budget. All products printed with precision on premium equipment.",
+    "headline": "Our Printing Services"
   },
   "categories": [
     {
+      "desc": "Web offset printing for daily, weekly, and community newspapers. Broadsheet and tabloid formats, black-and-white or full color, from 500 to 500,000+ copies.",
+      "icon": "📰",
       "name": "Newspaper Printing",
       "slug": "newspaper-printing",
-      "icon": "📰",
-      "desc": "Web offset printing for daily, weekly, and community newspapers. Broadsheet and tabloid formats, black-and-white or full color, from 500 to 500,000+ copies.",
-      "highlights": ["Web offset & digital", "500 to 500,000+ copies", "3–5 day standard turnaround"]
+      "highlights": [
+        "Web offset & digital",
+        "500 to 500,000+ copies",
+        "3–5 day standard turnaround"
+      ]
     },
     {
+      "desc": "High-end magazine production with saddle stitch, perfect binding, UV-coated and matte covers. From quarterly journals to high-gloss consumer titles.",
+      "icon": "📖",
       "name": "Magazine Printing",
       "slug": "magazine-printing",
-      "icon": "📖",
-      "desc": "High-end magazine production with saddle stitch, perfect binding, UV-coated and matte covers. From quarterly journals to high-gloss consumer titles.",
-      "highlights": ["Saddle stitch & perfect bind", "UV, matte or silk covers", "From 250 copies"]
+      "highlights": [
+        "Saddle stitch & perfect bind",
+        "UV, matte or silk covers",
+        "From 250 copies"
+      ]
     },
     {
+      "desc": "Offset and digital book printing with hardcover and softcover options. Print-on-demand available. ISBN and barcode services. Short and long runs.",
+      "icon": "📚",
       "name": "Book Printing",
       "slug": "book-printing",
-      "icon": "📚",
-      "desc": "Offset and digital book printing with hardcover and softcover options. Print-on-demand available. ISBN and barcode services. Short and long runs.",
-      "highlights": ["Hardcover & softcover", "Print-on-demand available", "ISBN/barcode services"]
+      "highlights": [
+        "Hardcover & softcover",
+        "Print-on-demand available",
+        "ISBN/barcode services"
+      ]
     },
     {
+      "desc": "Flyers, brochures, postcards, posters, and banners for campaigns that demand attention. All sizes, all fold types, all paper stocks.",
+      "icon": "📄",
       "name": "Marketing Print",
       "slug": "marketing-print",
-      "icon": "📄",
-      "desc": "Flyers, brochures, postcards, posters, and banners for campaigns that demand attention. All sizes, all fold types, all paper stocks.",
-      "highlights": ["All standard sizes + custom", "Bi-fold, tri-fold, z-fold", "Fast turnaround options"]
+      "highlights": [
+        "All standard sizes + custom",
+        "Bi-fold, tri-fold, z-fold",
+        "Fast turnaround options"
+      ]
     },
     {
+      "desc": "Restaurant-quality menu printing with durable lamination options. Designed for high daily use. Dine-in menus, takeout menus, trifolds, and oversized.",
+      "icon": "🍽️",
       "name": "Menu Printing",
       "slug": "menu-printing",
-      "icon": "🍽️",
-      "desc": "Restaurant-quality menu printing with durable lamination options. Designed for high daily use. Dine-in menus, takeout menus, trifolds, and oversized.",
-      "highlights": ["Gloss, matte, soft-touch lam", "Durable for daily use", "Rush 48-hour options"]
+      "highlights": [
+        "Gloss, matte, soft-touch lam",
+        "Durable for daily use",
+        "Rush 48-hour options"
+      ]
     },
     {
+      "desc": "From standard to ultra-premium. Foil stamping, embossing, spot UV, raised ink, and die-cutting available. Make a lasting first impression.",
+      "icon": "💳",
       "name": "Business Cards",
       "slug": "business-cards",
-      "icon": "💳",
-      "desc": "From standard to ultra-premium. Foil stamping, embossing, spot UV, raised ink, and die-cutting available. Make a lasting first impression.",
-      "highlights": ["14pt, 16pt, 32pt stock", "Foil, emboss, spot UV", "From 250 cards"]
+      "highlights": [
+        "14pt, 16pt, 32pt stock",
+        "Foil, emboss, spot UV",
+        "From 250 cards"
+      ]
     },
     {
+      "desc": "Banners, trade show displays, wall graphics, and outdoor signage. Vinyl, fabric, foam board, and acrylic. Indoor and outdoor options.",
+      "icon": "🖼️",
       "name": "Large Format",
       "slug": "large-format",
-      "icon": "🖼️",
-      "desc": "Banners, trade show displays, wall graphics, and outdoor signage. Vinyl, fabric, foam board, and acrylic. Indoor and outdoor options.",
-      "highlights": ["Custom sizes", "Indoor & outdoor", "Mounting & installation ready"]
+      "highlights": [
+        "Custom sizes",
+        "Indoor & outdoor",
+        "Mounting & installation ready"
+      ]
     }
   ]
 }
