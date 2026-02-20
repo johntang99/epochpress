@@ -6,7 +6,7 @@
     "buttonText": "Request a Quote"
   },
   "hero": {
-    "image": "/uploads/epoch-press/general/mika-baumeister-PtabTe6iJ_8-unsplash.jpg",
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/mika-baumeister-PtabTe6iJ_8-unsplash.jpg",
     "title": "Insights & Resources",
     "variant": "split-photo-right",
     "subtitle": "Industry trends, print tips, case studies, and behind-the-scenes at Epoch Press. Everything you need to make smarter printing decisions.",

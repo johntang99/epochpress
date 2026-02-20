@@ -310,10 +310,14 @@ Required variables:
 | `SUPABASE_URL` | Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_URL` | Same, exposed to client |
 | `SUPABASE_SERVICE_ROLE_KEY` | Secret key for DB-first mode |
+| `SUPABASE_STORAGE_BUCKET` | Storage bucket for media (`media` recommended) |
+| `NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET` | Optional client-side bucket identifier |
 | `JWT_SECRET` | Admin session signing key |
 | `RESEND_API_KEY` | Email delivery (resend.com) |
 | `RESEND_FROM` | From address for contact/notification emails |
 | `CONTACT_FALLBACK_TO` | Email address for contact form submissions |
+| `UNSPLASH_ACCESS_KEY` | Optional Unsplash search/import key |
+| `PEXELS_API_KEY` | Optional Pexels search/import key |
 
 ---
 
@@ -334,6 +338,12 @@ npm run build
 
 # Run all CI checks
 npm run ci:check
+
+# Dry-run media migration to Supabase Storage
+npm run media:migrate -- --sites epoch-press --dry-run
+
+# Dry-run content image URL normalization
+npm run content:normalize-media-urls -- --sites epoch-press --dry-run
 ```
 
 ### First-time DB bootstrap

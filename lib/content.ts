@@ -14,9 +14,67 @@ import {
   fetchThemeEntry,
   listContentEntriesByPrefix,
 } from './contentDb';
+import { canUseMediaDb, listMediaDb } from './admin/mediaDb';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
 const SITES_CONFIG_PATH = path.join(CONTENT_DIR, '_sites.json');
+const UPLOADS_PATH_REGEX = /^\/uploads\/([^/]+)\/(.+)$/;
+const mediaUrlMapCache = new Map<string, Promise<Map<string, string>>>();
+
+async function getMediaUrlMap(siteId: string): Promise<Map<string, string>> {
+  if (!canUseMediaDb()) {
+    return new Map<string, string>();
+  }
+
+  if (!mediaUrlMapCache.has(siteId)) {
+    mediaUrlMapCache.set(
+      siteId,
+      (async () => {
+        const items = await listMediaDb(siteId);
+        const map = new Map<string, string>();
+        for (const item of items) {
+          if (!item.path || !item.url) continue;
+          map.set(item.path, item.url);
+          map.set(`/uploads/${siteId}/${item.path}`, item.url);
+        }
+        return map;
+      })()
+    );
+  }
+
+  return mediaUrlMapCache.get(siteId) as Promise<Map<string, string>>;
+}
+
+async function resolveUploadStringToMediaUrl(value: string): Promise<string> {
+  const trimmed = value.trim();
+  const match = UPLOADS_PATH_REGEX.exec(trimmed);
+  if (!match) return value;
+
+  const [, siteIdInPath, mediaPath] = match;
+  const mediaMap = await getMediaUrlMap(siteIdInPath);
+  return mediaMap.get(mediaPath) || mediaMap.get(trimmed) || value;
+}
+
+async function resolveMediaUrlsDeep(value: unknown): Promise<unknown> {
+  if (typeof value === 'string') {
+    return resolveUploadStringToMediaUrl(value);
+  }
+
+  if (Array.isArray(value)) {
+    const resolved = await Promise.all(value.map((item) => resolveMediaUrlsDeep(item)));
+    return resolved;
+  }
+
+  if (value && typeof value === 'object') {
+    const entries = Object.entries(value as Record<string, unknown>);
+    const resolvedEntries = await Promise.all(
+      entries.map(async ([key, entryValue]) => [key, await resolveMediaUrlsDeep(entryValue)] as const)
+    );
+    return Object.fromEntries(resolvedEntries);
+  }
+
+  return value;
+}
 
 async function getLocalDefaultSiteId(): Promise<string | null> {
   try {
@@ -78,7 +136,8 @@ export async function loadContent<T>(
   if (canUseContentDb()) {
     const entry = await fetchContentEntry(siteId, locale, contentPath);
     if (entry?.data) {
-      return entry.data as T;
+      const resolved = await resolveMediaUrlsDeep(entry.data);
+      return resolved as T;
     }
   }
 
@@ -133,7 +192,7 @@ export async function loadTheme(siteId: string) {
     // Theme is site-wide, so always resolve from canonical locale row.
     const entry = await fetchThemeEntry(siteId, defaultLocale);
     if (entry?.data) {
-      return entry.data;
+      return resolveMediaUrlsDeep(entry.data);
     }
   }
 
@@ -181,7 +240,10 @@ export async function loadAllItems<T>(
       locale,
       `${directory}/`
     );
-    return entries.map((entry) => entry.data as T);
+    const resolvedItems = await Promise.all(
+      entries.map(async (entry) => (await resolveMediaUrlsDeep(entry.data)) as T)
+    );
+    return resolvedItems;
   }
 
   try {

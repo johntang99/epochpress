@@ -4,6 +4,7 @@ import path from 'path';
 import { getSessionFromRequest } from '@/lib/admin/auth';
 import { upsertMediaDb } from '@/lib/admin/mediaDb';
 import { canManageMedia, requireSiteAccess } from '@/lib/admin/permissions';
+import { isBucketModeEnabled, uploadToStorage } from '@/lib/admin/mediaStorage';
 
 function sanitizeFolder(value: string) {
   const cleaned = value.replace(/[^a-zA-Z0-9/_-]/g, '').replace(/^\/+|\/+$/g, '');
@@ -57,21 +58,32 @@ export async function POST(request: NextRequest) {
   const safeName = sanitizeFilename(file.name);
   const filename = `${Date.now()}-${safeName}`;
   const relativePath = folder ? `${folder}/${filename}` : filename;
-  const uploadDir = path.join(process.cwd(), 'public', 'uploads', siteId, folder);
-  await fs.mkdir(uploadDir, { recursive: true });
-
   const buffer = Buffer.from(await file.arrayBuffer());
-  const targetPath = path.join(uploadDir, filename);
-  await fs.writeFile(targetPath, buffer);
+  let publicUrl = '';
+
+  if (isBucketModeEnabled()) {
+    publicUrl = await uploadToStorage({
+      siteId,
+      relativePath,
+      contentType: file.type || 'application/octet-stream',
+      buffer,
+    });
+  } else {
+    const uploadDir = path.join(process.cwd(), 'public', 'uploads', siteId, folder);
+    await fs.mkdir(uploadDir, { recursive: true });
+    const targetPath = path.join(uploadDir, filename);
+    await fs.writeFile(targetPath, buffer);
+    publicUrl = `/uploads/${siteId}/${relativePath}`;
+  }
 
   await upsertMediaDb({
     siteId,
     path: relativePath,
-    url: `/uploads/${siteId}/${relativePath}`,
+    url: publicUrl,
   });
 
   return NextResponse.json({
-    url: `/uploads/${siteId}/${relativePath}`,
+    url: publicUrl,
     path: relativePath,
     filename,
   });

@@ -13,6 +13,7 @@ import {
 } from '@/lib/contentDb';
 import { canWriteContent, requireSiteAccess } from '@/lib/admin/permissions';
 import { locales } from '@/lib/i18n';
+import { normalizeContentMediaUrls } from '@/lib/admin/mediaUrlNormalizer';
 
 function isEmptyHeaderPayload(filePath: string, data: any): boolean {
   if (filePath !== 'header.json' || !data || typeof data !== 'object') return false;
@@ -159,6 +160,7 @@ export async function PUT(request: NextRequest) {
       });
     }
     const parsed = JSON.parse(content);
+    const normalizedData = await normalizeContentMediaUrls(parsed, siteId);
     if (filePath === 'theme.json') {
       await Promise.all(
         locales.map((entryLocale) =>
@@ -166,7 +168,7 @@ export async function PUT(request: NextRequest) {
             siteId,
             locale: entryLocale,
             path: filePath,
-            data: parsed,
+            data: normalizedData,
             updatedBy: session.user.email,
           })
         )
@@ -176,7 +178,7 @@ export async function PUT(request: NextRequest) {
         siteId,
         locale,
         path: filePath,
-        data: parsed,
+        data: normalizedData,
         updatedBy: session.user.email,
       });
     }
@@ -289,7 +291,7 @@ export async function POST(request: NextRequest) {
         siteId,
         locale,
         path: filePath,
-        data: template.content,
+        data: await normalizeContentMediaUrls(template.content, siteId),
         updatedBy: session.user.email,
       });
       return NextResponse.json({ path: filePath });
@@ -349,11 +351,12 @@ export async function POST(request: NextRequest) {
     }
     if (canUseContentDb()) {
       const parsed = JSON.parse(nextContent);
+      const normalizedData = await normalizeContentMediaUrls(parsed, siteId);
       await upsertContentEntry({
         siteId,
         locale,
         path: targetPath,
-        data: parsed,
+        data: normalizedData,
         updatedBy: session.user.email,
       });
       return NextResponse.json({ path: targetPath });

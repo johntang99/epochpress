@@ -6,6 +6,7 @@ import { fetchContentEntry, upsertContentEntry } from '@/lib/contentDb';
 import { canWriteContent, requireSiteAccess } from '@/lib/admin/permissions';
 import { locales } from '@/lib/i18n';
 import { writeAuditLog } from '@/lib/admin/audit';
+import { normalizeContentMediaUrls } from '@/lib/admin/mediaUrlNormalizer';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
 
@@ -295,13 +296,16 @@ export async function POST(request: NextRequest) {
     const batch = importQueue.slice(i, i + writeBatchSize);
     await Promise.all(
       batch.map((candidate) =>
-        upsertContentEntry({
-          siteId,
-          locale: candidate.locale,
-          path: candidate.path,
-          data: candidate.data,
-          updatedBy: session.user.email,
-        })
+        (async () => {
+          const normalizedData = await normalizeContentMediaUrls(candidate.data, siteId);
+          return upsertContentEntry({
+            siteId,
+            locale: candidate.locale,
+            path: candidate.path,
+            data: normalizedData,
+            updatedBy: session.user.email,
+          });
+        })()
       )
     );
     imported += batch.length;

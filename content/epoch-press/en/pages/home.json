@@ -13,6 +13,7 @@
   },
   "hero": {
     "badge": "Engineered for High-Stakes Print",
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1771479825282-jakub-zerdzicki-da9qsu-0a00-unsplash.jpg",
     "subline": "Global conditions are tougher. Expectations are higher. Epoch Press protects your brand with precise execution, dependable quality, and disciplined turnaround.",
     "headline": "Premium Print. Executive Confidence.",
     "primaryCta": {
@@ -22,8 +23,7 @@
     "secondaryCta": {
       "href": "tel:+19736943600",
       "text": "Call Us: 973.694.3600"
-    },
-    "image": "/uploads/epoch-press/general/1771479825282-jakub-zerdzicki-da9qsu-0a00-unsplash.jpg"
+    }
   },
   "stats": [
     {

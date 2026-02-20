@@ -4,6 +4,7 @@ import path from 'path';
 import { getSessionFromRequest } from '@/lib/admin/auth';
 import { deleteMediaDb } from '@/lib/admin/mediaDb';
 import { canManageMedia, requireSiteAccess } from '@/lib/admin/permissions';
+import { deleteFromStorage, isBucketModeEnabled } from '@/lib/admin/mediaStorage';
 
 export async function DELETE(request: NextRequest) {
   const session = await getSessionFromRequest(request);
@@ -35,12 +36,17 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ message: 'Invalid path' }, { status: 400 });
   }
 
+  if (isBucketModeEnabled()) {
+    await deleteFromStorage(siteId, normalized);
+    await deleteMediaDb(siteId, normalized);
+    return NextResponse.json({ success: true });
+  }
+
   const absolute = path.join(process.cwd(), 'public', 'uploads', siteId, normalized);
   const uploadsRoot = path.join(process.cwd(), 'public', 'uploads', siteId);
   if (!absolute.startsWith(uploadsRoot)) {
     return NextResponse.json({ message: 'Invalid path' }, { status: 400 });
   }
-
   await fs.unlink(absolute);
   await deleteMediaDb(siteId, normalized);
   return NextResponse.json({ success: true });

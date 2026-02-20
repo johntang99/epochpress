@@ -1,6 +1,6 @@
 {
   "hero": {
-    "image": "/uploads/epoch-press/general/bank-phrom-Tzm3Oyu_6sk-unsplash.jpg",
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/bank-phrom-Tzm3Oyu_6sk-unsplash.jpg",
     "title": "About Epoch Press",
     "subtitle": "For organizations that demand precision, consistency, and control.",
     "backgroundImage": ""

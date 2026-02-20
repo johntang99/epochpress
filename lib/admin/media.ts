@@ -1,11 +1,12 @@
 import fs from 'fs/promises';
 import path from 'path';
 import {
-  canUseMediaDb,
-  deleteMediaDb,
   listMediaDb,
-  upsertMediaDb,
 } from '@/lib/admin/mediaDb';
+import {
+  isBucketModeEnabled,
+  shouldIncludeFilesystemInBucketMode,
+} from '@/lib/admin/mediaStorage';
 
 export interface MediaItem {
   id: string;
@@ -50,22 +51,24 @@ export async function listMedia(siteId: string): Promise<MediaItem[]> {
     }))
     .sort((a, b) => a.path.localeCompare(b.path));
 
-  if (canUseMediaDb()) {
+  if (isBucketModeEnabled()) {
     const dbItems = await listMediaDb(siteId);
-    const filesystemPathSet = new Set(normalizedFilesystemItems.map((item) => item.path));
-    const staleDbItems = dbItems.filter((item) => !filesystemPathSet.has(item.path));
+    if (shouldIncludeFilesystemInBucketMode()) {
+      const mergedByPath = new Map<string, MediaItem>();
+      for (const item of dbItems) mergedByPath.set(item.path, item);
+      for (const item of normalizedFilesystemItems) {
+        if (!mergedByPath.has(item.path)) {
+          mergedByPath.set(item.path, item);
+        }
+      }
+      return Array.from(mergedByPath.values()).sort((a, b) => a.path.localeCompare(b.path));
+    }
+    return dbItems.sort((a, b) => a.path.localeCompare(b.path));
+  }
 
-    // Clean stale DB media rows for files that no longer exist.
-    await Promise.all(staleDbItems.map((item) => deleteMediaDb(siteId, item.path)));
-
-    // Sync/refresh DB with current filesystem and return filesystem-only rows to picker.
-    await Promise.all(
-      normalizedFilesystemItems.map((item) =>
-        upsertMediaDb({ siteId, path: item.path, url: item.url })
-      )
-    );
+  if (normalizedFilesystemItems.length > 0) {
     return normalizedFilesystemItems;
   }
 
-  return normalizedFilesystemItems;
+  return listMediaDb(siteId);
 }
