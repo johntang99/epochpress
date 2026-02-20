@@ -155,7 +155,7 @@ export function ImagePickerModal({ open, siteId, onClose, onSelect }: ImagePicke
       <div className="bg-white rounded-xl shadow-xl w-full max-w-5xl max-h-[80vh] flex flex-col">
         <div className="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-semibold">Image Picker</h2>
+            <h2 className="text-lg font-semibold">Image Picker (V2)</h2>
             <p className="text-xs text-gray-500">Library, upload, Unsplash, and Pexels sources</p>
           </div>
           <button
