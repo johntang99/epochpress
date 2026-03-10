@@ -1,0 +1,19 @@
+{
+  "slug": "test-article-admin-fix",
+  "tags": [
+    "qa",
+    "admin",
+    "blog"
+  ],
+  "type": "article",
+  "image": "",
+  "title": "Test Article Admin Fix",
+  "author": "QA Bot",
+  "excerpt": "This is a QA post created to verify blog post creation now opens the blog article editor UI.",
+  "category": "industry-trends",
+  "featured": false,
+  "readTime": "2 min read",
+  "publishDate": "2026-03-08",
+  "contentMarkdown": "## QA Test Body\n\nThis post validates that newly created blog posts now use the blog article schema.\n\n- Blog fields are present.\n- Generic page schema is not used.\n- Markdown body is editable in admin.",
+  "relatedProducts": []
+}

@@ -105,7 +105,7 @@ export default function PrivacyPolicyPage() {
             <br />
             7 Highpoint Drive, Wayne, NJ 07470
             <br />
-            Email: info@epoch-press.com
+            Email: info@epochpress.com
             <br />
             Phone: 973.694.3600
           </p>

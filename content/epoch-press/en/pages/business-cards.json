@@ -110,6 +110,16 @@
     }
   ],
   "tagline": "Make a lasting first impression with cards that stand out.",
+  "pageHero": {
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959608400-unsplash-vwaojp-m3ba.jpg",
+    "title": "Business Cards",
+    "subtitle": "Make a lasting first impression with cards that stand out.",
+    "variants": [
+      "split-photo-right"
+    ],
+    "description": "From clean standard cards to ultra-premium luxury finishes. Foil stamping, embossing, spot UV, raised ink, and die-cutting available for cards that get remembered.",
+    "backgroundImage": ""
+  },
   "priceTiers": [
     {
       "qty": "250",
@@ -136,15 +146,5 @@
   "detailSheet": {
     "href": "/spec-sheets/business-cards-spec-sheet.pdf",
     "text": "View Full Spec Sheet (PDF)"
-  },
-  "pageHero": {
-    "title": "Business Cards",
-    "subtitle": "Make a lasting first impression with cards that stand out.",
-    "description": "From clean standard cards to ultra-premium luxury finishes. Foil stamping, embossing, spot UV, raised ink, and die-cutting available for cards that get remembered.",
-    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959608400-unsplash-vwaojp-m3ba.jpg",
-    "backgroundImage": "",
-    "variants": [
-      "split-photo-right"
-    ]
   }
 }

@@ -129,10 +129,6 @@
       ]
     }
   ],
-  "detailSheet": {
-    "href": "/spec-sheets/large-format-spec-sheet.pdf",
-    "text": "View Full Spec Sheet (PDF)"
-  },
   "process": [
     {
       "desc": "Choose your product, size, and material type.",
@@ -161,6 +157,16 @@
     }
   ],
   "tagline": "Make a big impression with large format prints that command attention.",
+  "pageHero": {
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959659418-unsplash-cyryxz-uve4.jpg",
+    "title": "Large Format Printing",
+    "subtitle": "Make a big impression with large format prints that command attention.",
+    "variants": [
+      "split-photo-right"
+    ],
+    "description": "Banners, trade show displays, retail signage, wall graphics, and outdoor advertising. Vinyl, fabric, foam board, and acrylic. Indoor and outdoor options with weather-resistant inks.",
+    "backgroundImage": ""
+  },
   "priceTiers": [
     {
       "qty": "1–5",
@@ -180,14 +186,8 @@
     }
   ],
   "description": "Banners, trade show displays, retail signage, wall graphics, and outdoor advertising. Vinyl, fabric, foam board, and acrylic. Indoor and outdoor options with weather-resistant inks.",
-  "pageHero": {
-    "title": "Large Format Printing",
-    "subtitle": "Make a big impression with large format prints that command attention.",
-    "description": "Banners, trade show displays, retail signage, wall graphics, and outdoor advertising. Vinyl, fabric, foam board, and acrylic. Indoor and outdoor options with weather-resistant inks.",
-    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959659418-unsplash-cyryxz-uve4.jpg",
-    "backgroundImage": "",
-    "variants": [
-      "split-photo-right"
-    ]
+  "detailSheet": {
+    "href": "/spec-sheets/large-format-spec-sheet.pdf",
+    "text": "View Full Spec Sheet (PDF)"
   }
 }

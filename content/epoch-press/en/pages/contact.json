@@ -26,9 +26,9 @@
   "hero": {
     "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1771479825282-jakub-zerdzicki-da9qsu-0a00-unsplash.jpg",
     "title": "Get in Touch",
+    "variant": "split-photo-right",
     "subtitle": "Our team is ready to help with your print project. Reach out by phone, email, or the form below.",
-    "backgroundImage": "",
-    "variant": "split-photo-right"
+    "backgroundImage": ""
   },
   "email": {
     "title": "Email",

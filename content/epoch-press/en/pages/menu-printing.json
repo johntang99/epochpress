@@ -114,6 +114,16 @@
     }
   ],
   "tagline": "Restaurant menus that reflect the quality of your food.",
+  "pageHero": {
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959727626-unsplash-zcysac8mxtk.jpg",
+    "title": "Menu Printing",
+    "subtitle": "Restaurant menus that reflect the quality of your food.",
+    "variants": [
+      "split-photo-right"
+    ],
+    "description": "Durable, beautiful menus for restaurants, cafes, bars, and caterers. Laminated for longevity, available in all sizes and fold styles.",
+    "backgroundImage": ""
+  },
   "priceTiers": [
     {
       "qty": "25–99",
@@ -139,15 +149,5 @@
   "detailSheet": {
     "href": "/spec-sheets/menu-printing-spec-sheet.pdf",
     "text": "View Full Spec Sheet (PDF)"
-  },
-  "pageHero": {
-    "title": "Menu Printing",
-    "subtitle": "Restaurant menus that reflect the quality of your food.",
-    "description": "Durable, beautiful menus for restaurants, cafes, bars, and caterers. Laminated for longevity, available in all sizes and fold styles.",
-    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959727626-unsplash-zcysac8mxtk.jpg",
-    "backgroundImage": "",
-    "variants": [
-      "split-photo-right"
-    ]
   }
 }

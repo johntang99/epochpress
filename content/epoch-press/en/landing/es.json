@@ -1,0 +1,355 @@
+{
+  "faq": {
+    "items": [
+      {
+        "a": "Depende del producto y volumen. Tenemos opciones express en 48 horas para proyectos elegibles.",
+        "q": "Cual es su tiempo de entrega?"
+      },
+      {
+        "a": "Si. Ofrecemos tanto tirajes cortos como programas de alto volumen.",
+        "q": "Aceptan tirajes cortos?"
+      },
+      {
+        "a": "PDF listo para impresion con sangrado y fuentes incrustadas.",
+        "q": "Que formato de archivo recomiendan?"
+      },
+      {
+        "a": "Si. Coordinamos fulfillment por sede para operaciones multi-location.",
+        "q": "Pueden entregar en multiples ubicaciones?"
+      },
+      {
+        "a": "Si. Trabajamos con pruebas para validar contenido y color antes de produccion.",
+        "q": "Ofrecen prueba antes de imprimir?"
+      },
+      {
+        "a": "Si. Aplicamos procesos calibrados para repetir color con estabilidad.",
+        "q": "Pueden ayudar con control de color?"
+      },
+      {
+        "a": "Atendemos editorial, retail, hospitalidad, salud, educacion y mas.",
+        "q": "Que industrias atienden?"
+      },
+      {
+        "a": "Comparta su requerimiento y le proponemos alcance, tiempos y presupuesto.",
+        "q": "Como empezamos?"
+      }
+    ],
+    "title": "Preguntas frecuentes"
+  },
+  "hero": {
+    "badge": "Impresion de alto impacto para operaciones criticas",
+    "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1400&q=80",
+    "subline": "Cuando el tiempo y la calidad no son negociables, Epoch Press entrega consistencia, control y cumplimiento.",
+    "variant": "split-photo-right",
+    "headline": "Impresion Premium. Ejecucion Confiable.",
+    "primaryCta": {
+      "href": "/quote",
+      "text": "Solicitar Cotizacion"
+    },
+    "secondaryCta": {
+      "href": "tel:+19736943600",
+      "text": "Llamar Ahora"
+    },
+    "backgroundImage": "https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=2200&q=80"
+  },
+  "meta": {
+    "rtl": false,
+    "title": "Impresion comercial premium para marcas exigentes",
+    "locale": "es",
+    "description": "Landing page en espanol para conversion: capacidad, calidad, velocidad y resultados comprobados."
+  },
+  "proof": {
+    "items": [
+      {
+        "label": "Cumplimiento de salida",
+        "detail": "Mejora de puntualidad en un programa editorial regional.",
+        "metric": "98%"
+      },
+      {
+        "label": "Menos desperdicio",
+        "detail": "Optimizacion de inventario en programa de libros short-run.",
+        "metric": "32%"
+      },
+      {
+        "label": "Campana nacional",
+        "detail": "Produccion y entrega multi-formato para lanzamiento premium.",
+        "metric": "10 dias"
+      }
+    ],
+    "title": "Resultados que importan"
+  },
+  "contact": {
+    "formTitle": "Envianos un mensaje",
+    "infoTitle": "Informacion de contacto",
+    "emailLabel": "Correo electronico",
+    "emailValue": "info@epochpress.com",
+    "hoursLines": [
+      "Mon - Fri: 8:00 AM - 6:00 PM",
+      "Sat: 9:00 AM - 2:00 PM",
+      "Sun: Closed"
+    ],
+    "phoneLabel": "Telefono",
+    "phoneValue": "973-694-3600",
+    "addressLine1": "7 Highpoint Drive",
+    "addressLine2": "Wayne, NJ 07470",
+    "companyLabel": "Empresa",
+    "messageLabel": "Mensaje",
+    "fullNameLabel": "Nombre completo",
+    "sendButtonText": "Enviar mensaje",
+    "emailPlaceholder": "",
+    "phonePlaceholder": "",
+    "companyPlaceholder": "Nombre de la empresa",
+    "messagePlaceholder": "Cuentanos sobre tu proyecto...",
+    "fullNamePlaceholder": "Tu nombre",
+    "productInterestLabel": "Interes de producto",
+    "productInterestPlaceholder": "Selecciona un producto..."
+  },
+  "process": {
+    "steps": [
+      {
+        "desc": "Definimos alcance, plazos y estandares.",
+        "title": "Diagnostico"
+      },
+      {
+        "desc": "Validamos archivos y color antes de producir.",
+        "title": "Preprensa"
+      },
+      {
+        "desc": "Ejecucion controlada con QA en linea.",
+        "title": "Produccion"
+      },
+      {
+        "desc": "Despacho puntual con soporte post-entrega.",
+        "title": "Entrega"
+      }
+    ],
+    "title": "Como trabajamos"
+  },
+  "finalCta": {
+    "title": "Listo para elevar su produccion impresa?",
+    "subline": "Comparta su necesidad y le enviamos un plan de impresion claro y competitivo.",
+    "primaryHref": "/quote",
+    "primaryText": "Solicitar Cotizacion",
+    "secondaryHref": "tel:+19736943600",
+    "secondaryText": "Hablar con un especialista"
+  },
+  "trustBar": [
+    "22+ anos de experiencia",
+    "50M+ paginas al ano",
+    "500+ clientes empresariales",
+    "Opciones express en 48h"
+  ],
+  "caseStudies": {
+    "items": [
+      {
+        "quote": "Epoch Press nos devolvio la confianza operativa cuando el tiempo era lo mas critico.",
+        "title": "Estabilizacion de cierres en diario regional",
+        "author": "Director de Operaciones",
+        "client": "Grupo de Medios del Noreste",
+        "result": "La tasa de salida a tiempo mejoro del 86% al 98% en un trimestre.",
+        "category": "Periodicos",
+        "featured": true,
+        "solution": "Epoch Press implemento un flujo de preprensa mas estricto, ajusto el protocolo de corte y asigno una celda de urgencia dedicada.",
+        "challenge": "Los cambios editoriales de ultima hora ponian en riesgo de forma recurrente los cierres de imprenta y las ventanas de reparto."
+      },
+      {
+        "quote": "La consistencia se nota en cada edicion. Elevo nuestra marca de inmediato.",
+        "title": "Consistencia premium de color entre ediciones",
+        "author": "Editora",
+        "client": "Revista Avenue Living",
+        "result": "La variacion de color de marca bajo de forma significativa y aumento la satisfaccion de anunciantes.",
+        "category": "Revistas",
+        "featured": true,
+        "solution": "Controles de color calibrados bajo estandar G7 y puntos de aprobacion mas estrictos en tapas e interiores.",
+        "challenge": "La variacion de tonos de marca entre ediciones mensuales reducia la continuidad visual para los anunciantes."
+      },
+      {
+        "quote": "Avanzamos mas rapido, con menos riesgo y mejor economia por unidad.",
+        "title": "Programa de libros short-run escalado con rentabilidad",
+        "author": "Jefe de Produccion",
+        "client": "Editorial Educativa Independiente",
+        "result": "El desperdicio de inventario se redujo un 32% manteniendo el calendario de lanzamientos.",
+        "category": "Libros",
+        "solution": "Epoch Press estructuro un modelo hibrido de tirajes cortos con cantidades por etapas y especificaciones de acabado repetibles.",
+        "challenge": "Las revisiones frecuentes de contenido volvian riesgosas y costosas las tiradas grandes."
+      },
+      {
+        "quote": "Ejecucion veloz sin sacrificar calidad. Exactamente lo que necesitabamos.",
+        "title": "Campana de marca premium entregada en 10 dias",
+        "author": "Lider de Marketing de Marca",
+        "client": "Marca Nacional de Retail",
+        "result": "La campana se lanzo en fecha en todos los mercados objetivo.",
+        "category": "Impresion de Marketing",
+        "featured": true,
+        "solution": "Planificacion paralela de produccion para folletos, insertos y materiales de punto de venta con control de calidad coordinado.",
+        "challenge": "Un lanzamiento multi-formato exigia calidad premium de impresion bajo una ventana de tiempo muy ajustada."
+      },
+      {
+        "quote": "La disciplina del proceso simplifico mucho nuestras proyecciones de campana.",
+        "title": "Mailer de captacion mejoro eficiencia de respuesta",
+        "author": "Gerente de Campana",
+        "client": "Red de Salud",
+        "result": "Mejoro la consistencia de entrega y aumento la eficiencia de respuesta de la campana.",
+        "category": "Correo Directo",
+        "solution": "Epoch Press alineo impresion, personalizacion y secuenciacion de fecha de deposito con flujos listos para USPS.",
+        "challenge": "Los proveedores anteriores generaban calidad variable y demoras de correo entre oleadas."
+      },
+      {
+        "quote": "Epoch Press transformo una operacion fragmentada de impresion en un sistema confiable.",
+        "title": "Estandarizacion de impresion para franquicia a gran escala",
+        "author": "Director de Compras",
+        "client": "Grupo de Franquicias de Hospitalidad",
+        "result": "La consistencia visual mejoro en mas de 40 ubicaciones en un solo ciclo de despliegue.",
+        "category": "Despliegue Multi-Ubicacion",
+        "solution": "Plantillas estandarizadas, especificaciones de produccion controladas y fulfillment sincronizado por ubicacion.",
+        "challenge": "La calidad de impresion variaba por mercado, debilitando la presentacion de marca."
+      }
+    ],
+    "title": "Casos relevantes"
+  },
+  "galleryRail": {
+    "items": [
+      {
+        "alt": "Operacion de impresion",
+        "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1771479825282-jakub-zerdzicki-da9qsu-0a00-unsplash.jpg"
+      },
+      {
+        "alt": "Equipo planificando proyecto",
+        "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959268504-unsplash-kkv1gkdvfzm.jpg"
+      },
+      {
+        "alt": "Materiales listos para entrega",
+        "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772961508120-unsplash-tzm3oyu-6sk.jpg"
+      },
+      {
+        "alt": "Acabados de produccion",
+        "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/bank-phrom-Tzm3Oyu_6sk-unsplash.jpg"
+      },
+      {
+        "alt": "Revision de color",
+        "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772960819540-unsplash-mhsfcjd2rjw.jpg"
+      },
+      {
+        "alt": "Sesion con cliente",
+        "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772953105276-unsplash-2jivbogleho.jpg"
+      }
+    ],
+    "title": "Photo Gallery"
+  },
+  "capabilities": {
+    "items": [
+      {
+        "desc": "Preprensa validada, calibracion de color y revision final para asegurar consistencia.",
+        "title": "Control de calidad en cada etapa"
+      },
+      {
+        "desc": "Desde tirajes cortos hasta programas de impresion masivos sin perder calidad.",
+        "title": "Capacidad para alto volumen"
+      },
+      {
+        "desc": "Flujos operativos disciplinados para lanzamientos y ventanas de distribucion.",
+        "title": "Cumplimiento de plazos criticos"
+      },
+      {
+        "desc": "Acompanamiento experto para minimizar riesgo y acelerar decisiones.",
+        "title": "Soporte comercial cercano"
+      }
+    ],
+    "title": "Por que empresas exigentes trabajan con nosotros"
+  },
+  "productGallery": {
+    "items": [
+      {
+        "desc": "Impresion web offset para periodicos diarios, semanales y comunitarios. Formatos broadsheet y tabloide, en blanco y negro o color completo, desde 500 hasta 500,000+ copias.",
+        "href": "/products/newspaper-printing",
+        "name": "Impresion de Periodicos",
+        "image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Web offset y digital",
+          "De 500 a 500,000+ copias",
+          "Entrega estandar en 3-5 dias"
+        ]
+      },
+      {
+        "desc": "Impresion de revistas y catalogos con grapa o encuadernacion perfecta, formatos de corte definidos, papeles de cubierta y opciones de acabado para publicaciones periodicas y premium.",
+        "href": "/products/magazine-printing",
+        "name": "Impresion de Revistas",
+        "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Revistas y catalogos",
+          "Grapa y encuadernacion perfecta",
+          "Formatos de corte estandarizados"
+        ]
+      },
+      {
+        "desc": "Impresion de libros en tapa blanda y tapa dura con formatos, paginacion, materiales de cubierta y acabados para editoriales, instituciones y ediciones de marca.",
+        "href": "/products/book-printing",
+        "name": "Impresion de Libros",
+        "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Tapa blanda y tapa dura",
+          "Cuadernos y albums",
+          "Opciones de papel y acabado"
+        ]
+      },
+      {
+        "desc": "Calendarios de escritorio y pared con opciones de cubierta, interiores y acabado para regalos corporativos, oficinas y programas estacionales de retail.",
+        "href": "/products/calendar-printing",
+        "name": "Impresion de Calendarios",
+        "image": "https://images.unsplash.com/photo-1506784693919-ef06d93c28d2?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Formatos de escritorio y pared",
+          "Wire-O y multiples acabados",
+          "Programas estacionales de marca"
+        ]
+      },
+      {
+        "desc": "Flyers, folletos, posters y postales en una sola familia de impresos de campana, con tamanos, pliegues, papeles y terminaciones estandarizadas.",
+        "href": "/products/marketing-print",
+        "name": "Impresion de Marketing",
+        "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Flyers, folletos, posters y postales",
+          "Opciones comunes de pliegue y acabado",
+          "Tiempos rapidos para campanas"
+        ]
+      },
+      {
+        "desc": "Impresion de menus plegados o desplegados para restaurantes, con configuracion de paginas, tipos de papel, modos de color y opciones de terminacion.",
+        "href": "/products/menu-printing",
+        "name": "Impresion de Menus",
+        "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Formatos plegados y desplegados",
+          "Opciones de paginacion definidas",
+          "Reglas consistentes de acabado"
+        ]
+      },
+      {
+        "desc": "Desde estandar hasta ultra premium. Incluye stamping, embossing, UV sectorizado, tinta en relieve y troquelado para una primera impresion memorable.",
+        "href": "/products/business-cards",
+        "name": "Tarjetas de Presentacion",
+        "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Papeles 14pt, 16pt y 32pt",
+          "Foil, emboss y UV sectorizado",
+          "Desde 250 tarjetas"
+        ]
+      },
+      {
+        "desc": "Banners, exhibidores para ferias, graficos de muro y senaletica exterior. Materiales en vinilo, tela, foam board y acrilico para interior y exterior.",
+        "href": "/products/large-format",
+        "name": "Gran Formato",
+        "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Tamanos personalizados",
+          "Uso interior y exterior",
+          "Listo para montaje e instalacion"
+        ]
+      }
+    ],
+    "title": "Categorías de impresión",
+    "variant": "grid-3x"
+  },
+  "relatedProducts": []
+}

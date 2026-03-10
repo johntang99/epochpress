@@ -104,6 +104,16 @@
     }
   ],
   "tagline": "Custom calendar printing for branded desk and wall formats.",
+  "pageHero": {
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959459954-unsplash-foko4dpxamq.jpg",
+    "title": "Calendar Printing",
+    "subtitle": "Custom calendar printing for branded desk and wall formats.",
+    "variants": [
+      "split-photo-right"
+    ],
+    "description": "Desk calendars and wall calendars produced with workbook-backed binding, finishing, and seasonal page options.",
+    "backgroundImage": ""
+  },
   "priceTiers": [
     {
       "qty": "Small Run",
@@ -125,15 +135,5 @@
   "detailSheet": {
     "href": "/spec-sheets/calendar-printing-spec-sheet.pdf",
     "text": "View Full Spec Sheet (PDF)"
-  },
-  "pageHero": {
-    "title": "Calendar Printing",
-    "subtitle": "Custom calendar printing for branded desk and wall formats.",
-    "description": "Desk calendars and wall calendars produced with workbook-backed binding, finishing, and seasonal page options.",
-    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959459954-unsplash-foko4dpxamq.jpg",
-    "backgroundImage": "",
-    "variants": [
-      "split-photo-right"
-    ]
   }
 }

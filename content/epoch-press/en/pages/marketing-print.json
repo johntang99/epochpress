@@ -136,6 +136,16 @@
     }
   ],
   "tagline": "Print marketing materials that demand attention and drive results.",
+  "pageHero": {
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772960819540-unsplash-mhsfcjd2rjw.jpg",
+    "title": "Marketing Print",
+    "subtitle": "Print marketing materials that demand attention and drive results.",
+    "variants": [
+      "split-photo-right"
+    ],
+    "description": "Flyers, brochures, postcards, posters, and more. All sizes, all fold types, all paper stocks. Fast turnaround for campaigns with real deadlines.",
+    "backgroundImage": ""
+  },
   "priceTiers": [
     {
       "qty": "100–499",
@@ -161,15 +171,5 @@
   "detailSheet": {
     "href": "/spec-sheets/marketing-print-spec-sheet.pdf",
     "text": "View Full Spec Sheet (PDF)"
-  },
-  "pageHero": {
-    "title": "Marketing Print",
-    "subtitle": "Print marketing materials that demand attention and drive results.",
-    "description": "Flyers, brochures, postcards, posters, and more. All sizes, all fold types, all paper stocks. Fast turnaround for campaigns with real deadlines.",
-    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772960819540-unsplash-mhsfcjd2rjw.jpg",
-    "backgroundImage": "",
-    "variants": [
-      "split-photo-right"
-    ]
   }
 }

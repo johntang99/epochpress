@@ -1,0 +1,327 @@
+{
+  "faq": {
+    "items": [
+      {
+        "a": "Turnaround depends on product and volume. We also offer 48-hour rush for eligible jobs.",
+        "q": "What is your typical turnaround?"
+      },
+      {
+        "a": "Yes. We handle short-run and high-volume programs with the same quality controls.",
+        "q": "Do you support short runs?"
+      },
+      {
+        "a": "Print-ready PDF with bleed and embedded fonts is recommended.",
+        "q": "Which file format should we provide?"
+      },
+      {
+        "a": "Yes. We support multi-location fulfillment with coordinated drop schedules.",
+        "q": "Can you deliver to multiple locations?"
+      },
+      {
+        "a": "Yes. We provide proofing workflows before final production begins.",
+        "q": "Do you provide proofs?"
+      },
+      {
+        "a": "Yes. Our calibrated process is designed for repeatable, brand-safe color output.",
+        "q": "Can you help with color consistency?"
+      },
+      {
+        "a": "We serve publishing, retail, hospitality, healthcare, education, and more.",
+        "q": "What industries do you serve?"
+      },
+      {
+        "a": "Submit project details through quote request and we will respond with scope and timeline options.",
+        "q": "How do we start?"
+      }
+    ],
+    "title": "Frequently asked questions"
+  },
+  "hero": {
+    "badge": "Engineered for High-Stakes Print",
+    "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1400&q=80",
+    "subline": "When timelines and quality standards are strict, Epoch Press delivers consistent output with disciplined execution.",
+    "headline": "Premium Print. Executive Confidence.",
+    "primaryCta": {
+      "href": "/quote",
+      "text": "Request a Quote"
+    },
+    "secondaryCta": {
+      "href": "tel:+19736943600",
+      "text": "Call Now"
+    },
+    "backgroundImage": "https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=2200&q=80"
+  },
+  "meta": {
+    "rtl": false,
+    "title": "Premium Commercial Printing Landing Page",
+    "locale": "en",
+    "description": "Single-page conversion landing for enterprise print buyers."
+  },
+  "proof": {
+    "items": [
+      {
+        "label": "On-time release",
+        "detail": "Improved release consistency for a regional media operation.",
+        "metric": "98%"
+      },
+      {
+        "label": "Waste reduction",
+        "detail": "Inventory optimization in a short-run book program.",
+        "metric": "32%"
+      },
+      {
+        "label": "National campaign",
+        "detail": "Multi-format production delivered on launch schedule.",
+        "metric": "10 days"
+      }
+    ],
+    "title": "Proven outcomes"
+  },
+  "process": {
+    "steps": [
+      {
+        "desc": "Define scope, standards, and timeline.",
+        "title": "Consult"
+      },
+      {
+        "desc": "Validate files and align color output.",
+        "title": "Prepress"
+      },
+      {
+        "desc": "Run controlled manufacturing with QA checks.",
+        "title": "Production"
+      },
+      {
+        "desc": "Ship on schedule with accountable support.",
+        "title": "Delivery"
+      }
+    ],
+    "title": "How it works"
+  },
+  "finalCta": {
+    "title": "Ready to Raise Print Standards?",
+    "subline": "Share your requirements and we will propose a production plan that fits your timeline and quality goals.",
+    "primaryHref": "/quote",
+    "primaryText": "Request a Quote",
+    "secondaryHref": "tel:+19736943600",
+    "secondaryText": "Talk to a specialist"
+  },
+  "trustBar": [
+    "25+ years of experience",
+    "50M+ pages annually",
+    "500+ business clients",
+    "48-hour rush options"
+  ],
+  "caseStudies": {
+    "items": [
+      {
+        "quote": "Epoch Press gave us operational confidence when timing mattered most.",
+        "title": "Regional Daily Turnaround Stabilized",
+        "author": "Operations Director",
+        "client": "Northeast Media Group",
+        "result": "On-time release rate improved from 86% to 98% in one quarter.",
+        "category": "Newspapers",
+        "featured": true,
+        "solution": "Epoch Press implemented a tighter prepress validation workflow, revised cutoff protocol, and dedicated rush lane.",
+        "challenge": "Late-night editorial changes repeatedly threatened print deadlines and carrier windows."
+      },
+      {
+        "quote": "The consistency is obvious issue to issue. It elevated our brand instantly.",
+        "title": "Premium Color Consistency Across Issues",
+        "author": "Publisher",
+        "client": "Avenue Living Magazine",
+        "result": "Brand color variance dropped significantly and ad client satisfaction scores increased.",
+        "category": "Magazines",
+        "featured": true,
+        "solution": "G7-calibrated color controls and tighter proofing checkpoints across covers and interior signatures.",
+        "challenge": "Inconsistent brand tones across monthly issues reduced visual continuity for advertisers."
+      },
+      {
+        "quote": "We moved faster with less risk and better unit economics.",
+        "title": "Short-Run Book Program Scaled Profitably",
+        "author": "Head of Production",
+        "client": "Independent Education Publisher",
+        "result": "Inventory waste reduced by 32% while maintaining launch schedules.",
+        "category": "Books",
+        "solution": "Epoch Press structured a hybrid short-run program with staged quantities and repeatable finishing specs.",
+        "challenge": "Frequent content revisions made large runs risky and costly."
+      },
+      {
+        "quote": "Fast execution without sacrificing quality. Exactly what we needed.",
+        "title": "Luxury Brand Campaign Delivered in 10 Days",
+        "author": "Brand Marketing Lead",
+        "client": "National Retail Brand",
+        "result": "Campaign launched on schedule across all target markets.",
+        "category": "Marketing Print",
+        "featured": true,
+        "solution": "Parallel production planning across brochures, inserts, and point-of-sale assets with coordinated QC.",
+        "challenge": "A multi-format launch needed premium print quality under an aggressive timeline."
+      },
+      {
+        "quote": "The process discipline made forecasting much easier for our team.",
+        "title": "Acquisition Mailer Improved Response Efficiency",
+        "author": "Campaign Manager",
+        "client": "Healthcare Network",
+        "result": "Delivery consistency improved and campaign response efficiency increased.",
+        "category": "Direct Mail",
+        "solution": "Epoch Press aligned print, personalization, and drop-date sequencing with USPS-ready workflows.",
+        "challenge": "Prior vendors produced variable quality and mailing delays across waves."
+      },
+      {
+        "quote": "Epoch Press turned a fragmented print operation into a reliable system.",
+        "title": "Franchise Print Standardization at Scale",
+        "author": "Procurement Director",
+        "client": "Hospitality Franchise Group",
+        "result": "Visual consistency improved across 40+ locations within one rollout cycle.",
+        "category": "Multi-Location Rollout",
+        "solution": "Standardized templates, controlled production specs, and synchronized fulfillment by location.",
+        "challenge": "Store-level print quality varied by market, weakening brand presentation."
+      }
+    ],
+    "title": "Selected case studies"
+  },
+  "galleryRail": {
+    "items": [
+      {
+        "alt": "Press operation close-up",
+        "image": "https://images.unsplash.com/photo-1586953983027-d750b9d95f95?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "Team planning print project",
+        "image": "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "Printed materials staged for delivery",
+        "image": "https://images.unsplash.com/photo-1524758870432-af57e54afa26?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "Finishing workflow",
+        "image": "https://images.unsplash.com/photo-1554774853-b414d2a2b7c0?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "Color review session",
+        "image": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "Client collaboration meeting",
+        "image": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1800&q=80"
+      }
+    ],
+    "title": "Photo Gallery"
+  },
+  "capabilities": {
+    "items": [
+      {
+        "desc": "Prepress checks, color calibration, and production QA protect brand consistency.",
+        "title": "Quality controls at every stage"
+      },
+      {
+        "desc": "From short runs to enterprise-scale print programs with predictable output.",
+        "title": "Scalable production capacity"
+      },
+      {
+        "desc": "Operational discipline that supports campaign launches and distribution windows.",
+        "title": "Reliable deadline performance"
+      },
+      {
+        "desc": "Experienced specialists who identify risks early and keep projects moving.",
+        "title": "Senior-level project support"
+      }
+    ],
+    "title": "Why high-standard teams choose Epoch Press"
+  },
+  "productGallery": {
+    "items": [
+      {
+        "desc": "Web offset printing for daily, weekly, and community newspapers. Broadsheet and tabloid formats, black-and-white or full color, from 500 to 500,000+ copies.",
+        "href": "/products/newspaper-printing",
+        "name": "Newspaper Printing",
+        "image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Web offset & digital",
+          "500 to 500,000+ copies",
+          "3-5 day standard turnaround"
+        ]
+      },
+      {
+        "desc": "Magazine and catalogue printing with saddle stitch or perfect binding, workbook-backed trim sizes, cover stocks, and finishing options for periodicals and premium publications.",
+        "href": "/products/magazine-printing",
+        "name": "Magazine Printing",
+        "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Magazines + catalogues",
+          "Saddle stitch & perfect bind",
+          "Workbook-backed trim sizes"
+        ]
+      },
+      {
+        "desc": "Paper books and hardcover books with workbook-backed trim sizes, page ranges, cover materials, and finishing options for publishers, institutions, and branded editions.",
+        "href": "/products/book-printing",
+        "name": "Book Printing",
+        "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Paper books + hardcover books",
+          "Notebooks + albums",
+          "Workbook-backed stock options"
+        ]
+      },
+      {
+        "desc": "Desk calendars and wall calendars with workbook-backed cover, finishing, and interior page options for branded giveaways, offices, and retail seasonal programs.",
+        "href": "/products/calendar-printing",
+        "name": "Calendar Printing",
+        "image": "https://images.unsplash.com/photo-1506784693919-ef06d93c28d2?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Desk + wall calendar formats",
+          "Wire-O binding and finishing options",
+          "Seasonal branded print programs"
+        ]
+      },
+      {
+        "desc": "Flyers, brochures, posters, and postcards grouped into one campaign-print family, with workbook-backed sizes, fold styles, paper stocks, and finishing options.",
+        "href": "/products/marketing-print",
+        "name": "Marketing Print",
+        "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Flyers, brochures, posters, postcards",
+          "Shared fold and finish options",
+          "Fast campaign turnarounds"
+        ]
+      },
+      {
+        "desc": "Workbook-backed menu printing for folded and unfolded restaurant menus, with defined page counts, paper stocks, color modes, and finishing options.",
+        "href": "/products/menu-printing",
+        "name": "Menu Printing",
+        "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Folded + unfolded menu formats",
+          "Defined page-count options",
+          "Workbook-backed finishing rules"
+        ]
+      },
+      {
+        "desc": "From standard to ultra-premium. Foil stamping, embossing, spot UV, raised ink, and die-cutting available. Make a lasting first impression.",
+        "href": "/products/business-cards",
+        "name": "Business Cards",
+        "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "14pt, 16pt, 32pt stock",
+          "Foil, emboss, spot UV",
+          "From 250 cards"
+        ]
+      },
+      {
+        "desc": "Banners, trade show displays, wall graphics, and outdoor signage. Vinyl, fabric, foam board, and acrylic. Indoor and outdoor options.",
+        "href": "/products/large-format",
+        "name": "Large Format",
+        "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Custom sizes",
+          "Indoor & outdoor",
+          "Mounting & installation ready"
+        ]
+      }
+    ],
+    "title": "Print Categories",
+    "variant": "grid-3x"
+  }
+}

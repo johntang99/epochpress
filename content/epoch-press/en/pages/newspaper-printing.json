@@ -191,9 +191,9 @@
       "note": "Custom pricing, dedicated press run"
     }
   ],
+  "description": "From community weeklies to major regional dailies, we deliver fast, reliable newspaper printing. Web offset and digital capabilities, broadsheet and tabloid formats, black-and-white and full color.",
   "detailSheet": {
     "href": "/spec-sheets/newspaper-printing-spec-sheet.pdf",
     "text": "View Full Spec Sheet (PDF)"
-  },
-  "description": "From community weeklies to major regional dailies, we deliver fast, reliable newspaper printing. Web offset and digital capabilities, broadsheet and tabloid formats, black-and-white and full color."
+  }
 }

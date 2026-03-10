@@ -1,212 +1,63 @@
 {
   "products": {
-    "newspaper-printing": {
-      "label": "Newspapers",
+    "other": {
+      "label": "Other / Not Sure",
       "fields": [
         {
-          "id": "format",
-          "label": "Format",
-          "type": "radio",
-          "options": [
-            "Broadsheet",
-            "Tabloid",
-            "Berliner"
-          ]
-        },
-        {
-          "id": "pageCount",
-          "label": "Number of Pages",
-          "type": "number",
-          "placeholder": "e.g. 16"
-        },
-        {
-          "id": "paperStock",
-          "label": "Paper Stock",
-          "type": "select",
-          "options": [
-            "Newsprint 30#",
-            "Improved Newsprint 35#",
-            "Premium Newsprint 40#"
-          ]
-        },
-        {
-          "id": "color",
-          "label": "Color",
-          "type": "radio",
-          "options": [
-            "Black & White",
-            "Full Color",
-            "Color Cover + B&W Interior"
-          ]
-        },
-        {
-          "id": "quantity",
-          "label": "Quantity",
-          "type": "number",
-          "placeholder": "e.g. 5000"
-        },
-        {
-          "id": "frequency",
-          "label": "Frequency",
-          "type": "radio",
-          "options": [
-            "One-time",
-            "Weekly",
-            "Monthly",
-            "Other"
-          ]
-        },
-        {
-          "id": "turnaround",
-          "label": "Desired Turnaround",
-          "type": "select",
-          "options": [
-            "Standard (3–5 days)",
-            "Rush (48 hours)",
-            "Flexible"
-          ]
+          "id": "description",
+          "type": "textarea",
+          "label": "Project Description",
+          "placeholder": "Tell us about your project — what you need, approximate quantities, and any special requirements."
         }
       ]
     },
-    "magazine-printing": {
-      "label": "Magazine Printing",
+    "large-format": {
+      "label": "Large Format",
       "fields": [
         {
-          "id": "binding",
-          "label": "Binding Type",
-          "type": "radio",
-          "options": [
-            "Perfect Bindery",
-            "Saddle stitch"
-          ]
-        },
-        {
-          "id": "trimSize",
-          "label": "Trim Size",
+          "id": "product",
           "type": "select",
+          "label": "Product Type",
           "options": [
-            "5x7",
-            "5.5x8.5",
-            "6x9",
-            "8.5x11",
-            "8.25x10.75",
-            "8.125x10.5",
-            "9x12",
-            "8.5x5.5",
-            "9x6",
-            "11x8.5",
-            "12x9"
+            "Vinyl Banner",
+            "Fabric Display",
+            "Foam Board",
+            "Acrylic",
+            "Wall Graphic",
+            "Retractable Banner"
           ]
         },
         {
-          "id": "pageCount",
-          "label": "Page Count",
-          "type": "number",
-          "placeholder": "Match workbook page rules for selected binding"
+          "id": "size",
+          "type": "text",
+          "label": "Size",
+          "placeholder": "e.g. 4ft × 8ft or custom dimensions"
         },
         {
-          "id": "coverPaper",
-          "label": "Cover Paper",
+          "id": "material",
           "type": "select",
+          "label": "Material",
           "options": [
-            "80 Cover Gloss",
-            "100 Cover Gloss",
-            "120 Cover Gloss",
-            "80 Cover Silk",
-            "100 Cover Silk",
-            "120 Cover Silk",
-            "65 Cover offset",
-            "80 Cover offset",
-            "100 Cover offset",
-            "8PT",
-            "12PT",
-            "14PT",
-            "16PT",
-            "24PT"
-          ]
-        },
-        {
-          "id": "textPaper",
-          "label": "Text Paper",
-          "type": "select",
-          "options": [
-            "40 Text Gloss",
-            "45 Text Gloss",
-            "50 Text Gloss",
-            "60 Text Gloss",
-            "70 Text Gloss",
-            "80 Text Gloss",
-            "50 Text offset",
-            "70 Text offset",
-            "100 Text Gloss",
-            "40 Text Silk/stain",
-            "45 Text Silk/stain",
-            "50 Text Silk/stain",
-            "60 Text Silk/stain",
-            "70 Text Silk/stain",
-            "80 Text Silk/stain",
-            "100 Text Silk/stain",
-            "Uncoated",
-            "35 Text Hight Bright",
-            "40 Text",
-            "45 Text",
-            "50 Text",
-            "60 Text",
-            "70 Text",
-            "80 Text"
-          ]
-        },
-        {
-          "id": "color",
-          "label": "Color",
-          "type": "radio",
-          "options": [
-            "1/1",
-            "4/1",
-            "4/4",
-            "4/0"
-          ]
-        },
-        {
-          "id": "coverFinish",
-          "label": "Cover Finish",
-          "type": "select",
-          "options": [
-            "Lamination--Matt",
-            "Lamination--Gloss",
-            "Lamination--Soft touch",
-            "Foil Stamping",
-            "Embossing",
-            "Debossing",
-            "UV",
-            "Spot UV",
-            "AQ Coating --Matt",
-            "AQ Coating --Gloss",
-            "AQ Coating --Soft touch"
+            "13 oz Vinyl (standard)",
+            "18 oz Vinyl (heavy duty)",
+            "Mesh Vinyl (wind-resistant)",
+            "Polyester Fabric",
+            "Coroplast (rigid)"
           ]
         },
         {
           "id": "quantity",
-          "label": "Quantity",
           "type": "number",
-          "placeholder": "Enter quantity"
-        },
-        {
-          "id": "packing",
-          "label": "Packing",
-          "type": "select",
-          "options": [
-            "Poly Bag+ Box",
-            "Wrapping film + Box"
-          ]
+          "label": "Quantity",
+          "placeholder": "e.g. 5"
         },
         {
           "id": "turnaround",
-          "label": "Turnaround",
           "type": "select",
+          "label": "Turnaround",
           "options": [
-            "Standard",
-            "Rush",
+            "Standard (3–5 days)",
+            "Rush (24–48 hours)",
             "Flexible"
           ]
         }
@@ -217,8 +68,8 @@
       "fields": [
         {
           "id": "bookType",
-          "label": "Book Type",
           "type": "radio",
+          "label": "Book Type",
           "options": [
             "Paper Book (Softcover)",
             "Hard Cover Book",
@@ -228,8 +79,8 @@
         },
         {
           "id": "binding",
-          "label": "Binding",
           "type": "radio",
+          "label": "Binding",
           "options": [
             "Perfect Bindery",
             "Saddle stitch",
@@ -240,8 +91,8 @@
         },
         {
           "id": "trimSize",
-          "label": "Trim Size",
           "type": "select",
+          "label": "Trim Size",
           "options": [
             "5x7",
             "5.5x8.5",
@@ -258,14 +109,14 @@
         },
         {
           "id": "pageCount",
-          "label": "Page Count",
           "type": "number",
+          "label": "Page Count",
           "placeholder": "Enter page count"
         },
         {
           "id": "coverMaterial",
-          "label": "Cover Material",
           "type": "select",
+          "label": "Cover Material",
           "options": [
             "Fabric",
             "Jacket (書衣）"
@@ -273,8 +124,8 @@
         },
         {
           "id": "coverPaper",
-          "label": "Cover Paper",
           "type": "select",
+          "label": "Cover Paper",
           "options": [
             "80 Cover Gloss",
             "100 Cover Gloss",
@@ -294,8 +145,8 @@
         },
         {
           "id": "textPaper",
-          "label": "Text Paper",
           "type": "select",
+          "label": "Text Paper",
           "options": [
             "40 Text Gloss",
             "45 Text Gloss",
@@ -325,8 +176,8 @@
         },
         {
           "id": "color",
-          "label": "Color",
           "type": "radio",
+          "label": "Color",
           "options": [
             "1/1",
             "4/1",
@@ -336,8 +187,8 @@
         },
         {
           "id": "coverFinish",
-          "label": "Cover Finish",
           "type": "select",
+          "label": "Cover Finish",
           "options": [
             "Lamination--Matt",
             "Lamination--Gloss",
@@ -354,14 +205,130 @@
         },
         {
           "id": "quantity",
-          "label": "Quantity",
           "type": "number",
+          "label": "Quantity",
           "placeholder": "Enter quantity"
         },
         {
           "id": "turnaround",
-          "label": "Turnaround",
           "type": "select",
+          "label": "Turnaround",
+          "options": [
+            "Standard",
+            "Rush",
+            "Flexible"
+          ]
+        }
+      ]
+    },
+    "menu-printing": {
+      "label": "Menu Printing",
+      "fields": [
+        {
+          "id": "style",
+          "type": "radio",
+          "label": "Menu Fold / Style",
+          "options": [
+            "Unfold",
+            "Half Fold",
+            "Tri-Fold",
+            "N Fold",
+            "Double Parallet Fold",
+            "Gate Fold",
+            "French Fold",
+            "Accordion Fold",
+            "Map Fold"
+          ]
+        },
+        {
+          "id": "size",
+          "type": "select",
+          "label": "Flat Size",
+          "options": [
+            "22x17",
+            "11x17",
+            "14x8.5",
+            "11x8.5",
+            "16x9",
+            "12.65x9.25",
+            "17x9"
+          ]
+        },
+        {
+          "id": "pageCount",
+          "type": "select",
+          "label": "Page Count",
+          "options": [
+            "4",
+            "8",
+            "12",
+            "16",
+            "20",
+            "24"
+          ]
+        },
+        {
+          "id": "paper",
+          "type": "select",
+          "label": "Paper",
+          "options": [
+            "60 Text Gloss",
+            "70 Text Gloss",
+            "80 Text Gloss",
+            "100 Text Gloss",
+            "60 Text Silk",
+            "70 Text Silk",
+            "80 Text Silk",
+            "100 Text Silk",
+            "80 Cover Gloss",
+            "100 Cover GLOSS",
+            "80 Silk Gloss",
+            "100 Silk Gloss",
+            "50 Text Offset",
+            "60 Text Offset",
+            "70 Text Offset",
+            "80 Text Offset"
+          ]
+        },
+        {
+          "id": "color",
+          "type": "radio",
+          "label": "Color",
+          "options": [
+            "1/1",
+            "4/1",
+            "4/4",
+            "4/0"
+          ]
+        },
+        {
+          "id": "lamination",
+          "type": "select",
+          "label": "Finishing",
+          "options": [
+            "Lamination--Matt",
+            "Lamination--Gloss",
+            "Lamination--Soft touch",
+            "Foil Stamping",
+            "Embossing",
+            "Debossing",
+            "UV",
+            "Spot UV",
+            "AQ Coating --Matt",
+            "AQ Coating --Gloss",
+            "AQ Coating --Soft touch"
+          ]
+        },
+        {
+          "id": "quantity",
+          "type": "number",
+          "label": "Quantity",
+          "placeholder": "Enter quantity"
+        },
+        {
+          "id": "turnaround",
+          "type": "select",
+          "label": "Turnaround",
           "options": [
             "Standard",
             "Rush",
@@ -375,8 +342,8 @@
       "fields": [
         {
           "id": "quantity",
-          "label": "Quantity",
           "type": "radio",
+          "label": "Quantity",
           "options": [
             "250",
             "500",
@@ -388,8 +355,8 @@
         },
         {
           "id": "stock",
-          "label": "Paper Stock",
           "type": "radio",
+          "label": "Paper Stock",
           "options": [
             "Standard 14pt",
             "Premium 16pt",
@@ -398,8 +365,8 @@
         },
         {
           "id": "page",
-          "label": "Page / Sides",
           "type": "radio",
+          "label": "Page / Sides",
           "options": [
             "1",
             "2"
@@ -407,8 +374,8 @@
         },
         {
           "id": "color",
-          "label": "Color",
           "type": "radio",
+          "label": "Color",
           "options": [
             "1/1",
             "4/1",
@@ -418,8 +385,8 @@
         },
         {
           "id": "finish",
-          "label": "Finish",
           "type": "select",
+          "label": "Finish",
           "options": [
             "Lamination--Matt",
             "Lamination--Gloss",
@@ -436,8 +403,8 @@
         },
         {
           "id": "sides",
-          "label": "Sides",
           "type": "radio",
+          "label": "Sides",
           "options": [
             "Single-sided",
             "Double-sided"
@@ -445,8 +412,8 @@
         },
         {
           "id": "turnaround",
-          "label": "Turnaround",
           "type": "radio",
+          "label": "Turnaround",
           "options": [
             "Standard (3–5 days)",
             "Rush (2–3 days)"
@@ -459,8 +426,8 @@
       "fields": [
         {
           "id": "productType",
-          "label": "Marketing Product Type",
           "type": "select",
+          "label": "Marketing Product Type",
           "options": [
             "Flyers",
             "Brochures",
@@ -470,8 +437,8 @@
         },
         {
           "id": "size",
-          "label": "Size",
           "type": "select",
+          "label": "Size",
           "options": [
             "22x17",
             "11x17",
@@ -489,8 +456,8 @@
         },
         {
           "id": "fold",
-          "label": "Fold / Binding",
           "type": "select",
+          "label": "Fold / Binding",
           "options": [
             "Unfold",
             "Half Fold",
@@ -506,8 +473,8 @@
         },
         {
           "id": "paper",
-          "label": "Paper",
           "type": "select",
+          "label": "Paper",
           "options": [
             "60 Text Gloss",
             "70 Text Gloss",
@@ -530,8 +497,8 @@
         },
         {
           "id": "color",
-          "label": "Color",
           "type": "radio",
+          "label": "Color",
           "options": [
             "1/1",
             "4/1",
@@ -541,8 +508,8 @@
         },
         {
           "id": "finish",
-          "label": "Finishing",
           "type": "select",
+          "label": "Finishing",
           "options": [
             "Lamination--Matt",
             "Lamination--Gloss",
@@ -559,198 +526,19 @@
         },
         {
           "id": "quantity",
-          "label": "Quantity",
           "type": "number",
+          "label": "Quantity",
           "placeholder": "Enter quantity"
         },
         {
           "id": "turnaround",
-          "label": "Turnaround",
           "type": "select",
+          "label": "Turnaround",
           "options": [
             "Standard",
             "Rush",
             "Flexible"
           ]
-        }
-      ]
-    },
-    "menu-printing": {
-      "label": "Menu Printing",
-      "fields": [
-        {
-          "id": "style",
-          "label": "Menu Fold / Style",
-          "type": "radio",
-          "options": [
-            "Unfold",
-            "Half Fold",
-            "Tri-Fold",
-            "N Fold",
-            "Double Parallet Fold",
-            "Gate Fold",
-            "French Fold",
-            "Accordion Fold",
-            "Map Fold"
-          ]
-        },
-        {
-          "id": "size",
-          "label": "Flat Size",
-          "type": "select",
-          "options": [
-            "22x17",
-            "11x17",
-            "14x8.5",
-            "11x8.5",
-            "16x9",
-            "12.65x9.25",
-            "17x9"
-          ]
-        },
-        {
-          "id": "pageCount",
-          "label": "Page Count",
-          "type": "select",
-          "options": [
-            "4",
-            "8",
-            "12",
-            "16",
-            "20",
-            "24"
-          ]
-        },
-        {
-          "id": "paper",
-          "label": "Paper",
-          "type": "select",
-          "options": [
-            "60 Text Gloss",
-            "70 Text Gloss",
-            "80 Text Gloss",
-            "100 Text Gloss",
-            "60 Text Silk",
-            "70 Text Silk",
-            "80 Text Silk",
-            "100 Text Silk",
-            "80 Cover Gloss",
-            "100 Cover GLOSS",
-            "80 Silk Gloss",
-            "100 Silk Gloss",
-            "50 Text Offset",
-            "60 Text Offset",
-            "70 Text Offset",
-            "80 Text Offset"
-          ]
-        },
-        {
-          "id": "color",
-          "label": "Color",
-          "type": "radio",
-          "options": [
-            "1/1",
-            "4/1",
-            "4/4",
-            "4/0"
-          ]
-        },
-        {
-          "id": "lamination",
-          "label": "Finishing",
-          "type": "select",
-          "options": [
-            "Lamination--Matt",
-            "Lamination--Gloss",
-            "Lamination--Soft touch",
-            "Foil Stamping",
-            "Embossing",
-            "Debossing",
-            "UV",
-            "Spot UV",
-            "AQ Coating --Matt",
-            "AQ Coating --Gloss",
-            "AQ Coating --Soft touch"
-          ]
-        },
-        {
-          "id": "quantity",
-          "label": "Quantity",
-          "type": "number",
-          "placeholder": "Enter quantity"
-        },
-        {
-          "id": "turnaround",
-          "label": "Turnaround",
-          "type": "select",
-          "options": [
-            "Standard",
-            "Rush",
-            "Flexible"
-          ]
-        }
-      ]
-    },
-    "large-format": {
-      "label": "Large Format",
-      "fields": [
-        {
-          "id": "product",
-          "label": "Product Type",
-          "type": "select",
-          "options": [
-            "Vinyl Banner",
-            "Fabric Display",
-            "Foam Board",
-            "Acrylic",
-            "Wall Graphic",
-            "Retractable Banner"
-          ]
-        },
-        {
-          "id": "size",
-          "label": "Size",
-          "type": "text",
-          "placeholder": "e.g. 4ft × 8ft or custom dimensions"
-        },
-        {
-          "id": "material",
-          "label": "Material",
-          "type": "select",
-          "options": [
-            "13 oz Vinyl (standard)",
-            "18 oz Vinyl (heavy duty)",
-            "Mesh Vinyl (wind-resistant)",
-            "Polyester Fabric",
-            "Coroplast (rigid)"
-          ]
-        },
-        {
-          "id": "quantity",
-          "label": "Quantity",
-          "type": "number",
-          "placeholder": "e.g. 5"
-        },
-        {
-          "id": "turnaround",
-          "label": "Turnaround",
-          "type": "select",
-          "options": [
-            "Standard (3–5 days)",
-            "Rush (24–48 hours)",
-            "Flexible"
-          ]
-        }
-      ]
-    },
-    "other": {
-      "label": "Other / Not Sure",
-      "fields": [
-        {
-          "id": "description",
-          "label": "Project Description",
-          "type": "textarea",
-          "placeholder": "Tell us about your project — what you need, approximate quantities, and any special requirements."
         }
       ]
     },
@@ -759,8 +547,8 @@
       "fields": [
         {
           "id": "calendarType",
-          "label": "Calendar Type",
           "type": "radio",
+          "label": "Calendar Type",
           "options": [
             "Desk Calendar",
             "Wall Calendar"
@@ -768,8 +556,8 @@
         },
         {
           "id": "binding",
-          "label": "Binding",
           "type": "radio",
+          "label": "Binding",
           "options": [
             "Wire-O-Bound",
             "Hard Cover"
@@ -777,8 +565,8 @@
         },
         {
           "id": "material",
-          "label": "Basic Material",
           "type": "select",
+          "label": "Basic Material",
           "options": [
             "Basic Material",
             "Fabric"
@@ -786,8 +574,8 @@
         },
         {
           "id": "coverColor",
-          "label": "Cover Color",
           "type": "radio",
+          "label": "Cover Color",
           "options": [
             "1/1",
             "4/1",
@@ -797,8 +585,8 @@
         },
         {
           "id": "finish",
-          "label": "Finishing",
           "type": "select",
+          "label": "Finishing",
           "options": [
             "Lamination--Matt",
             "Lamination--Gloss",
@@ -815,8 +603,8 @@
         },
         {
           "id": "pageCount",
-          "label": "Calendar Pages",
           "type": "select",
+          "label": "Calendar Pages",
           "options": [
             "8",
             "12",
@@ -842,14 +630,14 @@
         },
         {
           "id": "quantity",
-          "label": "Quantity",
           "type": "number",
+          "label": "Quantity",
           "placeholder": "Enter quantity"
         },
         {
           "id": "packing",
-          "label": "Packing",
           "type": "select",
+          "label": "Packing",
           "options": [
             "Poly Bag+ Box",
             "Wrapping film + Box"
@@ -857,11 +645,223 @@
         },
         {
           "id": "turnaround",
-          "label": "Turnaround",
           "type": "select",
+          "label": "Turnaround",
           "options": [
             "Standard",
             "Rush",
+            "Flexible"
+          ]
+        }
+      ]
+    },
+    "magazine-printing": {
+      "label": "Magazine Printing",
+      "fields": [
+        {
+          "id": "binding",
+          "type": "radio",
+          "label": "Binding Type",
+          "options": [
+            "Perfect Bindery",
+            "Saddle stitch"
+          ]
+        },
+        {
+          "id": "trimSize",
+          "type": "select",
+          "label": "Trim Size",
+          "options": [
+            "5x7",
+            "5.5x8.5",
+            "6x9",
+            "8.5x11",
+            "8.25x10.75",
+            "8.125x10.5",
+            "9x12",
+            "8.5x5.5",
+            "9x6",
+            "11x8.5",
+            "12x9"
+          ]
+        },
+        {
+          "id": "pageCount",
+          "type": "number",
+          "label": "Page Count",
+          "placeholder": "Match workbook page rules for selected binding"
+        },
+        {
+          "id": "coverPaper",
+          "type": "select",
+          "label": "Cover Paper",
+          "options": [
+            "80 Cover Gloss",
+            "100 Cover Gloss",
+            "120 Cover Gloss",
+            "80 Cover Silk",
+            "100 Cover Silk",
+            "120 Cover Silk",
+            "65 Cover offset",
+            "80 Cover offset",
+            "100 Cover offset",
+            "8PT",
+            "12PT",
+            "14PT",
+            "16PT",
+            "24PT"
+          ]
+        },
+        {
+          "id": "textPaper",
+          "type": "select",
+          "label": "Text Paper",
+          "options": [
+            "40 Text Gloss",
+            "45 Text Gloss",
+            "50 Text Gloss",
+            "60 Text Gloss",
+            "70 Text Gloss",
+            "80 Text Gloss",
+            "50 Text offset",
+            "70 Text offset",
+            "100 Text Gloss",
+            "40 Text Silk/stain",
+            "45 Text Silk/stain",
+            "50 Text Silk/stain",
+            "60 Text Silk/stain",
+            "70 Text Silk/stain",
+            "80 Text Silk/stain",
+            "100 Text Silk/stain",
+            "Uncoated",
+            "35 Text Hight Bright",
+            "40 Text",
+            "45 Text",
+            "50 Text",
+            "60 Text",
+            "70 Text",
+            "80 Text"
+          ]
+        },
+        {
+          "id": "color",
+          "type": "radio",
+          "label": "Color",
+          "options": [
+            "1/1",
+            "4/1",
+            "4/4",
+            "4/0"
+          ]
+        },
+        {
+          "id": "coverFinish",
+          "type": "select",
+          "label": "Cover Finish",
+          "options": [
+            "Lamination--Matt",
+            "Lamination--Gloss",
+            "Lamination--Soft touch",
+            "Foil Stamping",
+            "Embossing",
+            "Debossing",
+            "UV",
+            "Spot UV",
+            "AQ Coating --Matt",
+            "AQ Coating --Gloss",
+            "AQ Coating --Soft touch"
+          ]
+        },
+        {
+          "id": "quantity",
+          "type": "number",
+          "label": "Quantity",
+          "placeholder": "Enter quantity"
+        },
+        {
+          "id": "packing",
+          "type": "select",
+          "label": "Packing",
+          "options": [
+            "Poly Bag+ Box",
+            "Wrapping film + Box"
+          ]
+        },
+        {
+          "id": "turnaround",
+          "type": "select",
+          "label": "Turnaround",
+          "options": [
+            "Standard",
+            "Rush",
+            "Flexible"
+          ]
+        }
+      ]
+    },
+    "newspaper-printing": {
+      "label": "Newspapers",
+      "fields": [
+        {
+          "id": "format",
+          "type": "radio",
+          "label": "Format",
+          "options": [
+            "Broadsheet",
+            "Tabloid",
+            "Berliner"
+          ]
+        },
+        {
+          "id": "pageCount",
+          "type": "number",
+          "label": "Number of Pages",
+          "placeholder": "e.g. 16"
+        },
+        {
+          "id": "paperStock",
+          "type": "select",
+          "label": "Paper Stock",
+          "options": [
+            "Newsprint 30#",
+            "Improved Newsprint 35#",
+            "Premium Newsprint 40#"
+          ]
+        },
+        {
+          "id": "color",
+          "type": "radio",
+          "label": "Color",
+          "options": [
+            "Black & White",
+            "Full Color",
+            "Color Cover + B&W Interior"
+          ]
+        },
+        {
+          "id": "quantity",
+          "type": "number",
+          "label": "Quantity",
+          "placeholder": "e.g. 5000"
+        },
+        {
+          "id": "frequency",
+          "type": "radio",
+          "label": "Frequency",
+          "options": [
+            "One-time",
+            "Weekly",
+            "Monthly",
+            "Other"
+          ]
+        },
+        {
+          "id": "turnaround",
+          "type": "select",
+          "label": "Desired Turnaround",
+          "options": [
+            "Standard (3–5 days)",
+            "Rush (48 hours)",
             "Flexible"
           ]
         }

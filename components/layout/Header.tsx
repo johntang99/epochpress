@@ -90,6 +90,7 @@ export function Header({
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [logoImageFailed, setLogoImageFailed] = useState(false);
   const pathname = usePathname();
@@ -163,11 +164,30 @@ export function Header({
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
+  useEffect(() => {
+    if (!mobileOpen) {
+      document.body.style.overflow = '';
+      setMobileProductsOpen(false);
+      return;
+    }
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    setMobileOpen(false);
+    setMobileProductsOpen(false);
+  }, [pathname]);
+
   return (
     <header
       className={clsx(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled
+        mobileOpen
+          ? 'bg-white shadow-md border-b border-[var(--border)]'
+          : scrolled
           ? 'bg-white shadow-md border-b border-[var(--border)]'
           : isTransparentHeader
             ? 'bg-transparent'
@@ -398,7 +418,7 @@ export function Header({
       {/* Mobile Menu Overlay */}
       {mobileOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black/40 z-30"
+          className="lg:hidden fixed inset-0 bg-black/50 z-[60]"
           onClick={() => setMobileOpen(false)}
           aria-hidden="true"
         />
@@ -407,7 +427,7 @@ export function Header({
       {/* Mobile Menu Drawer */}
       <nav
         className={clsx(
-          'lg:hidden fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-white z-40 overflow-y-auto shadow-2xl transition-transform duration-300',
+          'lg:hidden fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-white z-[70] overflow-y-auto shadow-2xl transition-transform duration-300',
           mobileOpen ? 'translate-x-0' : 'translate-x-full'
         )}
         aria-label="Mobile navigation"
@@ -423,10 +443,31 @@ export function Header({
           </button>
         </div>
 
-        <div className="p-4 space-y-1">
+        <div className="p-3 space-y-1">
+          <div className="mb-2 grid grid-cols-4 gap-1.5">
+            {landingLanguages.map((lang) => {
+              const langHref = lang.id === 'en' ? '/' : `/lp/${lang.id}`;
+              const isActiveLang = lang.id === 'en' ? !isLandingPage : landingLang === lang.id;
+              return (
+                <Link
+                  key={lang.id}
+                  href={langHref}
+                  className={clsx(
+                    'rounded-lg px-2 py-1.5 text-center text-[11px] font-bold tracking-wide transition-all',
+                    isActiveLang
+                      ? 'bg-gold-gradient text-white shadow-gold'
+                      : 'bg-[var(--surface)] text-[var(--navy)] border border-[var(--border)]'
+                  )}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {lang.label}
+                </Link>
+              );
+            })}
+          </div>
           <a
             href={phoneHref}
-            className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-[var(--charcoal)] bg-[var(--surface)] rounded-xl mb-3"
+            className="mb-2.5 flex items-center gap-2 rounded-xl bg-[var(--surface)] px-3 py-2.5 text-sm font-medium text-[var(--charcoal)]"
           >
             <Phone className="w-4 h-4 text-[var(--gold)]" />
             {phoneText}
@@ -434,40 +475,71 @@ export function Header({
 
           {navLinks.map((link) => (
             <div key={link.name}>
-              <Link
-                href={link.href}
-                className={clsx(
-                  'flex items-center px-4 py-3 text-base rounded-xl transition-colors',
-                  isLinkActive(link.href)
-                    ? 'font-bold text-[var(--navy)] bg-[var(--surface)]'
-                    : 'font-semibold text-[var(--navy)] hover:bg-[var(--surface)]'
-                )}
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.name}
-              </Link>
-              {link.hasDropdown && (
-                <div className="ml-3 mb-2 space-y-0.5">
-                  {products.map((product) => (
-                    <Link
-                      key={product.slug}
-                      href={`/products/${product.slug}`}
-                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-[var(--charcoal)] hover:text-[var(--navy)] hover:bg-[var(--surface)] rounded-xl transition-colors"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <span className="text-base">→</span>
-                      {product.name}
-                    </Link>
-                  ))}
-                </div>
+              {link.hasDropdown ? (
+                <>
+                  <button
+                    type="button"
+                    className={clsx(
+                      'flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left text-[15px] transition-colors',
+                      isProductsActive
+                        ? 'bg-[var(--surface)] font-bold text-[var(--navy)]'
+                        : 'font-semibold text-[var(--navy)] hover:bg-[var(--surface)]'
+                    )}
+                    onClick={() => setMobileProductsOpen((prev) => !prev)}
+                    aria-expanded={mobileProductsOpen}
+                  >
+                    <span>{link.name}</span>
+                    <ChevronDown
+                      className={clsx(
+                        'h-4 w-4 text-[var(--text-secondary)] transition-transform',
+                        mobileProductsOpen && 'rotate-180'
+                      )}
+                    />
+                  </button>
+                  {mobileProductsOpen && (
+                    <div className="mb-1 ml-1.5 mt-1 space-y-0.5">
+                      <Link
+                        href="/products"
+                        className="flex items-center rounded-lg px-3 py-1.5 text-sm font-semibold text-[var(--navy)] hover:bg-[var(--surface)]"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        View All Products
+                      </Link>
+                      {products.map((product) => (
+                        <Link
+                          key={product.slug}
+                          href={`/products/${product.slug}`}
+                          className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-[var(--charcoal)] transition-colors hover:bg-[var(--surface)] hover:text-[var(--navy)]"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          <span className="text-sm">→</span>
+                          {product.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <Link
+                  href={link.href}
+                  className={clsx(
+                    'flex items-center rounded-xl px-3 py-2.5 text-[15px] transition-colors',
+                    isLinkActive(link.href)
+                      ? 'bg-[var(--surface)] font-bold text-[var(--navy)]'
+                      : 'font-semibold text-[var(--navy)] hover:bg-[var(--surface)]'
+                  )}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {link.name}
+                </Link>
               )}
             </div>
           ))}
 
-          <div className="pt-4 border-t border-[var(--border)] mt-2">
+          <div className="mt-2 border-t border-[var(--border)] pt-3">
             <Link
               href={ctaHref}
-              className="flex items-center justify-center bg-gold-gradient text-white font-semibold px-6 py-3.5 rounded-xl hover:opacity-90 transition-opacity"
+              className="flex items-center justify-center rounded-xl bg-gold-gradient px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
               onClick={() => setMobileOpen(false)}
             >
               {ctaText} →
