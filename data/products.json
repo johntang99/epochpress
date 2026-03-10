@@ -15,29 +15,36 @@
       "name": "Magazine Printing",
       "slug": "magazine-printing",
       "icon": "📖",
-      "desc": "High-end magazine production with saddle stitch, perfect binding, UV-coated and matte covers. From quarterly journals to high-gloss consumer titles.",
-      "highlights": ["Saddle stitch & perfect bind", "UV, matte or silk covers", "From 250 copies"]
+      "desc": "Magazine and catalogue printing with saddle stitch or perfect binding, workbook-backed trim sizes, cover stocks, and finishing options for periodicals and premium publications.",
+      "highlights": ["Magazines + catalogues", "Saddle stitch & perfect bind", "Workbook-backed trim sizes"]
     },
     {
       "name": "Book Printing",
       "slug": "book-printing",
       "icon": "📚",
-      "desc": "Offset and digital book printing with hardcover and softcover options. Print-on-demand available. ISBN and barcode services. Short and long runs.",
-      "highlights": ["Hardcover & softcover", "Print-on-demand available", "ISBN/barcode services"]
+      "desc": "Paper books and hardcover books with workbook-backed trim sizes, page ranges, cover materials, and finishing options for publishers, institutions, and branded editions.",
+      "highlights": ["Paper books + hardcover books", "Notebooks + albums", "Workbook-backed stock options"]
+    },
+    {
+      "name": "Calendar Printing",
+      "slug": "calendar-printing",
+      "icon": "🗓️",
+      "desc": "Desk calendars and wall calendars with workbook-backed cover, finishing, and interior page options for branded giveaways, offices, and retail seasonal programs.",
+      "highlights": ["Desk + wall calendar formats", "Wire-O binding and finishing options", "Seasonal branded print programs"]
     },
     {
       "name": "Marketing Print",
       "slug": "marketing-print",
       "icon": "📄",
-      "desc": "Flyers, brochures, postcards, posters, and banners for campaigns that demand attention. All sizes, all fold types, all paper stocks.",
-      "highlights": ["All standard sizes + custom", "Bi-fold, tri-fold, z-fold", "Fast turnaround options"]
+      "desc": "Flyers, brochures, posters, and postcards grouped into one campaign-print family, with workbook-backed sizes, fold styles, paper stocks, and finishing options.",
+      "highlights": ["Flyers, brochures, posters, postcards", "Shared fold and finish options", "Fast campaign turnarounds"]
     },
     {
       "name": "Menu Printing",
       "slug": "menu-printing",
       "icon": "🍽️",
-      "desc": "Restaurant-quality menu printing with durable lamination options. Designed for high daily use. Dine-in menus, takeout menus, trifolds, and oversized.",
-      "highlights": ["Gloss, matte, soft-touch lam", "Durable for daily use", "Rush 48-hour options"]
+      "desc": "Workbook-backed menu printing for folded and unfolded restaurant menus, with defined page counts, paper stocks, color modes, and finishing options.",
+      "highlights": ["Folded + unfolded menu formats", "Defined page-count options", "Workbook-backed finishing rules"]
     },
     {
       "name": "Business Cards",

@@ -5,17 +5,14 @@ import { useSearchParams } from 'next/navigation';
 import { ArrowRight, ArrowLeft, CheckCircle, Upload, X, Phone } from 'lucide-react';
 import Link from 'next/link';
 import quoteConfig from '@/data/quote-config.json';
+import { PUBLIC_PRODUCT_CATALOG, PUBLIC_PRODUCT_CATALOG_BY_ID } from '@/lib/productTaxonomy';
 
-const products = [
-  { id: 'newspaper-printing', label: 'Newspapers', icon: '📰', desc: 'Broadsheet, tabloid, inserts' },
-  { id: 'magazine-printing', label: 'Magazines', icon: '📖', desc: 'Perfect bind, saddle stitch' },
-  { id: 'book-printing', label: 'Books', icon: '📚', desc: 'Offset, digital, print-on-demand' },
-  { id: 'marketing-print', label: 'Marketing Print', icon: '📄', desc: 'Flyers, brochures, postcards' },
-  { id: 'menu-printing', label: 'Menus', icon: '🍽️', desc: 'Dine-in, takeout, laminated' },
-  { id: 'business-cards', label: 'Business Cards', icon: '💳', desc: 'Standard to luxury finishes' },
-  { id: 'large-format', label: 'Large Format', icon: '🖼️', desc: 'Banners, signage, displays' },
-  { id: 'other', label: 'Other / Not Sure', icon: '❓', desc: 'Tell us about your project' },
-];
+const products = PUBLIC_PRODUCT_CATALOG.map((item) => ({
+  id: item.id,
+  label: item.label,
+  icon: item.icon,
+  desc: item.desc,
+}));
 
 const steps = ['Select Product', 'Specifications', 'Upload Files', 'Contact & Submit'];
 
@@ -43,6 +40,7 @@ export default function QuotePage() {
   const [dragging, setDragging] = useState(false);
 
   const productConfig = quoteConfig.products[selectedProduct as keyof typeof quoteConfig.products] as ProductConfig | undefined;
+  const selectedProductMeta = selectedProduct ? PUBLIC_PRODUCT_CATALOG_BY_ID[selectedProduct] : undefined;
 
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -154,6 +152,24 @@ export default function QuotePage() {
                 {productConfig.label} Specifications
               </h2>
               <p className="text-sm text-[var(--text-secondary)] mb-7">Provide as much detail as you can. Our team will follow up if needed.</p>
+              {selectedProductMeta?.publicStrategy === 'grouped' && selectedProductMeta.includedSubtypes.length > 0 && (
+                <div className="mb-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
+                  <p className="text-sm font-semibold text-[var(--navy)] mb-2">Included product types</p>
+                  <p className="text-sm text-[var(--text-secondary)] mb-3">
+                    {selectedProductMeta.quoteSubtypePrompt || 'Choose the closest subtype first, then continue with detailed specifications.'}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProductMeta.includedSubtypes.map((subtype) => (
+                      <span
+                        key={subtype}
+                        className="rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs font-medium text-[var(--navy)]"
+                      >
+                        {subtype}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div className="space-y-6">
                 {productConfig.fields.map((field) => (
                   <div key={field.id}>

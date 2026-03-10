@@ -26,6 +26,7 @@ interface ProviderItem {
 }
 
 type PickerTab = 'library' | 'upload' | 'unsplash' | 'pexels';
+const PROVIDER_PER_PAGE = 24;
 
 export function ImagePickerModal({ open, siteId, onClose, onSelect }: ImagePickerModalProps) {
   const [items, setItems] = useState<MediaItem[]>([]);
@@ -39,6 +40,9 @@ export function ImagePickerModal({ open, siteId, onClose, onSelect }: ImagePicke
   const [uploading, setUploading] = useState(false);
   const [searchingProvider, setSearchingProvider] = useState(false);
   const [importingId, setImportingId] = useState<string | null>(null);
+  const [providerPage, setProviderPage] = useState(1);
+  const [providerTotalPages, setProviderTotalPages] = useState(1);
+  const [providerTotalResults, setProviderTotalResults] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
   const loadLibrary = async () => {
@@ -80,7 +84,7 @@ export function ImagePickerModal({ open, siteId, onClose, onSelect }: ImagePicke
     });
   }, [items, query, folder]);
 
-  const searchProvider = async (provider: 'unsplash' | 'pexels') => {
+  const searchProvider = async (provider: 'unsplash' | 'pexels', page = 1) => {
     if (!providerQuery.trim()) return;
     setSearchingProvider(true);
     setError(null);
@@ -88,11 +92,14 @@ export function ImagePickerModal({ open, siteId, onClose, onSelect }: ImagePicke
       const response = await fetch(
         `/api/admin/media/provider/search?provider=${provider}&query=${encodeURIComponent(
           providerQuery
-        )}&perPage=24`
+        )}&perPage=${PROVIDER_PER_PAGE}&page=${page}`
       );
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.message || 'Provider search failed');
       setProviderResults(payload.items || []);
+      setProviderPage(Number(payload.page || page || 1));
+      setProviderTotalPages(Math.max(1, Number(payload.totalPages || 1)));
+      setProviderTotalResults(Number(payload.totalResults || 0));
     } catch (err: any) {
       setError(err?.message || 'Provider search failed');
     } finally {
@@ -176,6 +183,9 @@ export function ImagePickerModal({ open, siteId, onClose, onSelect }: ImagePicke
                 onClick={() => {
                   setTab(entry);
                   setProviderResults([]);
+                  setProviderPage(1);
+                  setProviderTotalPages(1);
+                  setProviderTotalResults(0);
                   setError(null);
                 }}
                 className={`px-3 py-1.5 rounded-full text-xs font-semibold border ${
@@ -303,7 +313,7 @@ export function ImagePickerModal({ open, siteId, onClose, onSelect }: ImagePicke
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
                     event.preventDefault();
-                    void searchProvider(tab);
+                    void searchProvider(tab, 1);
                   }
                 }}
               />
@@ -315,7 +325,7 @@ export function ImagePickerModal({ open, siteId, onClose, onSelect }: ImagePicke
               />
               <button
                 type="button"
-                onClick={() => void searchProvider(tab)}
+                onClick={() => void searchProvider(tab, 1)}
                 className="px-3 py-2 rounded-md border border-gray-200 text-xs hover:bg-gray-50"
                 disabled={searchingProvider}
               >
@@ -353,6 +363,32 @@ export function ImagePickerModal({ open, siteId, onClose, onSelect }: ImagePicke
                   <div className="text-sm text-gray-500">Search to find images.</div>
                 )}
               </div>
+              {!searchingProvider && providerResults.length > 0 && (
+                <div className="mt-4 flex items-center justify-between text-xs text-gray-500">
+                  <div>
+                    Page {providerPage} of {providerTotalPages}
+                    {providerTotalResults > 0 ? ` · ${providerTotalResults} results` : ''}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => void searchProvider(tab, providerPage - 1)}
+                      disabled={providerPage <= 1 || searchingProvider}
+                      className="px-3 py-1.5 rounded-md border border-gray-200 disabled:opacity-50"
+                    >
+                      Previous
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => void searchProvider(tab, providerPage + 1)}
+                      disabled={providerPage >= providerTotalPages || searchingProvider}
+                      className="px-3 py-1.5 rounded-md border border-gray-200 disabled:opacity-50"
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </>
         )}

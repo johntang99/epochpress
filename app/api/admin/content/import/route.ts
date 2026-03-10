@@ -9,6 +9,7 @@ import { writeAuditLog } from '@/lib/admin/audit';
 import { normalizeContentMediaUrls } from '@/lib/admin/mediaUrlNormalizer';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
+const LANDING_PATHS = ['landing/es.json', 'landing/zh.json', 'landing/he.json'] as const;
 
 async function readJson(filePath: string) {
   const raw = await fs.readFile(filePath, 'utf-8');
@@ -112,6 +113,16 @@ async function collectImportCandidates(siteId: string, locale: string): Promise<
     }
   } catch {
     // ignore missing theme
+  }
+
+  // Landing pages (site scope) - stored in data/landing/*.json
+  for (const landingPath of LANDING_PATHS) {
+    const filePath = path.join(process.cwd(), 'data', landingPath.replace(/^landing\//, ''));
+    try {
+      await addCandidate(locale, landingPath, filePath);
+    } catch {
+      // ignore missing landing file
+    }
   }
 
   return candidates;

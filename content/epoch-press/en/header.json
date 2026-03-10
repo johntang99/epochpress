@@ -5,8 +5,12 @@
   },
   "menu": {
     "logo": {
-      "text": "EPOCH PRESS",
-      "subtext": "Commercial Printing"
+      "text": "",
+      "image": {
+        "alt": "Epoch Press, commercial printing",
+        "src": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1773112879869-header-logo-new.png"
+      },
+      "subtext": ""
     },
     "items": [
       {
@@ -39,7 +43,7 @@
       }
     ],
     "variant": "default",
-    "fontWeight": "semibold"
+    "fontWeight": "regular"
   },
   "topbar": {
     "badge": "Rush Options Available",
@@ -59,5 +63,6 @@
   },
   "languages": [
     "en"
-  ]
+  ],
+  "relatedProducts": []
 }

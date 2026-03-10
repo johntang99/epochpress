@@ -40,6 +40,11 @@ export interface SeoConfig {
 }
 
 export interface ThemeConfig {
+  heroOverlay?: {
+    from?: string;
+    to?: string;
+    opacity?: number;
+  };
   typography: {
     display: string;
     heading: string;

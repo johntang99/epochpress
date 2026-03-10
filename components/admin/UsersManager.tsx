@@ -277,10 +277,12 @@ export function UsersManager({ sites }: UsersManagerProps) {
               const draft = drafts[user.id];
               return (
                 <div key={user.id} className="border border-gray-100 rounded-lg p-3">
-                  <div className="grid gap-3 md:grid-cols-4">
+                  {/* User info row */}
+                  <div className="grid gap-3 md:grid-cols-3">
                     <input
                       className="rounded-md border border-gray-200 px-3 py-2 text-sm"
                       value={draft?.name || ''}
+                      placeholder="Name"
                       onChange={(event) =>
                         updateDraft(user.id, { name: event.target.value })
                       }
@@ -288,6 +290,7 @@ export function UsersManager({ sites }: UsersManagerProps) {
                     <input
                       className="rounded-md border border-gray-200 px-3 py-2 text-sm"
                       value={draft?.email || ''}
+                      placeholder="Email"
                       onChange={(event) =>
                         updateDraft(user.id, { email: event.target.value })
                       }
@@ -306,16 +309,9 @@ export function UsersManager({ sites }: UsersManagerProps) {
                       <option value="editor">Editor</option>
                       <option value="viewer">Viewer</option>
                     </select>
-                    <input
-                      className="rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="New password"
-                      type="password"
-                      value={draft?.newPassword || ''}
-                      onChange={(event) =>
-                        updateDraft(user.id, { newPassword: event.target.value })
-                      }
-                    />
                   </div>
+
+                  {/* Sites */}
                   <div className="mt-3 flex flex-wrap gap-2">
                     {siteOptions.map((siteId) => (
                       <label
@@ -336,12 +332,11 @@ export function UsersManager({ sites }: UsersManagerProps) {
                       </label>
                     ))}
                   </div>
+
+                  {/* Save / Delete */}
                   <div className="mt-3 flex flex-wrap gap-2">
                     <Button variant="outline" onClick={() => handleSave(user.id)}>
                       Save
-                    </Button>
-                    <Button variant="outline" onClick={() => handleSetPassword(user.id)}>
-                      Set Password
                     </Button>
                     <Button
                       variant="outline"
@@ -350,6 +345,25 @@ export function UsersManager({ sites }: UsersManagerProps) {
                     >
                       Delete
                     </Button>
+                  </div>
+
+                  {/* Set Password — separate, clearly labeled section */}
+                  <div className="mt-4 pt-4 border-t border-gray-100">
+                    <p className="text-xs font-medium text-gray-500 mb-2">Set new password</p>
+                    <div className="flex gap-2 items-center">
+                      <input
+                        className="rounded-md border border-gray-200 px-3 py-2 text-sm w-64"
+                        placeholder="Type new password here, then click Set Password"
+                        type="password"
+                        value={draft?.newPassword || ''}
+                        onChange={(event) =>
+                          updateDraft(user.id, { newPassword: event.target.value })
+                        }
+                      />
+                      <Button variant="outline" onClick={() => handleSetPassword(user.id)}>
+                        Set Password
+                      </Button>
+                    </div>
                   </div>
                 </div>
               );

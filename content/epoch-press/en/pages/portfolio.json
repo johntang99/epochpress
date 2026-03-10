@@ -1,4 +1,11 @@
 {
+  "hero": {
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/mika-baumeister-PtabTe6iJ_8-unsplash.jpg",
+    "title": "Portfolio of Our Work",
+    "subtitle": "A selection of production partnerships delivered with consistency, precision, and speed.",
+    "backgroundImage": "",
+    "variant": "split-photo-right"
+  },
   "items": [
     {
       "id": 1,
@@ -110,5 +117,6 @@
     "Menus",
     "Business Cards",
     "Large Format"
-  ]
+  ],
+  "relatedProducts": []
 }

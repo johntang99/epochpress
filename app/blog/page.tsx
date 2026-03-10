@@ -52,8 +52,12 @@ function resolveRenderableImage(post: Record<string, unknown>): string | null {
   return fs.existsSync(localPath) ? resolved : blogPreviewImages[String(post.slug || '')] || null;
 }
 
-function toCategoryLabel(value: string): string {
+function toCategoryLabel(value: unknown): string {
+  if (typeof value !== 'string' || !value.trim()) {
+    return 'Uncategorized';
+  }
   return value
+    .trim()
     .split('-')
     .map((chunk) => chunk.charAt(0).toUpperCase() + chunk.slice(1))
     .join(' ');
@@ -88,7 +92,18 @@ export default async function BlogPage({
   const posts = dbPosts.length > 0 ? dbPosts : (blogData.posts as BlogPost[]);
   const categories =
     dbPosts.length > 0
-      ? [{ id: 'all', name: pageContent.labels.allPosts }, ...Array.from(new Set(posts.map((post) => post.category))).map((id) => ({ id, name: toCategoryLabel(id) }))]
+      ? [
+          { id: 'all', name: pageContent.labels.allPosts },
+          ...Array.from(
+            new Set(
+              posts
+                .map((post) =>
+                  typeof post.category === 'string' ? post.category.trim() : ''
+                )
+                .filter((category) => Boolean(category))
+            )
+          ).map((id) => ({ id, name: toCategoryLabel(id) })),
+        ]
       : blogData.categories;
 
   const active = searchParams?.category || 'all';
@@ -170,7 +185,7 @@ export default async function BlogPage({
                 )}
               </div>
               <div className="p-8 flex flex-col justify-center">
-                <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full mb-4 ${categoryColors[featured.category] || 'bg-gray-100 text-gray-700'}`}>
+                <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full mb-4 ${categoryColors[typeof featured.category === 'string' ? featured.category : ''] || 'bg-gray-100 text-gray-700'}`}>
                   {categories.find((c) => c.id === featured.category)?.name || toCategoryLabel(featured.category)}
                 </span>
                 <h2 className="font-serif text-[var(--navy)] text-2xl mb-3 group-hover:text-[var(--gold)] transition-colors leading-snug">
@@ -230,7 +245,7 @@ export default async function BlogPage({
                 </div>
                 <div className="p-6 flex flex-col flex-1">
                   <div className="flex items-center gap-2 mb-3">
-                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${categoryColors[post.category] || 'bg-gray-100 text-gray-700'}`}>
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${categoryColors[typeof post.category === 'string' ? post.category : ''] || 'bg-gray-100 text-gray-700'}`}>
                       {categories.find((c) => c.id === post.category)?.name || toCategoryLabel(post.category)}
                     </span>
                     {post.type === 'video' && (

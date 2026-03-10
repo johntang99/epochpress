@@ -24,6 +24,7 @@ export async function GET(request: NextRequest) {
   const query = (searchParams.get('query') || '').trim();
   const page = Number(searchParams.get('page') || '1');
   const perPage = Math.min(Math.max(Number(searchParams.get('perPage') || '20'), 1), 30);
+  const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
 
   if (!provider) {
     return NextResponse.json({ message: 'provider is required' }, { status: 400 });
@@ -42,7 +43,7 @@ export async function GET(request: NextRequest) {
     }
 
     const response = await fetch(
-      `https://api.unsplash.com/search/photos?page=${page}&per_page=${perPage}&query=${encodeURIComponent(query)}`,
+      `https://api.unsplash.com/search/photos?page=${safePage}&per_page=${perPage}&query=${encodeURIComponent(query)}`,
       {
         headers: {
           Authorization: `Client-ID ${accessKey}`,
@@ -63,7 +64,17 @@ export async function GET(request: NextRequest) {
       creditLink: String(item?.user?.links?.html || ''),
       alt: String(item?.alt_description || item?.description || ''),
     }));
-    return NextResponse.json({ items });
+    const totalResults = Number(payload?.total || 0);
+    const totalPages = Math.max(1, Number(payload?.total_pages || 1));
+    return NextResponse.json({
+      items,
+      page: safePage,
+      perPage,
+      totalResults,
+      totalPages,
+      hasPrevPage: safePage > 1,
+      hasNextPage: safePage < totalPages,
+    });
   }
 
   const apiKey = process.env.PEXELS_API_KEY;
@@ -71,7 +82,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ message: 'PEXELS_API_KEY is not configured' }, { status: 500 });
   }
   const response = await fetch(
-    `https://api.pexels.com/v1/search?page=${page}&per_page=${perPage}&query=${encodeURIComponent(query)}`,
+    `https://api.pexels.com/v1/search?page=${safePage}&per_page=${perPage}&query=${encodeURIComponent(query)}`,
     {
       headers: {
         Authorization: apiKey,
@@ -91,6 +102,16 @@ export async function GET(request: NextRequest) {
     creditLink: String(item?.photographer_url || ''),
     alt: String(item?.alt || ''),
   }));
-  return NextResponse.json({ items });
+  const totalResults = Number(payload?.total_results || 0);
+  const totalPages = Math.max(1, Math.ceil(totalResults / perPage) || 1);
+  return NextResponse.json({
+    items,
+    page: safePage,
+    perPage,
+    totalResults,
+    totalPages,
+    hasPrevPage: safePage > 1,
+    hasNextPage: safePage < totalPages,
+  });
 }
 

@@ -32,86 +32,56 @@
   "slug": "menu-printing",
   "specs": [
     {
-      "tab": "Types",
+      "tab": "Product Types",
       "items": [
         {
-          "label": "Dine-In",
-          "value": "Single, bi-fold, or booklet"
+          "label": "Folded Menus",
+          "value": "Bi-fold, tri-fold, and multi-panel menu formats for dine-in and takeaway",
+          "pdfHref": "/spec-sheets/product-types/menu-printing-folded-menus-spec-sheet.pdf"
         },
         {
-          "label": "Takeout/Delivery",
-          "value": "Flyer-weight, quantity discounts"
-        },
-        {
-          "label": "Trifold",
-          "value": "Compact, easy to handle"
-        },
-        {
-          "label": "Oversized",
-          "value": "Tabletop statement menus"
+          "label": "Unfolded Menus",
+          "value": "Single-sheet flat menu formats for inserts, placemats, and quick-service use",
+          "pdfHref": "/spec-sheets/product-types/menu-printing-unfolded-menus-spec-sheet.pdf"
         }
       ]
     },
     {
-      "tab": "Lamination",
+      "tab": "Sizes & Folds",
       "items": [
         {
-          "label": "Gloss Laminate",
-          "value": "Bright, easy to clean"
+          "label": "Flat Sizes",
+          "value": "22x17, 11x17, 14x8.5, 11x8.5, 16x9, 12.65x9.25, 17x9"
         },
         {
-          "label": "Matte Laminate",
-          "value": "Elegant, non-glare"
-        },
-        {
-          "label": "Soft Touch",
-          "value": "Premium velvet feel"
-        },
-        {
-          "label": "No Lamination",
-          "value": "Eco option, replace more often"
+          "label": "Fold Styles",
+          "value": "Unfold, Half Fold, Tri-Fold, N Fold, Double Parallet Fold, Gate Fold, French Fold, Accordion Fold, Map Fold"
         }
       ]
     },
     {
-      "tab": "Paper",
+      "tab": "Paper & Page Counts",
       "items": [
         {
-          "label": "100 lb Gloss",
-          "value": "Standard menu weight"
+          "label": "Paper",
+          "value": "60 Text Gloss, 70 Text Gloss, 80 Text Gloss, 100 Text Gloss, 60 Text Silk, 70 Text Silk, 80 Text Silk, 100 Text Silk, 80 Cover Gloss, 100 Cover GLOSS, 80 Silk Gloss, 100 Silk Gloss, 50 Text Offset, 60 Text Offset, 70 Text Offset, 80 Text Offset"
         },
         {
-          "label": "14pt Card Stock",
-          "value": "Sturdy, upscale"
+          "label": "Page Counts",
+          "value": "4, 8, 12, 16, 20, 24"
         },
         {
-          "label": "Synthetic/Waterproof",
-          "value": "Ultra-durable for high-use"
-        },
-        {
-          "label": "Recycled",
-          "value": "FSC-certified available"
+          "label": "Color Modes",
+          "value": "1/1, 4/1, 4/4, 4/0"
         }
       ]
     },
     {
-      "tab": "Quantities",
+      "tab": "Finishing",
       "items": [
         {
-          "label": "Small Restaurant",
-          "value": "25–99 copies"
-        },
-        {
-          "label": "Standard",
-          "value": "100–499"
-        },
-        {
-          "label": "Multi-Location",
-          "value": "500–5,000+"
-        },
-        {
-          "label": "Rush",
-          "value": "48-hour available"
+          "label": "Finishing Options",
+          "value": "Lamination--Matt, Lamination--Gloss, Lamination--Soft touch, Foil Stamping, Embossing, Debossing, UV, Spot UV, AQ Coating --Matt, AQ Coating --Gloss, AQ Coating --Soft touch"
         }
       ]
     }
@@ -162,5 +132,22 @@
       "note": "Best unit price"
     }
   ],
-  "description": "Durable, beautiful menus for restaurants, cafes, bars, and caterers. Laminated for longevity, available in all sizes and fold styles."
+  "rulesNotes": [
+    "Menu printing rules come directly from the Menu workbook tab."
+  ],
+  "description": "Durable, beautiful menus for restaurants, cafes, bars, and caterers. Laminated for longevity, available in all sizes and fold styles.",
+  "detailSheet": {
+    "href": "/spec-sheets/menu-printing-spec-sheet.pdf",
+    "text": "View Full Spec Sheet (PDF)"
+  },
+  "pageHero": {
+    "title": "Menu Printing",
+    "subtitle": "Restaurant menus that reflect the quality of your food.",
+    "description": "Durable, beautiful menus for restaurants, cafes, bars, and caterers. Laminated for longevity, available in all sizes and fold styles.",
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959727626-unsplash-zcysac8mxtk.jpg",
+    "backgroundImage": "",
+    "variants": [
+      "split-photo-right"
+    ]
+  }
 }

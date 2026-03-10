@@ -37,7 +37,7 @@ export default async function CaseStudiesPage({
   return (
     <>
       <section
-        className={`relative pt-28 pb-14 border-b border-[var(--border)] overflow-hidden ${
+        className={`relative pt-36 md:pt-40 pb-14 border-b border-[var(--border)] overflow-hidden ${
           hasHeroMedia ? 'bg-[var(--navy)]' : 'bg-[var(--surface)]'
         }`}
       >
@@ -78,7 +78,7 @@ export default async function CaseStudiesPage({
             )}
           </div>
 
-          <div className="max-w-4xl mx-auto bg-white/95 border border-[var(--border)] rounded-xl px-5 py-4">
+          <div className="mt-6 max-w-4xl mx-auto bg-white/95 border border-[var(--border)] rounded-xl px-5 py-4">
             <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
               {data.hero.disclaimer}
             </p>

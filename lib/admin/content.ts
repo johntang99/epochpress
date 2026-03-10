@@ -12,6 +12,12 @@ export interface ContentFileItem {
 }
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
+const LANDING_DIR = path.join(process.cwd(), 'data', 'landing');
+const LANDING_FILE_MAP: Record<string, { id: string; label: string }> = {
+  'landing/es.json': { id: 'landing-es', label: 'Landing Page: ES' },
+  'landing/zh.json': { id: 'landing-zh', label: 'Landing Page: ZH' },
+  'landing/he.json': { id: 'landing-he', label: 'Landing Page: HE' },
+};
 
 function titleCase(value: string) {
   return value
@@ -149,6 +155,15 @@ export async function listContentFiles(
         });
         return;
       }
+      if (entry.path in LANDING_FILE_MAP) {
+        addItem({
+          id: LANDING_FILE_MAP[entry.path].id,
+          label: LANDING_FILE_MAP[entry.path].label,
+          path: entry.path,
+          scope: 'site',
+        });
+        return;
+      }
 
       if (entry.path === 'navigation.json') {
         addItem({ id: 'navigation', label: 'Navigation', path: entry.path, scope: 'locale' });
@@ -257,6 +272,14 @@ export async function listContentFiles(
     path: 'theme.json',
     scope: 'site',
   });
+  for (const [landingPath, landingMeta] of Object.entries(LANDING_FILE_MAP)) {
+    addItem({
+      id: landingMeta.id,
+      label: landingMeta.label,
+      path: landingPath,
+      scope: 'site',
+    });
+  }
 
   return items;
 }
@@ -292,6 +315,11 @@ export function resolveContentPath(siteId: string, locale: string, filePath: str
 
   if (filePath.startsWith('blog/')) {
     return path.join(CONTENT_DIR, siteId, locale, filePath);
+  }
+
+  if (filePath in LANDING_FILE_MAP) {
+    const landingLang = filePath.split('/')[1]?.replace('.json', '');
+    return path.join(LANDING_DIR, `${landingLang}.json`);
   }
 
   return null;

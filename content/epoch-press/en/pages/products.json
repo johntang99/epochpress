@@ -1,7 +1,9 @@
 {
   "hero": {
     "subline": "Comprehensive commercial printing capabilities for every project size, deadline, and budget. All products printed with precision on premium equipment.",
-    "headline": "Our Printing Services"
+    "headline": "Our Printing Services",
+    "variant": "split-photo-right",
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1773111894240-unsplash-buz7tsy7kqs.jpg"
   },
   "categories": [
     {
@@ -16,47 +18,58 @@
       ]
     },
     {
-      "desc": "High-end magazine production with saddle stitch, perfect binding, UV-coated and matte covers. From quarterly journals to high-gloss consumer titles.",
+      "desc": "Magazine and catalogue printing with saddle stitch or perfect binding, workbook-backed trim sizes, cover stocks, and finishing options for periodicals and premium publications.",
       "icon": "📖",
       "name": "Magazine Printing",
       "slug": "magazine-printing",
       "highlights": [
+        "Magazines + catalogues",
         "Saddle stitch & perfect bind",
-        "UV, matte or silk covers",
-        "From 250 copies"
+        "Workbook-backed trim sizes"
       ]
     },
     {
-      "desc": "Offset and digital book printing with hardcover and softcover options. Print-on-demand available. ISBN and barcode services. Short and long runs.",
+      "desc": "Paper books and hardcover books with workbook-backed trim sizes, page ranges, cover materials, and finishing options for publishers, institutions, and branded editions.",
       "icon": "📚",
       "name": "Book Printing",
       "slug": "book-printing",
       "highlights": [
-        "Hardcover & softcover",
-        "Print-on-demand available",
-        "ISBN/barcode services"
+        "Paper books + hardcover books",
+        "Notebooks + albums",
+        "Workbook-backed stock options"
       ]
     },
     {
-      "desc": "Flyers, brochures, postcards, posters, and banners for campaigns that demand attention. All sizes, all fold types, all paper stocks.",
+      "desc": "Desk calendars and wall calendars with workbook-backed cover, finishing, and interior page options for branded giveaways, offices, and retail seasonal programs.",
+      "icon": "🗓️",
+      "name": "Calendar Printing",
+      "slug": "calendar-printing",
+      "highlights": [
+        "Desk + wall calendar formats",
+        "Wire-O binding and finishing options",
+        "Seasonal branded print programs"
+      ]
+    },
+    {
+      "desc": "Flyers, brochures, posters, and postcards grouped into one campaign-print family, with workbook-backed sizes, fold styles, paper stocks, and finishing options.",
       "icon": "📄",
       "name": "Marketing Print",
       "slug": "marketing-print",
       "highlights": [
-        "All standard sizes + custom",
-        "Bi-fold, tri-fold, z-fold",
-        "Fast turnaround options"
+        "Flyers, brochures, posters, postcards",
+        "Shared fold and finish options",
+        "Fast campaign turnarounds"
       ]
     },
     {
-      "desc": "Restaurant-quality menu printing with durable lamination options. Designed for high daily use. Dine-in menus, takeout menus, trifolds, and oversized.",
+      "desc": "Workbook-backed menu printing for folded and unfolded restaurant menus, with defined page counts, paper stocks, color modes, and finishing options.",
       "icon": "🍽️",
       "name": "Menu Printing",
       "slug": "menu-printing",
       "highlights": [
-        "Gloss, matte, soft-touch lam",
-        "Durable for daily use",
-        "Rush 48-hour options"
+        "Folded + unfolded menu formats",
+        "Defined page-count options",
+        "Workbook-backed finishing rules"
       ]
     },
     {
@@ -81,5 +94,6 @@
         "Mounting & installation ready"
       ]
     }
-  ]
+  ],
+  "relatedProducts": []
 }

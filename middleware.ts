@@ -9,6 +9,13 @@ import { NextRequest, NextResponse } from 'next/server';
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
+  // EN should use the main site, not the landing route.
+  if (pathname === '/lp/en' || pathname.startsWith('/lp/en/')) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/';
+    return NextResponse.redirect(url);
+  }
+
   // Admin routes: require auth cookie
   if (pathname.startsWith('/admin')) {
     if (pathname === '/admin/login') {

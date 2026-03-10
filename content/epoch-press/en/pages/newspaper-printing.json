@@ -36,6 +36,21 @@
   "slug": "newspaper-printing",
   "specs": [
     {
+      "tab": "Product Types",
+      "items": [
+        {
+          "label": "Newspapers",
+          "value": "Daily, weekly, and community newspaper editions in broadsheet and tabloid formats",
+          "pdfHref": "/spec-sheets/product-types/newspaper-printing-newspapers-spec-sheet.pdf"
+        },
+        {
+          "label": "Inserts",
+          "value": "Custom-size newspaper inserts for advertising, coupons, and special supplements",
+          "pdfHref": "/spec-sheets/product-types/newspaper-printing-inserts-spec-sheet.pdf"
+        }
+      ]
+    },
+    {
       "tab": "Formats",
       "items": [
         {
@@ -148,6 +163,16 @@
     }
   ],
   "tagline": "High-volume newspaper printing for publishers of all sizes.",
+  "pageHero": {
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772961508120-unsplash-tzm3oyu-6sk.jpg",
+    "title": "Newspaper Printing",
+    "subtitle": "High-volume newspaper printing for publishers of all sizes.",
+    "variants": [
+      "split-photo-right"
+    ],
+    "description": "From community weeklies to major regional dailies, we deliver fast, reliable newspaper printing. Web offset and digital capabilities, broadsheet and tabloid formats, black-and-white and full color.",
+    "backgroundImage": ""
+  },
   "priceTiers": [
     {
       "qty": "500–999",
@@ -166,5 +191,9 @@
       "note": "Custom pricing, dedicated press run"
     }
   ],
+  "detailSheet": {
+    "href": "/spec-sheets/newspaper-printing-spec-sheet.pdf",
+    "text": "View Full Spec Sheet (PDF)"
+  },
   "description": "From community weeklies to major regional dailies, we deliver fast, reliable newspaper printing. Web offset and digital capabilities, broadsheet and tabloid formats, black-and-white and full color."
 }

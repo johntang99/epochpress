@@ -50,6 +50,9 @@ export default async function RootLayout({
       --gold-50: ${theme.colors.secondary?.['50'] || '#FDF8EC'};
       --backdrop-primary: ${theme.colors.backdrop?.primary || '#F8F9FA'};
       --backdrop-secondary: ${theme.colors.backdrop?.secondary || '#FDF8EC'};
+      --hero-overlay-from: ${theme.heroOverlay?.from || '#080F1A'};
+      --hero-overlay-to: ${theme.heroOverlay?.to || '#0F1B2D'};
+      --hero-overlay-opacity: ${theme.heroOverlay?.opacity ?? 0.7};
     }
   `
     : '';

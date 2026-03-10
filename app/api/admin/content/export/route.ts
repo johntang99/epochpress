@@ -5,6 +5,7 @@ import { getSessionFromRequest } from '@/lib/admin/auth';
 import { listContentEntries, upsertContentEntry } from '@/lib/contentDb';
 import { canWriteContent, requireSiteAccess } from '@/lib/admin/permissions';
 import { writeAuditLog } from '@/lib/admin/audit';
+const LANDING_PATHS = ['landing/es.json', 'landing/zh.json', 'landing/he.json'] as const;
 
 async function collectJsonPathsRecursive(
   rootDir: string,
@@ -150,13 +151,23 @@ export async function POST(request: NextRequest) {
     await fs.writeFile(themePath, JSON.stringify(themeEntry.data, null, 2));
   }
 
+  // Export landing pages from selected locale DB rows to data/landing/*.json
+  const landingEntries = entries.filter((entry) => LANDING_PATHS.includes(entry.path as (typeof LANDING_PATHS)[number]));
+  await Promise.all(
+    landingEntries.map(async (entry) => {
+      const targetPath = path.join(process.cwd(), 'data', entry.path.replace(/^landing\//, ''));
+      await fs.mkdir(path.dirname(targetPath), { recursive: true });
+      await fs.writeFile(targetPath, JSON.stringify(entry.data, null, 2));
+    })
+  );
+
   await writeAuditLog({
     actor: session.user,
     action: 'content_export_completed',
     siteId,
     metadata: {
       locale,
-      exported: localeEntries.length + (themeEntry ? 1 : 0),
+      exported: localeEntries.length + (themeEntry ? 1 : 0) + landingEntries.length,
       backfilled,
       backfillErrors,
       durationMs: Date.now() - startedAt,
@@ -165,7 +176,7 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json({
     success: true,
-    exported: localeEntries.length + (themeEntry ? 1 : 0),
+    exported: localeEntries.length + (themeEntry ? 1 : 0) + landingEntries.length,
     backfilled,
     backfillErrors,
     backfilledPaths,

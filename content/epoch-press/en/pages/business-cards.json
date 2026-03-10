@@ -32,90 +32,52 @@
   "slug": "business-cards",
   "specs": [
     {
-      "tab": "Stock",
+      "tab": "Product Types",
       "items": [
         {
-          "label": "Standard 14pt",
-          "value": "Most popular, durable"
+          "label": "Standard Business Cards",
+          "value": "Clean everyday cards in popular stocks and single or double-sided layouts",
+          "pdfHref": "/spec-sheets/product-types/business-cards-standard-business-cards-spec-sheet.pdf"
         },
         {
-          "label": "Premium 16pt",
-          "value": "Noticeably thicker"
-        },
-        {
-          "label": "Ultra 32pt",
-          "value": "Luxury, impressive thickness"
-        },
-        {
-          "label": "Soft Touch 14pt",
-          "value": "Velvet coating, tactile"
+          "label": "Premium Finish Cards",
+          "value": "Foil, emboss, spot UV, and layered-card styles for elevated brand presentation",
+          "pdfHref": "/spec-sheets/product-types/business-cards-premium-finish-cards-spec-sheet.pdf"
         }
       ]
     },
     {
-      "tab": "Finish",
+      "tab": "Sides & Color",
       "items": [
         {
-          "label": "Gloss Coating",
-          "value": "Bright, professional"
+          "label": "Page / Sides",
+          "value": "1, 2"
         },
         {
-          "label": "Matte Coating",
-          "value": "Elegant, non-glare"
-        },
-        {
-          "label": "Silk/Satin",
-          "value": "Between gloss and matte"
-        },
-        {
-          "label": "Uncoated",
-          "value": "Writeable, natural feel"
+          "label": "Color Modes",
+          "value": "1/1, 4/1, 4/4, 4/0"
         }
       ]
     },
     {
-      "tab": "Special Effects",
+      "tab": "Finishing",
       "items": [
         {
-          "label": "Foil Stamping",
-          "value": "Gold, silver, or custom foil"
-        },
-        {
-          "label": "Embossing",
-          "value": "Raised design elements"
-        },
-        {
-          "label": "Spot UV",
-          "value": "Selective gloss over matte"
-        },
-        {
-          "label": "Raised Ink",
-          "value": "Thermographic raised print"
-        },
-        {
-          "label": "Die-Cut",
-          "value": "Custom shapes and rounded corners"
+          "label": "Finishing Options",
+          "value": "Lamination--Matt, Lamination--Gloss, Lamination--Soft touch, Foil Stamping, Embossing, Debossing, UV, Spot UV, AQ Coating --Matt, AQ Coating --Gloss, AQ Coating --Soft touch"
         }
       ]
     },
     {
-      "tab": "Quantities",
+      "tab": "Ordering Notes",
       "items": [
         {
-          "label": "Starter",
-          "value": "250 cards"
+          "label": "Stock",
+          "value": "Standard 14pt, Premium 16pt, Ultra 32pt"
         },
         {
-          "label": "Standard",
-          "value": "500 or 1,000 cards"
-        },
-        {
-          "label": "Team",
-          "value": "2,500 or 5,000 cards"
-        },
-        {
-          "label": "Enterprise",
-          "value": "10,000+ cards"
+          "label": "Quantities",
+          "value": "250, 500, 1000, 2500, 5000, Custom"
         }
       ]
     }
@@ -166,5 +128,23 @@
       "note": "Enterprise pricing"
     }
   ],
-  "description": "From clean standard cards to ultra-premium luxury finishes. Foil stamping, embossing, spot UV, raised ink, and die-cutting available for cards that get remembered."
+  "rulesNotes": [
+    "Business Card workbook tab provides reliable color, page, and finishing data.",
+    "Stock and quantity remain preserved from existing quote configuration because workbook cells are incomplete for those fields."
+  ],
+  "description": "From clean standard cards to ultra-premium luxury finishes. Foil stamping, embossing, spot UV, raised ink, and die-cutting available for cards that get remembered.",
+  "detailSheet": {
+    "href": "/spec-sheets/business-cards-spec-sheet.pdf",
+    "text": "View Full Spec Sheet (PDF)"
+  },
+  "pageHero": {
+    "title": "Business Cards",
+    "subtitle": "Make a lasting first impression with cards that stand out.",
+    "description": "From clean standard cards to ultra-premium luxury finishes. Foil stamping, embossing, spot UV, raised ink, and die-cutting available for cards that get remembered.",
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959608400-unsplash-vwaojp-m3ba.jpg",
+    "backgroundImage": "",
+    "variants": [
+      "split-photo-right"
+    ]
+  }
 }

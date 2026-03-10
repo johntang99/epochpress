@@ -1,0 +1,275 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Campaign Landing Page Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "meta",
+    "hero",
+    "trustBar",
+    "capabilities",
+    "productGallery",
+    "proof",
+    "process",
+    "caseStudies",
+    "galleryRail",
+    "faq",
+    "contact",
+    "finalCta"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["locale", "rtl", "title", "description"],
+      "properties": {
+        "locale": { "type": "string" },
+        "rtl": { "type": "boolean" },
+        "title": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "hero": {
+      "type": "object",
+      "required": ["badge", "headline", "subline", "primaryCta", "secondaryCta"],
+      "properties": {
+        "variant": {
+          "type": "string",
+          "enum": ["default", "split-photo-right", "split-photo-left", "centered"]
+        },
+        "badge": { "type": "string" },
+        "headline": { "type": "string" },
+        "subline": { "type": "string" },
+        "backgroundImage": { "type": "string" },
+        "image": { "type": "string" },
+        "primaryCta": {
+          "type": "object",
+          "required": ["text", "href"],
+          "properties": {
+            "text": { "type": "string" },
+            "href": { "type": "string" }
+          }
+        },
+        "secondaryCta": {
+          "type": "object",
+          "required": ["text", "href"],
+          "properties": {
+            "text": { "type": "string" },
+            "href": { "type": "string" }
+          }
+        }
+      }
+    },
+    "trustBar": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "capabilities": {
+      "type": "object",
+      "required": ["title", "items"],
+      "properties": {
+        "title": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["title", "desc"],
+            "properties": {
+              "title": { "type": "string" },
+              "desc": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "productGallery": {
+      "type": "object",
+      "required": ["title", "variant", "items"],
+      "properties": {
+        "title": { "type": "string" },
+        "variant": { "type": "string", "enum": ["grid-2x", "grid-3x", "detail-alternating"] },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "desc", "image", "href", "highlights"],
+            "properties": {
+              "name": { "type": "string" },
+              "desc": { "type": "string" },
+              "image": { "type": "string" },
+              "href": { "type": "string" },
+              "highlights": {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "caseStudies": {
+      "type": "object",
+      "required": ["title", "items"],
+      "properties": {
+        "title": { "type": "string" },
+        "items": {
+          "type": "array",
+          "minItems": 6,
+          "items": {
+            "type": "object",
+            "required": ["title", "category", "client", "challenge", "solution", "result", "quote", "author"],
+            "properties": {
+              "title": { "type": "string" },
+              "category": { "type": "string" },
+              "client": { "type": "string" },
+              "challenge": { "type": "string" },
+              "solution": { "type": "string" },
+              "result": { "type": "string" },
+              "quote": { "type": "string" },
+              "author": { "type": "string" },
+              "featured": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    "galleryRail": {
+      "type": "object",
+      "required": ["title", "items"],
+      "properties": {
+        "title": { "type": "string" },
+        "items": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "required": ["image", "alt"],
+            "properties": {
+              "image": { "type": "string" },
+              "alt": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "proof": {
+      "type": "object",
+      "required": ["title", "items"],
+      "properties": {
+        "title": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["metric", "label", "detail"],
+            "properties": {
+              "metric": { "type": "string" },
+              "label": { "type": "string" },
+              "detail": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "process": {
+      "type": "object",
+      "required": ["title", "steps"],
+      "properties": {
+        "title": { "type": "string" },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["title", "desc"],
+            "properties": {
+              "title": { "type": "string" },
+              "desc": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "faq": {
+      "type": "object",
+      "required": ["title", "items"],
+      "properties": {
+        "title": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["q", "a"],
+            "properties": {
+              "q": { "type": "string" },
+              "a": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "required": [
+        "formTitle",
+        "infoTitle",
+        "fullNameLabel",
+        "fullNamePlaceholder",
+        "companyLabel",
+        "companyPlaceholder",
+        "emailLabel",
+        "emailPlaceholder",
+        "phoneLabel",
+        "phonePlaceholder",
+        "productInterestLabel",
+        "productInterestPlaceholder",
+        "messageLabel",
+        "messagePlaceholder",
+        "sendButtonText",
+        "phoneValue",
+        "emailValue",
+        "addressLine1",
+        "addressLine2",
+        "hoursLines"
+      ],
+      "properties": {
+        "formTitle": { "type": "string" },
+        "infoTitle": { "type": "string" },
+        "fullNameLabel": { "type": "string" },
+        "fullNamePlaceholder": { "type": "string" },
+        "companyLabel": { "type": "string" },
+        "companyPlaceholder": { "type": "string" },
+        "emailLabel": { "type": "string" },
+        "emailPlaceholder": { "type": "string" },
+        "phoneLabel": { "type": "string" },
+        "phonePlaceholder": { "type": "string" },
+        "productInterestLabel": { "type": "string" },
+        "productInterestPlaceholder": { "type": "string" },
+        "messageLabel": { "type": "string" },
+        "messagePlaceholder": { "type": "string" },
+        "sendButtonText": { "type": "string" },
+        "phoneValue": { "type": "string" },
+        "emailValue": { "type": "string" },
+        "addressLine1": { "type": "string" },
+        "addressLine2": { "type": "string" },
+        "hoursLines": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "finalCta": {
+      "type": "object",
+      "required": ["title", "subline", "primaryText", "primaryHref", "secondaryText", "secondaryHref"],
+      "properties": {
+        "title": { "type": "string" },
+        "subline": { "type": "string" },
+        "primaryText": { "type": "string" },
+        "primaryHref": { "type": "string" },
+        "secondaryText": { "type": "string" },
+        "secondaryHref": { "type": "string" }
+      }
+    }
+  }
+}

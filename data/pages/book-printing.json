@@ -3,67 +3,210 @@
   "name": "Book Printing",
   "tagline": "Professional book printing for publishers, authors, and institutions.",
   "description": "Offset and digital book printing with hardcover, softcover, and print-on-demand options. Short and long runs. ISBN and barcode services. Trusted by publishers, universities, and self-publishing authors.",
+  "pageHero": {
+    "title": "Book Printing",
+    "subtitle": "Professional book printing for publishers, authors, and institutions.",
+    "description": "Offset and digital book printing with hardcover, softcover, and print-on-demand options. Short and long runs. ISBN and barcode services. Trusted by publishers, universities, and self-publishing authors.",
+    "image": "",
+    "backgroundImage": "",
+    "variants": [
+      "split-photo-right"
+    ]
+  },
   "specs": [
     {
-      "tab": "Binding Types",
+      "tab": "Product Types",
       "items": [
-        { "label": "Perfect Bound (Softcover)", "value": "Glued flat spine — most common" },
-        { "label": "Case Bound (Hardcover)", "value": "Sewn and glued — premium durability" },
-        { "label": "Spiral / Coil", "value": "Lay-flat — ideal for manuals, workbooks" },
-        { "label": "Saddle Stitch", "value": "Stapled — for short books up to 80 pages" }
+        {
+          "label": "Paper Books",
+          "value": "Softcover paper book production for trade and educational publishing",
+          "pdfHref": "/spec-sheets/product-types/book-paper-book-spec-sheet.pdf"
+        },
+        {
+          "label": "Hardcover Books",
+          "value": "Premium hardcover and Smyth sewn formats for durable long-form editions",
+          "pdfHref": "/spec-sheets/product-types/book-hardcover-book-spec-sheet.pdf"
+        },
+        {
+          "label": "Notebooks",
+          "value": "Custom notebooks in perfect bind, sewn, and hard cover construction",
+          "pdfHref": "/spec-sheets/product-types/book-notebook-spec-sheet.pdf"
+        },
+        {
+          "label": "Albums",
+          "value": "Photo and presentation albums in perfect bind and Smyth sewn options",
+          "pdfHref": "/spec-sheets/product-types/book-album-spec-sheet.pdf"
+        }
       ]
     },
     {
-      "tab": "Cover Finishes",
+      "tab": "Binding & Page Range",
       "items": [
-        { "label": "Gloss Laminate", "value": "Bright, eye-catching" },
-        { "label": "Matte Laminate", "value": "Understated, professional" },
-        { "label": "Soft Touch", "value": "Tactile, premium feel" },
-        { "label": "Cloth Hardcover", "value": "Linen texture for special editions" }
+        {
+          "label": "Perfect Bindery",
+          "value": "52-324 pages"
+        },
+        {
+          "label": "Saddle stitch",
+          "value": "8-164 pages"
+        },
+        {
+          "label": "Sewn Bound",
+          "value": "8-100 page"
+        },
+        {
+          "label": "Hard Cover / Smyth Sewn",
+          "value": "Available for premium hardcover book construction"
+        },
+        {
+          "label": "Notebook Formats",
+          "value": "Perfect Bindery, Sewn Bound, Hard Cover"
+        },
+        {
+          "label": "Album Formats",
+          "value": "Perfect Bindery, Smyth Sewn"
+        }
       ]
     },
     {
-      "tab": "Interior",
+      "tab": "Trim Sizes",
       "items": [
-        { "label": "Black & White", "value": "60 lb natural or white" },
-        { "label": "Full Color Interior", "value": "100 lb gloss or silk text" },
-        { "label": "Uncoated Natural", "value": "70 lb cream — preferred for novels" },
-        { "label": "Page Count", "value": "Minimum 48 pages, no maximum" }
+        {
+          "label": "Portrait Sizes",
+          "value": "5x7, 5.5x8.5, 6x9, 8.5x11, 8.25x10.75, 8.125x10.5, 9x12"
+        },
+        {
+          "label": "Landscape Sizes",
+          "value": "8.5x5.5, 9x6, 11x8.5, 12x9"
+        }
       ]
     },
     {
-      "tab": "Quantities",
+      "tab": "Cover Materials & Components",
       "items": [
-        { "label": "Print-on-Demand", "value": "1–49 copies (digital)" },
-        { "label": "Short Run", "value": "50–499 copies (digital offset)" },
-        { "label": "Standard Run", "value": "500–4,999 copies (offset)" },
-        { "label": "Long Run", "value": "5,000+ copies (volume pricing)" }
+        {
+          "label": "Cover Materials",
+          "value": "Fabric, Jacket (書衣）"
+        },
+        {
+          "label": "Cover Color",
+          "value": "1/1, 4/1, 4/4, 4/0"
+        },
+        {
+          "label": "Cover Finishing",
+          "value": "Lamination--Matt, Lamination--Gloss, Lamination--Soft touch, Foil Stamping, Embossing, Debossing, UV, Spot UV, AQ Coating --Matt, AQ Coating --Gloss, AQ Coating --Soft touch"
+        },
+        {
+          "label": "Included Product Types",
+          "value": "Paper books, hardcover books, notebooks, albums"
+        }
+      ]
+    },
+    {
+      "tab": "Paper, Interior & Packing",
+      "items": [
+        {
+          "label": "Cover Paper",
+          "value": "80 Cover Gloss, 100 Cover Gloss, 120 Cover Gloss, 80 Cover Silk, 100 Cover Silk, 120 Cover Silk, 65 Cover offset, 80 Cover offset, 100 Cover offset, 8PT, 12PT, 14PT, 16PT, 24PT"
+        },
+        {
+          "label": "Text Paper",
+          "value": "40 Text Gloss, 45 Text Gloss, 50 Text Gloss, 60 Text Gloss, 70 Text Gloss, 80 Text Gloss, 50 Text offset, 70 Text offset, 100 Text Gloss, 40 Text Silk/stain, 45 Text Silk/stain, 50 Text Silk/stain, 60 Text Silk/stain, 70 Text Silk/stain, 80 Text Silk/stain, 100 Text Silk/stain, Uncoated, 35 Text Hight Bright, 40 Text, 45 Text, 50 Text, 60 Text, 70 Text, 80 Text"
+        },
+        {
+          "label": "Text Page Range",
+          "value": "8–148 pages"
+        },
+        {
+          "label": "Packing",
+          "value": "Poly Bag+ Box, Wrapping film + Box"
+        }
       ]
     }
   ],
   "priceTiers": [
-    { "qty": "1–49", "note": "Print-on-demand, no minimum" },
-    { "qty": "50–499", "note": "Short-run digital, fast turnaround" },
-    { "qty": "500–4,999", "note": "Offset printing, cost-effective" },
-    { "qty": "5,000+", "note": "Volume pricing, best unit cost" }
+    {
+      "qty": "1–49",
+      "note": "Print-on-demand, no minimum"
+    },
+    {
+      "qty": "50–499",
+      "note": "Short-run digital, fast turnaround"
+    },
+    {
+      "qty": "500–4,999",
+      "note": "Offset printing, cost-effective"
+    },
+    {
+      "qty": "5,000+",
+      "note": "Volume pricing, best unit cost"
+    }
   ],
   "process": [
-    { "step": 1, "title": "File Preparation", "desc": "Submit print-ready interior PDF and cover file with correct trim sizes." },
-    { "step": 2, "title": "Proof & Approval", "desc": "Digital proof for review. Physical proof optional for first-time orders." },
-    { "step": 3, "title": "Interior Printing", "desc": "Pages printed on high-quality press equipment." },
-    { "step": 4, "title": "Cover Production", "desc": "Cover printed, laminated, and prepared for binding." },
-    { "step": 5, "title": "Binding & Shipping", "desc": "Books bound, quality inspected, and delivered." }
+    {
+      "step": 1,
+      "title": "File Preparation",
+      "desc": "Submit print-ready interior PDF and cover file with correct trim sizes."
+    },
+    {
+      "step": 2,
+      "title": "Proof & Approval",
+      "desc": "Digital proof for review. Physical proof optional for first-time orders."
+    },
+    {
+      "step": 3,
+      "title": "Interior Printing",
+      "desc": "Pages printed on high-quality press equipment."
+    },
+    {
+      "step": 4,
+      "title": "Cover Production",
+      "desc": "Cover printed, laminated, and prepared for binding."
+    },
+    {
+      "step": 5,
+      "title": "Binding & Shipping",
+      "desc": "Books bound, quality inspected, and delivered."
+    }
   ],
   "faq": [
-    { "q": "Can I print just one copy of my book?", "a": "Yes. Our print-on-demand service allows single copy orders with no minimum." },
-    { "q": "Do you offer ISBN and barcode services?", "a": "Yes. We can add ISBN barcodes to your cover file or help you source an ISBN through our publishing partners." },
-    { "q": "What file format do you need for book printing?", "a": "We accept print-ready PDF files. Interior and cover should be separate files with appropriate bleed settings." },
-    { "q": "How long does book printing take?", "a": "POD orders: 2–3 business days. Short run (50–499): 5–7 days. Standard offset run: 10–14 days from approved proof." },
-    { "q": "Can you print children's books with full color throughout?", "a": "Yes. Full color interior on 100 lb gloss or silk is ideal for illustrated children's books." }
+    {
+      "q": "Can I print just one copy of my book?",
+      "a": "Yes. Our print-on-demand service allows single copy orders with no minimum."
+    },
+    {
+      "q": "Do you offer ISBN and barcode services?",
+      "a": "Yes. We can add ISBN barcodes to your cover file or help you source an ISBN through our publishing partners."
+    },
+    {
+      "q": "What file format do you need for book printing?",
+      "a": "We accept print-ready PDF files. Interior and cover should be separate files with appropriate bleed settings."
+    },
+    {
+      "q": "How long does book printing take?",
+      "a": "POD orders: 2–3 business days. Short run (50–499): 5–7 days. Standard offset run: 10–14 days from approved proof."
+    },
+    {
+      "q": "Can you print children's books with full color throughout?",
+      "a": "Yes. Full color interior on 100 lb gloss or silk is ideal for illustrated children's books."
+    }
   ],
   "cta": {
     "headline": "Ready to print your book?",
-    "primaryCta": { "text": "Get a Quote", "href": "/quote?product=book-printing" },
-    "secondaryCta": { "text": "Call Us", "href": "tel:+12125550100" }
-  }
+    "primaryCta": {
+      "text": "Get a Quote",
+      "href": "/quote?product=book-printing"
+    },
+    "secondaryCta": {
+      "text": "Call Us",
+      "href": "tel:+12125550100"
+    }
+  },
+  "detailSheet": {
+    "text": "View Full Spec Sheet (PDF)",
+    "href": "/spec-sheets/book-printing-spec-sheet.pdf"
+  },
+  "rulesNotes": [
+    "Paper Book + Hard Cover Book sheets are combined into one book-printing rule set."
+  ]
 }

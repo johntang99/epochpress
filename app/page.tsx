@@ -159,12 +159,22 @@ export default async function HomePage() {
       <section className="relative bg-navy-gradient min-h-[90vh] flex items-center overflow-hidden pt-20">
         {heroBackgroundImage ? (
           <>
-            <img
+            <Image
               src={heroBackgroundImage}
               alt="Home hero background"
+              fill
+              priority
+              sizes="100vw"
               className="absolute inset-0 h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-[var(--navy)]/70" />
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  'linear-gradient(180deg, var(--hero-overlay-from, #080F1A), var(--hero-overlay-to, #0F1B2D))',
+                opacity: 'var(--hero-overlay-opacity, 0.7)',
+              }}
+            />
           </>
         ) : (
           <div className="absolute inset-0 opacity-10">
@@ -212,7 +222,14 @@ export default async function HomePage() {
             </div>
             {heroImage && (
               <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/20">
-                <img src={heroImage} alt={hero.headline} className="h-full w-full object-cover" />
+                <Image
+                  src={heroImage}
+                  alt={hero.headline}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="h-full w-full object-cover"
+                />
               </div>
             )}
           </div>
@@ -357,11 +374,12 @@ export default async function HomePage() {
             {displayedPortfolioItems.map((item, index) => (
               <div key={index} className="group rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 border border-[var(--border)]">
                 <div className="relative h-48">
-                  <img
+                  <Image
                     src={resolveRenderablePortfolioImage(item)}
                     alt={item.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     className="block h-full w-full object-cover"
-                    loading="lazy"
                   />
                 </div>
                 <div className="p-5">

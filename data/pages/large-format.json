@@ -3,8 +3,18 @@
   "name": "Large Format Printing",
   "tagline": "Make a big impression with large format prints that command attention.",
   "description": "Banners, trade show displays, retail signage, wall graphics, and outdoor advertising. Vinyl, fabric, foam board, and acrylic. Indoor and outdoor options with weather-resistant inks.",
+  "pageHero": {
+    "title": "Large Format Printing",
+    "subtitle": "Make a big impression with large format prints that command attention.",
+    "description": "Banners, trade show displays, retail signage, wall graphics, and outdoor advertising. Vinyl, fabric, foam board, and acrylic. Indoor and outdoor options with weather-resistant inks.",
+    "image": "",
+    "backgroundImage": "",
+    "variants": [
+      "split-photo-right"
+    ]
+  },
   "specs": [
-    {"tab":"Products","items":[{"label":"Vinyl Banners","value":"Indoor and outdoor, grommets included"},{"label":"Fabric Displays","value":"Trade show tension fabric"},{"label":"Foam Board","value":"Lightweight indoor signage"},{"label":"Acrylic","value":"Premium glass-like display"},{"label":"Wall Graphics","value":"Removable or permanent"}]},
+    {"tab":"Product Types","items":[{"label":"Vinyl Banners","value":"Indoor and outdoor, grommets included","pdfHref":"/spec-sheets/product-types/large-format-vinyl-banners-spec-sheet.pdf"},{"label":"Fabric Displays","value":"Trade show tension fabric","pdfHref":"/spec-sheets/product-types/large-format-fabric-displays-spec-sheet.pdf"},{"label":"Foam Board","value":"Lightweight indoor signage","pdfHref":"/spec-sheets/product-types/large-format-foam-board-spec-sheet.pdf"},{"label":"Acrylic","value":"Premium glass-like display","pdfHref":"/spec-sheets/product-types/large-format-acrylic-spec-sheet.pdf"},{"label":"Wall Graphics","value":"Removable or permanent","pdfHref":"/spec-sheets/product-types/large-format-wall-graphics-spec-sheet.pdf"}]},
     {"tab":"Materials","items":[{"label":"13 oz Vinyl","value":"Standard banner material"},{"label":"18 oz Vinyl","value":"Heavy-duty outdoor"},{"label":"Mesh Vinyl","value":"Wind-resistant outdoor"},{"label":"Polyester Fabric","value":"Wrinkle-free trade show"},{"label":"Coroplast","value":"Rigid lightweight signage"}]},
     {"tab":"Finishing","items":[{"label":"Grommets","value":"Every 2 feet standard"},{"label":"Pole Pockets","value":"Top, bottom or both"},{"label":"Hemmed Edges","value":"Reinforced perimeter"},{"label":"Mounting Hardware","value":"Stands and frames available"}]},
     {"tab":"Sizes","items":[{"label":"Banners","value":"2×4 up to 10×20 ft and custom"},{"label":"Retractable","value":"33\" × 78\" standard"},{"label":"Backdrops","value":"8×8 to 10×20 ft"},{"label":"Custom","value":"Any size, no maximum"}]}
@@ -25,5 +35,6 @@
     {"q":"Can you print trade show backdrops?","a":"Yes. We offer tension fabric pop-up displays, step-and-repeat backdrops, and curved display systems."},
     {"q":"What is the turnaround for large format?","a":"Standard is 3–5 business days. Rush 24–48 hour options available for most products."}
   ],
-  "cta":{"headline":"Ready for large format printing?","primaryCta":{"text":"Get a Quote","href":"/quote?product=large-format"},"secondaryCta":{"text":"Call Us","href":"tel:+12125550100"}}
+  "cta":{"headline":"Ready for large format printing?","primaryCta":{"text":"Get a Quote","href":"/quote?product=large-format"},"secondaryCta":{"text":"Call Us","href":"tel:+12125550100"}},
+  "detailSheet":{"text":"View Full Spec Sheet (PDF)","href":"/spec-sheets/large-format-spec-sheet.pdf"}
 }

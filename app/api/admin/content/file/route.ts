@@ -51,6 +51,37 @@ function shouldWriteThroughFile(): boolean {
   return process.env.NODE_ENV !== 'production';
 }
 
+function mergeMissingFields(base: unknown, overlay: unknown): unknown {
+  if (Array.isArray(base) || Array.isArray(overlay)) {
+    return overlay ?? base;
+  }
+  if (!base || typeof base !== 'object') {
+    return overlay ?? base;
+  }
+  if (!overlay || typeof overlay !== 'object') {
+    return base;
+  }
+  const result: Record<string, unknown> = { ...(base as Record<string, unknown>) };
+  for (const [key, value] of Object.entries(overlay as Record<string, unknown>)) {
+    const baseValue = result[key];
+    if (baseValue === undefined || baseValue === null || baseValue === '') {
+      result[key] = value;
+      continue;
+    }
+    if (
+      typeof baseValue === 'object' &&
+      baseValue !== null &&
+      !Array.isArray(baseValue) &&
+      typeof value === 'object' &&
+      value !== null &&
+      !Array.isArray(value)
+    ) {
+      result[key] = mergeMissingFields(baseValue, value);
+    }
+  }
+  return result;
+}
+
 export async function GET(request: NextRequest) {
   const session = await getSessionFromRequest(request);
   if (!session) {
@@ -84,6 +115,25 @@ export async function GET(request: NextRequest) {
     if (canUseContentDb()) {
       const entry = await fetchContentEntry(siteId, locale, filePath);
       if (entry?.data && !isEmptyHeaderPayload(filePath, entry.data)) {
+        if (filePath.startsWith('landing/')) {
+          try {
+            const fileContent = await fs.readFile(resolved, 'utf-8');
+            const fileData = JSON.parse(fileContent);
+            const mergedData = mergeMissingFields(entry.data, fileData);
+            if (JSON.stringify(mergedData) !== JSON.stringify(entry.data)) {
+              await upsertContentEntry({
+                siteId,
+                locale,
+                path: filePath,
+                data: mergedData,
+                updatedBy: session.user.email,
+              });
+            }
+            return NextResponse.json({ content: JSON.stringify(mergedData, null, 2) });
+          } catch {
+            return NextResponse.json({ content: JSON.stringify(entry.data, null, 2) });
+          }
+        }
         return NextResponse.json({ content: JSON.stringify(entry.data, null, 2) });
       }
     }
@@ -259,11 +309,13 @@ export async function POST(request: NextRequest) {
 
   if (action === 'create') {
     const slug = payload.slug as string | undefined;
-    const templateId = (payload.templateId as string | undefined) || 'basic';
+    const requestedTemplateId = payload.templateId as string | undefined;
     const targetDir = (payload.targetDir as string | undefined) || 'pages';
     if (!slug) {
       return NextResponse.json({ message: 'slug is required' }, { status: 400 });
     }
+    const templateId =
+      targetDir === 'blog' ? requestedTemplateId || 'blog-post' : requestedTemplateId || 'basic';
     if (!['pages', 'blog'].includes(targetDir)) {
       return NextResponse.json({ message: 'Invalid target directory' }, { status: 400 });
     }
@@ -282,6 +334,19 @@ export async function POST(request: NextRequest) {
     const template =
       CONTENT_TEMPLATES.find((item) => item.id === templateId) ||
       CONTENT_TEMPLATES[0];
+    const baseContent =
+      targetDir === 'blog'
+        ? {
+            ...(template.content || {}),
+            slug: normalized,
+            type:
+              typeof template.content?.type === 'string' ? template.content.type : 'article',
+            contentMarkdown:
+              typeof template.content?.contentMarkdown === 'string'
+                ? template.content.contentMarkdown
+                : '',
+          }
+        : template.content;
     if (canUseContentDb()) {
       const existing = await fetchContentEntry(siteId, locale, filePath);
       if (existing) {
@@ -291,14 +356,14 @@ export async function POST(request: NextRequest) {
         siteId,
         locale,
         path: filePath,
-        data: await normalizeContentMediaUrls(template.content, siteId),
+        data: await normalizeContentMediaUrls(baseContent, siteId),
         updatedBy: session.user.email,
       });
       return NextResponse.json({ path: filePath });
     }
 
     await fs.mkdir(path.dirname(resolved), { recursive: true });
-    await fs.writeFile(resolved, JSON.stringify(template.content, null, 2));
+    await fs.writeFile(resolved, JSON.stringify(baseContent, null, 2));
     return NextResponse.json({ path: filePath });
   }
 
@@ -411,6 +476,13 @@ export async function DELETE(request: NextRequest) {
 
   if (canUseContentDb()) {
     await deleteContentEntry({ siteId, locale, path: filePath });
+    if (shouldWriteThroughFile()) {
+      try {
+        await fs.unlink(resolved);
+      } catch (error) {
+        // ignore missing file; DB delete is the source of truth in this mode
+      }
+    }
     return NextResponse.json({ success: true });
   }
 

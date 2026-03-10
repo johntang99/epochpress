@@ -36,86 +36,85 @@
   "slug": "magazine-printing",
   "specs": [
     {
-      "tab": "Binding",
+      "tab": "Product Types",
       "items": [
         {
-          "label": "Saddle Stitch",
-          "value": "Up to 80 pages — stapled spine"
+          "label": "Magazine",
+          "value": "Short and long-run magazine printing for editorial and commercial publications",
+          "pdfHref": "/spec-sheets/product-types/magazine-magazine-spec-sheet.pdf"
         },
         {
-          "label": "Perfect Bind",
-          "value": "48+ pages — glued flat spine"
-        },
-        {
-          "label": "Spiral Bound",
-          "value": "Any page count — coil binding"
-        },
-        {
-          "label": "Case Bound",
-          "value": "Hardcover for premium editions"
+          "label": "Catalogues",
+          "value": "Retail, product, and brand catalogues in saddle stitch or perfect bind formats",
+          "pdfHref": "/spec-sheets/product-types/magazine-catalogues-spec-sheet.pdf"
         }
       ]
     },
     {
-      "tab": "Cover Finishes",
+      "tab": "Binding & Page Range",
       "items": [
         {
-          "label": "Gloss UV",
-          "value": "High shine, premium feel"
+          "label": "Perfect Bindery",
+          "value": "52-324 pages"
         },
         {
-          "label": "Matte Laminate",
-          "value": "Sophisticated, fingerprint-resistant"
-        },
-        {
-          "label": "Soft Touch",
-          "value": "Velvet texture, ultra-premium"
-        },
-        {
-          "label": "Spot UV",
-          "value": "Selective gloss over matte base"
+          "label": "Saddle stitch",
+          "value": "8-164 pages"
         }
       ]
     },
     {
-      "tab": "Paper",
+      "tab": "Trim Sizes",
       "items": [
         {
-          "label": "Cover Stock",
-          "value": "80–100 lb cover, coated or uncoated"
+          "label": "Portrait Sizes",
+          "value": "5x7, 5.5x8.5, 6x9, 8.5x11, 8.25x10.75, 8.125x10.5, 9x12"
         },
         {
-          "label": "Interior Pages",
-          "value": "60–80 lb text, coated or uncoated"
-        },
-        {
-          "label": "Premium Interior",
-          "value": "100 lb gloss or silk for photography"
-        },
-        {
-          "label": "Recycled Options",
-          "value": "FSC-certified paper available"
+          "label": "Landscape Sizes",
+          "value": "8.5x5.5, 9x6, 11x8.5, 12x9"
         }
       ]
     },
     {
-      "tab": "Quantities",
+      "tab": "Cover & Text Stocks",
       "items": [
         {
-          "label": "Short Run",
-          "value": "From 250 copies (digital)"
+          "label": "Cover Paper",
+          "value": "80 Cover Gloss, 100 Cover Gloss, 120 Cover Gloss, 80 Cover Silk, 100 Cover Silk, 120 Cover Silk, 65 Cover offset, 80 Cover offset, 100 Cover offset, 8PT, 12PT, 14PT, 16PT, 24PT"
         },
         {
-          "label": "Standard",
-          "value": "1,000 – 10,000 (offset)"
+          "label": "Text Paper",
+          "value": "40 Text Gloss, 45 Text Gloss, 50 Text Gloss, 60 Text Gloss, 70 Text Gloss, 80 Text Gloss, 50 Text offset, 70 Text offset, 100 Text Gloss, 40 Text Silk/stain, 45 Text Silk/stain, 50 Text Silk/stain, 60 Text Silk/stain, 70 Text Silk/stain, 80 Text Silk/stain, 100 Text Silk/stain, Uncoated, 35 Text Hight Bright, 40 Text, 45 Text, 50 Text, 60 Text, 70 Text, 80 Text"
         },
         {
-          "label": "High Volume",
-          "value": "10,000 – 100,000+"
+          "label": "Text Page Range",
+          "value": "8–144 pages"
+        }
+      ]
+    },
+    {
+      "tab": "Color, Finish & Packing",
+      "items": [
+        {
+          "label": "Cover Color",
+          "value": "1/1, 4/1, 4/4, 4/0"
         },
         {
-          "label": "Frequency",
-          "value": "Monthly, quarterly, annual, one-time"
+          "label": "Text Color",
+          "value": "1/1, 4/1, 4/4, 4/0"
+        },
+        {
+          "label": "Cover Finishing",
+          "value": "Lamination--Matt, Lamination--Gloss, Lamination--Soft touch, Foil Stamping, Embossing, Debossing, UV, Spot UV, AQ Coating --Matt, AQ Coating --Gloss, AQ Coating --Soft touch"
+        },
+        {
+          "label": "Inside Finishing",
+          "value": "Lamination--Matt, Lamination--Gloss, Lamination--Soft touch, Foil Stamping, Embossing, Debossing, UV, Spot UV, AQ Coating --Matt, AQ Coating --Gloss, AQ Coating --Soft touch"
+        },
+        {
+          "label": "Packing",
+          "value": "Poly Bag+ Box, Wrapping film + Box"
         }
       ]
     }
@@ -148,6 +147,16 @@
     }
   ],
   "tagline": "Premium magazine printing for publishers who demand the best.",
+  "pageHero": {
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959268504-unsplash-kkv1gkdvfzm.jpg",
+    "title": "Magazine Printing",
+    "subtitle": "Premium magazine printing for publishers who demand the best.",
+    "variants": [
+      "split-photo-right"
+    ],
+    "description": "From independent literary journals to high-gloss consumer magazines, we print with the quality your readers expect. Perfect binding, saddle stitch, UV coated covers, and more.",
+    "backgroundImage": ""
+  },
   "priceTiers": [
     {
       "qty": "250–499",
@@ -166,5 +175,12 @@
       "note": "Volume pricing, dedicated scheduling"
     }
   ],
-  "description": "From independent literary journals to high-gloss consumer magazines, we print with the quality your readers expect. Perfect binding, saddle stitch, UV coated covers, and more."
+  "rulesNotes": [
+    "Workbook is treated as source-of-truth for factual magazine specifications."
+  ],
+  "description": "From independent literary journals to high-gloss consumer magazines, we print with the quality your readers expect. Perfect binding, saddle stitch, UV coated covers, and more.",
+  "detailSheet": {
+    "href": "/spec-sheets/magazine-printing-spec-sheet.pdf",
+    "text": "View Full Spec Sheet (PDF)"
+  }
 }

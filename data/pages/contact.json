@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "title": "Get in Touch",
+    "subtitle": "Our team is ready to help with your print project. Reach out by phone, email, or the form below.",
+    "backgroundImage": "",
+    "image": ""
+  },
+  "location": {
+    "title": "Address",
+    "address": "123 Press Way",
+    "city": "New York, NY 10001",
+    "mapUrl": "",
+    "directions": ""
+  },
+  "phone": {
+    "title": "Phone",
+    "number": "(212) 555-0100",
+    "secondaryNumber": ""
+  },
+  "email": {
+    "title": "Email",
+    "address": "info@epochpress.com"
+  },
+  "hours": {
+    "title": "Hours",
+    "schedule": [
+      {
+        "day": "Mon-Fri",
+        "time": "8:00 AM - 6:00 PM",
+        "isOpen": true
+      },
+      {
+        "day": "Sat",
+        "time": "9:00 AM - 2:00 PM",
+        "isOpen": true
+      },
+      {
+        "day": "Sun",
+        "time": "Closed",
+        "isOpen": false
+      }
+    ],
+    "note": ""
+  },
+  "form": {
+    "variant": "single-column",
+    "title": "Send Us a Message",
+    "subtitle": "Tell us about your print needs and we'll get back to you quickly.",
+    "reasonOptions": [
+      "Newspapers",
+      "Magazines",
+      "Books",
+      "Marketing Print",
+      "Menu Printing",
+      "Business Cards",
+      "Large Format",
+      "Other"
+    ],
+    "submitButton": {
+      "text": "Send Message"
+    },
+    "successMessage": "Thanks! We received your request.",
+    "errorMessage": "Unable to send right now. Please try again."
+  },
+  "map": {
+    "embedUrl": "",
+    "showMap": false
+  },
+  "emergency": {
+    "title": "Need Rush Support?",
+    "message": "Call us directly for urgent print deadlines.",
+    "phone": "(212) 555-0100",
+    "visible": false
+  }
+}

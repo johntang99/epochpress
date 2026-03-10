@@ -12,5 +12,14 @@
   "category": "sustainability",
   "featured": false,
   "readTime": "4 min read",
-  "publishDate": "2026-01-08"
+  "publishDate": "2026-01-08",
+  "contentMarkdown": "Sustainable printing isn't just good for the environment — it's good for business. We explain our FSC certification and how it benefits your clients.\n\nThe article body supports headers, pull quotes, numbered lists, code blocks for spec references, and inline product CTAs. When admin is wired, editors will write directly in the admin CMS editor.\n\nFor now, this is a starter layout body. Replace it with your full article content.",
+  "relatedProducts": [
+    "newspaper-printing",
+    "marketing-print",
+    "magazine-printing",
+    "calendar-printing",
+    "menu-printing",
+    "book-printing"
+  ]
 }

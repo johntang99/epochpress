@@ -3,7 +3,24 @@
   "name": "Newspaper Printing",
   "tagline": "High-volume newspaper printing for publishers of all sizes.",
   "description": "From community weeklies to major regional dailies, we deliver fast, reliable newspaper printing. Web offset and digital capabilities, broadsheet and tabloid formats, black-and-white and full color.",
+  "pageHero": {
+    "title": "Newspaper Printing",
+    "subtitle": "High-volume newspaper printing for publishers of all sizes.",
+    "description": "From community weeklies to major regional dailies, we deliver fast, reliable newspaper printing. Web offset and digital capabilities, broadsheet and tabloid formats, black-and-white and full color.",
+    "image": "",
+    "backgroundImage": "",
+    "variants": [
+      "split-photo-right"
+    ]
+  },
   "specs": [
+    {
+      "tab": "Product Types",
+      "items": [
+        { "label": "Newspapers", "value": "Daily, weekly, and community newspaper editions in broadsheet and tabloid formats", "pdfHref": "/spec-sheets/product-types/newspaper-printing-newspapers-spec-sheet.pdf" },
+        { "label": "Inserts", "value": "Custom-size newspaper inserts for advertising, coupons, and special supplements", "pdfHref": "/spec-sheets/product-types/newspaper-printing-inserts-spec-sheet.pdf" }
+      ]
+    },
     {
       "tab": "Formats",
       "items": [
@@ -41,6 +58,10 @@
       ]
     }
   ],
+  "detailSheet": {
+    "text": "View Full Spec Sheet (PDF)",
+    "href": "/spec-sheets/newspaper-printing-spec-sheet.pdf"
+  },
   "priceTiers": [
     { "qty": "500–999", "note": "Digital printing, fast turnaround" },
     { "qty": "1,000–4,999", "note": "Offset or digital depending on spec" },

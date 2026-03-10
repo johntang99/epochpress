@@ -32,86 +32,78 @@
   "slug": "marketing-print",
   "specs": [
     {
-      "tab": "Products",
+      "tab": "Product Types",
       "items": [
         {
           "label": "Flyers",
-          "value": "Letter, legal, A5, custom"
+          "value": "Single-sheet marketing pieces with multiple fold options",
+          "pdfHref": "/spec-sheets/product-types/marketing-print-flyers-spec-sheet.pdf"
         },
         {
           "label": "Brochures",
-          "value": "Tri-fold, bi-fold, z-fold, gate-fold"
-        },
-        {
-          "label": "Postcards",
-          "value": "4×6, 5×7, 6×9, custom"
+          "value": "Multi-panel or saddle-stitched print collateral",
+          "pdfHref": "/spec-sheets/product-types/marketing-print-brochures-spec-sheet.pdf"
         },
         {
           "label": "Posters",
-          "value": "11×17, 18×24, 24×36, custom"
+          "value": "Large-format campaign and point-of-sale posters",
+          "pdfHref": "/spec-sheets/product-types/marketing-print-posters-spec-sheet.pdf"
+        },
+        {
+          "label": "Postcards",
+          "value": "Card-weight direct mail and handout pieces",
+          "pdfHref": "/spec-sheets/product-types/marketing-print-postcards-spec-sheet.pdf"
         }
       ]
     },
     {
-      "tab": "Paper",
+      "tab": "Sizes & Folds",
       "items": [
         {
-          "label": "Standard",
-          "value": "80 lb gloss or matte text"
+          "label": "Size Options",
+          "value": "22x17, 11x17, 14x8.5, 11x8.5, 16x9, 12.65x9.25, 17x9, 27x39, 17x27, 14x22, 12x18, 24x36"
         },
         {
-          "label": "Premium",
-          "value": "100 lb silk or gloss text"
-        },
-        {
-          "label": "Heavy",
-          "value": "100 lb cover, 14pt, 16pt"
-        },
-        {
-          "label": "Uncoated",
-          "value": "60–80 lb offset"
+          "label": "Fold / Binding",
+          "value": "Unfold, Half Fold, Tri-Fold, N Fold, Double Parallet Fold, Gate Fold, French Fold, Accordion Fold, Map Fold, Saddle stitch"
         }
       ]
     },
     {
-      "tab": "Finishing",
+      "tab": "Paper, Color & Finishing",
       "items": [
         {
-          "label": "Gloss Coating",
-          "value": "Bright, protective"
+          "label": "Paper",
+          "value": "60 Text Gloss, 70 Text Gloss, 80 Text Gloss, 100 Text Gloss, 60 Text Silk, 70 Text Silk, 80 Text Silk, 100 Text Silk, 80 Cover Gloss, 100 Cover GLOSS, 80 Silk Gloss, 100 Silk Gloss, 50 Text Offset, 60 Text Offset, 70 Text Offset, 80 Text Offset, 100 Cover Gloss"
         },
         {
-          "label": "Matte Coating",
-          "value": "Non-glare, elegant"
+          "label": "Page / Sides",
+          "value": "1, 2"
         },
         {
-          "label": "Spot UV",
-          "value": "Selective gloss highlights"
+          "label": "Color",
+          "value": "1/1, 4/1, 4/4, 4/0"
         },
         {
-          "label": "Folding",
-          "value": "Machine folding included"
+          "label": "Finishing",
+          "value": "Lamination--Matt, Lamination--Gloss, Lamination--Soft touch, Foil Stamping, Embossing, Debossing, UV, Spot UV, AQ Coating --Matt, AQ Coating --Gloss, AQ Coating --Soft touch"
         }
       ]
     },
     {
-      "tab": "Quantities",
+      "tab": "Production Notes",
       "items": [
         {
-          "label": "Small",
-          "value": "100–499"
+          "label": "Brochure Binding",
+          "value": "Saddle stitch"
         },
         {
-          "label": "Standard",
-          "value": "500–4,999"
+          "label": "Poster Range",
+          "value": "27x39, 17x27, 14x22, 11x17, 12x18, 24x36"
         },
         {
-          "label": "Large",
-          "value": "5,000–50,000+"
-        },
-        {
-          "label": "Rush",
-          "value": "48–72 hour options"
+          "label": "Postcard Finishing",
+          "value": "Lamination--Matt, Lamination--Gloss, Lamination--Soft touch, Foil Stamping, Embossing, Debossing, UV, Spot UV, AQ Coating --Matt, AQ Coating --Gloss, AQ Coating --Soft touch"
         }
       ]
     }
@@ -162,5 +154,22 @@
       "note": "Volume pricing"
     }
   ],
-  "description": "Flyers, brochures, postcards, posters, and more. All sizes, all fold types, all paper stocks. Fast turnaround for campaigns with real deadlines."
+  "rulesNotes": [
+    "Marketing Print combines workbook rules across Flyer, Brochures, Poster, and Post Card."
+  ],
+  "description": "Flyers, brochures, postcards, posters, and more. All sizes, all fold types, all paper stocks. Fast turnaround for campaigns with real deadlines.",
+  "detailSheet": {
+    "href": "/spec-sheets/marketing-print-spec-sheet.pdf",
+    "text": "View Full Spec Sheet (PDF)"
+  },
+  "pageHero": {
+    "title": "Marketing Print",
+    "subtitle": "Print marketing materials that demand attention and drive results.",
+    "description": "Flyers, brochures, postcards, posters, and more. All sizes, all fold types, all paper stocks. Fast turnaround for campaigns with real deadlines.",
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772960819540-unsplash-mhsfcjd2rjw.jpg",
+    "backgroundImage": "",
+    "variants": [
+      "split-photo-right"
+    ]
+  }
 }

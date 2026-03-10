@@ -1,0 +1,139 @@
+{
+  "cta": {
+    "headline": "Ready to plan your calendar printing project?",
+    "primaryCta": {
+      "href": "/quote?product=calendar-printing",
+      "text": "Get a Quote"
+    },
+    "secondaryCta": {
+      "href": "tel:+12125550100",
+      "text": "Call Us"
+    }
+  },
+  "faq": [
+    {
+      "a": "See the workbook-backed specification tables and contact us for exact configuration guidance.",
+      "q": "What options are available for calendar printing?"
+    },
+    {
+      "a": "Yes. Use the quote form and our team will confirm the right production path for your project.",
+      "q": "Can I request a custom quote?"
+    }
+  ],
+  "name": "Calendar Printing",
+  "slug": "calendar-printing",
+  "specs": [
+    {
+      "tab": "Product Types",
+      "items": [
+        {
+          "label": "Desk Calendars",
+          "value": "Desk-standing seasonal calendar format for offices and branded giveaways",
+          "pdfHref": "/spec-sheets/product-types/calendar-printing-desk-calendars-spec-sheet.pdf"
+        },
+        {
+          "label": "Wall Calendars",
+          "value": "Wall-hanging seasonal calendar format for retail and promotional distribution",
+          "pdfHref": "/spec-sheets/product-types/calendar-printing-wall-calendars-spec-sheet.pdf"
+        }
+      ]
+    },
+    {
+      "tab": "Calendar Types",
+      "items": [
+        {
+          "label": "Desk Calendars",
+          "value": "Desk-standing seasonal calendar format"
+        },
+        {
+          "label": "Wall Calendars",
+          "value": "Wall-hanging seasonal calendar format"
+        }
+      ]
+    },
+    {
+      "tab": "Binding, Materials & Pages",
+      "items": [
+        {
+          "label": "Binding",
+          "value": "Wire-O-Bound, Hard Cover"
+        },
+        {
+          "label": "Basic Materials",
+          "value": "Basic Material, Fabric"
+        },
+        {
+          "label": "Interior Page Options",
+          "value": "8, 12, 16, 20, 28, 36, 44, 52, 60, 68, 76, 84, 92, 100, 108, 116, 124, 132, 140, 148"
+        }
+      ]
+    },
+    {
+      "tab": "Color, Finish & Packing",
+      "items": [
+        {
+          "label": "Cover Color",
+          "value": "1/1, 4/1, 4/4, 4/0"
+        },
+        {
+          "label": "Finishing",
+          "value": "Lamination--Matt, Lamination--Gloss, Lamination--Soft touch, Foil Stamping, Embossing, Debossing, UV, Spot UV, AQ Coating --Matt, AQ Coating --Gloss, AQ Coating --Soft touch"
+        },
+        {
+          "label": "Packing",
+          "value": "Poly Bag+ Box, Wrapping film + Box"
+        }
+      ]
+    }
+  ],
+  "process": [
+    {
+      "desc": "Tell us the format, quantity, and finishing details you need.",
+      "step": 1,
+      "title": "Share Your Specs"
+    },
+    {
+      "desc": "We prepare and confirm the production setup before printing.",
+      "step": 2,
+      "title": "Review Proofs"
+    },
+    {
+      "desc": "Your project is printed, finished, packed, and delivered.",
+      "step": 3,
+      "title": "Produce & Deliver"
+    }
+  ],
+  "tagline": "Custom calendar printing for branded desk and wall formats.",
+  "priceTiers": [
+    {
+      "qty": "Small Run",
+      "note": "Quote based on specs and finishing requirements"
+    },
+    {
+      "qty": "Standard Run",
+      "note": "Best value for routine production"
+    },
+    {
+      "qty": "Large Run",
+      "note": "Volume pricing available"
+    }
+  ],
+  "rulesNotes": [
+    "Desk and wall calendar rules are grouped into one public calendar-printing family."
+  ],
+  "description": "Desk calendars and wall calendars produced with workbook-backed binding, finishing, and seasonal page options.",
+  "detailSheet": {
+    "href": "/spec-sheets/calendar-printing-spec-sheet.pdf",
+    "text": "View Full Spec Sheet (PDF)"
+  },
+  "pageHero": {
+    "title": "Calendar Printing",
+    "subtitle": "Custom calendar printing for branded desk and wall formats.",
+    "description": "Desk calendars and wall calendars produced with workbook-backed binding, finishing, and seasonal page options.",
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959459954-unsplash-foko4dpxamq.jpg",
+    "backgroundImage": "",
+    "variants": [
+      "split-photo-right"
+    ]
+  }
+}

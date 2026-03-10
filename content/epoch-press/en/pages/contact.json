@@ -1,0 +1,77 @@
+{
+  "map": {
+    "showMap": false,
+    "embedUrl": ""
+  },
+  "form": {
+    "title": "Send Us a Message",
+    "variant": "single-column",
+    "subtitle": "Tell us about your print needs and we'll get back to you quickly.",
+    "errorMessage": "Unable to send right now. Please try again.",
+    "submitButton": {
+      "text": "Send Message"
+    },
+    "reasonOptions": [
+      "Newspapers",
+      "Magazines",
+      "Books",
+      "Marketing Print",
+      "Menu Printing",
+      "Business Cards",
+      "Large Format",
+      "Other"
+    ],
+    "successMessage": "Thanks! We received your request."
+  },
+  "hero": {
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1771479825282-jakub-zerdzicki-da9qsu-0a00-unsplash.jpg",
+    "title": "Get in Touch",
+    "subtitle": "Our team is ready to help with your print project. Reach out by phone, email, or the form below.",
+    "backgroundImage": "",
+    "variant": "split-photo-right"
+  },
+  "email": {
+    "title": "Email",
+    "address": "info@epochpress.com"
+  },
+  "hours": {
+    "note": "",
+    "title": "Hours",
+    "schedule": [
+      {
+        "day": "Mon-Fri",
+        "time": "8:00 AM - 6:00 PM",
+        "isOpen": true
+      },
+      {
+        "day": "Sat",
+        "time": "9:00 AM - 2:00 PM",
+        "isOpen": true
+      },
+      {
+        "day": "Sun",
+        "time": "Closed",
+        "isOpen": false
+      }
+    ]
+  },
+  "phone": {
+    "title": "Phone",
+    "number": "(212) 555-0100",
+    "secondaryNumber": ""
+  },
+  "location": {
+    "city": "New York, NY 10001",
+    "title": "Address",
+    "mapUrl": "",
+    "address": "123 Press Way",
+    "directions": ""
+  },
+  "emergency": {
+    "phone": "(212) 555-0100",
+    "title": "Need Rush Support?",
+    "message": "Call us directly for urgent print deadlines.",
+    "visible": false
+  },
+  "relatedProducts": []
+}

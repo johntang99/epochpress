@@ -6,6 +6,38 @@ import { resolveRenderableImageUrl } from '@/lib/renderableImage';
 
 type ProductsData = typeof productsDataFallback;
 
+interface ProductHeroLike {
+  image?: string;
+  backgroundImage?: string;
+}
+
+interface ProductPageLike {
+  image?: string;
+  backgroundImage?: string;
+  hero?: ProductHeroLike;
+  pageHero?: ProductHeroLike;
+  heroSection?: ProductHeroLike;
+}
+
+const productCardFallbackImages: Record<string, string> = {
+  'newspaper-printing':
+    'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1400&q=80',
+  'magazine-printing':
+    'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=1400&q=80',
+  'book-printing':
+    'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1400&q=80',
+  'calendar-printing':
+    'https://images.unsplash.com/photo-1506784693919-ef06d93c28d2?auto=format&fit=crop&w=1400&q=80',
+  'marketing-print':
+    'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1400&q=80',
+  'menu-printing':
+    'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80',
+  'business-cards':
+    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1400&q=80',
+  'large-format':
+    'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1400&q=80',
+};
+
 export const metadata = {
   title: 'Printing Services',
   description: 'Full-service commercial printing: newspapers, magazines, books, marketing, menus, business cards, and large format.',
@@ -15,6 +47,24 @@ export default async function ProductsPage() {
   const siteId = await getRequestSiteId();
   const dbContent = await loadPageContent<ProductsData>('products', 'en', siteId);
   const { hero, categories } = dbContent ?? productsDataFallback;
+  const categoriesWithHeroImage = await Promise.all(
+    categories.map(async (category) => {
+      const productPage = await loadPageContent<ProductPageLike>(category.slug, 'en', siteId);
+      const heroBlock =
+        productPage?.pageHero || productPage?.heroSection || productPage?.hero || null;
+      const heroImage =
+        resolveRenderableImageUrl(heroBlock?.image) ||
+        resolveRenderableImageUrl(productPage?.image) ||
+        resolveRenderableImageUrl(heroBlock?.backgroundImage) ||
+        resolveRenderableImageUrl(productPage?.backgroundImage) ||
+        productCardFallbackImages[category.slug] ||
+        '';
+      return {
+        ...category,
+        heroImage,
+      };
+    })
+  );
   const heroBackgroundImage = resolveRenderableImageUrl(
     (hero as Record<string, unknown>)?.backgroundImage
   );
@@ -25,7 +75,7 @@ export default async function ProductsPage() {
     <>
       {/* Hero */}
       <section
-        className={`relative pt-28 pb-16 border-b border-[var(--border)] overflow-hidden ${
+        className={`relative pt-36 md:pt-40 pb-16 border-b border-[var(--border)] overflow-hidden ${
           hasHeroMedia ? 'bg-[var(--navy)]' : 'bg-[var(--surface)]'
         }`}
       >
@@ -70,14 +120,22 @@ export default async function ProductsPage() {
       <section className="section-padding bg-white">
         <div className="container-content">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-            {categories.map((cat) => (
+            {categoriesWithHeroImage.map((cat) => (
               <div
                 key={cat.slug}
                 className="group bg-white rounded-2xl border border-[var(--border)] overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 flex flex-col"
               >
-                {/* Image placeholder */}
                 <div className="h-52 bg-gradient-to-br from-[var(--navy)] to-[var(--charcoal)] flex items-center justify-center relative overflow-hidden">
-                  <span className="text-7xl opacity-25">{cat.icon}</span>
+                  {cat.heroImage ? (
+                    <img
+                      src={cat.heroImage}
+                      alt={cat.name}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <span className="text-7xl opacity-25">{cat.icon}</span>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                 </div>
 

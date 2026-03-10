@@ -12,5 +12,10 @@
   "category": "industry-trends",
   "featured": false,
   "readTime": "6 min read",
-  "publishDate": "2026-01-28"
+  "publishDate": "2026-01-28",
+  "contentMarkdown": "From bold typography to interactive QR integrations, magazine cover design is evolving fast. We look at what the top publishers are doing.\n\nThe article body supports headers, pull quotes, numbered lists, code blocks for spec references, and inline product CTAs. When admin is wired, editors will write directly in the admin CMS editor.\n\nFor now, this is a starter layout body. Replace it with your full article content.",
+  "relatedProducts": [
+    "marketing-print",
+    "magazine-printing"
+  ]
 }

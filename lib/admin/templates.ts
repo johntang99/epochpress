@@ -6,6 +6,25 @@ export interface ContentTemplate {
 
 export const CONTENT_TEMPLATES: ContentTemplate[] = [
   {
+    id: 'blog-post',
+    label: 'Blog Post',
+    content: {
+      slug: '',
+      title: 'New Blog Post',
+      excerpt: '',
+      image: '',
+      author: '',
+      publishDate: '',
+      category: '',
+      featured: false,
+      relatedProducts: [],
+      tags: [],
+      type: 'article',
+      readTime: '',
+      contentMarkdown: '',
+    },
+  },
+  {
     id: 'basic',
     label: 'Basic (Hero + CTA)',
     content: {

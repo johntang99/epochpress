@@ -12,9 +12,12 @@
     }
   },
   "hero": {
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959268504-unsplash-kkv1gkdvfzm.jpg",
     "title": "Client Success Stories",
+    "variant": "split-photo-right",
     "subtitle": "Real outcomes from organizations that trusted Epoch Press for mission-critical print projects.",
-    "disclaimer": "Each engagement has unique variables. Results shown reflect real client feedback and project outcomes, but timelines and performance may vary by scope, files, and logistics."
+    "disclaimer": "Each engagement has unique variables. Results shown reflect real client feedback and project outcomes, but timelines and performance may vary by scope, files, and logistics.",
+    "backgroundImage": ""
   },
   "stories": [
     {
@@ -95,5 +98,6 @@
     "Marketing Print",
     "Direct Mail",
     "Multi-Location Rollout"
-  ]
+  ],
+  "relatedProducts": []
 }

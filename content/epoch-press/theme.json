@@ -5,7 +5,7 @@
       "100": "#D0D9E6",
       "dark": "#080F1A",
       "light": "#1A2E4A",
-      "DEFAULT": "#0F1B2D"
+      "DEFAULT": "#1b3255"
     },
     "backdrop": {
       "primary": "#F8F9FA",
@@ -29,5 +29,11 @@
     "display": "clamp(2.8rem, 5vw, 4.5rem)",
     "heading": "clamp(1.75rem, 3vw, 2.5rem)",
     "subheading": "clamp(1.25rem, 2vw, 1.5rem)"
-  }
+  },
+  "heroOverlay": {
+    "to": "#060b13",
+    "from": "#020409",
+    "opacity": 0.3
+  },
+  "relatedProducts": []
 }

@@ -16,5 +16,32 @@
     "noPosts": "No posts in this category yet.",
     "allPosts": "All Posts",
     "featuredArticle": "Featured Article"
-  }
+  },
+  "categories": [
+    {
+      "name": "Industry trends",
+      "slug": "industry-trends"
+    },
+    {
+      "name": "Print tips",
+      "slug": "print-tips"
+    },
+    {
+      "name": "Our services",
+      "slug": "our-services"
+    },
+    {
+      "name": "Case studies",
+      "slug": "case-studies"
+    },
+    {
+      "name": "Sustainability",
+      "slug": "sustainability"
+    },
+    {
+      "name": "Newspaper Trends",
+      "slug": "newspaper-trends"
+    }
+  ],
+  "relatedProducts": []
 }

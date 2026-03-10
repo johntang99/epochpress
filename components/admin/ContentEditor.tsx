@@ -3,10 +3,21 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Locale, SiteConfig } from '@/lib/types';
-import ReactMarkdown from 'react-markdown';
 import { Button } from '@/components/ui';
 import { CONTENT_TEMPLATES } from '@/lib/admin/templates';
 import { ImagePickerModal } from '@/components/admin/ImagePickerModal';
+import { ContentEditorModuleSidebar } from '@/components/admin/sections/ContentEditorModuleSidebar';
+import { BlogCategoryEditorPanel } from '@/components/admin/sections/BlogCategoryEditorPanel';
+import { BlogArticleEditorPanel } from '@/components/admin/sections/BlogArticleEditorPanel';
+import { PortfolioFormPanels } from '@/components/admin/sections/PortfolioFormPanels';
+import { CaseStudiesFormPanels } from '@/components/admin/sections/CaseStudiesFormPanels';
+import { GenericPageFormPanels } from '@/components/admin/sections/GenericPageFormPanels';
+import { ProductPageFormPanel } from '@/components/admin/sections/ProductPageFormPanel';
+import { SeoFormPanel } from '@/components/admin/sections/SeoFormPanel';
+import { HeaderFormPanel } from '@/components/admin/sections/HeaderFormPanel';
+import { ThemeFormPanel } from '@/components/admin/sections/ThemeFormPanel';
+import { ProfileIntroImagesPanel } from '@/components/admin/sections/ProfileIntroImagesPanel';
+import { LandingPageFormPanel } from '@/components/admin/sections/LandingPageFormPanel';
 
 interface ContentFileItem {
   id: string;
@@ -21,9 +32,13 @@ interface ContentEditorProps {
   selectedSiteId: string;
   selectedLocale: string;
   initialFilePath?: string;
-  fileFilter?: 'all' | 'blog' | 'siteSettings';
+  fileFilter?: 'all' | 'blog' | 'siteSettings' | 'portfolio' | 'caseStudies';
   titleOverride?: string;
   basePath?: string;
+}
+interface BlogCategoryOption {
+  slug: string;
+  name: string;
 }
 
 const SECTION_VARIANT_OPTIONS: Record<string, string[]> = {
@@ -38,9 +53,6 @@ const SECTION_VARIANT_OPTIONS: Record<string, string[]> = {
   ],
   testimonials: ['carousel', 'grid', 'masonry', 'slider-vertical', 'featured-single'],
   howItWorks: ['horizontal', 'vertical', 'cards', 'vertical-image-right'],
-  conditions: ['grid-cards', 'categories-tabs', 'list-detailed', 'icon-grid'],
-  services: ['grid-cards-2x', 'grid-cards-3x', 'featured-large', 'list-horizontal', 'accordion', 'tabs', 'detail-alternating', 'detail-image-right'],
-  servicesList: ['grid-cards-2x', 'grid-cards-3x', 'featured-large', 'list-horizontal', 'accordion', 'tabs', 'detail-alternating', 'detail-image-right'],
   overview: ['centered', 'left'],
   blog: ['cards-grid', 'featured-side', 'list-detailed', 'carousel'],
   gallery: ['grid-masonry', 'grid-uniform', 'carousel', 'lightbox-grid'],
@@ -52,7 +64,6 @@ const SECTION_VARIANT_OPTIONS: Record<string, string[]> = {
   journey: ['prose', 'card'],
   affiliations: ['compact', 'detailed'],
   continuingEducation: ['compact', 'detailed'],
-  clinic: ['split', 'cards'],
   introduction: ['centered', 'left'],
   hours: ['grid', 'list'],
   form: ['single-column', 'two-column', 'multi-step', 'modal', 'inline-minimal'],
@@ -73,6 +84,14 @@ const toTitleCase = (value: string) =>
     .trim()
     .replace(/^./, (match) => match.toUpperCase());
 
+const slugifyCategoryName = (value: string) =>
+  value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+
 const SITE_SETTINGS_PATHS = new Set([
   'navigation.json',
   'header.json',
@@ -80,6 +99,20 @@ const SITE_SETTINGS_PATHS = new Set([
   'seo.json',
   'theme.json',
   'site.json',
+]);
+const BLOG_PAGE_PATH = 'pages/blog.json';
+const PORTFOLIO_PAGE_PATH = 'pages/portfolio.json';
+const CASE_STUDIES_PAGE_PATH = 'pages/case-studies.json';
+
+const PRODUCT_PAGE_PATHS = new Set([
+  'pages/newspaper-printing.json',
+  'pages/magazine-printing.json',
+  'pages/book-printing.json',
+  'pages/calendar-printing.json',
+  'pages/marketing-print.json',
+  'pages/menu-printing.json',
+  'pages/business-cards.json',
+  'pages/large-format.json',
 ]);
 
 export function ContentEditor({
@@ -104,26 +137,149 @@ export function ContentEditor({
   const [showImagePicker, setShowImagePicker] = useState(false);
   const [imageFieldPath, setImageFieldPath] = useState<string[] | null>(null);
   const [markdownPreview, setMarkdownPreview] = useState<Record<string, boolean>>({});
+  const [activePortfolioCategoryIndex, setActivePortfolioCategoryIndex] = useState(-1);
+  const [activePortfolioItemIndex, setActivePortfolioItemIndex] = useState(-1);
+  const [activeCaseStudyCategoryIndex, setActiveCaseStudyCategoryIndex] = useState(-1);
+  const [activeCaseStudyItemIndex, setActiveCaseStudyItemIndex] = useState(-1);
+  const [activeBlogCategoryIndex, setActiveBlogCategoryIndex] = useState(-1);
+  const [cachedBlogPageCategories, setCachedBlogPageCategories] = useState<BlogCategoryOption[]>(
+    []
+  );
+  const [cachedBlogArticleCategories, setCachedBlogArticleCategories] = useState<string[]>([]);
+  const [blogProductOptions, setBlogProductOptions] = useState<
+    Array<{ slug: string; name: string }>
+  >([]);
   const [seoPopulating, setSeoPopulating] = useState(false);
   const [importing, setImporting] = useState(false);
   const [exporting, setExporting] = useState(false);
-  const [blogServiceOptions, setBlogServiceOptions] = useState<
-    Array<{ id: string; title: string }>
-  >([]);
-  const [blogConditionOptions, setBlogConditionOptions] = useState<
-    Array<{ id: string; title: string }>
-  >([]);
   const filesTitle =
     fileFilter === 'blog'
       ? 'Blog Posts'
       : fileFilter === 'siteSettings'
         ? 'Site Settings'
+        : fileFilter === 'portfolio'
+          ? 'Portfolio'
+          : fileFilter === 'caseStudies'
+            ? 'Case Studies'
         : 'Files';
 
   const site = useMemo(
     () => sites.find((item) => item.id === siteId),
     [sites, siteId]
   );
+
+  const buildDefaultBlogBodyMarkdown = (excerpt: string) =>
+    `${excerpt}
+
+The article body supports headers, pull quotes, numbered lists, code blocks for spec references, and inline product CTAs. When admin is wired, editors will write directly in the admin CMS editor.
+
+For now, this is a starter layout body. Replace it with your full article content.`;
+
+  const sanitizeLegacyBlogPostFields = (
+    input: unknown,
+    options?: { seedDefaultBody?: boolean; blogSlug?: string }
+  ): { sanitized: Record<string, any>; changed: boolean } => {
+    if (!input || typeof input !== 'object' || Array.isArray(input)) {
+      return { sanitized: {}, changed: false };
+    }
+    const next: Record<string, any> = { ...(input as Record<string, unknown>) };
+    let changed = false;
+    if ('relatedServices' in next) {
+      delete next.relatedServices;
+      changed = true;
+    }
+    if ('relatedConditions' in next) {
+      delete next.relatedConditions;
+      changed = true;
+    }
+    const normalizedRelatedProducts = Array.isArray(next.relatedProducts)
+      ? Array.from(
+          new Set(
+            next.relatedProducts
+              .map((item: any) =>
+                typeof item === 'string'
+                  ? item.trim()
+                  : typeof item?.slug === 'string'
+                    ? item.slug.trim()
+                    : ''
+              )
+              .filter((slug: string) => Boolean(slug))
+          )
+        )
+      : [];
+    if (
+      !Array.isArray(next.relatedProducts) ||
+      JSON.stringify(next.relatedProducts) !== JSON.stringify(normalizedRelatedProducts)
+    ) {
+      next.relatedProducts = normalizedRelatedProducts;
+      changed = true;
+    }
+    const currentMarkdown =
+      typeof next.contentMarkdown === 'string' ? next.contentMarkdown.trim() : '';
+    const legacyBodyCandidates = [
+      typeof next.content === 'string' ? next.content.trim() : '',
+      typeof next.body === 'string' ? next.body.trim() : '',
+      typeof next.markdown === 'string' ? next.markdown.trim() : '',
+    ].filter((value): value is string => Boolean(value));
+    if (!currentMarkdown && legacyBodyCandidates.length > 0) {
+      next.contentMarkdown = legacyBodyCandidates[0];
+      changed = true;
+    }
+    if (!currentMarkdown && legacyBodyCandidates.length === 0 && options?.seedDefaultBody) {
+      const excerpt = typeof next.excerpt === 'string' ? next.excerpt.trim() : '';
+      if (excerpt) {
+        next.contentMarkdown = buildDefaultBlogBodyMarkdown(excerpt);
+        changed = true;
+      }
+    }
+    if ('content' in next) {
+      delete next.content;
+      changed = true;
+    }
+    if ('body' in next) {
+      delete next.body;
+      changed = true;
+    }
+    if ('markdown' in next) {
+      delete next.markdown;
+      changed = true;
+    }
+    if (options?.blogSlug) {
+      if (typeof next.slug !== 'string' || !next.slug.trim()) {
+        next.slug = options.blogSlug;
+        changed = true;
+      }
+      if (typeof next.type !== 'string' || !next.type.trim()) {
+        next.type = 'article';
+        changed = true;
+      }
+      if (!next.title && typeof next.hero?.title === 'string' && next.hero.title.trim()) {
+        next.title = next.hero.title.trim();
+        changed = true;
+      }
+      if (
+        !next.excerpt &&
+        typeof next.hero?.subtitle === 'string' &&
+        next.hero.subtitle.trim()
+      ) {
+        next.excerpt = next.hero.subtitle.trim();
+        changed = true;
+      }
+      if ('sectionVariants' in next) {
+        delete next.sectionVariants;
+        changed = true;
+      }
+      if ('hero' in next) {
+        delete next.hero;
+        changed = true;
+      }
+      if ('cta' in next) {
+        delete next.cta;
+        changed = true;
+      }
+    }
+    return { sanitized: next, changed };
+  };
 
   useEffect(() => {
     if (!site) return;
@@ -153,13 +309,18 @@ export function ContentEditor({
       const payload = await response.json();
       let nextFiles: ContentFileItem[] = payload.files || [];
       if (fileFilter === 'blog') {
-        nextFiles = nextFiles.filter((file) => file.path.startsWith('blog/'));
-        nextFiles = [...nextFiles].sort((a, b) =>
-          (b.publishDate || '').localeCompare(a.publishDate || '')
-        );
+        const blogFiles = nextFiles
+          .filter((file) => file.path.startsWith('blog/'))
+          .sort((a, b) => (b.publishDate || '').localeCompare(a.publishDate || ''));
+        const blogPageFile = nextFiles.find((file) => file.path === BLOG_PAGE_PATH);
+        nextFiles = blogPageFile ? [blogPageFile, ...blogFiles] : blogFiles;
       } else if (fileFilter === 'siteSettings') {
         nextFiles = nextFiles.filter((file) => SITE_SETTINGS_PATHS.has(file.path));
         nextFiles = [...nextFiles].sort((a, b) => a.label.localeCompare(b.label));
+      } else if (fileFilter === 'portfolio') {
+        nextFiles = nextFiles.filter((file) => file.path === PORTFOLIO_PAGE_PATH);
+      } else if (fileFilter === 'caseStudies') {
+        nextFiles = nextFiles.filter((file) => file.path === CASE_STUDIES_PAGE_PATH);
       } else {
         nextFiles = nextFiles.filter(
           (file) => !file.path.startsWith('blog/') && !SITE_SETTINGS_PATHS.has(file.path)
@@ -200,12 +361,41 @@ export function ContentEditor({
         }
         return response.json();
       })
-      .then((payload) => {
+      .then(async (payload) => {
         const nextContent = payload.content || '';
-        setContent(nextContent);
         try {
-          setFormData(JSON.parse(nextContent));
+          const parsed = JSON.parse(nextContent);
+          const isBlogArticle = activeFile.path.startsWith('blog/');
+          const blogSlug = isBlogArticle
+            ? activeFile.path.replace(/^blog\//, '').replace(/\.json$/, '')
+            : undefined;
+          const { sanitized, changed } = sanitizeLegacyBlogPostFields(parsed, {
+            seedDefaultBody: isBlogArticle,
+            blogSlug,
+          });
+          const normalizedContent =
+            isBlogArticle && changed
+              ? JSON.stringify(sanitized, null, 2)
+              : nextContent;
+
+          setContent(normalizedContent);
+          setFormData(sanitized);
+
+          if (isBlogArticle && changed) {
+            await fetch('/api/admin/content/file', {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                siteId,
+                locale,
+                path: activeFile.path,
+                content: normalizedContent,
+              }),
+            });
+            setStatus('Auto-migrated legacy blog fields and normalized article body content.');
+          }
         } catch (error) {
+          setContent(nextContent);
           setFormData(null);
         }
       })
@@ -214,17 +404,36 @@ export function ContentEditor({
   }, [activeFile, siteId, locale]);
 
   useEffect(() => {
-    if (!activeFile) return;
-    if (activeFile.path.startsWith('blog/')) {
-      loadBlogLinkOptions();
+    setActivePortfolioCategoryIndex(-1);
+    setActivePortfolioItemIndex(-1);
+    setActiveCaseStudyCategoryIndex(-1);
+    setActiveCaseStudyItemIndex(-1);
+    setActiveBlogCategoryIndex(-1);
+  }, [activeFile?.path, fileFilter]);
+
+  useEffect(() => {
+    if (activeFile?.path === 'theme.json') {
+      setActiveTab('form');
     }
-  }, [activeFile, siteId, locale]);
+  }, [activeFile?.path]);
 
   const handleSave = async () => {
     setStatus(null);
     if (!activeFile) return;
+    let saveContent = content;
+    let removedLegacyFields = false;
     try {
-      JSON.parse(content);
+      const parsed = JSON.parse(content);
+      if (activeFile.path.startsWith('blog/')) {
+        const blogSlug = activeFile.path.replace(/^blog\//, '').replace(/\.json$/, '');
+        const { sanitized, changed } = sanitizeLegacyBlogPostFields(parsed, { blogSlug });
+        if (changed) {
+          saveContent = JSON.stringify(sanitized, null, 2);
+          setFormData(sanitized);
+          setContent(saveContent);
+          removedLegacyFields = true;
+        }
+      }
     } catch (error) {
       setStatus('Invalid JSON. Please fix before saving.');
       return;
@@ -237,7 +446,7 @@ export function ContentEditor({
         siteId,
         locale,
         path: activeFile.path,
-        content,
+        content: saveContent,
       }),
     });
 
@@ -248,7 +457,11 @@ export function ContentEditor({
     }
 
     const payload = await response.json();
-    setStatus(payload.message || 'Saved');
+    setStatus(
+      removedLegacyFields
+        ? 'Saved. Normalized legacy blog fields.'
+        : payload.message || 'Saved'
+    );
   };
 
   const handleImport = async (
@@ -399,11 +612,12 @@ export function ContentEditor({
       isBlog ? 'New blog slug (example: my-post)' : 'New page slug (example: faq)'
     );
     if (!slug) return;
-    const templateId =
-      window.prompt(
-        `Template: ${CONTENT_TEMPLATES.map((t) => t.id).join(', ')}`,
-        CONTENT_TEMPLATES[0]?.id || 'basic'
-      ) || CONTENT_TEMPLATES[0]?.id;
+    const templateId = isBlog
+      ? 'blog-post'
+      : window.prompt(
+          `Template: ${CONTENT_TEMPLATES.map((t) => t.id).join(', ')}`,
+          CONTENT_TEMPLATES[0]?.id || 'basic'
+        ) || CONTENT_TEMPLATES[0]?.id;
     const response = await fetch('/api/admin/content/file', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -489,60 +703,12 @@ export function ContentEditor({
     await loadFiles();
   };
 
-  const loadBlogLinkOptions = async () => {
-    if (!siteId || !locale) return;
-    try {
-      const [servicesRes, conditionsRes] = await Promise.all([
-        fetch(
-          `/api/admin/content/file?siteId=${siteId}&locale=${locale}&path=${encodeURIComponent(
-            'pages/services.json'
-          )}`
-        ),
-        fetch(
-          `/api/admin/content/file?siteId=${siteId}&locale=${locale}&path=${encodeURIComponent(
-            'pages/conditions.json'
-          )}`
-        ),
-      ]);
-      const [servicesPayload, conditionsPayload] = await Promise.all([
-        servicesRes.ok ? servicesRes.json() : Promise.resolve(null),
-        conditionsRes.ok ? conditionsRes.json() : Promise.resolve(null),
-      ]);
-
-      const servicesData = servicesPayload?.content
-        ? JSON.parse(servicesPayload.content)
-        : null;
-      const conditionsData = conditionsPayload?.content
-        ? JSON.parse(conditionsPayload.content)
-        : null;
-
-      const servicesOptions = Array.isArray(servicesData?.services)
-        ? servicesData.services
-            .map((service: any) => ({
-              id: String(service?.id || ''),
-              title: String(service?.title || service?.name || ''),
-            }))
-            .filter((item: any) => item.id && item.title)
-        : [];
-      const conditionsOptions = Array.isArray(conditionsData?.conditions)
-        ? conditionsData.conditions
-            .map((condition: any) => ({
-              id: String(condition?.id || ''),
-              title: String(condition?.title || condition?.name || ''),
-            }))
-            .filter((item: any) => item.id && item.title)
-        : [];
-
-      setBlogServiceOptions(servicesOptions);
-      setBlogConditionOptions(conditionsOptions);
-    } catch (error) {
-      setBlogServiceOptions([]);
-      setBlogConditionOptions([]);
-    }
-  };
-
   const getPreviewPath = () => {
     if (!activeFile) return `/${locale}`;
+    if (activeFile.path.startsWith('landing/')) {
+      const lang = activeFile.path.replace('landing/', '').replace('.json', '');
+      return `/lp/${lang}`;
+    }
     if (activeFile.path.startsWith('pages/')) {
       const slug = activeFile.path.replace('pages/', '').replace('.json', '');
       if (slug === 'home') return `/${locale}`;
@@ -618,12 +784,26 @@ export function ContentEditor({
   };
 
   const isSeoFile = activeFile?.path === 'seo.json';
-  const isBlogPostFile = activeFile?.path.startsWith('blog/');
   const isHeaderFile = activeFile?.path === 'header.json';
   const isThemeFile = activeFile?.path === 'theme.json';
+  const isLandingFile = Boolean(activeFile?.path.startsWith('landing/'));
   const isHomePageFile = activeFile?.path === 'pages/home.json';
   const isPortfolioPageFile = activeFile?.path === 'pages/portfolio.json';
-  const allowCreateOrDuplicate = fileFilter !== 'siteSettings';
+  const isProductPageFile = activeFile ? PRODUCT_PAGE_PATHS.has(activeFile.path) : false;
+  const productHeroKey = isProductPageFile
+    ? formData?.pageHero
+      ? 'pageHero'
+      : formData?.heroSection
+        ? 'heroSection'
+        : formData?.hero
+          ? 'hero'
+          : 'pageHero'
+    : 'hero';
+  const productHero = isProductPageFile ? formData?.[productHeroKey] : null;
+  const allowCreateOrDuplicate =
+    fileFilter !== 'siteSettings' &&
+    fileFilter !== 'portfolio' &&
+    fileFilter !== 'caseStudies';
   const variantSections = formData
     ? Object.entries(SECTION_VARIANT_OPTIONS).filter(
         ([key]) =>
@@ -642,12 +822,28 @@ export function ContentEditor({
     : [];
   const caseStudyCategories = Array.isArray(formData?.categories)
     ? formData.categories
-        .map((category: any) => ({
-          id: typeof category?.id === 'string' ? category.id : '',
-          name: typeof category?.name === 'string' ? category.name : '',
-        }))
+        .map((category: any) => {
+          if (typeof category === 'string') {
+            return { id: category, name: category };
+          }
+          return {
+            id: typeof category?.id === 'string' ? category.id : '',
+            name: typeof category?.name === 'string' ? category.name : '',
+          };
+        })
         .filter((category: any) => category.id && category.name)
     : [];
+  const caseStudiesKey = Array.isArray(formData?.stories)
+    ? 'stories'
+    : Array.isArray(formData?.caseStudies)
+      ? 'caseStudies'
+      : null;
+  const caseStudiesItems = caseStudiesKey
+    ? (formData?.[caseStudiesKey] as Array<Record<string, any>>)
+    : [];
+  const portfolioItems = Array.isArray(formData?.items) ? formData.items : [];
+  const isBlogArticleFile = activeFile?.path.startsWith('blog/');
+  const isBlogPageFile = activeFile?.path === BLOG_PAGE_PATH;
   const portfolioCategoryOptions = Array.isArray(formData?.categories)
     ? formData.categories
         .map((category: any) =>
@@ -659,6 +855,239 @@ export function ContentEditor({
         )
         .filter((category: string) => Boolean(category))
     : [];
+  const normalizeBlogCategories = (categories: unknown): BlogCategoryOption[] => {
+    if (!Array.isArray(categories)) return [];
+    return categories
+      .map((category: any) => {
+        if (typeof category === 'string') {
+          const maybeSlug = category.trim();
+          if (!maybeSlug) return null;
+          return {
+            slug: maybeSlug,
+            name: toTitleCase(maybeSlug),
+          };
+        }
+        const name = typeof category?.name === 'string' ? category.name.trim() : '';
+        const slugSource =
+          typeof category?.slug === 'string'
+            ? category.slug
+            : typeof category?.id === 'string'
+              ? category.id
+              : '';
+        const slug = slugifyCategoryName(String(slugSource || name || '').trim());
+        if (!slug) return null;
+        return {
+          slug,
+          name: name || toTitleCase(slug),
+        };
+      })
+      .filter((category): category is BlogCategoryOption => Boolean(category));
+  };
+  const blogPageCategories = normalizeBlogCategories(formData?.categories);
+  const blogPageFileRef = files.find((file) => file.path === BLOG_PAGE_PATH) || null;
+  const blogArticleFiles = files.filter((file) => file.path.startsWith('blog/'));
+  const blogArticlePathsKey = blogArticleFiles.map((file) => file.path).join('|');
+  const activeBlogArticlePath = activeFile?.path?.startsWith('blog/') ? activeFile.path : null;
+  const isPortfolioModuleMode = fileFilter === 'portfolio' && isPortfolioPageFile;
+  const isCaseStudiesModuleMode =
+    fileFilter === 'caseStudies' && activeFile?.path === CASE_STUDIES_PAGE_PATH;
+  const isBlogModuleMode = fileFilter === 'blog' && isBlogPageFile;
+  const isPortfolioCategorySelected =
+    isPortfolioModuleMode &&
+    activePortfolioCategoryIndex >= 0 &&
+    activePortfolioCategoryIndex < portfolioCategoryOptions.length;
+  const isPortfolioItemSelected =
+    isPortfolioModuleMode &&
+    activePortfolioItemIndex >= 0 &&
+    activePortfolioItemIndex < portfolioItems.length;
+  const selectedPortfolioCategory = isPortfolioCategorySelected
+    ? portfolioCategoryOptions[activePortfolioCategoryIndex]
+    : '';
+  const selectedPortfolioItem = isPortfolioItemSelected
+    ? portfolioItems[activePortfolioItemIndex]
+    : null;
+  const isCaseStudyCategorySelected =
+    isCaseStudiesModuleMode &&
+    activeCaseStudyCategoryIndex >= 0 &&
+    activeCaseStudyCategoryIndex < caseStudyCategories.length;
+  const isCaseStudyItemSelected =
+    isCaseStudiesModuleMode &&
+    activeCaseStudyItemIndex >= 0 &&
+    activeCaseStudyItemIndex < caseStudiesItems.length;
+  const selectedCaseStudyCategory = isCaseStudyCategorySelected
+    ? caseStudyCategories[activeCaseStudyCategoryIndex]
+    : null;
+  const selectedCaseStudyItem = isCaseStudyItemSelected
+    ? caseStudiesItems[activeCaseStudyItemIndex]
+    : null;
+  const blogSidebarCategories = Array.from(
+    new Map(
+      [
+        ...blogPageCategories,
+        ...cachedBlogPageCategories,
+        ...cachedBlogArticleCategories
+          .map((slug) => slug.trim())
+          .filter((slug) => Boolean(slug))
+          .map((slug) => ({ slug, name: toTitleCase(slug) })),
+      ].map((category) => [category.slug, category] as const)
+    ).values()
+  );
+  const isBlogCategorySelected =
+    isBlogModuleMode &&
+    activeBlogCategoryIndex >= 0 &&
+    activeBlogCategoryIndex < blogSidebarCategories.length;
+  const selectedBlogCategory = isBlogCategorySelected
+    ? blogSidebarCategories[activeBlogCategoryIndex]
+    : null;
+  const blogCategorySelectOptions = Array.from(
+    new Map(
+      [
+        ...blogSidebarCategories,
+        typeof formData?.category === 'string' && formData.category.trim()
+          ? {
+              slug: formData.category.trim(),
+              name: toTitleCase(formData.category.trim()),
+            }
+          : null,
+      ]
+        .filter((category): category is BlogCategoryOption => Boolean(category))
+        .map((category) => [category.slug, category] as const)
+    ).values()
+  );
+  const selectedRelatedProducts = Array.isArray(formData?.relatedProducts)
+    ? formData.relatedProducts
+        .map((item: any) => (typeof item === 'string' ? item : ''))
+        .filter((item: string) => Boolean(item))
+    : [];
+
+  useEffect(() => {
+    if (!isBlogPageFile) return;
+    setCachedBlogPageCategories(blogPageCategories);
+  }, [isBlogPageFile, blogPageCategories]);
+
+  useEffect(() => {
+    if (fileFilter !== 'blog' || !siteId || !locale || isBlogPageFile || !blogPageFileRef) return;
+    let cancelled = false;
+
+    const loadBlogCategoriesFromPage = async () => {
+      try {
+        const response = await fetch(
+          `/api/admin/content/file?siteId=${siteId}&locale=${locale}&path=${encodeURIComponent(
+            BLOG_PAGE_PATH
+          )}`
+        );
+        if (!response.ok) return;
+        const payload = await response.json();
+        const parsed = payload?.content ? JSON.parse(payload.content) : {};
+        if (!cancelled) {
+          setCachedBlogPageCategories(normalizeBlogCategories(parsed?.categories));
+        }
+      } catch {
+        if (!cancelled) {
+          setCachedBlogPageCategories([]);
+        }
+      }
+    };
+
+    void loadBlogCategoriesFromPage();
+    return () => {
+      cancelled = true;
+    };
+  }, [fileFilter, siteId, locale, isBlogPageFile, blogPageFileRef]);
+
+  useEffect(() => {
+    if (fileFilter !== 'blog' || !siteId || !locale) return;
+    if (blogArticleFiles.length === 0) {
+      setCachedBlogArticleCategories([]);
+      return;
+    }
+    let cancelled = false;
+
+    const loadBlogCategoriesFromArticles = async () => {
+      try {
+        const payloads = await Promise.all(
+          blogArticleFiles.map(async (file) => {
+            const response = await fetch(
+              `/api/admin/content/file?siteId=${siteId}&locale=${locale}&path=${encodeURIComponent(
+                file.path
+              )}`
+            );
+            if (!response.ok) return null;
+            return response.json();
+          })
+        );
+
+        const categories = payloads
+          .map((payload) => {
+            if (!payload?.content) return '';
+            try {
+              const parsed = JSON.parse(payload.content);
+              return typeof parsed?.category === 'string' ? parsed.category.trim() : '';
+            } catch {
+              return '';
+            }
+          })
+          .filter((category): category is string => Boolean(category));
+
+        if (!cancelled) {
+          setCachedBlogArticleCategories(Array.from(new Set(categories)));
+        }
+      } catch {
+        if (!cancelled) {
+          setCachedBlogArticleCategories([]);
+        }
+      }
+    };
+
+    void loadBlogCategoriesFromArticles();
+    return () => {
+      cancelled = true;
+    };
+  }, [fileFilter, siteId, locale, blogArticlePathsKey]);
+
+  useEffect(() => {
+    if (fileFilter !== 'blog' || !siteId || !locale) return;
+    let cancelled = false;
+
+    const loadProductsForBlog = async () => {
+      try {
+        const response = await fetch(
+          `/api/admin/content/file?siteId=${siteId}&locale=${locale}&path=${encodeURIComponent(
+            'pages/products.json'
+          )}`
+        );
+        if (!response.ok) {
+          if (!cancelled) setBlogProductOptions([]);
+          return;
+        }
+        const payload = await response.json();
+        const parsed = payload?.content ? JSON.parse(payload.content) : {};
+        const options = Array.isArray(parsed?.categories)
+          ? parsed.categories
+              .map((category: any) => ({
+                slug: typeof category?.slug === 'string' ? category.slug.trim() : '',
+                name:
+                  typeof category?.name === 'string' && category.name.trim()
+                    ? category.name.trim()
+                    : '',
+              }))
+              .filter((category: { slug: string; name: string }) => category.slug && category.name)
+          : [];
+        if (!cancelled) {
+          setBlogProductOptions(options);
+        }
+      } catch {
+        if (!cancelled) {
+          setBlogProductOptions([]);
+        }
+      }
+    };
+
+    void loadProductsForBlog();
+    return () => {
+      cancelled = true;
+    };
+  }, [fileFilter, siteId, locale]);
   const homePhotoFields = useMemo(() => {
     if (!isHomePageFile || !formData) return [] as Array<{ path: string[]; label: string }>;
 
@@ -669,9 +1098,6 @@ export function ContentEditor({
       'title',
       'name',
       'label',
-      'condition',
-      'businessName',
-      'clinicName',
       'tagline',
       'text',
       'id',
@@ -806,6 +1232,8 @@ export function ContentEditor({
       featured: false,
     });
     updateFormValue(['items'], items);
+    setActivePortfolioCategoryIndex(-1);
+    setActivePortfolioItemIndex(items.length - 1);
   };
 
   const removePortfolioItem = (index: number) => {
@@ -813,6 +1241,8 @@ export function ContentEditor({
     const items = [...formData.items];
     items.splice(index, 1);
     updateFormValue(['items'], items);
+    if (activePortfolioItemIndex === index) setActivePortfolioItemIndex(-1);
+    if (activePortfolioItemIndex > index) setActivePortfolioItemIndex(activePortfolioItemIndex - 1);
   };
 
   const addPortfolioCategory = () => {
@@ -822,6 +1252,8 @@ export function ContentEditor({
     const categories = Array.isArray(formData.categories) ? [...formData.categories] : [];
     categories.push(value.trim());
     updateFormValue(['categories'], categories);
+    setActivePortfolioItemIndex(-1);
+    setActivePortfolioCategoryIndex(categories.length - 1);
   };
 
   const removePortfolioCategory = (index: number) => {
@@ -829,6 +1261,198 @@ export function ContentEditor({
     const categories = [...formData.categories];
     categories.splice(index, 1);
     updateFormValue(['categories'], categories);
+    if (activePortfolioCategoryIndex === index) setActivePortfolioCategoryIndex(-1);
+    if (activePortfolioCategoryIndex > index) {
+      setActivePortfolioCategoryIndex(activePortfolioCategoryIndex - 1);
+    }
+  };
+
+  const addCaseStudyCategory = () => {
+    if (!formData) return;
+    const value = window.prompt('Category name');
+    if (!value || !value.trim()) return;
+    const categories = Array.isArray(formData.categories) ? [...formData.categories] : [];
+    categories.push(value.trim());
+    updateFormValue(['categories'], categories);
+    setActiveCaseStudyItemIndex(-1);
+    setActiveCaseStudyCategoryIndex(categories.length - 1);
+  };
+
+  const removeCaseStudyCategory = (index: number) => {
+    if (!formData || !Array.isArray(formData.categories)) return;
+    const categories = [...formData.categories];
+    categories.splice(index, 1);
+    updateFormValue(['categories'], categories);
+    if (activeCaseStudyCategoryIndex === index) setActiveCaseStudyCategoryIndex(-1);
+    if (activeCaseStudyCategoryIndex > index) {
+      setActiveCaseStudyCategoryIndex(activeCaseStudyCategoryIndex - 1);
+    }
+  };
+
+  const addCaseStudyEntry = () => {
+    if (!formData || !caseStudiesKey) return;
+    const next = [...caseStudiesItems];
+    const nextIdBase = (next.length ? next.length : 0) + Date.now().toString().slice(-4);
+    next.push({
+      id: `cs-${nextIdBase}`,
+      title: '',
+      client: '',
+      author: '',
+      category: caseStudyCategories[0]?.id || '',
+      challenge: '',
+      solution: '',
+      result: '',
+      quote: '',
+      featured: false,
+      image: '',
+      beforeImage: '',
+      afterImage: '',
+      condition: '',
+      summary: '',
+    });
+    updateFormValue([caseStudiesKey], next);
+    setActiveCaseStudyCategoryIndex(-1);
+    setActiveCaseStudyItemIndex(next.length - 1);
+  };
+
+  const removeCaseStudyEntry = (index: number) => {
+    if (!caseStudiesKey) return;
+    const next = [...caseStudiesItems];
+    next.splice(index, 1);
+    updateFormValue([caseStudiesKey], next);
+    if (activeCaseStudyItemIndex === index) setActiveCaseStudyItemIndex(-1);
+    if (activeCaseStudyItemIndex > index) setActiveCaseStudyItemIndex(activeCaseStudyItemIndex - 1);
+  };
+
+  const saveBlogCategoriesToPage = async (categories: BlogCategoryOption[]) => {
+    if (!siteId || !locale) return false;
+    const normalized = Array.from(
+      new Map(
+        categories
+          .map((category) => {
+            const slug = slugifyCategoryName(category.slug || category.name || '');
+            const name = String(category.name || '').trim() || toTitleCase(slug);
+            if (!slug) return null;
+            return { slug, name };
+          })
+          .filter((category): category is BlogCategoryOption => Boolean(category))
+          .map((category) => [category.slug, category] as const)
+      ).values()
+    );
+
+    try {
+      let nextPageData: Record<string, any> = {};
+
+      if (isBlogPageFile && formData) {
+        nextPageData = { ...formData };
+      } else {
+        const response = await fetch(
+          `/api/admin/content/file?siteId=${siteId}&locale=${locale}&path=${encodeURIComponent(
+            BLOG_PAGE_PATH
+          )}`
+        );
+        if (!response.ok) {
+          const payload = await response.json();
+          throw new Error(payload.message || 'Failed to load blog page categories.');
+        }
+        const payload = await response.json();
+        nextPageData = payload?.content ? JSON.parse(payload.content) : {};
+      }
+
+      nextPageData.categories = normalized;
+      const nextContent = JSON.stringify(nextPageData, null, 2);
+      const saveResponse = await fetch('/api/admin/content/file', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          siteId,
+          locale,
+          path: BLOG_PAGE_PATH,
+          content: nextContent,
+        }),
+      });
+      if (!saveResponse.ok) {
+        const payload = await saveResponse.json();
+        throw new Error(payload.message || 'Failed to save blog page categories.');
+      }
+
+      setCachedBlogPageCategories(normalized);
+      if (isBlogPageFile) {
+        setFormData(nextPageData);
+        setContent(nextContent);
+      }
+      return true;
+    } catch (error: any) {
+      setStatus(error?.message || 'Failed to update blog categories.');
+      return false;
+    }
+  };
+
+  const addBlogCategory = () => {
+    const value = window.prompt('Category name (slug will auto-generate)');
+    if (!value || !value.trim()) return;
+    const name = value.trim();
+    const baseSlug = slugifyCategoryName(name);
+    if (!baseSlug) return;
+    let slug = baseSlug;
+    let suffix = 2;
+    const usedSlugs = new Set(blogSidebarCategories.map((category) => category.slug));
+    while (usedSlugs.has(slug)) {
+      slug = `${baseSlug}-${suffix}`;
+      suffix += 1;
+    }
+    const categories = [...blogSidebarCategories, { slug, name }];
+    void saveBlogCategoriesToPage(categories).then((saved) => {
+      if (!saved) return;
+      const index = categories.findIndex((category) => category.slug === slug);
+      setActiveBlogCategoryIndex(index);
+    });
+  };
+
+  const removeBlogCategory = (index: number) => {
+    const categoryToRemove = blogSidebarCategories[index];
+    if (!categoryToRemove) return;
+    const categories = blogSidebarCategories.filter(
+      (category) => category.slug !== categoryToRemove.slug
+    );
+    void saveBlogCategoriesToPage(categories).then((saved) => {
+      if (!saved) return;
+      if (activeBlogCategoryIndex === index) setActiveBlogCategoryIndex(-1);
+      if (activeBlogCategoryIndex > index) setActiveBlogCategoryIndex(activeBlogCategoryIndex - 1);
+    });
+  };
+
+  const updateBlogCategory = (index: number, patch: Partial<BlogCategoryOption>) => {
+    const current = blogSidebarCategories[index];
+    if (!current) return;
+    const nextSlug = slugifyCategoryName(
+      typeof patch.slug === 'string' ? patch.slug : current.slug
+    );
+    const nextName =
+      typeof patch.name === 'string' ? patch.name.trim() : current.name;
+    if (!nextSlug) return;
+
+    const nextCategories = blogSidebarCategories.map((category, categoryIndex) => {
+      if (categoryIndex !== index) return category;
+      return {
+        slug: nextSlug,
+        name: nextName || toTitleCase(nextSlug),
+      };
+    });
+
+    void saveBlogCategoriesToPage(nextCategories);
+  };
+
+  const addBlogArticle = () => {
+    void handleCreate();
+  };
+
+  const deleteSelectedBlogArticle = () => {
+    if (!activeBlogArticlePath) {
+      setStatus('Select an article to delete.');
+      return;
+    }
+    void handleDelete();
   };
 
   const addHeaderMenuItem = () => {
@@ -857,16 +1481,6 @@ export function ContentEditor({
     const languages = [...formData.languages];
     languages.splice(index, 1);
     updateFormValue(['languages'], languages);
-  };
-
-  const toggleSelection = (path: string[], value: string) => {
-    if (!formData) return;
-    const current = Array.isArray(path.reduce<any>((acc, key) => acc?.[key], formData))
-      ? (path.reduce<any>((acc, key) => acc?.[key], formData) as string[])
-      : [];
-    const exists = current.includes(value);
-    const next = exists ? current.filter((item) => item !== value) : [...current, value];
-    updateFormValue(path, next);
   };
 
   const populateSeoFromHeroes = async () => {
@@ -1019,47 +1633,54 @@ export function ContentEditor({
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
-        <div className="bg-white border border-gray-200 rounded-xl p-4">
-          <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-            {filesTitle}
-          </div>
-          {loading && files.length === 0 ? (
-            <div className="text-sm text-gray-500">Loading…</div>
-          ) : (
-            <div className="space-y-2">
-              {files.map((file) => (
-                <button
-                  key={file.id}
-                  type="button"
-                  onClick={() => setActiveFile(file)}
-                  className={`w-full text-left px-3 py-2 rounded-lg text-sm ${
-                    activeFile?.id === file.id
-                      ? 'bg-[var(--primary)] text-white'
-                      : 'hover:bg-gray-100 text-gray-700'
-                  }`}
-                >
-                  <div className="font-medium">{file.label}</div>
-                  <div className="text-xs opacity-70">{file.path}</div>
-                  {fileFilter === 'blog' && file.publishDate && (
-                    <div className="text-[11px] text-gray-500 mt-1">
-                      {new Date(file.publishDate).toLocaleDateString(
-                        locale === 'zh' ? 'zh-CN' : 'en-US',
-                        { year: 'numeric', month: 'short', day: 'numeric' }
-                      )}
-                    </div>
-                  )}
-                </button>
-              ))}
-              {files.length === 0 && (
-                <div className="text-sm text-gray-500">
-                  {fileFilter === 'blog'
-                    ? 'No blog posts found for this locale.'
-                    : 'No content files found for this locale.'}
-                </div>
-              )}
-            </div>
-          )}
-        </div>
+        <ContentEditorModuleSidebar
+          filesTitle={filesTitle}
+          loading={loading}
+          files={files}
+          activeFile={activeFile}
+          fileFilter={fileFilter}
+          locale={locale}
+          setActiveFile={setActiveFile}
+          isPortfolioPageFile={Boolean(isPortfolioPageFile)}
+          isPortfolioCategorySelected={isPortfolioCategorySelected}
+          isPortfolioItemSelected={isPortfolioItemSelected}
+          activePortfolioCategoryIndex={activePortfolioCategoryIndex}
+          activePortfolioItemIndex={activePortfolioItemIndex}
+          setActivePortfolioCategoryIndex={setActivePortfolioCategoryIndex}
+          setActivePortfolioItemIndex={setActivePortfolioItemIndex}
+          addPortfolioCategory={addPortfolioCategory}
+          removePortfolioCategory={removePortfolioCategory}
+          portfolioCategoryOptions={portfolioCategoryOptions}
+          addPortfolioItem={addPortfolioItem}
+          removePortfolioItem={removePortfolioItem}
+          portfolioItems={portfolioItems}
+          isCaseStudiesPageFile={Boolean(activeFile?.path === CASE_STUDIES_PAGE_PATH)}
+          isCaseStudyCategorySelected={isCaseStudyCategorySelected}
+          isCaseStudyItemSelected={isCaseStudyItemSelected}
+          activeCaseStudyCategoryIndex={activeCaseStudyCategoryIndex}
+          activeCaseStudyItemIndex={activeCaseStudyItemIndex}
+          setActiveCaseStudyCategoryIndex={setActiveCaseStudyCategoryIndex}
+          setActiveCaseStudyItemIndex={setActiveCaseStudyItemIndex}
+          addCaseStudyCategory={addCaseStudyCategory}
+          removeCaseStudyCategory={removeCaseStudyCategory}
+          caseStudyCategories={caseStudyCategories}
+          addCaseStudyEntry={addCaseStudyEntry}
+          removeCaseStudyEntry={removeCaseStudyEntry}
+          caseStudiesItems={caseStudiesItems}
+          isBlogPageFile={Boolean(isBlogPageFile)}
+          isBlogCategorySelected={isBlogCategorySelected}
+          activeBlogCategoryIndex={activeBlogCategoryIndex}
+          setActiveBlogCategoryIndex={setActiveBlogCategoryIndex}
+          addBlogCategory={addBlogCategory}
+          removeBlogCategory={removeBlogCategory}
+          blogPageCategories={blogSidebarCategories.map((category) => category.slug)}
+          blogPageFile={blogPageFileRef}
+          blogArticleFiles={blogArticleFiles}
+          activeBlogArticlePath={activeBlogArticlePath}
+          addBlogArticle={addBlogArticle}
+          deleteSelectedBlogArticle={deleteSelectedBlogArticle}
+          canDeleteSelectedBlogArticle={Boolean(activeBlogArticlePath)}
+        />
 
         <div className="bg-white border border-gray-200 rounded-xl p-4">
           <div className="flex items-center justify-between mb-3">
@@ -1160,655 +1781,47 @@ export function ContentEditor({
                 </div>
               )}
 
-              {isSeoFile && formData && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="text-xs font-semibold text-gray-500 uppercase">
-                      SEO
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={populateSeoFromHeroes}
-                        disabled={seoPopulating}
-                        className="px-3 py-1.5 rounded-md border border-gray-200 text-xs text-gray-700 hover:bg-gray-50 disabled:opacity-50"
-                      >
-                        {seoPopulating ? 'Populating…' : 'Auto-populate'}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={addSeoPage}
-                        className="px-3 py-1.5 rounded-md border border-gray-200 text-xs text-gray-700 hover:bg-gray-50"
-                      >
-                        Add Page SEO
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="grid gap-3 md:grid-cols-2">
-                    <div>
-                      <label className="block text-xs text-gray-500">Default Title</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.title || ''}
-                        onChange={(event) => updateFormValue(['title'], event.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs text-gray-500">Default Description</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.description || ''}
-                        onChange={(event) =>
-                          updateFormValue(['description'], event.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="md:col-span-2">
-                      <label className="block text-xs text-gray-500">Open Graph Image</label>
-                      <div className="mt-1 flex gap-2">
-                        <input
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.ogImage || ''}
-                          onChange={(event) =>
-                            updateFormValue(['ogImage'], event.target.value)
-                          }
-                        />
-                        <button
-                          type="button"
-                          onClick={() => openImagePicker(['ogImage'])}
-                          className="px-3 rounded-md border border-gray-200 text-xs"
-                        >
-                          Choose
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 border-t border-gray-100 pt-4">
-                    <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                      Home Page SEO
-                    </div>
-                    <div className="grid gap-3 md:grid-cols-2">
-                      <div>
-                        <label className="block text-xs text-gray-500">Home Title</label>
-                        <input
-                          className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.home?.title || ''}
-                          onChange={(event) =>
-                            updateFormValue(['home', 'title'], event.target.value)
-                          }
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-xs text-gray-500">Home Description</label>
-                        <input
-                          className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.home?.description || ''}
-                          onChange={(event) =>
-                            updateFormValue(['home', 'description'], event.target.value)
-                          }
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 border-t border-gray-100 pt-4">
-                    <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                      Page SEO
-                    </div>
-                    {formData.pages && typeof formData.pages === 'object' ? (
-                      <div className="space-y-3">
-                        {Object.entries(formData.pages as Record<string, any>).map(
-                          ([slug, values]) => (
-                            <div
-                              key={slug}
-                              className="border border-gray-200 rounded-lg p-3"
-                            >
-                              <div className="flex items-center justify-between mb-2">
-                                <div className="text-xs font-semibold text-gray-700">
-                                  {slug}
-                                </div>
-                                <button
-                                  type="button"
-                                  onClick={() => removeSeoPage(slug)}
-                                  className="text-xs text-red-600 hover:text-red-700"
-                                >
-                                  Remove
-                                </button>
-                              </div>
-                              <div className="grid gap-3 md:grid-cols-2">
-                                <div>
-                                  <label className="block text-xs text-gray-500">
-                                    Title
-                                  </label>
-                                  <input
-                                    className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                    value={values?.title || ''}
-                                    onChange={(event) =>
-                                      updateFormValue(
-                                        ['pages', slug, 'title'],
-                                        event.target.value
-                                      )
-                                    }
-                                  />
-                                </div>
-                                <div>
-                                  <label className="block text-xs text-gray-500">
-                                    Description
-                                  </label>
-                                  <input
-                                    className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                    value={values?.description || ''}
-                                    onChange={(event) =>
-                                      updateFormValue(
-                                        ['pages', slug, 'description'],
-                                        event.target.value
-                                      )
-                                    }
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          )
-                        )}
-                        {Object.keys(formData.pages).length === 0 && (
-                          <div className="text-xs text-gray-500">
-                            No page-specific SEO entries yet.
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <div className="text-xs text-gray-500">
-                        No page-specific SEO entries yet.
-                      </div>
-                    )}
-                  </div>
-                </div>
+              {isBlogCategorySelected && selectedBlogCategory && (
+                <BlogCategoryEditorPanel
+                  selectedBlogCategory={selectedBlogCategory}
+                  activeBlogCategoryIndex={activeBlogCategoryIndex}
+                  removeBlogCategory={removeBlogCategory}
+                  setActiveBlogCategoryIndex={setActiveBlogCategoryIndex}
+                  updateBlogCategory={updateBlogCategory}
+                />
               )}
 
-              {isHeaderFile && formData && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Header
-                  </div>
+              {!isBlogCategorySelected && (
+              <>
+              <SeoFormPanel
+                isSeoFile={isSeoFile}
+                formData={formData}
+                seoPopulating={seoPopulating}
+                populateSeoFromHeroes={populateSeoFromHeroes}
+                addSeoPage={addSeoPage}
+                removeSeoPage={removeSeoPage}
+                updateFormValue={updateFormValue}
+                openImagePicker={openImagePicker}
+              />
 
-                  <div className="space-y-4">
-                    <div>
-                      <div className="text-xs font-semibold text-gray-500 uppercase mb-2">
-                        Topbar
-                      </div>
-                      <div className="grid gap-3 md:grid-cols-2">
-                        <div>
-                          <label className="block text-xs text-gray-500">Phone</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.topbar?.phone || ''}
-                            onChange={(event) =>
-                              updateFormValue(['topbar', 'phone'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Phone Href</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.topbar?.phoneHref || ''}
-                            onChange={(event) =>
-                              updateFormValue(['topbar', 'phoneHref'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Address</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.topbar?.address || ''}
-                            onChange={(event) =>
-                              updateFormValue(['topbar', 'address'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Address Href</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.topbar?.addressHref || ''}
-                            onChange={(event) =>
-                              updateFormValue(['topbar', 'addressHref'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Hours</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.topbar?.hours || ''}
-                            onChange={(event) =>
-                              updateFormValue(['topbar', 'hours'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Badge</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.topbar?.badge || ''}
-                            onChange={(event) =>
-                              updateFormValue(['topbar', 'badge'], event.target.value)
-                            }
-                          />
-                        </div>
-                      </div>
-                    </div>
+              <HeaderFormPanel
+                isHeaderFile={isHeaderFile}
+                formData={formData}
+                updateFormValue={updateFormValue}
+                openImagePicker={openImagePicker}
+                addHeaderMenuItem={addHeaderMenuItem}
+                removeHeaderMenuItem={removeHeaderMenuItem}
+                addHeaderLanguage={addHeaderLanguage}
+                removeHeaderLanguage={removeHeaderLanguage}
+              />
 
-                    <div>
-                      <div className="text-xs font-semibold text-gray-500 uppercase mb-2">
-                        Logo
-                      </div>
-                      <div className="mb-3">
-                        <label className="block text-xs text-gray-500">Menu Variant</label>
-                        <select
-                          className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.menu?.variant || 'default'}
-                          onChange={(event) =>
-                            updateFormValue(['menu', 'variant'], event.target.value)
-                          }
-                        >
-                          <option value="default">Default</option>
-                          <option value="centered">Centered</option>
-                          <option value="transparent">Transparent</option>
-                          <option value="stacked">Stacked</option>
-                        </select>
-                      </div>
-                      <div className="mb-3">
-                        <label className="block text-xs text-gray-500">Menu Font Weight</label>
-                        <select
-                          className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.menu?.fontWeight || 'semibold'}
-                          onChange={(event) =>
-                            updateFormValue(['menu', 'fontWeight'], event.target.value)
-                          }
-                        >
-                          <option value="regular">Regular</option>
-                          <option value="semibold">Semibold</option>
-                        </select>
-                      </div>
-                      <div className="grid gap-3 md:grid-cols-3">
-                        <div>
-                          <label className="block text-xs text-gray-500">Emoji</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.menu?.logo?.emoji || ''}
-                            onChange={(event) =>
-                              updateFormValue(['menu', 'logo', 'emoji'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Text</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.menu?.logo?.text || ''}
-                            onChange={(event) =>
-                              updateFormValue(['menu', 'logo', 'text'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Subtext</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.menu?.logo?.subtext || ''}
-                            onChange={(event) =>
-                              updateFormValue(['menu', 'logo', 'subtext'], event.target.value)
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="mt-3 grid gap-3 md:grid-cols-2">
-                        <div>
-                          <label className="block text-xs text-gray-500">Logo Image</label>
-                          <div className="mt-1 flex gap-2">
-                            <input
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={formData.menu?.logo?.image?.src || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['menu', 'logo', 'image', 'src'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                            <button
-                              type="button"
-                              onClick={() => openImagePicker(['menu', 'logo', 'image', 'src'])}
-                              className="px-3 rounded-md border border-gray-200 text-xs"
-                            >
-                              Choose
-                            </button>
-                          </div>
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Logo Alt</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.menu?.logo?.image?.alt || ''}
-                            onChange={(event) =>
-                              updateFormValue(
-                                ['menu', 'logo', 'image', 'alt'],
-                                event.target.value
-                              )
-                            }
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="text-xs font-semibold text-gray-500 uppercase">
-                          Menu Items
-                        </div>
-                        <button
-                          type="button"
-                          onClick={addHeaderMenuItem}
-                          className="px-3 py-1.5 rounded-md border border-gray-200 text-xs text-gray-700 hover:bg-gray-50"
-                        >
-                          Add Item
-                        </button>
-                      </div>
-                      <div className="space-y-3">
-                        {(Array.isArray(formData.menu?.items)
-                          ? formData.menu.items
-                          : []
-                        ).map((item: any, index: number) => (
-                          <div
-                            key={`header-item-${index}`}
-                            className="grid gap-3 md:grid-cols-[1fr_1fr_auto] items-end"
-                          >
-                            <div>
-                              <label className="block text-xs text-gray-500">Text</label>
-                              <input
-                                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                value={item?.text || ''}
-                                onChange={(event) =>
-                                  updateFormValue(
-                                    ['menu', 'items', `${index}`, 'text'],
-                                    event.target.value
-                                  )
-                                }
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-xs text-gray-500">URL</label>
-                              <input
-                                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                value={item?.url || ''}
-                                onChange={(event) =>
-                                  updateFormValue(
-                                    ['menu', 'items', `${index}`, 'url'],
-                                    event.target.value
-                                  )
-                                }
-                              />
-                            </div>
-                            <button
-                              type="button"
-                              onClick={() => removeHeaderMenuItem(index)}
-                              className="text-xs text-red-600 hover:text-red-700"
-                            >
-                              Remove
-                            </button>
-                          </div>
-                        ))}
-                        {!Array.isArray(formData.menu?.items) ||
-                        formData.menu.items.length === 0 ? (
-                          <div className="text-xs text-gray-500">
-                            No menu items yet.
-                          </div>
-                        ) : null}
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="text-xs font-semibold text-gray-500 uppercase">
-                          Languages
-                        </div>
-                        <button
-                          type="button"
-                          onClick={addHeaderLanguage}
-                          className="px-3 py-1.5 rounded-md border border-gray-200 text-xs text-gray-700 hover:bg-gray-50"
-                        >
-                          Add Language
-                        </button>
-                      </div>
-                      <div className="space-y-3">
-                        {(Array.isArray(formData.languages)
-                          ? formData.languages
-                          : []
-                        ).map((item: any, index: number) => (
-                          <div
-                            key={`header-language-${index}`}
-                            className="grid gap-3 md:grid-cols-[1fr_1fr_1fr_auto] items-end"
-                          >
-                            <div>
-                              <label className="block text-xs text-gray-500">Label</label>
-                              <input
-                                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                value={item?.label || ''}
-                                onChange={(event) =>
-                                  updateFormValue(
-                                    ['languages', `${index}`, 'label'],
-                                    event.target.value
-                                  )
-                                }
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-xs text-gray-500">Locale</label>
-                              <input
-                                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                value={item?.locale || ''}
-                                onChange={(event) =>
-                                  updateFormValue(
-                                    ['languages', `${index}`, 'locale'],
-                                    event.target.value
-                                  )
-                                }
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-xs text-gray-500">URL</label>
-                              <input
-                                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                value={item?.url || ''}
-                                onChange={(event) =>
-                                  updateFormValue(
-                                    ['languages', `${index}`, 'url'],
-                                    event.target.value
-                                  )
-                                }
-                              />
-                            </div>
-                            <button
-                              type="button"
-                              onClick={() => removeHeaderLanguage(index)}
-                              className="text-xs text-red-600 hover:text-red-700"
-                            >
-                              Remove
-                            </button>
-                          </div>
-                        ))}
-                        {!Array.isArray(formData.languages) ||
-                        formData.languages.length === 0 ? (
-                          <div className="text-xs text-gray-500">
-                            No languages yet.
-                          </div>
-                        ) : null}
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="text-xs font-semibold text-gray-500 uppercase mb-2">
-                        CTA
-                      </div>
-                      <div className="grid gap-3 md:grid-cols-2">
-                        <div>
-                          <label className="block text-xs text-gray-500">Text</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.cta?.text || ''}
-                            onChange={(event) =>
-                              updateFormValue(['cta', 'text'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Link</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.cta?.link || ''}
-                            onChange={(event) =>
-                              updateFormValue(['cta', 'link'], event.target.value)
-                            }
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {isThemeFile && formData && (
-                <div className="border border-gray-200 rounded-lg p-4 space-y-6">
-                  <div className="text-xs font-semibold text-gray-500 uppercase">
-                    Theme
-                  </div>
-
-                  <div className="grid gap-6 md:grid-cols-2">
-                    <div className="space-y-3">
-                      <div className="text-xs font-semibold text-gray-500 uppercase">
-                        Typography Sizes
-                      </div>
-                      {(['display', 'heading', 'subheading', 'body', 'small'] as const).map(
-                        (key) => (
-                          <div key={`type-${key}`}>
-                            <label className="block text-xs text-gray-500">
-                              {key}
-                            </label>
-                            <input
-                              className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={String(getPathValue(['typography', key]) || '')}
-                              onChange={(event) =>
-                                updateFormValue(['typography', key], event.target.value)
-                              }
-                              placeholder="e.g. 2rem"
-                            />
-                          </div>
-                        )
-                      )}
-                    </div>
-
-                    <div className="space-y-3">
-                      <div className="text-xs font-semibold text-gray-500 uppercase">
-                        Typography Fonts
-                      </div>
-                      {(['display', 'heading', 'subheading', 'body', 'small'] as const).map(
-                        (key) => (
-                          <div key={`font-${key}`}>
-                            <label className="block text-xs text-gray-500">
-                              {key}
-                            </label>
-                            <input
-                              className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={String(
-                                getPathValue(['typography', 'fonts', key]) || ''
-                              )}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['typography', 'fonts', key],
-                                  event.target.value
-                                )
-                              }
-                              placeholder="e.g. Inter, sans-serif"
-                            />
-                          </div>
-                        )
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="grid gap-6 md:grid-cols-3">
-                    <div className="space-y-3">
-                      <div className="text-xs font-semibold text-gray-500 uppercase">
-                        Primary Colors
-                      </div>
-                      {renderColorField('Primary', ['colors', 'primary', 'DEFAULT'])}
-                      {renderColorField('Primary Dark', ['colors', 'primary', 'dark'])}
-                      {renderColorField('Primary Light', ['colors', 'primary', 'light'])}
-                      {renderColorField('Primary 50', ['colors', 'primary', '50'])}
-                      {renderColorField('Primary 100', ['colors', 'primary', '100'])}
-                    </div>
-                    <div className="space-y-3">
-                      <div className="text-xs font-semibold text-gray-500 uppercase">
-                        Secondary Colors
-                      </div>
-                      {renderColorField('Secondary', ['colors', 'secondary', 'DEFAULT'])}
-                      {renderColorField('Secondary Dark', ['colors', 'secondary', 'dark'])}
-                      {renderColorField('Secondary Light', ['colors', 'secondary', 'light'])}
-                      {renderColorField('Secondary 50', ['colors', 'secondary', '50'])}
-                    </div>
-                    <div className="space-y-3">
-                      <div className="text-xs font-semibold text-gray-500 uppercase">
-                        Backdrop Colors
-                      </div>
-                      {renderColorField('Backdrop Primary', [
-                        'colors',
-                        'backdrop',
-                        'primary',
-                      ])}
-                      {renderColorField('Backdrop Secondary', [
-                        'colors',
-                        'backdrop',
-                        'secondary',
-                      ])}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {formData && variantSections.length > 0 && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Section Variants
-                  </div>
-                  <div className="grid gap-3 md:grid-cols-2">
-                    {variantSections.map(([sectionKey, options]) => (
-                      <div key={`variant-${sectionKey}`}>
-                        <label className="block text-xs text-gray-500">
-                          {toTitleCase(sectionKey)} Variant
-                        </label>
-                        <select
-                          className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm bg-white"
-                          value={String(getPathValue([sectionKey, 'variant']) || '')}
-                          onChange={(event) =>
-                            updateFormValue([sectionKey, 'variant'], event.target.value)
-                          }
-                        >
-                          <option value="">Default</option>
-                          {options.map((option) => (
-                            <option key={`${sectionKey}-${option}`} value={option}>
-                              {option}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+              <ThemeFormPanel
+                isThemeFile={isThemeFile}
+                formData={formData}
+                getPathValue={getPathValue}
+                updateFormValue={updateFormValue}
+                renderColorField={renderColorField}
+              />
 
               {isHomePageFile && homePhotoFields.length > 0 && (
                 <div className="border border-gray-200 rounded-lg p-4">
@@ -1850,1355 +1863,109 @@ export function ContentEditor({
                 </div>
               )}
 
-              {formData?.hero && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Hero
-                  </div>
-                  {'title' in formData.hero && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Title</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.hero.title || ''}
-                        onChange={(event) =>
-                          updateFormValue(['hero', 'title'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'subtitle' in formData.hero && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Subtitle</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.hero.subtitle || ''}
-                        onChange={(event) =>
-                          updateFormValue(['hero', 'subtitle'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {('businessName' in formData.hero || 'clinicName' in formData.hero) && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Business Name</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.hero.businessName || formData.hero.clinicName || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['hero', 'businessName' in formData.hero ? 'businessName' : 'clinicName'],
-                            event.target.value
-                          )
-                        }
-                      />
-                    </div>
-                  )}
-                  {'tagline' in formData.hero && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Tagline</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.hero.tagline || ''}
-                        onChange={(event) =>
-                          updateFormValue(['hero', 'tagline'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'description' in formData.hero && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">
-                        Description
-                      </label>
-                      <textarea
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.hero.description || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['hero', 'description'],
-                            event.target.value
-                          )
-                        }
-                      />
-                    </div>
-                  )}
-                  <div>
-                    <label className="block text-xs text-gray-500">
-                      Background Image
-                    </label>
-                    <div className="mt-1 flex gap-2">
-                      <input
-                        className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.hero.backgroundImage || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['hero', 'backgroundImage'],
-                            event.target.value
-                          )
-                        }
-                        placeholder="/uploads/..."
-                      />
-                      <button
-                        type="button"
-                        onClick={() => openImagePicker(['hero', 'backgroundImage'])}
-                        className="px-3 rounded-md border border-gray-200 text-xs"
-                      >
-                        Choose
-                      </button>
-                    </div>
-                  </div>
-                  <div className="mt-3">
-                    <label className="block text-xs text-gray-500">Hero Image</label>
-                    <div className="mt-1 flex gap-2">
-                      <input
-                        className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.hero.image || ''}
-                        onChange={(event) =>
-                          updateFormValue(['hero', 'image'], event.target.value)
-                        }
-                        placeholder="/uploads/..."
-                      />
-                      <button
-                        type="button"
-                        onClick={() => openImagePicker(['hero', 'image'])}
-                        className="px-3 rounded-md border border-gray-200 text-xs"
-                      >
-                        Choose
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <ProductPageFormPanel
+                isProductPageFile={isProductPageFile}
+                formData={formData}
+                productHero={productHero}
+                productHeroKey={productHeroKey}
+                heroVariantOptions={SECTION_VARIANT_OPTIONS.hero}
+                updateFormValue={updateFormValue}
+                openImagePicker={openImagePicker}
+              />
+
+              <ProfileIntroImagesPanel
+                formData={formData}
+                galleryCategories={galleryCategories}
+                updateFormValue={updateFormValue}
+                openImagePicker={openImagePicker}
+                addGalleryImage={addGalleryImage}
+                removeGalleryImage={removeGalleryImage}
+              />
+
+              <LandingPageFormPanel
+                isLandingFile={isLandingFile}
+                formData={formData}
+                updateFormValue={updateFormValue}
+                openImagePicker={openImagePicker}
+              />
+
+              {!isLandingFile && (
+                <GenericPageFormPanels
+                  formData={formData}
+                  isProductPageFile={isProductPageFile}
+                  variantSections={variantSections}
+                  toTitleCase={toTitleCase}
+                  getPathValue={getPathValue}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                />
               )}
 
-              {formData?.profile && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Profile
-                  </div>
-                  {'name' in formData.profile && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Name</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.profile.name || ''}
-                        onChange={(event) =>
-                          updateFormValue(['profile', 'name'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'title' in formData.profile && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Title</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.profile.title || ''}
-                        onChange={(event) =>
-                          updateFormValue(['profile', 'title'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'bio' in formData.profile && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Bio</label>
-                      <textarea
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.profile.bio || ''}
-                        onChange={(event) =>
-                          updateFormValue(['profile', 'bio'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'quote' in formData.profile && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Quote</label>
-                      <textarea
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.profile.quote || ''}
-                        onChange={(event) =>
-                          updateFormValue(['profile', 'quote'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'image' in formData.profile && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Profile Photo</label>
-                      <div className="mt-1 flex gap-2">
-                        <input
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.profile.image || ''}
-                          onChange={(event) =>
-                            updateFormValue(['profile', 'image'], event.target.value)
-                          }
-                        />
-                        <button
-                          type="button"
-                          onClick={() => openImagePicker(['profile', 'image'])}
-                          className="px-3 rounded-md border border-gray-200 text-xs"
-                        >
-                          Choose
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                  {'signature' in formData.profile && (
-                    <div>
-                      <label className="block text-xs text-gray-500">Signature Image</label>
-                      <div className="mt-1 flex gap-2">
-                        <input
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.profile.signature || ''}
-                          onChange={(event) =>
-                            updateFormValue(['profile', 'signature'], event.target.value)
-                          }
-                        />
-                        <button
-                          type="button"
-                          onClick={() => openImagePicker(['profile', 'signature'])}
-                          className="px-3 rounded-md border border-gray-200 text-xs"
-                        >
-                          Choose
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
+              <PortfolioFormPanels
+                isPortfolioCategorySelected={isPortfolioCategorySelected}
+                isPortfolioItemSelected={isPortfolioItemSelected}
+                selectedPortfolioCategory={selectedPortfolioCategory}
+                selectedPortfolioItem={selectedPortfolioItem}
+                activePortfolioCategoryIndex={activePortfolioCategoryIndex}
+                activePortfolioItemIndex={activePortfolioItemIndex}
+                isPortfolioPageFile={Boolean(isPortfolioPageFile)}
+                isPortfolioModuleMode={isPortfolioModuleMode}
+                portfolioCategoryOptions={portfolioCategoryOptions}
+                formData={formData}
+                removePortfolioCategory={removePortfolioCategory}
+                setActivePortfolioCategoryIndex={setActivePortfolioCategoryIndex}
+                updateFormValue={updateFormValue}
+                removePortfolioItem={removePortfolioItem}
+                setActivePortfolioItemIndex={setActivePortfolioItemIndex}
+                openImagePicker={openImagePicker}
+                addPortfolioCategory={addPortfolioCategory}
+                addPortfolioItem={addPortfolioItem}
+              />
+
+              <CaseStudiesFormPanels
+                isCaseStudyCategorySelected={isCaseStudyCategorySelected}
+                selectedCaseStudyCategory={selectedCaseStudyCategory}
+                activeCaseStudyCategoryIndex={activeCaseStudyCategoryIndex}
+                removeCaseStudyCategory={removeCaseStudyCategory}
+                setActiveCaseStudyCategoryIndex={setActiveCaseStudyCategoryIndex}
+                updateFormValue={updateFormValue}
+                isCaseStudyItemSelected={isCaseStudyItemSelected}
+                selectedCaseStudyItem={selectedCaseStudyItem}
+                caseStudiesKey={caseStudiesKey}
+                activeCaseStudyItemIndex={activeCaseStudyItemIndex}
+                removeCaseStudyEntry={removeCaseStudyEntry}
+                setActiveCaseStudyItemIndex={setActiveCaseStudyItemIndex}
+                isCaseStudiesModuleMode={isCaseStudiesModuleMode}
+                caseStudiesItems={caseStudiesItems}
+                addCaseStudyEntry={addCaseStudyEntry}
+                formData={formData}
+                caseStudyCategories={caseStudyCategories}
+                markdownPreview={markdownPreview}
+                toggleMarkdownPreview={toggleMarkdownPreview}
+                normalizeMarkdown={normalizeMarkdown}
+                openImagePicker={openImagePicker}
+              />
+
+              {isBlogArticleFile && formData && (
+                <BlogArticleEditorPanel
+                  formData={formData}
+                  blogCategorySelectOptions={blogCategorySelectOptions}
+                  blogProductOptions={blogProductOptions}
+                  selectedRelatedProducts={selectedRelatedProducts}
+                  markdownPreview={markdownPreview}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                  toggleMarkdownPreview={toggleMarkdownPreview}
+                  normalizeMarkdown={normalizeMarkdown}
+                />
               )}
 
-              {formData?.introduction && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Introduction
-                  </div>
-                  {'text' in formData.introduction && (
-                    <div>
-                      <label className="block text-xs text-gray-500">Text</label>
-                      <textarea
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.introduction.text || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['introduction', 'text'],
-                            event.target.value
-                          )
-                        }
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {Array.isArray(formData?.images) && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="text-xs font-semibold text-gray-500 uppercase">
-                      Gallery Photos
-                    </div>
-                    <button
-                      type="button"
-                      onClick={addGalleryImage}
-                      className="px-3 py-1 rounded-md border border-gray-200 text-xs"
-                    >
-                      Add Photo
-                    </button>
-                  </div>
-                  <div className="space-y-4">
-                    {formData.images.map((image: any, index: number) => (
-                      <div
-                        key={image.id || index}
-                        className="border border-gray-100 rounded-lg p-4"
-                      >
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="text-xs font-semibold text-gray-500">
-                            Photo {index + 1}
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => removeGalleryImage(index)}
-                            className="text-xs text-red-600 hover:text-red-700"
-                          >
-                            Remove
-                          </button>
-                        </div>
-                        <div className="grid gap-3 md:grid-cols-2">
-                          <div>
-                            <label className="block text-xs text-gray-500">Title</label>
-                            <input
-                              className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={image.title || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['images', index, 'title'] as string[],
-                                  event.target.value
-                                )
-                              }
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-xs text-gray-500">Category</label>
-                            {galleryCategories.length > 0 ? (
-                              <select
-                                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm bg-white"
-                                value={image.category || ''}
-                                onChange={(event) =>
-                                  updateFormValue(
-                                    ['images', index, 'category'] as string[],
-                                    event.target.value
-                                  )
-                                }
-                              >
-                                <option value="">Select category</option>
-                                {galleryCategories.map((category: any) => (
-                                  <option key={category.id} value={category.id}>
-                                    {category.name}
-                                  </option>
-                                ))}
-                              </select>
-                            ) : (
-                              <input
-                                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                value={image.category || ''}
-                                onChange={(event) =>
-                                  updateFormValue(
-                                    ['images', index, 'category'] as string[],
-                                    event.target.value
-                                  )
-                                }
-                              />
-                            )}
-                          </div>
-                          <div>
-                            <label className="block text-xs text-gray-500">Source</label>
-                            <div className="mt-1 flex gap-2">
-                              <input
-                                readOnly
-                                className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm bg-gray-50"
-                                value={image.src || ''}
-                              />
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  openImagePicker(['images', index, 'src'] as string[])
-                                }
-                                className="px-3 rounded-md border border-gray-200 text-xs"
-                              >
-                                Choose
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  updateFormValue(['images', index, 'src'] as string[], '')
-                                }
-                                className="px-3 rounded-md border border-gray-200 text-xs"
-                              >
-                                Clear
-                              </button>
-                            </div>
-                          </div>
-                          <div>
-                            <label className="block text-xs text-gray-500">Alt</label>
-                            <input
-                              className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={image.alt || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['images', index, 'alt'] as string[],
-                                  event.target.value
-                                )
-                              }
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-xs text-gray-500">Order</label>
-                            <input
-                              type="number"
-                              className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={image.order ?? ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['images', index, 'order'] as string[],
-                                  event.target.value === '' ? '' : Number(event.target.value)
-                                )
-                              }
-                            />
-                          </div>
-                          <div className="flex items-center gap-2 mt-6">
-                            <input
-                              type="checkbox"
-                              checked={Boolean(image.featured)}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['images', index, 'featured'] as string[],
-                                  event.target.checked
-                                )
-                              }
-                            />
-                            <span className="text-xs text-gray-600">Featured</span>
-                          </div>
-                          <div className="md:col-span-2">
-                            <label className="block text-xs text-gray-500">
-                              Description
-                            </label>
-                            <textarea
-                              className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={image.description || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['images', index, 'description'] as string[],
-                                  event.target.value
-                                )
-                              }
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {formData?.cta && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    CTA
-                  </div>
-                  {'title' in formData.cta && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Title</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.cta.title || ''}
-                        onChange={(event) =>
-                          updateFormValue(['cta', 'title'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'description' in formData.cta && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">
-                        Description
-                      </label>
-                      <textarea
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.cta.description || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['cta', 'description'],
-                            event.target.value
-                          )
-                        }
-                      />
-                    </div>
-                  )}
-                  {formData.cta?.primaryCta && (
-                    <div className="mb-3">
-                      <div className="text-xs text-gray-500 mb-1">Primary CTA</div>
-                      <input
-                        className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        placeholder="Text"
-                        value={formData.cta.primaryCta.text || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['cta', 'primaryCta', 'text'],
-                            event.target.value
-                          )
-                        }
-                      />
-                      <input
-                        className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        placeholder="Link"
-                        value={formData.cta.primaryCta.link || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['cta', 'primaryCta', 'link'],
-                            event.target.value
-                          )
-                        }
-                      />
-                    </div>
-                  )}
-                  {formData.cta?.secondaryCta && (
-                    <div>
-                      <div className="text-xs text-gray-500 mb-1">Secondary CTA</div>
-                      <input
-                        className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        placeholder="Text"
-                        value={formData.cta.secondaryCta.text || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['cta', 'secondaryCta', 'text'],
-                            event.target.value
-                          )
-                        }
-                      />
-                      <input
-                        className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        placeholder="Link"
-                        value={formData.cta.secondaryCta.link || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['cta', 'secondaryCta', 'link'],
-                            event.target.value
-                          )
-                        }
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {Array.isArray(formData?.services) && !formData?.servicesList && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Services
-                  </div>
-                  <div className="space-y-4">
-                    {formData.services.map((service: any, index: number) => (
-                      <div key={service.id || index} className="border rounded-md p-3">
-                        <div className="text-xs text-gray-500 mb-2">
-                          {service.title || `Service ${index + 1}`}
-                        </div>
-                        <input
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Title"
-                          value={service.title || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['services', String(index), 'title'],
-                              event.target.value
-                            )
-                          }
-                        />
-                        <textarea
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Short description"
-                          value={service.shortDescription || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['services', String(index), 'shortDescription'],
-                              event.target.value
-                            )
-                          }
-                        />
-                        <div className="flex gap-2">
-                          <input
-                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            placeholder="Image"
-                            value={service.image || ''}
-                            onChange={(event) =>
-                              updateFormValue(
-                                ['services', String(index), 'image'],
-                                event.target.value
-                              )
-                            }
-                          />
-                          <button
-                            type="button"
-                            onClick={() =>
-                              openImagePicker(['services', String(index), 'image'])
-                            }
-                            className="px-3 rounded-md border border-gray-200 text-xs"
-                          >
-                            Choose
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {formData?.servicesList && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Services List
-                  </div>
-                  {Array.isArray(formData.servicesList.items) && (
-                    <div className="space-y-4 mt-4">
-                      {formData.servicesList.items.map((service: any, index: number) => (
-                        <div key={service.id || index} className="border rounded-md p-3 bg-white">
-                          <div className="text-xs text-gray-500 mb-2">
-                            {service.title || `Service ${index + 1}`}
-                          </div>
-                          <input
-                            className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            placeholder="Title"
-                            value={service.title || ''}
-                            onChange={(event) =>
-                              updateFormValue(
-                                ['servicesList', 'items', String(index), 'title'],
-                                event.target.value
-                              )
-                            }
-                          />
-                          <textarea
-                            className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            placeholder="Short description"
-                            value={service.shortDescription || ''}
-                            onChange={(event) =>
-                              updateFormValue(
-                                ['servicesList', 'items', String(index), 'shortDescription'],
-                                event.target.value
-                              )
-                            }
-                          />
-                          <div className="grid grid-cols-2 gap-2 mb-2">
-                            <input
-                              className="rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="Price"
-                              value={service.price || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['servicesList', 'items', String(index), 'price'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                            <input
-                              className="rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="Duration (min)"
-                              type="number"
-                              value={service.durationMinutes || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['servicesList', 'items', String(index), 'durationMinutes'],
-                                  parseInt(event.target.value) || 0
-                                )
-                              }
-                            />
-                          </div>
-                          <div className="flex gap-2 mb-2">
-                            <input
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="Image"
-                              value={service.image || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['servicesList', 'items', String(index), 'image'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                            <button
-                              type="button"
-                              onClick={() =>
-                                openImagePicker(['servicesList', 'items', String(index), 'image'])
-                              }
-                              className="px-3 rounded-md border border-gray-200 text-xs"
-                            >
-                              Choose
-                            </button>
-                          </div>
-                          <label className="flex items-center gap-2 text-sm">
-                            <input
-                              type="checkbox"
-                              checked={Boolean(service.featured)}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['servicesList', 'items', String(index), 'featured'],
-                                  event.target.checked
-                                )
-                              }
-                              className="rounded border-gray-300"
-                            />
-                            <span className="text-gray-700">Featured (for featured-large variant)</span>
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {Array.isArray(formData?.conditions) && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Conditions
-                  </div>
-                  <div className="space-y-4">
-                    {formData.conditions.map((condition: any, index: number) => (
-                      <div key={condition.id || index} className="border rounded-md p-3">
-                        <div className="text-xs text-gray-500 mb-2">
-                          {condition.title || `Condition ${index + 1}`}
-                        </div>
-                        <input
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Title"
-                          value={condition.title || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['conditions', String(index), 'title'],
-                              event.target.value
-                            )
-                          }
-                        />
-                        <textarea
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Description"
-                          value={condition.description || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['conditions', String(index), 'description'],
-                              event.target.value
-                            )
-                          }
-                        />
-                        <div className="flex gap-2">
-                          <input
-                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            placeholder="Image"
-                            value={condition.image || ''}
-                            onChange={(event) =>
-                              updateFormValue(
-                                ['conditions', String(index), 'image'],
-                                event.target.value
-                              )
-                            }
-                          />
-                          <button
-                            type="button"
-                            onClick={() =>
-                              openImagePicker(['conditions', String(index), 'image'])
-                            }
-                            className="px-3 rounded-md border border-gray-200 text-xs"
-                          >
-                            Choose
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {isPortfolioPageFile && (
-                <div className="border border-gray-200 rounded-lg p-4 space-y-4">
-                  {!formData?.hero && (
-                    <div className="rounded-md border border-dashed border-gray-300 p-3">
-                      <div className="flex items-center justify-between gap-3">
-                        <p className="text-xs text-gray-600">
-                          Portfolio hero is not set in this JSON yet.
-                        </p>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            updateFormValue(['hero'], {
-                              title: '',
-                              subtitle: '',
-                              backgroundImage: '',
-                              image: '',
-                            })
-                          }
-                          className="text-xs px-2 py-1 rounded border border-gray-200 hover:bg-gray-50"
-                        >
-                          Add Hero
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                  <div className="flex items-center justify-between">
-                    <div className="text-xs font-semibold text-gray-500 uppercase">
-                      Portfolio Categories
-                    </div>
-                    <button
-                      type="button"
-                      onClick={addPortfolioCategory}
-                      className="text-xs px-2 py-1 rounded border border-gray-200 hover:bg-gray-50"
-                    >
-                      Add Category
-                    </button>
-                  </div>
-                  <div className="space-y-2">
-                    {Array.isArray(formData?.categories) &&
-                      formData.categories.map((category: any, index: number) => (
-                        <div key={`${category}-${index}`} className="flex gap-2">
-                          <input
-                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={typeof category === 'string' ? category : ''}
-                            onChange={(event) =>
-                              updateFormValue(
-                                ['categories', String(index)],
-                                event.target.value
-                              )
-                            }
-                          />
-                          <button
-                            type="button"
-                            onClick={() => removePortfolioCategory(index)}
-                            className="px-3 rounded-md border border-gray-200 text-xs"
-                          >
-                            Remove
-                          </button>
-                        </div>
-                      ))}
-                  </div>
-
-                  <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-                    <div className="text-xs font-semibold text-gray-500 uppercase">
-                      Portfolio Items
-                    </div>
-                    <button
-                      type="button"
-                      onClick={addPortfolioItem}
-                      className="text-xs px-2 py-1 rounded border border-gray-200 hover:bg-gray-50"
-                    >
-                      Add Item
-                    </button>
-                  </div>
-                  <div className="space-y-4">
-                    {Array.isArray(formData?.items) &&
-                      formData.items.map((item: any, index: number) => (
-                        <div key={item.id || index} className="border rounded-md p-3">
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="text-xs text-gray-500">
-                              {item.title || `Item ${index + 1}`}
-                            </div>
-                            <button
-                              type="button"
-                              onClick={() => removePortfolioItem(index)}
-                              className="text-xs px-2 py-1 rounded border border-gray-200 hover:bg-gray-50"
-                            >
-                              Delete
-                            </button>
-                          </div>
-                          <div className="grid gap-2 md:grid-cols-2">
-                            <input
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="Title"
-                              value={item.title || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['items', String(index), 'title'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                            <input
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="Client"
-                              value={item.client || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['items', String(index), 'client'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                          </div>
-                          <div className="mt-2">
-                            <label className="block text-xs text-gray-500 mb-1">Category</label>
-                            <select
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={item.category || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['items', String(index), 'category'],
-                                  event.target.value
-                                )
-                              }
-                            >
-                              <option value="">Select category</option>
-                              {portfolioCategoryOptions.map((category: string) => (
-                                <option key={category} value={category}>
-                                  {category}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                          <textarea
-                            className="mt-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            placeholder="Description"
-                            value={item.desc || ''}
-                            onChange={(event) =>
-                              updateFormValue(
-                                ['items', String(index), 'desc'],
-                                event.target.value
-                              )
-                            }
-                          />
-                          <div className="mt-2 flex gap-2">
-                            <input
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="Image"
-                              value={item.image || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['items', String(index), 'image'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                            <button
-                              type="button"
-                              onClick={() => openImagePicker(['items', String(index), 'image'])}
-                              className="px-3 rounded-md border border-gray-200 text-xs"
-                            >
-                              Choose
-                            </button>
-                          </div>
-                          <label className="mt-2 inline-flex items-center gap-2 text-sm text-gray-700">
-                            <input
-                              type="checkbox"
-                              className="rounded border-gray-300"
-                              checked={Boolean(item.featured)}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['items', String(index), 'featured'],
-                                  event.target.checked
-                                )
-                              }
-                            />
-                            Featured
-                          </label>
-                        </div>
-                      ))}
-                  </div>
-                </div>
-              )}
-
-              {Array.isArray(formData?.caseStudies) && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Case Studies
-                  </div>
-                  <div className="space-y-4">
-                    {formData.caseStudies.map((item: any, index: number) => (
-                      <div key={item.id || index} className="border rounded-md p-3">
-                        <div className="text-xs text-gray-500 mb-2">
-                          {item.condition || `Case ${index + 1}`}
-                        </div>
-                        <input
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Condition"
-                          value={item.condition || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['caseStudies', String(index), 'condition'],
-                              event.target.value
-                            )
-                          }
-                        />
-                      <div className="mb-2">
-                        <label className="block text-xs text-gray-500 mb-1">Category</label>
-                        <select
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={item.category || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['caseStudies', String(index), 'category'],
-                              event.target.value
-                            )
-                          }
-                        >
-                          <option value="">Select category</option>
-                          {caseStudyCategories.map((category: any) => (
-                            <option key={category.id} value={category.id}>
-                              {category.name}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs text-gray-500">Summary (Markdown)</span>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            toggleMarkdownPreview(`caseStudies-${index}-summary`)
-                          }
-                          className="text-xs text-gray-600 hover:text-gray-900"
-                        >
-                          {markdownPreview[`caseStudies-${index}-summary`]
-                            ? 'Edit'
-                            : 'Preview'}
-                        </button>
-                      </div>
-                      {markdownPreview[`caseStudies-${index}-summary`] ? (
-                        <div className="prose prose-sm max-w-none rounded-md border border-gray-200 px-3 py-2">
-                          <ReactMarkdown
-                            components={{
-                              ul: (props) => <ul className="list-disc pl-5" {...props} />,
-                              ol: (props) => (
-                                <ol className="list-decimal pl-5" {...props} />
-                              ),
-                              li: (props) => <li className="mb-1" {...props} />,
-                            }}
-                          >
-                            {normalizeMarkdown(item.summary || '')}
-                          </ReactMarkdown>
-                        </div>
-                      ) : (
-                        <textarea
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Summary (Markdown supported)"
-                          value={item.summary || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['caseStudies', String(index), 'summary'],
-                              event.target.value
-                            )
-                          }
-                        />
-                      )}
-                        <div className="grid gap-2 md:grid-cols-3">
-                          <div className="flex gap-2">
-                            <input
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="Image"
-                              value={item.image || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['caseStudies', String(index), 'image'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                            <button
-                              type="button"
-                              onClick={() =>
-                                openImagePicker(['caseStudies', String(index), 'image'])
-                              }
-                              className="px-3 rounded-md border border-gray-200 text-xs"
-                            >
-                              Choose
-                            </button>
-                          </div>
-                          <div className="flex gap-2">
-                            <input
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="Before image"
-                              value={item.beforeImage || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['caseStudies', String(index), 'beforeImage'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                            <button
-                              type="button"
-                              onClick={() =>
-                                openImagePicker([
-                                  'caseStudies',
-                                  String(index),
-                                  'beforeImage',
-                                ])
-                              }
-                              className="px-3 rounded-md border border-gray-200 text-xs"
-                            >
-                              Choose
-                            </button>
-                          </div>
-                          <div className="flex gap-2">
-                            <input
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="After image"
-                              value={item.afterImage || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['caseStudies', String(index), 'afterImage'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                            <button
-                              type="button"
-                              onClick={() =>
-                                openImagePicker([
-                                  'caseStudies',
-                                  String(index),
-                                  'afterImage',
-                                ])
-                              }
-                              className="px-3 rounded-md border border-gray-200 text-xs"
-                            >
-                              Choose
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {formData?.featuredPost && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Featured Post
-                  </div>
-                  <input
-                    className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                    placeholder="Title"
-                    value={formData.featuredPost.title || ''}
-                    onChange={(event) =>
-                      updateFormValue(['featuredPost', 'title'], event.target.value)
-                    }
-                  />
-                  <textarea
-                    className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                    placeholder="Excerpt"
-                    value={formData.featuredPost.excerpt || ''}
-                    onChange={(event) =>
-                      updateFormValue(['featuredPost', 'excerpt'], event.target.value)
-                    }
-                  />
-                  <div className="flex gap-2">
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Image"
-                      value={formData.featuredPost.image || ''}
-                      onChange={(event) =>
-                        updateFormValue(['featuredPost', 'image'], event.target.value)
-                      }
-                    />
-                    <button
-                      type="button"
-                      onClick={() => openImagePicker(['featuredPost', 'image'])}
-                      className="px-3 rounded-md border border-gray-200 text-xs"
-                    >
-                      Choose
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {Array.isArray(formData?.posts) && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Blog Posts
-                  </div>
-                  <div className="space-y-4">
-                    {formData.posts.map((post: any, index: number) => (
-                      <div key={post.slug || index} className="border rounded-md p-3">
-                        <div className="text-xs text-gray-500 mb-2">
-                          {post.title || `Post ${index + 1}`}
-                        </div>
-                        <input
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Title"
-                          value={post.title || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['posts', String(index), 'title'],
-                              event.target.value
-                            )
-                          }
-                        />
-                        <textarea
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Excerpt"
-                          value={post.excerpt || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['posts', String(index), 'excerpt'],
-                              event.target.value
-                            )
-                          }
-                        />
-                        <div className="flex gap-2">
-                          <input
-                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            placeholder="Image"
-                            value={post.image || ''}
-                            onChange={(event) =>
-                              updateFormValue(
-                                ['posts', String(index), 'image'],
-                                event.target.value
-                              )
-                            }
-                          />
-                          <button
-                            type="button"
-                            onClick={() =>
-                              openImagePicker(['posts', String(index), 'image'])
-                            }
-                            className="px-3 rounded-md border border-gray-200 text-xs"
-                          >
-                            Choose
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {formData?.slug && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Blog Article
-                  </div>
-                  <input
-                    className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                    placeholder="Title"
-                    value={formData.title || ''}
-                    onChange={(event) => updateFormValue(['title'], event.target.value)}
-                  />
-                  <textarea
-                    className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                    placeholder="Excerpt"
-                    value={formData.excerpt || ''}
-                    onChange={(event) => updateFormValue(['excerpt'], event.target.value)}
-                  />
-                  <div className="flex gap-2 mb-2">
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Image"
-                      value={formData.image || ''}
-                      onChange={(event) => updateFormValue(['image'], event.target.value)}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => openImagePicker(['image'])}
-                      className="px-3 rounded-md border border-gray-200 text-xs"
-                    >
-                      Choose
-                    </button>
-                  </div>
-                  <div className="grid gap-2 md:grid-cols-3">
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Author"
-                      value={formData.author || ''}
-                      onChange={(event) => updateFormValue(['author'], event.target.value)}
-                    />
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Publish Date (YYYY-MM-DD)"
-                      value={formData.publishDate || ''}
-                      onChange={(event) =>
-                        updateFormValue(['publishDate'], event.target.value)
-                      }
-                    />
-                  </div>
-                  <input
-                    className="mt-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                    placeholder="Category"
-                    value={formData.category || ''}
-                    onChange={(event) => updateFormValue(['category'], event.target.value)}
-                  />
-                  <div className="mt-3 flex items-center gap-2">
-                    <input
-                      id="featured"
-                      type="checkbox"
-                      className="h-4 w-4 rounded border-gray-300"
-                      checked={Boolean(formData.featured)}
-                      onChange={(event) =>
-                        updateFormValue(['featured'], event.target.checked)
-                      }
-                    />
-                    <label htmlFor="featured" className="text-sm text-gray-700">
-                      Featured article
-                    </label>
-                  </div>
-                  {isBlogPostFile && (
-                    <div className="mt-4 grid gap-4 md:grid-cols-2">
-                      <div className="rounded-md border border-gray-200 p-3">
-                        <div className="text-xs font-semibold text-gray-500 uppercase mb-2">
-                          Related Services
-                        </div>
-                        {blogServiceOptions.length === 0 && (
-                          <p className="text-xs text-gray-500">No services found.</p>
-                        )}
-                        <div className="space-y-2">
-                          {blogServiceOptions.map((service) => (
-                            <label
-                              key={service.id}
-                              className="flex items-center gap-2 text-sm text-gray-700"
-                            >
-                              <input
-                                type="checkbox"
-                                className="h-4 w-4 rounded border-gray-300"
-                                checked={Array.isArray(formData.relatedServices)
-                                  ? formData.relatedServices.includes(service.id)
-                                  : false}
-                                onChange={() =>
-                                  toggleSelection(['relatedServices'], service.id)
-                                }
-                              />
-                              {service.title}
-                            </label>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="rounded-md border border-gray-200 p-3">
-                        <div className="text-xs font-semibold text-gray-500 uppercase mb-2">
-                          Related Conditions
-                        </div>
-                        {blogConditionOptions.length === 0 && (
-                          <p className="text-xs text-gray-500">No conditions found.</p>
-                        )}
-                        <div className="space-y-2">
-                          {blogConditionOptions.map((condition) => (
-                            <label
-                              key={condition.id}
-                              className="flex items-center gap-2 text-sm text-gray-700"
-                            >
-                              <input
-                                type="checkbox"
-                                className="h-4 w-4 rounded border-gray-300"
-                                checked={Array.isArray(formData.relatedConditions)
-                                  ? formData.relatedConditions.includes(condition.id)
-                                  : false}
-                                onChange={() =>
-                                  toggleSelection(['relatedConditions'], condition.id)
-                                }
-                              />
-                              {condition.title}
-                            </label>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  <div className="mt-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs text-gray-500">Body (Markdown)</span>
-                      <button
-                        type="button"
-                        onClick={() => toggleMarkdownPreview('blog-article-body')}
-                        className="text-xs text-gray-600 hover:text-gray-900"
-                      >
-                        {markdownPreview['blog-article-body'] ? 'Edit' : 'Preview'}
-                      </button>
-                    </div>
-                    {markdownPreview['blog-article-body'] ? (
-                      <div className="prose prose-sm max-w-none rounded-md border border-gray-200 px-3 py-2">
-                        <ReactMarkdown
-                          components={{
-                            ul: (props) => <ul className="list-disc pl-5" {...props} />,
-                            ol: (props) => (
-                              <ol className="list-decimal pl-5" {...props} />
-                            ),
-                            li: (props) => <li className="mb-1" {...props} />,
-                          }}
-                        >
-                          {normalizeMarkdown(formData.contentMarkdown || '')}
-                        </ReactMarkdown>
-                      </div>
-                    ) : (
-                      <textarea
-                        className="w-full min-h-[220px] rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        placeholder="Write the article body in Markdown"
-                        value={formData.contentMarkdown || ''}
-                        onChange={(event) =>
-                          updateFormValue(['contentMarkdown'], event.target.value)
-                        }
-                      />
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {formData && !formData.hero && !formData.introduction && !formData.cta && (
+              {formData && !isBlogArticleFile && !formData.hero && !formData.introduction && !formData.cta && (
                 <div className="text-sm text-gray-500">
                   No schema panels available for this file yet. Use the JSON tab.
                 </div>
+              )}
+              </>
               )}
             </div>
           ) : (

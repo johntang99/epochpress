@@ -1,0 +1,354 @@
+{
+  "faq": {
+    "items": [
+      {
+        "a": "תלוי במוצר ובהיקף. בפרויקטים מתאימים יש גם מסלול אקספרס 48 שעות.",
+        "q": "מה זמן האספקה?"
+      },
+      {
+        "a": "כן. אנו תומכים בהרצות קצרות ובייצור בהיקפים גדולים.",
+        "q": "האם אפשר כמויות קטנות?"
+      },
+      {
+        "a": "PDF מוכן לדפוס עם bleed ופונטים מוטמעים.",
+        "q": "איזה פורמט קבצים מומלץ?"
+      },
+      {
+        "a": "כן. יש לנו תהליך fulfillment מסודר לפריסה רב-אתרית.",
+        "q": "אפשר אספקה למספר אתרים?"
+      },
+      {
+        "a": "כן. ניתן לאשר proof לפני תחילת הייצור.",
+        "q": "האם אתם מספקים proof לפני הדפסה?"
+      },
+      {
+        "a": "באמצעות תהליך כיול ובקרות איכות לאורך כל הייצור.",
+        "q": "איך אתם מבטיחים עקביות צבע?"
+      },
+      {
+        "a": "הוצאה לאור, קמעונאות, אירוח, בריאות, חינוך ועוד.",
+        "q": "לאילו ענפים אתם מספקים שירות?"
+      },
+      {
+        "a": "שולחים פרטי פרויקט ואנחנו חוזרים עם היקף, לו\"ז והצעה.",
+        "q": "איך מתחילים?"
+      }
+    ],
+    "title": "שאלות נפוצות"
+  },
+  "hero": {
+    "badge": "דפוס מקצועי לפרויקטים קריטיים",
+    "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1400&q=80",
+    "subline": "כשאין מקום לטעויות בלוחות זמנים ובאיכות, Epoch Press מספקת תהליך יציב ותוצאה עקבית.",
+    "headline": "דפוס פרימיום. ביצוע אמין.",
+    "primaryCta": {
+      "href": "/quote",
+      "text": "קבלו הצעת מחיר"
+    },
+    "secondaryCta": {
+      "href": "tel:+19736943600",
+      "text": "שיחה מיידית"
+    },
+    "backgroundImage": "https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=2200&q=80"
+  },
+  "meta": {
+    "rtl": true,
+    "title": "דף נחיתה לשירותי דפוס מסחריים",
+    "locale": "he",
+    "description": "דף נחיתה ממוקד המרה בעברית עם דגש על יכולת ביצוע, איכות, מהירות ותוצאות."
+  },
+  "proof": {
+    "items": [
+      {
+        "label": "עמידה בזמן",
+        "detail": "שיפור עקבי בפרויקט מדיה אזורי.",
+        "metric": "98%"
+      },
+      {
+        "label": "הפחתת בזבוז",
+        "detail": "ייעול מלאי בפרויקט ספרים קצרי טווח.",
+        "metric": "32%"
+      },
+      {
+        "label": "קמפיין ארצי",
+        "detail": "הפקה רב-ערוצית והשקה בזמן.",
+        "metric": "10 ימים"
+      }
+    ],
+    "title": "תוצאות שמדברות במספרים"
+  },
+  "contact": {
+    "formTitle": "שלחו לנו הודעה",
+    "infoTitle": "פרטי יצירת קשר",
+    "emailLabel": "אימייל",
+    "emailValue": "info@epochpress.com",
+    "hoursLines": [
+      "Mon - Fri: 8:00 AM - 6:00 PM",
+      "Sat: 9:00 AM - 2:00 PM",
+      "Sun: Closed"
+    ],
+    "phoneLabel": "טלפון",
+    "phoneValue": "973-694-3600",
+    "addressLine1": "7 Highpoint Drive",
+    "addressLine2": "Wayne, NJ 07470",
+    "companyLabel": "חברה",
+    "messageLabel": "הודעה",
+    "fullNameLabel": "שם מלא",
+    "sendButtonText": "שלח הודעה",
+    "emailPlaceholder": "your@email.com",
+    "phonePlaceholder": "(212) 000-0000",
+    "companyPlaceholder": "שם החברה",
+    "messagePlaceholder": "ספרו לנו על הפרויקט שלכם...",
+    "fullNamePlaceholder": "השם שלך",
+    "productInterestLabel": "תחום עניין",
+    "productInterestPlaceholder": "בחרו מוצר..."
+  },
+  "process": {
+    "steps": [
+      {
+        "desc": "מגדירים היקף, זמנים וסטנדרט איכות.",
+        "title": "אפיון"
+      },
+      {
+        "desc": "בדיקת קבצים וכיול צבע.",
+        "title": "קדם דפוס"
+      },
+      {
+        "desc": "תהליך ייצור מבוקר עם QA.",
+        "title": "הפקה"
+      },
+      {
+        "desc": "הפצה בזמן ותמיכה מלאה.",
+        "title": "אספקה"
+      }
+    ],
+    "title": "איך זה עובד"
+  },
+  "finalCta": {
+    "title": "מוכנים לשדרג את תוצרי הדפוס שלכם?",
+    "subline": "שלחו דרישות ונבנה עבורכם תוכנית הדפסה ברורה ומדויקת.",
+    "primaryHref": "/quote",
+    "primaryText": "קבלו הצעת מחיר",
+    "secondaryHref": "tel:+19736943600",
+    "secondaryText": "שוחחו עם מומחה"
+  },
+  "trustBar": [
+    "מעל 25 שנות ניסיון",
+    "מעל 50 מיליון עמודים בשנה",
+    "מעל 500 לקוחות עסקיים",
+    "אפשרות אקספרס 48 שעות"
+  ],
+  "caseStudies": {
+    "items": [
+      {
+        "quote": "Epoch Press gave us operational confidence when timing mattered most.",
+        "title": "Regional Daily Turnaround Stabilized",
+        "author": "Operations Director",
+        "client": "Northeast Media Group",
+        "result": "On-time release rate improved from 86% to 98% in one quarter.",
+        "category": "Newspapers",
+        "featured": true,
+        "solution": "Epoch Press implemented a tighter prepress validation workflow, revised cutoff protocol, and dedicated rush lane.",
+        "challenge": "Late-night editorial changes repeatedly threatened print deadlines and carrier windows."
+      },
+      {
+        "quote": "The consistency is obvious issue to issue. It elevated our brand instantly.",
+        "title": "Premium Color Consistency Across Issues",
+        "author": "Publisher",
+        "client": "Avenue Living Magazine",
+        "result": "Brand color variance dropped significantly and ad client satisfaction scores increased.",
+        "category": "Magazines",
+        "featured": true,
+        "solution": "G7-calibrated color controls and tighter proofing checkpoints across covers and interior signatures.",
+        "challenge": "Inconsistent brand tones across monthly issues reduced visual continuity for advertisers."
+      },
+      {
+        "quote": "We moved faster with less risk and better unit economics.",
+        "title": "Short-Run Book Program Scaled Profitably",
+        "author": "Head of Production",
+        "client": "Independent Education Publisher",
+        "result": "Inventory waste reduced by 32% while maintaining launch schedules.",
+        "category": "Books",
+        "solution": "Epoch Press structured a hybrid short-run program with staged quantities and repeatable finishing specs.",
+        "challenge": "Frequent content revisions made large runs risky and costly."
+      },
+      {
+        "quote": "Fast execution without sacrificing quality. Exactly what we needed.",
+        "title": "Luxury Brand Campaign Delivered in 10 Days",
+        "author": "Brand Marketing Lead",
+        "client": "National Retail Brand",
+        "result": "Campaign launched on schedule across all target markets.",
+        "category": "Marketing Print",
+        "featured": true,
+        "solution": "Parallel production planning across brochures, inserts, and point-of-sale assets with coordinated QC.",
+        "challenge": "A multi-format launch needed premium print quality under an aggressive timeline."
+      },
+      {
+        "quote": "The process discipline made forecasting much easier for our team.",
+        "title": "Acquisition Mailer Improved Response Efficiency",
+        "author": "Campaign Manager",
+        "client": "Healthcare Network",
+        "result": "Delivery consistency improved and campaign response efficiency increased.",
+        "category": "Direct Mail",
+        "solution": "Epoch Press aligned print, personalization, and drop-date sequencing with USPS-ready workflows.",
+        "challenge": "Prior vendors produced variable quality and mailing delays across waves."
+      },
+      {
+        "quote": "Epoch Press turned a fragmented print operation into a reliable system.",
+        "title": "Franchise Print Standardization at Scale",
+        "author": "Procurement Director",
+        "client": "Hospitality Franchise Group",
+        "result": "Visual consistency improved across 40+ locations within one rollout cycle.",
+        "category": "Multi-Location Rollout",
+        "solution": "Standardized templates, controlled production specs, and synchronized fulfillment by location.",
+        "challenge": "Store-level print quality varied by market, weakening brand presentation."
+      }
+    ],
+    "title": "סיפורי הצלחה נבחרים"
+  },
+  "galleryRail": {
+    "items": [
+      {
+        "alt": "מכונת דפוס בפעולה",
+        "image": "https://images.unsplash.com/photo-1586953983027-d750b9d95f95?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "צוות מתכנן פרויקט",
+        "image": "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "חומרים מוכנים לאספקה",
+        "image": "https://images.unsplash.com/photo-1524758870432-af57e54afa26?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "עבודת גימור",
+        "image": "https://images.unsplash.com/photo-1554774853-b414d2a2b7c0?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "בדיקת צבע",
+        "image": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "פגישה עם לקוח",
+        "image": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1800&q=80"
+      }
+    ],
+    "title": "Photo Gallery"
+  },
+  "capabilities": {
+    "items": [
+      {
+        "desc": "בדיקות פרה-פרס, כיול צבע ואימות סופי בכל שלב.",
+        "title": "בקרת איכות מקצה לקצה"
+      },
+      {
+        "desc": "מתאים גם להרצות קצרות וגם להיקפים גבוהים לאורך זמן.",
+        "title": "יכולת ייצור בקנה מידה גדול"
+      },
+      {
+        "desc": "משמעת תפעולית שמבטיחה השקות בזמן.",
+        "title": "עמידה בלוחות זמנים"
+      },
+      {
+        "desc": "צוות מנוסה שמזהה סיכונים מוקדם ומקצר תהליכים.",
+        "title": "ליווי מקצועי צמוד"
+      }
+    ],
+    "title": "למה לבחור בנו"
+  },
+  "productGallery": {
+    "items": [
+      {
+        "desc": "Web offset printing for daily, weekly, and community newspapers. Broadsheet and tabloid formats, black-and-white or full color, from 500 to 500,000+ copies.",
+        "href": "/products/newspaper-printing",
+        "name": "Newspaper Printing",
+        "image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Web offset & digital",
+          "500 to 500,000+ copies",
+          "3-5 day standard turnaround"
+        ]
+      },
+      {
+        "desc": "Magazine and catalogue printing with saddle stitch or perfect binding, workbook-backed trim sizes, cover stocks, and finishing options for periodicals and premium publications.",
+        "href": "/products/magazine-printing",
+        "name": "Magazine Printing",
+        "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Magazines + catalogues",
+          "Saddle stitch & perfect bind",
+          "Workbook-backed trim sizes"
+        ]
+      },
+      {
+        "desc": "Paper books and hardcover books with workbook-backed trim sizes, page ranges, cover materials, and finishing options for publishers, institutions, and branded editions.",
+        "href": "/products/book-printing",
+        "name": "Book Printing",
+        "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Paper books + hardcover books",
+          "Notebooks + albums",
+          "Workbook-backed stock options"
+        ]
+      },
+      {
+        "desc": "Desk calendars and wall calendars with workbook-backed cover, finishing, and interior page options for branded giveaways, offices, and retail seasonal programs.",
+        "href": "/products/calendar-printing",
+        "name": "Calendar Printing",
+        "image": "https://images.unsplash.com/photo-1506784693919-ef06d93c28d2?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Desk + wall calendar formats",
+          "Wire-O binding and finishing options",
+          "Seasonal branded print programs"
+        ]
+      },
+      {
+        "desc": "Flyers, brochures, posters, and postcards grouped into one campaign-print family, with workbook-backed sizes, fold styles, paper stocks, and finishing options.",
+        "href": "/products/marketing-print",
+        "name": "Marketing Print",
+        "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Flyers, brochures, posters, postcards",
+          "Shared fold and finish options",
+          "Fast campaign turnarounds"
+        ]
+      },
+      {
+        "desc": "Workbook-backed menu printing for folded and unfolded restaurant menus, with defined page counts, paper stocks, color modes, and finishing options.",
+        "href": "/products/menu-printing",
+        "name": "Menu Printing",
+        "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Folded + unfolded menu formats",
+          "Defined page-count options",
+          "Workbook-backed finishing rules"
+        ]
+      },
+      {
+        "desc": "From standard to ultra-premium. Foil stamping, embossing, spot UV, raised ink, and die-cutting available. Make a lasting first impression.",
+        "href": "/products/business-cards",
+        "name": "Business Cards",
+        "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "14pt, 16pt, 32pt stock",
+          "Foil, emboss, spot UV",
+          "From 250 cards"
+        ]
+      },
+      {
+        "desc": "Banners, trade show displays, wall graphics, and outdoor signage. Vinyl, fabric, foam board, and acrylic. Indoor and outdoor options.",
+        "href": "/products/large-format",
+        "name": "Large Format",
+        "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "Custom sizes",
+          "Indoor & outdoor",
+          "Mounting & installation ready"
+        ]
+      }
+    ],
+    "title": "קטגוריות הדפסה",
+    "variant": "grid-3x"
+  },
+  "relatedProducts": []
+}

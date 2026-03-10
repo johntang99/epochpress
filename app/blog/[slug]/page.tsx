@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Clock, ArrowLeft, ArrowRight, Tag as TagIcon } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 import blogData from '@/data/blog.json';
-import { loadAllItems, getRequestSiteId } from '@/lib/content';
+import productsDataFallback from '@/data/products.json';
+import { loadAllItems, getRequestSiteId, loadPageContent } from '@/lib/content';
 import fs from 'fs';
 import path from 'path';
 
@@ -51,6 +53,42 @@ function resolveRenderableImage(post: Record<string, unknown>): string | null {
   return fs.existsSync(localPath) ? resolved : blogPreviewImages[String(post.slug || '')] || null;
 }
 
+function buildDefaultArticleBody(excerpt: string): string {
+  return `${excerpt}
+
+The article body supports headers, pull quotes, numbered lists, code blocks for spec references, and inline product CTAs. When admin is wired, editors will write directly in the admin CMS editor.
+
+For now, this is a starter layout body. Replace it with your full article content.`;
+}
+
+function resolveArticleBody(post: Record<string, unknown>): string {
+  const candidates = [post.contentMarkdown, post.content, post.body, post.markdown];
+  for (const candidate of candidates) {
+    if (typeof candidate === 'string' && candidate.trim()) {
+      return candidate;
+    }
+  }
+  const excerpt = typeof post.excerpt === 'string' ? post.excerpt.trim() : '';
+  return buildDefaultArticleBody(excerpt);
+}
+
+function getRelatedProductSlugs(post: Record<string, unknown>): string[] {
+  if (!Array.isArray(post.relatedProducts)) return [];
+  return Array.from(
+    new Set(
+      post.relatedProducts
+        .map((item: unknown) =>
+          typeof item === 'string'
+            ? item.trim()
+            : typeof (item as { slug?: unknown })?.slug === 'string'
+              ? ((item as { slug: string }).slug || '').trim()
+              : ''
+        )
+        .filter((slug): slug is string => Boolean(slug))
+    )
+  );
+}
+
 export async function generateStaticParams() {
   return blogData.posts.map((post) => ({ slug: post.slug }));
 }
@@ -66,13 +104,24 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const siteId = await getRequestSiteId();
-  const dbPosts = await loadAllItems<typeof blogData.posts[0]>(siteId, 'en', 'blog');
+  const [dbPosts, productsPage] = await Promise.all([
+    loadAllItems<typeof blogData.posts[0]>(siteId, 'en', 'blog'),
+    loadPageContent<typeof productsDataFallback>('products', 'en', siteId),
+  ]);
   const posts = dbPosts.length > 0 ? dbPosts : blogData.posts;
   const post = posts.find((p) => p.slug === params.slug);
   if (!post) notFound();
 
   const category = blogData.categories.find((c) => c.id === post.category);
   const related = posts.filter((p) => p.slug !== post.slug && p.category === post.category).slice(0, 3);
+  const articleBody = resolveArticleBody(post as unknown as Record<string, unknown>);
+  const productCategories = Array.isArray(productsPage?.categories)
+    ? productsPage.categories
+    : productsDataFallback.categories;
+  const relatedProductSlugs = getRelatedProductSlugs(post as unknown as Record<string, unknown>);
+  const relatedProducts = productCategories.filter((product) =>
+    relatedProductSlugs.includes(product.slug)
+  );
 
   return (
     <>
@@ -124,15 +173,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       <section className="section-padding bg-white">
         <div className="container-content max-w-3xl mx-auto">
           <article className="prose prose-lg max-w-none">
-            <p className="text-[var(--text-secondary)] leading-relaxed text-lg mb-6">
-              {post.excerpt} This is where the full article content will be displayed. In Phase 3 (admin wiring), this content will be loaded from the CMS database and support rich text, images, embedded videos, and related product callouts.
-            </p>
-            <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
-              The article body supports headers, pull quotes, numbered lists, code blocks for spec references, and inline product CTAs. When admin is wired, editors will write directly in the admin CMS editor.
-            </p>
-            <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
-              For now, this is a placeholder layout that demonstrates the full article page design — hero, tags, body, sidebar suggestions, and CTA — so we can refine the UX before connecting to the backend.
-            </p>
+            <ReactMarkdown>{articleBody}</ReactMarkdown>
           </article>
 
           {/* Tags */}
@@ -144,6 +185,28 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   <span key={tag} className="text-xs font-medium bg-[var(--surface)] border border-[var(--border)] text-[var(--charcoal)] px-3 py-1.5 rounded-full">
                     {tag}
                   </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {relatedProducts.length > 0 && (
+            <div className="mt-8 pt-8 border-t border-[var(--border)]">
+              <h3 className="font-serif text-[var(--navy)] text-xl mb-4">Related Products</h3>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {relatedProducts.map((product) => (
+                  <Link
+                    key={product.slug}
+                    href={`/products/${product.slug}`}
+                    className="flex flex-col rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 hover:border-[var(--gold)] transition-colors"
+                  >
+                    <div className="block font-semibold text-[var(--navy)] leading-snug">
+                      {product.name}
+                    </div>
+                    <div className="block mt-1 text-sm text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
+                      {product.desc}
+                    </div>
+                  </Link>
                 ))}
               </div>
             </div>

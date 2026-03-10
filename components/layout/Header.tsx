@@ -1,6 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import {
   Menu,
@@ -10,23 +12,16 @@ import {
   PrinterIcon,
   Mail,
   MapPin,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Youtube,
 } from 'lucide-react';
 import clsx from 'clsx';
 import type { SiteInfo } from '@/lib/types';
+import { PUBLIC_PRODUCT_CATALOG } from '@/lib/productTaxonomy';
 
-const products = [
-  { name: 'Newspapers', slug: 'newspaper-printing', desc: 'Broadsheet, tabloid, inserts' },
-  { name: 'Magazines', slug: 'magazine-printing', desc: 'Perfect bind, saddle stitch' },
-  { name: 'Books', slug: 'book-printing', desc: 'Offset, digital, print-on-demand' },
-  { name: 'Marketing Print', slug: 'marketing-print', desc: 'Flyers, brochures, postcards' },
-  { name: 'Menus', slug: 'menu-printing', desc: 'Dine-in, takeout, laminated' },
-  { name: 'Business Cards', slug: 'business-cards', desc: 'Standard, premium, luxury' },
-  { name: 'Large Format', slug: 'large-format', desc: 'Banners, signage, displays' },
-];
+const products = PUBLIC_PRODUCT_CATALOG.filter((item) => item.id !== 'other').map((item) => ({
+  name: item.label,
+  slug: item.slug,
+  desc: item.desc,
+}));
 
 const fallbackNavLinks = [
   { name: 'Products', href: '/products', hasDropdown: true },
@@ -35,11 +30,39 @@ const fallbackNavLinks = [
   { name: 'Blog', href: '/blog', hasDropdown: false },
   { name: 'Contact', href: '/contact', hasDropdown: false },
 ];
+const landingNavLinksByLocale: Record<string, Array<{ name: string; href: string; hasDropdown: boolean }>> = {
+  es: [
+    { name: 'Por que nosotros', href: '#why-us', hasDropdown: false },
+    { name: 'Productos', href: '#products', hasDropdown: false },
+    { name: 'Proceso', href: '#process', hasDropdown: false },
+    { name: 'Casos de exito', href: '#case-studies', hasDropdown: false },
+    { name: 'Galeria', href: '#gallery', hasDropdown: false },
+    { name: 'Contacto', href: '#contact', hasDropdown: false },
+  ],
+  zh: [
+    { name: '为什么选择我们', href: '#why-us', hasDropdown: false },
+    { name: '产品', href: '#products', hasDropdown: false },
+    { name: '流程', href: '#process', hasDropdown: false },
+    { name: '案例', href: '#case-studies', hasDropdown: false },
+    { name: '图片展示', href: '#gallery', hasDropdown: false },
+    { name: '联系', href: '#contact', hasDropdown: false },
+  ],
+  he: [
+    { name: 'למה אנחנו', href: '#why-us', hasDropdown: false },
+    { name: 'מוצרים', href: '#products', hasDropdown: false },
+    { name: 'תהליך', href: '#process', hasDropdown: false },
+    { name: 'סיפורי הצלחה', href: '#case-studies', hasDropdown: false },
+    { name: 'גלריה', href: '#gallery', hasDropdown: false },
+    { name: 'צור קשר', href: '#contact', hasDropdown: false },
+  ],
+};
 
 type HeaderConfig = {
   menu?: {
-    logo?: { text?: string; subtext?: string };
+    logo?: { text?: string; subtext?: string; image?: { src?: string; alt?: string } };
     items?: Array<{ text?: string; url?: string }>;
+    variant?: 'default' | 'centered' | 'transparent' | 'stacked';
+    fontWeight?: 'regular' | 'semibold';
   };
   cta?: { text?: string; link?: string };
   topbar?: {
@@ -68,9 +91,17 @@ export function Header({
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [logoImageFailed, setLogoImageFailed] = useState(false);
+  const pathname = usePathname();
 
-  const logoText = config?.menu?.logo?.text || 'EPOCH PRESS';
-  const logoSubtext = config?.menu?.logo?.subtext || 'Commercial Printing';
+  const rawLogoText = config?.menu?.logo?.text;
+  const rawLogoSubtext = config?.menu?.logo?.subtext;
+  const logoText = rawLogoText ?? 'EPOCH PRESS';
+  const logoSubtext = rawLogoSubtext ?? 'Commercial Printing';
+  const logoImageSrc = config?.menu?.logo?.image?.src?.trim() || '';
+  const logoImageAlt = config?.menu?.logo?.image?.alt || logoText;
+  const shouldShowLogoImage = Boolean(logoImageSrc) && !logoImageFailed;
+  const shouldShowLogoText = Boolean((logoText || '').trim() || (logoSubtext || '').trim());
   const phoneText = siteInfo?.phone || config?.topbar?.phone || '(212) 555-0100';
   const phoneHref =
     config?.topbar?.phoneHref ||
@@ -96,8 +127,11 @@ export function Header({
     Boolean(emailText) ||
     Boolean(addressText) ||
     Boolean(socialLinks.facebook || socialLinks.instagram || socialLinks.linkedin || socialLinks.youtube);
-  const navLinks =
-    config?.menu?.items?.length
+  const isLandingPage = pathname?.startsWith('/lp/');
+  const landingLang = isLandingPage ? pathname.split('/')[2] || '' : '';
+  const navLinks = isLandingPage
+    ? landingNavLinksByLocale[landingLang] || landingNavLinksByLocale.es
+    : config?.menu?.items?.length
       ? config.menu.items
           .filter((item) => Boolean(item?.text && item?.url))
           .map((item) => ({
@@ -106,6 +140,22 @@ export function Header({
             hasDropdown: (item.url || '').toLowerCase() === '/products',
           }))
       : fallbackNavLinks;
+  const menuVariant = (config?.menu?.variant || siteInfo?.headerVariant || 'default').toLowerCase();
+  const isTransparentVariant = menuVariant === 'transparent';
+  const isTransparentHeader = isTransparentVariant && !scrolled;
+  const landingLanguages = [
+    { id: 'en', label: 'EN' },
+    { id: 'es', label: 'ES' },
+    { id: 'zh', label: '中文' },
+    { id: 'he', label: 'עברית' },
+  ];
+  const isLinkActive = (href: string) => {
+    if (!pathname) return false;
+    if (href.startsWith('#')) return false;
+    if (href === '/') return pathname === '/';
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+  const isProductsActive = pathname === '/products' || pathname?.startsWith('/products/');
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -119,11 +169,18 @@ export function Header({
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrolled
           ? 'bg-white shadow-md border-b border-[var(--border)]'
-          : 'bg-white/95 backdrop-blur-sm'
+          : isTransparentHeader
+            ? 'bg-transparent'
+            : 'bg-white/95 backdrop-blur-sm'
       )}
     >
       {hasTopbar && (
-        <div className="hidden md:block border-b border-white/10 bg-[var(--primary-dark)] text-white">
+        <div
+          className={clsx(
+            'hidden md:block text-white',
+            isTransparentHeader ? 'bg-black/30 backdrop-blur-sm' : 'bg-[var(--primary-dark)]'
+          )}
+        >
           <div className="container-content">
             <div className="flex min-h-10 items-center justify-between gap-4 py-1.5 text-xs">
               <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-blue-100">
@@ -157,51 +214,25 @@ export function Header({
                   </a>
                 )}
               </div>
-              <div className="flex items-center gap-3 text-blue-100">
-                {socialLinks.facebook && (
-                  <a
-                    href={socialLinks.facebook}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Facebook"
-                    className="hover:text-[var(--gold-light)] transition-colors"
-                  >
-                    <Facebook className="h-3.5 w-3.5" />
-                  </a>
-                )}
-                {socialLinks.instagram && (
-                  <a
-                    href={socialLinks.instagram}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Instagram"
-                    className="hover:text-[var(--gold-light)] transition-colors"
-                  >
-                    <Instagram className="h-3.5 w-3.5" />
-                  </a>
-                )}
-                {socialLinks.linkedin && (
-                  <a
-                    href={socialLinks.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="LinkedIn"
-                    className="hover:text-[var(--gold-light)] transition-colors"
-                  >
-                    <Linkedin className="h-3.5 w-3.5" />
-                  </a>
-                )}
-                {socialLinks.youtube && (
-                  <a
-                    href={socialLinks.youtube}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="YouTube"
-                    className="hover:text-[var(--gold-light)] transition-colors"
-                  >
-                    <Youtube className="h-3.5 w-3.5" />
-                  </a>
-                )}
+              <div className="flex items-center gap-1.5">
+                {landingLanguages.map((lang) => {
+                  const langHref = lang.id === 'en' ? '/' : `/lp/${lang.id}`;
+                  const isActiveLang = lang.id === 'en' ? !isLandingPage : landingLang === lang.id;
+                  return (
+                    <Link
+                      key={lang.id}
+                      href={langHref}
+                      className={clsx(
+                        'rounded-full px-3 py-1.5 text-[11px] font-bold tracking-wide transition-all',
+                        isActiveLang
+                          ? 'bg-gold-gradient text-white shadow-gold'
+                          : 'bg-white/10 text-white border border-white/30 hover:bg-white/20'
+                      )}
+                    >
+                      {lang.label}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -211,17 +242,47 @@ export function Header({
         <div className="flex items-center justify-between h-18 py-3">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 bg-navy-gradient rounded-lg flex items-center justify-center flex-shrink-0">
-              <PrinterIcon className="w-5 h-5 text-[var(--gold-light)]" />
-            </div>
-            <div className="flex flex-col leading-tight">
-              <span className="font-serif font-700 text-[var(--navy)] text-lg tracking-wide">
-                {logoText}
-              </span>
-              <span className="text-[10px] text-[var(--text-secondary)] tracking-widest uppercase">
-                {logoSubtext}
-              </span>
-            </div>
+            {shouldShowLogoImage ? (
+              <div className="relative h-10 w-40 flex-shrink-0">
+                <Image
+                  src={logoImageSrc}
+                  alt={logoImageAlt}
+                  fill
+                  sizes="160px"
+                  className="object-contain object-left"
+                  onError={() => setLogoImageFailed(true)}
+                  unoptimized
+                />
+              </div>
+            ) : (
+              <div className="w-9 h-9 bg-navy-gradient rounded-lg flex items-center justify-center flex-shrink-0">
+                <PrinterIcon className="w-5 h-5 text-[var(--gold-light)]" />
+              </div>
+            )}
+            {shouldShowLogoText && (
+              <div className="flex flex-col leading-tight">
+                {logoText ? (
+                  <span
+                    className={clsx(
+                      'font-serif font-700 text-lg tracking-wide',
+                      isTransparentHeader ? 'text-white' : 'text-[var(--navy)]'
+                    )}
+                  >
+                    {logoText}
+                  </span>
+                ) : null}
+                {logoSubtext ? (
+                  <span
+                    className={clsx(
+                      'text-[10px] tracking-widest uppercase',
+                      isTransparentHeader ? 'text-blue-100' : 'text-[var(--text-secondary)]'
+                    )}
+                  >
+                    {logoSubtext}
+                  </span>
+                ) : null}
+              </div>
+            )}
           </Link>
 
           {/* Desktop Nav */}
@@ -234,7 +295,18 @@ export function Header({
                   onMouseEnter={() => setDropdownOpen(true)}
                   onMouseLeave={() => setDropdownOpen(false)}
                 >
-                  <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-[var(--charcoal)] hover:text-[var(--navy)] transition-colors rounded-lg hover:bg-[var(--surface)]">
+                  <button
+                    className={clsx(
+                      'flex items-center gap-1 px-4 py-2 text-sm transition-colors rounded-lg',
+                      isProductsActive
+                        ? isTransparentHeader
+                          ? 'font-semibold text-white bg-white/15'
+                          : 'font-semibold text-[var(--navy)] bg-[var(--surface)]'
+                        : isTransparentHeader
+                          ? 'font-medium text-blue-100 hover:text-white hover:bg-white/10'
+                          : 'font-medium text-[var(--charcoal)] hover:text-[var(--navy)] hover:bg-[var(--surface)]'
+                    )}
+                  >
                     {link.name}
                     <ChevronDown className={clsx('w-4 h-4 transition-transform duration-200', dropdownOpen && 'rotate-180')} />
                   </button>
@@ -280,7 +352,16 @@ export function Header({
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="px-4 py-2 text-sm font-medium text-[var(--charcoal)] hover:text-[var(--navy)] transition-colors rounded-lg hover:bg-[var(--surface)]"
+                  className={clsx(
+                    'px-4 py-2 text-sm transition-colors rounded-lg',
+                    isLinkActive(link.href)
+                      ? isTransparentHeader
+                        ? 'font-semibold text-white bg-white/15'
+                        : 'font-semibold text-[var(--navy)] bg-[var(--surface)]'
+                      : isTransparentHeader
+                        ? 'font-medium text-blue-100 hover:text-white hover:bg-white/10'
+                        : 'font-medium text-[var(--charcoal)] hover:text-[var(--navy)] hover:bg-[var(--surface)]'
+                  )}
                 >
                   {link.name}
                 </Link>
@@ -300,7 +381,12 @@ export function Header({
 
           {/* Mobile Toggle */}
           <button
-            className="lg:hidden p-2 rounded-lg text-[var(--navy)] hover:bg-[var(--surface)] transition-colors"
+            className={clsx(
+              'lg:hidden p-2 rounded-lg transition-colors',
+              isTransparentHeader
+                ? 'text-white hover:bg-white/10'
+                : 'text-[var(--navy)] hover:bg-[var(--surface)]'
+            )}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -350,7 +436,12 @@ export function Header({
             <div key={link.name}>
               <Link
                 href={link.href}
-                className="flex items-center px-4 py-3 text-base font-semibold text-[var(--navy)] hover:bg-[var(--surface)] rounded-xl transition-colors"
+                className={clsx(
+                  'flex items-center px-4 py-3 text-base rounded-xl transition-colors',
+                  isLinkActive(link.href)
+                    ? 'font-bold text-[var(--navy)] bg-[var(--surface)]'
+                    : 'font-semibold text-[var(--navy)] hover:bg-[var(--surface)]'
+                )}
                 onClick={() => setMobileOpen(false)}
               >
                 {link.name}

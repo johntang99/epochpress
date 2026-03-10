@@ -25,6 +25,35 @@ interface UserRecord extends User {
   passwordHash: string;
 }
 
+interface DecodedAdminToken {
+  userId: string;
+  email: string;
+  role: User['role'];
+  name?: string;
+  sites?: string[];
+  avatar?: string;
+  createdAt?: string;
+  lastLoginAt?: string;
+  exp: number;
+}
+
+function buildUserFromToken(decoded: DecodedAdminToken): User | null {
+  if (!decoded?.userId || !decoded?.email || !decoded?.role) {
+    return null;
+  }
+  const nowIso = new Date().toISOString();
+  return {
+    id: decoded.userId,
+    email: decoded.email,
+    name: decoded.name || decoded.email,
+    role: decoded.role,
+    sites: Array.isArray(decoded.sites) ? decoded.sites : [],
+    avatar: decoded.avatar,
+    createdAt: decoded.createdAt || nowIso,
+    lastLoginAt: decoded.lastLoginAt || nowIso,
+  };
+}
+
 async function loadUsers(): Promise<UserRecord[]> {
   if (canUseAdminDb()) {
     const users = await listAdminUsersDb();
@@ -115,7 +144,16 @@ export async function authenticate(email: string, password: string): Promise<Ses
   expiresAt.setDate(expiresAt.getDate() + 7);
 
   const token = jwt.sign(
-    { userId: user.id, email: user.email, role: user.role },
+    {
+      userId: user.id,
+      email: user.email,
+      role: user.role,
+      name: user.name,
+      sites: user.sites,
+      avatar: user.avatar,
+      createdAt: user.createdAt,
+      lastLoginAt: user.lastLoginAt,
+    },
     JWT_SECRET,
     { expiresIn: TOKEN_EXPIRY }
   );
@@ -129,9 +167,36 @@ export async function authenticate(email: string, password: string): Promise<Ses
 
 export async function verifyAuth(token: string): Promise<Session | null> {
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as { email: string; exp: number };
-    const user = await findUserByEmail(decoded.email);
-    if (!user) return null;
+    const decoded = jwt.verify(token, JWT_SECRET) as DecodedAdminToken;
+    const fallbackUser = buildUserFromToken(decoded);
+
+    let user: UserRecord | null = null;
+    try {
+      user = await findUserByEmail(decoded.email);
+    } catch (error) {
+      const errorWithCode = error as Error & { code?: string };
+      // Keep users signed in during transient admin DB outages.
+      if (errorWithCode?.code === 'ADMIN_DB_UNAVAILABLE' && fallbackUser) {
+        return {
+          user: fallbackUser,
+          expiresAt: new Date(decoded.exp * 1000).toISOString(),
+          token,
+        };
+      }
+      return null;
+    }
+
+    if (!user) {
+      // Supabase occasionally returns empty reads during short outages; use signed snapshot.
+      if (canUseAdminDb() && fallbackUser) {
+        return {
+          user: fallbackUser,
+          expiresAt: new Date(decoded.exp * 1000).toISOString(),
+          token,
+        };
+      }
+      return null;
+    }
 
     const userWithoutPassword: User = {
       id: user.id,

@@ -32,27 +32,32 @@
   "slug": "large-format",
   "specs": [
     {
-      "tab": "Products",
+      "tab": "Product Types",
       "items": [
         {
           "label": "Vinyl Banners",
-          "value": "Indoor and outdoor, grommets included"
+          "value": "Indoor and outdoor, grommets included",
+          "pdfHref": "/spec-sheets/product-types/large-format-vinyl-banners-spec-sheet.pdf"
         },
         {
           "label": "Fabric Displays",
-          "value": "Trade show tension fabric"
+          "value": "Trade show tension fabric",
+          "pdfHref": "/spec-sheets/product-types/large-format-fabric-displays-spec-sheet.pdf"
         },
         {
           "label": "Foam Board",
-          "value": "Lightweight indoor signage"
+          "value": "Lightweight indoor signage",
+          "pdfHref": "/spec-sheets/product-types/large-format-foam-board-spec-sheet.pdf"
         },
         {
           "label": "Acrylic",
-          "value": "Premium glass-like display"
+          "value": "Premium glass-like display",
+          "pdfHref": "/spec-sheets/product-types/large-format-acrylic-spec-sheet.pdf"
         },
         {
           "label": "Wall Graphics",
-          "value": "Removable or permanent"
+          "value": "Removable or permanent",
+          "pdfHref": "/spec-sheets/product-types/large-format-wall-graphics-spec-sheet.pdf"
         }
       ]
     },
@@ -124,6 +129,10 @@
       ]
     }
   ],
+  "detailSheet": {
+    "href": "/spec-sheets/large-format-spec-sheet.pdf",
+    "text": "View Full Spec Sheet (PDF)"
+  },
   "process": [
     {
       "desc": "Choose your product, size, and material type.",
@@ -170,5 +179,15 @@
       "note": "Volume and repeat pricing"
     }
   ],
-  "description": "Banners, trade show displays, retail signage, wall graphics, and outdoor advertising. Vinyl, fabric, foam board, and acrylic. Indoor and outdoor options with weather-resistant inks."
+  "description": "Banners, trade show displays, retail signage, wall graphics, and outdoor advertising. Vinyl, fabric, foam board, and acrylic. Indoor and outdoor options with weather-resistant inks.",
+  "pageHero": {
+    "title": "Large Format Printing",
+    "subtitle": "Make a big impression with large format prints that command attention.",
+    "description": "Banners, trade show displays, retail signage, wall graphics, and outdoor advertising. Vinyl, fabric, foam board, and acrylic. Indoor and outdoor options with weather-resistant inks.",
+    "image": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1772959659418-unsplash-cyryxz-uve4.jpg",
+    "backgroundImage": "",
+    "variants": [
+      "split-photo-right"
+    ]
+  }
 }
