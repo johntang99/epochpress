@@ -127,13 +127,34 @@ async function loadLandingData(lang: string): Promise<LandingData | null> {
 
   const siteId = await getRequestSiteId();
   const path = `landing/${lang}.json`;
-  const localePriority = Array.from(new Set([lang, 'en', 'zh', 'he', 'es']));
-  for (const locale of localePriority) {
-    const entry = await fetchContentEntry(siteId, locale, path);
-    if (entry?.data && typeof entry.data === 'object') {
-      return entry.data as LandingData;
-    }
+  // Landing files are site-scoped; admin/import currently writes them under canonical locale.
+  // Prefer canonical 'en' row for determinism, then allow locale row only if it is newer.
+  const [canonicalEntry, localeEntry] = await Promise.all([
+    fetchContentEntry(siteId, 'en', path),
+    lang !== 'en' ? fetchContentEntry(siteId, lang, path) : Promise.resolve(null),
+  ]);
+
+  const canonicalData =
+    canonicalEntry?.data && typeof canonicalEntry.data === 'object'
+      ? (canonicalEntry.data as LandingData)
+      : null;
+  const localeData =
+    localeEntry?.data && typeof localeEntry.data === 'object'
+      ? (localeEntry.data as LandingData)
+      : null;
+
+  if (localeData && canonicalData) {
+    const localeUpdatedAt = localeEntry?.updated_at
+      ? new Date(localeEntry.updated_at).getTime()
+      : 0;
+    const canonicalUpdatedAt = canonicalEntry?.updated_at
+      ? new Date(canonicalEntry.updated_at).getTime()
+      : 0;
+    return localeUpdatedAt > canonicalUpdatedAt ? localeData : canonicalData;
   }
+
+  if (canonicalData) return canonicalData;
+  if (localeData) return localeData;
   return fallback;
 }
 
