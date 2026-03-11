@@ -27,13 +27,13 @@ type PortfolioData = typeof portfolioData & {
 };
 
 const categoryColors: Record<string, string> = {
-  Newspapers: 'bg-blue-100 text-blue-800',
-  Magazines: 'bg-purple-100 text-purple-800',
-  Books: 'bg-green-100 text-green-800',
-  'Marketing Print': 'bg-orange-100 text-orange-800',
-  Menus: 'bg-rose-100 text-rose-800',
-  'Business Cards': 'bg-yellow-100 text-yellow-800',
-  'Large Format': 'bg-teal-100 text-teal-800',
+  Newspapers: 'tag-theme',
+  Magazines: 'tag-theme',
+  Books: 'tag-theme',
+  'Marketing Print': 'tag-theme',
+  Menus: 'tag-theme',
+  'Business Cards': 'tag-theme',
+  'Large Format': 'tag-theme',
 };
 
 const categoryIcons: Record<string, string> = {
@@ -117,7 +117,7 @@ export default async function PortfolioPage({
               </h1>
               <p
                 className={`max-w-2xl text-lg mx-auto ${
-                  hasHeroMedia ? 'text-blue-100' : 'text-[var(--text-secondary)]'
+                  hasHeroMedia ? 'text-on-primary-muted' : 'text-[var(--text-secondary)]'
                 }`}
               >
                 {data.hero?.subtitle ||
@@ -180,7 +180,7 @@ export default async function PortfolioPage({
                   )}
                 </div>
                 <div className="p-6">
-                  <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full mb-3 ${categoryColors[item.category] || 'bg-gray-100 text-gray-700'}`}>
+                  <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full mb-3 ${categoryColors[item.category] || 'tag-theme'}`}>
                     {item.category}
                   </span>
                   <h3 className="font-serif font-semibold text-[var(--navy)] text-lg mb-1 group-hover:text-[var(--gold)] transition-colors">
@@ -206,7 +206,7 @@ export default async function PortfolioPage({
           <h2 className="font-serif text-white mb-4" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)' }}>
             {data.cta?.title || "Let's create something great together."}
           </h2>
-          <p className="text-blue-200 mb-8">
+          <p className="text-on-primary-muted mb-8">
             {data.cta?.subtitle || "Tell us about your project and we'll provide a custom quote."}
           </p>
           <Link

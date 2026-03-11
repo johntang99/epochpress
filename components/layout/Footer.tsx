@@ -97,25 +97,25 @@ export function Footer({
                 {brandName.toUpperCase()}
               </span>
             </div>
-            <p className="text-sm text-blue-200 leading-relaxed mb-6">
+            <p className="mb-6 text-sm leading-relaxed text-on-primary-muted">
               {brandDescription}
             </p>
             <div className="space-y-3">
               <a
                 href={phoneLink}
-                className="flex items-center gap-2 text-sm text-blue-100 hover:text-[var(--gold-light)] transition-colors"
+                className="flex items-center gap-2 text-sm text-on-primary hover:text-[var(--gold-light)] transition-colors"
               >
                 <Phone className="w-4 h-4 text-[var(--gold)]" />
                 {phone}
               </a>
               <a
                 href={emailLink}
-                className="flex items-center gap-2 text-sm text-blue-100 hover:text-[var(--gold-light)] transition-colors"
+                className="flex items-center gap-2 text-sm text-on-primary hover:text-[var(--gold-light)] transition-colors"
               >
                 <Mail className="w-4 h-4 text-[var(--gold)]" />
                 {email}
               </a>
-              <div className="flex items-start gap-2 text-sm text-blue-100">
+              <div className="flex items-start gap-2 text-sm text-on-primary">
                 <MapPin className="w-4 h-4 text-[var(--gold)] mt-0.5 flex-shrink-0" />
                 <span>{address.join(', ')}</span>
               </div>
@@ -132,7 +132,7 @@ export function Footer({
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="inline-flex min-h-0 py-0.5 text-sm text-blue-200 hover:text-[var(--gold-light)] transition-colors"
+                    className="inline-flex min-h-0 py-0.5 text-sm text-on-primary-muted hover:text-[var(--gold-light)] transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -151,7 +151,7 @@ export function Footer({
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="inline-flex min-h-0 py-0.5 text-sm text-blue-200 hover:text-[var(--gold-light)] transition-colors"
+                    className="inline-flex min-h-0 py-0.5 text-sm text-on-primary-muted hover:text-[var(--gold-light)] transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -165,7 +165,7 @@ export function Footer({
             <h4 className="font-serif font-semibold text-white mb-5 text-sm tracking-wider uppercase">
               Start a Project
             </h4>
-            <p className="text-sm text-blue-200 leading-relaxed mb-5">
+            <p className="mb-5 text-sm leading-relaxed text-on-primary-muted">
               Ready to bring your print project to life? Get a custom quote today.
             </p>
             <Link
@@ -175,7 +175,7 @@ export function Footer({
               Request a Quote →
             </Link>
             <div className="mt-5 pt-5 border-t border-white/10">
-              <p className="text-xs text-blue-200 mb-1">Business Hours</p>
+              <p className="mb-1 text-xs text-on-primary-muted">Business Hours</p>
               {footerHours.map((line) => (
                 <p key={line} className="text-sm text-white">
                   {line}
@@ -190,7 +190,7 @@ export function Footer({
       <div className="border-t border-white/10">
         <div className="container-content py-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="text-xs text-blue-300">
+            <p className="text-xs text-on-primary-subtle">
               {copyright}
             </p>
             <div className="flex items-center gap-5">
@@ -198,7 +198,7 @@ export function Footer({
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-xs text-blue-300 hover:text-white transition-colors"
+                  className="text-xs text-on-primary-subtle hover:text-white transition-colors"
                 >
                   {link.name}
                 </Link>

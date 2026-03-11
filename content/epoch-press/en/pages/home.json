@@ -25,7 +25,7 @@
       "href": "tel:+19736943600",
       "text": "Call Us: 973.694.3600"
     },
-    "backgroundImage": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1773113331670-unsplash-7-w4uz4acu8.jpg"
+    "backgroundImage": "https://lezbtamhvgbesoshitta.supabase.co/storage/v1/object/public/media/epoch-press/general/1773195095315-background.png"
   },
   "stats": [
     {
@@ -161,6 +161,7 @@
     "badge": "Core Capabilities",
     "title": "Our Printing Solutions",
     "subtitle": "Comprehensive production across publications, commercial collateral, and specialty print.",
-    "featuredSlug": "newspaper-printing"
+    "featuredSlug": "newspaper-printing",
+    "variant": "featured-large"
   }
 }

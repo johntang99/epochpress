@@ -7,12 +7,12 @@ import { resolveRenderableImageUrl } from '@/lib/renderableImage';
 type CaseStudiesData = typeof caseStudiesFallback;
 
 const categoryTone: Record<string, string> = {
-  Newspapers: 'bg-blue-100 text-blue-800',
-  Magazines: 'bg-purple-100 text-purple-800',
-  Books: 'bg-green-100 text-green-800',
-  'Marketing Print': 'bg-orange-100 text-orange-800',
-  'Direct Mail': 'bg-rose-100 text-rose-800',
-  'Multi-Location Rollout': 'bg-teal-100 text-teal-800',
+  Newspapers: 'tag-theme',
+  Magazines: 'tag-theme',
+  Books: 'tag-theme',
+  'Marketing Print': 'tag-theme',
+  'Direct Mail': 'tag-theme',
+  'Multi-Location Rollout': 'tag-theme',
 };
 
 export default async function CaseStudiesPage({
@@ -64,7 +64,7 @@ export default async function CaseStudiesPage({
                 {data.hero.title}
               </h1>
               <p
-                className={`text-lg mb-8 ${hasHeroMedia ? 'text-blue-100' : 'text-[var(--text-secondary)]'} ${
+                className={`text-lg mb-8 ${hasHeroMedia ? 'text-on-primary-muted' : 'text-[var(--text-secondary)]'} ${
                   heroImage ? '' : 'text-center'
                 }`}
               >
@@ -122,7 +122,7 @@ export default async function CaseStudiesPage({
                   <div className="flex items-center justify-between gap-3 mb-3">
                     <span
                       className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold ${
-                        categoryTone[story.category] || 'bg-gray-100 text-gray-700'
+                        categoryTone[story.category] || 'tag-theme'
                       }`}
                     >
                       {story.category}
@@ -184,7 +184,7 @@ export default async function CaseStudiesPage({
           <h2 className="font-serif text-white mb-4" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)' }}>
             {data.cta.title}
           </h2>
-          <p className="text-blue-200 mb-8 max-w-2xl mx-auto">{data.cta.subtitle}</p>
+          <p className="text-on-primary-muted mb-8 max-w-2xl mx-auto">{data.cta.subtitle}</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href={data.cta.primary.href}

@@ -101,7 +101,7 @@ export default async function ProductsPage() {
               </h1>
               <p
                 className={`max-w-2xl text-lg leading-relaxed ${
-                  hasHeroMedia ? 'text-blue-100' : 'text-[var(--text-secondary)]'
+                  hasHeroMedia ? 'text-on-primary-muted' : 'text-[var(--text-secondary)]'
                 } ${heroImage ? '' : 'mx-auto'}`}
               >
                 {hero.subline}

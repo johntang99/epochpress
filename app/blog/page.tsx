@@ -8,11 +8,11 @@ import path from 'path';
 import { resolveRenderableImageUrl } from '@/lib/renderableImage';
 
 const categoryColors: Record<string, string> = {
-  'industry-trends': 'bg-blue-100 text-blue-800',
-  'print-tips': 'bg-green-100 text-green-800',
-  'our-services': 'bg-purple-100 text-purple-800',
-  'case-studies': 'bg-orange-100 text-orange-800',
-  'sustainability': 'bg-teal-100 text-teal-800',
+  'industry-trends': 'tag-theme',
+  'print-tips': 'tag-theme',
+  'our-services': 'tag-theme',
+  'case-studies': 'tag-theme',
+  'sustainability': 'tag-theme',
 };
 
 const blogPreviewImages: Record<string, string> = {
@@ -142,7 +142,7 @@ export default async function BlogPage({
               </h1>
               <p
                 className={`text-lg leading-relaxed ${
-                  hasHeroMedia ? 'text-blue-100' : 'text-[var(--text-secondary)]'
+                  hasHeroMedia ? 'text-on-primary-muted' : 'text-[var(--text-secondary)]'
                 }`}
               >
                 {pageContent.hero.subtitle}
@@ -185,7 +185,7 @@ export default async function BlogPage({
                 )}
               </div>
               <div className="p-8 flex flex-col justify-center">
-                <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full mb-4 ${categoryColors[typeof featured.category === 'string' ? featured.category : ''] || 'bg-gray-100 text-gray-700'}`}>
+                <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full mb-4 ${categoryColors[typeof featured.category === 'string' ? featured.category : ''] || 'tag-theme'}`}>
                   {categories.find((c) => c.id === featured.category)?.name || toCategoryLabel(featured.category)}
                 </span>
                 <h2 className="font-serif text-[var(--navy)] text-2xl mb-3 group-hover:text-[var(--gold)] transition-colors leading-snug">
@@ -245,11 +245,11 @@ export default async function BlogPage({
                 </div>
                 <div className="p-6 flex flex-col flex-1">
                   <div className="flex items-center gap-2 mb-3">
-                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${categoryColors[typeof post.category === 'string' ? post.category : ''] || 'bg-gray-100 text-gray-700'}`}>
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${categoryColors[typeof post.category === 'string' ? post.category : ''] || 'tag-theme'}`}>
                       {categories.find((c) => c.id === post.category)?.name || toCategoryLabel(post.category)}
                     </span>
                     {post.type === 'video' && (
-                      <span className="text-xs font-semibold bg-red-100 text-red-700 px-2.5 py-1 rounded-full">Video</span>
+                      <span className="rounded-full bg-[var(--secondary-50)] px-2.5 py-1 text-xs font-semibold text-[var(--secondary-dark)]">Video</span>
                     )}
                   </div>
                   <h2 className="font-serif font-semibold text-[var(--navy)] text-lg mb-3 group-hover:text-[var(--gold)] transition-colors leading-snug flex-1">

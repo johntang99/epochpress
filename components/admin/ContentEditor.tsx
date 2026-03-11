@@ -18,6 +18,7 @@ import { HeaderFormPanel } from '@/components/admin/sections/HeaderFormPanel';
 import { ThemeFormPanel } from '@/components/admin/sections/ThemeFormPanel';
 import { ProfileIntroImagesPanel } from '@/components/admin/sections/ProfileIntroImagesPanel';
 import { LandingPageFormPanel } from '@/components/admin/sections/LandingPageFormPanel';
+import { HomePageFormPanel } from '@/components/admin/sections/HomePageFormPanel';
 
 interface ContentFileItem {
   id: string;
@@ -74,6 +75,7 @@ const SECTION_VARIANT_OPTIONS: Record<string, string[]> = {
   insurance: ['split', 'stacked'],
   policies: ['grid', 'list'],
   statistics: ['horizontal-row', 'grid-2x2', 'vertical-cards', 'inline-badges'],
+  servicesSection: ['featured-large', 'grid-2x', 'grid-3x', 'detail-alternating'],
 };
 
 const toTitleCase = (value: string) =>
@@ -1889,7 +1891,14 @@ For now, this is a starter layout body. Replace it with your full article conten
                 openImagePicker={openImagePicker}
               />
 
-              {!isLandingFile && (
+              <HomePageFormPanel
+                isHomePageFile={isHomePageFile}
+                formData={formData}
+                updateFormValue={updateFormValue}
+                openImagePicker={openImagePicker}
+              />
+
+              {!isLandingFile && !isHomePageFile && (
                 <GenericPageFormPanels
                   formData={formData}
                   isProductPageFile={isProductPageFile}

@@ -56,20 +56,20 @@ export default function FileGuidelinesPage() {
                 </h3>
                 <ul className="space-y-2">
                   {accepted.map((f) => (
-                    <li key={f} className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-xl px-4 py-3 text-sm font-medium text-green-800">
-                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" /> {f}
+                    <li key={f} className="flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium bg-[var(--status-positive-bg)] border-[var(--status-positive-border)] text-[var(--status-positive-text)]">
+                      <CheckCircle className="h-4 w-4 flex-shrink-0 text-[var(--status-positive-text)]" /> {f}
                     </li>
                   ))}
                 </ul>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-red-600 mb-3 flex items-center gap-2">
+                <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-[var(--status-danger)]">
                   <XCircle className="w-4 h-4" /> Not Accepted
                 </h3>
                 <ul className="space-y-2">
                   {notAccepted.map((f) => (
-                    <li key={f} className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-sm font-medium text-red-800">
-                      <XCircle className="w-4 h-4 text-red-500 flex-shrink-0" /> {f}
+                    <li key={f} className="flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium bg-[var(--status-negative-bg)] border-[var(--status-negative-border)] text-[var(--status-negative-text)]">
+                      <XCircle className="h-4 w-4 flex-shrink-0 text-[var(--status-negative-text)]" /> {f}
                     </li>
                   ))}
                 </ul>
@@ -85,9 +85,9 @@ export default function FileGuidelinesPage() {
             <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-8">
               <div className="grid sm:grid-cols-3 gap-6 mb-6">
                 {[
-                  { label: 'Bleed', value: '0.125"', color: 'bg-red-100 border-red-300 text-red-800', desc: 'Extend background/images beyond trim' },
-                  { label: 'Trim Line', value: '0"', color: 'bg-blue-100 border-blue-300 text-blue-800', desc: 'Where the paper will be cut' },
-                  { label: 'Safety Zone', value: '0.25"', color: 'bg-green-100 border-green-300 text-green-800', desc: 'Keep text/logos inside this area' },
+                  { label: 'Bleed', value: '0.125"', color: 'bg-[var(--status-negative-bg)] border-[var(--status-negative-border)] text-[var(--status-negative-text)]', desc: 'Extend background/images beyond trim' },
+                  { label: 'Trim Line', value: '0"', color: 'bg-[var(--primary-50)] border-[var(--primary-100)] text-[var(--primary-dark)]', desc: 'Where the paper will be cut' },
+                  { label: 'Safety Zone', value: '0.25"', color: 'bg-[var(--status-positive-bg)] border-[var(--status-positive-border)] text-[var(--status-positive-text)]', desc: 'Keep text/logos inside this area' },
                 ].map((zone) => (
                   <div key={zone.label} className={`border rounded-xl p-5 text-center ${zone.color}`}>
                     <div className="text-2xl font-bold mb-1">{zone.value}</div>
@@ -143,7 +143,7 @@ export default function FileGuidelinesPage() {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <XCircle className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
+                <XCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-[var(--status-negative-text)]" />
                 <div>
                   <p className="font-semibold text-[var(--navy)]">Avoid RGB and Pantone without conversion</p>
                   <p className="text-sm text-[var(--text-secondary)]">RGB looks vibrant on screen but prints dull. Convert Pantone colors to CMYK equivalents in your design software.</p>
@@ -199,7 +199,7 @@ export default function FileGuidelinesPage() {
           {/* CTA */}
           <div className="bg-navy-gradient rounded-2xl p-8 text-center">
             <h2 className="font-serif text-white text-xl mb-3">Files Ready? Let's Print.</h2>
-            <p className="text-blue-200 text-sm mb-6">Submit your project details and files through our quote form.</p>
+            <p className="mb-6 text-sm text-on-primary-muted">Submit your project details and files through our quote form.</p>
             <Link href="/quote" className="inline-flex items-center gap-2 bg-gold-gradient text-white font-semibold px-7 py-3.5 rounded-xl hover:opacity-90 transition-opacity shadow-gold">
               Request a Quote <ArrowRight className="w-4 h-4" />
             </Link>

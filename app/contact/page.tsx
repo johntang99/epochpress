@@ -55,7 +55,7 @@ export default async function ContactPage() {
               </h1>
               <p
                 className={`max-w-xl text-lg ${
-                  hasHeroMedia ? 'text-blue-100' : 'text-[var(--text-secondary)]'
+                  hasHeroMedia ? 'text-on-primary-muted' : 'text-[var(--text-secondary)]'
                 } ${heroImage ? '' : 'mx-auto'}`}
               >
                 {data.hero?.subtitle ||
@@ -202,7 +202,7 @@ export default async function ContactPage() {
                 </div>
                 <div className="bg-[var(--navy)] rounded-2xl p-5 text-center">
                   <p className="font-serif font-semibold text-white mb-2">Prefer to Talk?</p>
-                  <p className="text-xs text-blue-200 mb-4">Call us directly — we respond fast.</p>
+                  <p className="mb-4 text-xs text-on-primary-muted">Call us directly — we respond fast.</p>
                   <a href={phoneHref} className="inline-flex items-center gap-1 bg-white text-[var(--navy)] text-sm font-semibold px-4 py-2.5 rounded-xl">
                     <Phone className="w-4 h-4" /> {primaryPhone}
                   </a>

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowRight, Phone, CheckCircle, ChevronRight, Newspaper, BookOpen, BookMarked, FileText, UtensilsCrossed, CreditCard, MonitorPlay } from 'lucide-react';
 import { loadAllItems, loadPageContent, getRequestSiteId } from '@/lib/content';
 import homeDataFallback from '@/data/home.json';
+import productsDataFallback from '@/data/products.json';
 import type { LucideIcon } from 'lucide-react';
 import Image from 'next/image';
 import fs from 'fs';
@@ -34,14 +35,27 @@ type PortfolioPageData = {
   items?: PortfolioItem[];
 };
 
+interface ProductHeroLike {
+  image?: string;
+  backgroundImage?: string;
+}
+
+interface ProductPageLike {
+  image?: string;
+  backgroundImage?: string;
+  hero?: ProductHeroLike;
+  pageHero?: ProductHeroLike;
+  heroSection?: ProductHeroLike;
+}
+
 const categoryIcons: Record<string, { Icon: LucideIcon; color: string; bg: string }> = {
-  'newspaper-printing':  { Icon: Newspaper,       color: 'text-blue-600',   bg: 'bg-blue-50'   },
-  'magazine-printing':   { Icon: BookOpen,         color: 'text-purple-600', bg: 'bg-purple-50' },
-  'book-printing':       { Icon: BookMarked,       color: 'text-green-600',  bg: 'bg-green-50'  },
-  'marketing-print':     { Icon: FileText,         color: 'text-orange-600', bg: 'bg-orange-50' },
-  'menu-printing':       { Icon: UtensilsCrossed,  color: 'text-rose-600',   bg: 'bg-rose-50'   },
-  'business-cards':      { Icon: CreditCard,       color: 'text-yellow-700', bg: 'bg-yellow-50' },
-  'large-format':        { Icon: MonitorPlay,      color: 'text-teal-600',   bg: 'bg-teal-50'   },
+  'newspaper-printing':  { Icon: Newspaper,       color: 'text-[var(--primary-dark)]', bg: 'bg-[var(--primary-50)]' },
+  'magazine-printing':   { Icon: BookOpen,        color: 'text-[var(--primary-dark)]', bg: 'bg-[var(--primary-50)]' },
+  'book-printing':       { Icon: BookMarked,      color: 'text-[var(--primary-dark)]', bg: 'bg-[var(--primary-50)]' },
+  'marketing-print':     { Icon: FileText,        color: 'text-[var(--primary-dark)]', bg: 'bg-[var(--primary-50)]' },
+  'menu-printing':       { Icon: UtensilsCrossed, color: 'text-[var(--primary-dark)]', bg: 'bg-[var(--primary-50)]' },
+  'business-cards':      { Icon: CreditCard,      color: 'text-[var(--primary-dark)]', bg: 'bg-[var(--primary-50)]' },
+  'large-format':        { Icon: MonitorPlay,     color: 'text-[var(--primary-dark)]', bg: 'bg-[var(--primary-50)]' },
 };
 
 const serviceImages: Record<string, string> = {
@@ -135,8 +149,34 @@ export default async function HomePage() {
   const heroImage = resolveRenderableImageUrl((hero as Record<string, unknown>)?.image);
   const hasHeroMedia = Boolean(heroBackgroundImage || heroImage);
   const featuredServiceSlug = servicesSection?.featuredSlug || categories?.[0]?.slug;
-  const featuredService = categories.find((cat) => cat.slug === featuredServiceSlug) || categories[0];
-  const secondaryServices = categories.filter((cat) => cat.slug !== featuredService?.slug);
+  const categoriesWithHeroImage = await Promise.all(
+    categories.map(async (category) => {
+      const productPage = await loadPageContent<ProductPageLike>(category.slug, 'en', siteId);
+      const heroBlock =
+        productPage?.pageHero || productPage?.heroSection || productPage?.hero || null;
+      const heroImage =
+        resolveRenderableImageUrl(heroBlock?.image) ||
+        resolveRenderableImageUrl(productPage?.image) ||
+        resolveRenderableImageUrl(heroBlock?.backgroundImage) ||
+        resolveRenderableImageUrl(productPage?.backgroundImage) ||
+        serviceImages[category.slug] ||
+        serviceImages['marketing-print'];
+      return {
+        ...category,
+        heroImage,
+      };
+    })
+  );
+  const featuredService =
+    categoriesWithHeroImage.find((cat) => cat.slug === featuredServiceSlug) ||
+    categoriesWithHeroImage[0];
+  const secondaryServices = categoriesWithHeroImage.filter(
+    (cat) => cat.slug !== featuredService?.slug
+  );
+  const homeProductsVariant = servicesSection?.variant || 'featured-large';
+  const productCatalogBySlug = new Map(
+    (productsDataFallback.categories || []).map((item) => [item.slug, item] as const)
+  );
   const featuredBlogPosts = [...blogItems]
     .sort((a, b) => {
       const aTime = a.publishDate ? new Date(a.publishDate).getTime() : 0;
@@ -179,7 +219,7 @@ export default async function HomePage() {
         ) : (
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-20 right-1/4 w-96 h-96 bg-[var(--gold)] rounded-full blur-3xl" />
-            <div className="absolute bottom-10 left-1/4 w-64 h-64 bg-blue-300 rounded-full blur-3xl" />
+            <div className="absolute bottom-10 left-1/4 h-64 w-64 rounded-full bg-[var(--primary-light)] blur-3xl" />
           </div>
         )}
         <div className="container-content relative z-10 py-20">
@@ -191,7 +231,7 @@ export default async function HomePage() {
               <h1 className="font-serif text-white leading-[1.1] mb-8" style={{ fontSize: 'clamp(2.8rem, 5vw, 4.5rem)', fontWeight: 700 }}>
                 {hero.headline}
               </h1>
-              <p className="text-blue-200 leading-relaxed mb-10" style={{ fontSize: 'clamp(1.1rem, 1.5vw, 1.25rem)', maxWidth: '600px' }}>
+              <p className="text-on-primary-muted mb-10 leading-relaxed" style={{ fontSize: 'clamp(1.1rem, 1.5vw, 1.25rem)', maxWidth: '600px' }}>
                 {hero.subline}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -213,7 +253,7 @@ export default async function HomePage() {
 
               <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mt-10">
                 {['Print-ready proofing', '48-hour rush options', 'Nationwide delivery'].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-sm text-blue-200">
+                  <div key={item} className="flex items-center gap-2 text-sm text-on-primary-muted">
                     <CheckCircle className="w-4 h-4 text-[var(--gold)] flex-shrink-0" />
                     {item}
                   </div>
@@ -251,63 +291,128 @@ export default async function HomePage() {
             </p>
           </div>
 
-          {featuredService && (
-            <div className="grid grid-cols-1 lg:grid-cols-5 rounded-2xl overflow-hidden bg-white border border-[var(--border)] shadow-card mb-7">
-              <div className="relative lg:col-span-3 aspect-video">
-                <Image
-                  src={serviceImages[featuredService.slug] || serviceImages['marketing-print']}
-                  alt={featuredService.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 60vw"
-                />
-              </div>
-              <div className="lg:col-span-2 p-8 flex flex-col justify-center">
-                <span className="inline-block w-fit bg-[var(--gold-50)] text-[var(--gold)] text-xs font-semibold px-2.5 py-1 rounded-full mb-3">
-                  Featured Service
-                </span>
-                <h3 className="font-serif text-[var(--navy)] mb-3" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)' }}>
-                  {featuredService.name}
-                </h3>
-                <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">{featuredService.desc}</p>
-                <Link
-                  href={`/products/${featuredService.slug}`}
-                  className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-[var(--gold)] hover:text-[var(--gold-light)] transition-colors"
+          {homeProductsVariant === 'detail-alternating' ? (
+            <div className="space-y-6">
+              {categories.map((cat, index) => (
+                <article
+                  key={cat.slug}
+                  className="grid grid-cols-1 overflow-hidden rounded-2xl border border-[var(--border)] bg-white shadow-card md:grid-cols-2"
                 >
-                  Learn More <ChevronRight className="w-4 h-4" />
-                </Link>
-              </div>
+                  <div className={index % 2 === 1 ? 'md:order-2' : ''}>
+                    <img
+                      src={serviceImages[cat.slug] || serviceImages['marketing-print']}
+                      alt={cat.name}
+                      className="h-full min-h-64 w-full object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-col justify-center p-8">
+                    <h3 className="font-serif text-[var(--navy)] mb-3" style={{ fontSize: 'clamp(1.3rem, 2.1vw, 1.8rem)' }}>
+                      {cat.name}
+                    </h3>
+                    <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">{cat.desc}</p>
+                    <Link
+                      href={`/products/${cat.slug}`}
+                      className="inline-flex w-fit items-center gap-2 rounded-xl bg-gold-gradient px-4 py-2 text-sm font-semibold text-white shadow-gold hover:opacity-90"
+                    >
+                      Learn More <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </article>
+              ))}
             </div>
-          )}
+          ) : (
+            <>
+              {featuredService && homeProductsVariant === 'featured-large' && (
+                <div className="grid grid-cols-1 lg:grid-cols-5 rounded-2xl overflow-hidden bg-white border border-[var(--border)] shadow-card mb-7">
+                  <div className="relative lg:col-span-3 aspect-video">
+                    <Image
+                      src={serviceImages[featuredService.slug] || serviceImages['marketing-print']}
+                      alt={featuredService.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 60vw"
+                    />
+                  </div>
+                  <div className="lg:col-span-2 p-8 flex flex-col justify-center">
+                    <span className="inline-block w-fit bg-[var(--gold-50)] text-[var(--gold)] text-xs font-semibold px-2.5 py-1 rounded-full mb-3">
+                      Featured Service
+                    </span>
+                    <h3 className="font-serif text-[var(--navy)] mb-3" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)' }}>
+                      {featuredService.name}
+                    </h3>
+                    <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">{featuredService.desc}</p>
+                    <Link
+                      href={`/products/${featuredService.slug}`}
+                      className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-[var(--gold)] hover:text-[var(--gold-light)] transition-colors"
+                    >
+                      Learn More <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+              )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {secondaryServices.map((cat) => {
+              <div
+                className={
+                  homeProductsVariant === 'grid-2x'
+                    ? 'grid grid-cols-1 sm:grid-cols-2 gap-5'
+                    : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'
+                }
+              >
+                {(homeProductsVariant === 'featured-large'
+                  ? secondaryServices
+                  : categoriesWithHeroImage).map((cat) => {
               const meta = categoryIcons[cat.slug];
               const IconComponent = meta?.Icon;
+              const productDetails = productCatalogBySlug.get(cat.slug);
+              const highlights =
+                Array.isArray(productDetails?.highlights) && productDetails.highlights.length > 0
+                  ? productDetails.highlights.slice(0, 3)
+                  : [];
               return (
-                <Link
+                <article
                   key={cat.slug}
-                  href={`/products/${cat.slug}`}
-                  className="group bg-white rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300 border border-[var(--border)] hover:border-[var(--gold)] hover:-translate-y-1 flex flex-col"
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
                 >
-                  {IconComponent && (
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 flex-shrink-0 ${meta.bg}`}>
-                      <IconComponent className={`w-6 h-6 ${meta.color}`} />
-                    </div>
-                  )}
-                  <h3 className="font-serif font-semibold text-[var(--navy)] text-lg mb-2 group-hover:text-[var(--gold)] transition-colors">
-                    {cat.name}
-                  </h3>
-                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-4 flex-1">
-                    {cat.desc}
-                  </p>
-                  <div className="flex items-center gap-1 text-sm font-semibold text-[var(--gold)] group-hover:gap-2 transition-all mt-auto">
-                    Learn More <ChevronRight className="w-4 h-4" />
+                  <div className="relative h-52 overflow-hidden bg-gradient-to-br from-[var(--navy)] to-[var(--charcoal)]">
+                    <img
+                      src={cat.heroImage || serviceImages[cat.slug] || serviceImages['marketing-print']}
+                      alt={cat.name}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                   </div>
-                </Link>
+                  <div className="flex h-full flex-1 flex-col p-7">
+                    <h3 className="mb-3 text-lg font-semibold font-serif text-[var(--navy)] transition-colors group-hover:text-[var(--gold)]">
+                      {cat.name}
+                    </h3>
+                    <p className="mb-5 flex-1 text-sm leading-relaxed text-[var(--text-secondary)]">
+                      {cat.desc}
+                    </p>
+                    {homeProductsVariant === 'featured-large' && highlights.length > 0 && (
+                      <ul className="mb-6 space-y-2">
+                        {highlights.map((point) => (
+                          <li key={`${cat.slug}-${point}`} className="flex items-start gap-2 text-sm text-[var(--charcoal)]">
+                            <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-[var(--gold)]" />
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    <Link
+                      href={`/products/${cat.slug}`}
+                      className="inline-flex items-center justify-center gap-2 rounded-xl bg-gold-gradient px-5 py-3 text-sm font-semibold text-white shadow-gold transition-opacity hover:opacity-90"
+                    >
+                      Learn More
+                      <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  </div>
+                </article>
               );
-            })}
-          </div>
+                })}
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -349,7 +454,7 @@ export default async function HomePage() {
                 <div className="font-serif font-bold text-[var(--gold-light)] mb-2" style={{ fontSize: 'clamp(2rem, 3vw, 2.75rem)' }}>
                   {stat.value}
                 </div>
-                <div className="text-sm text-blue-200 font-medium">{stat.label}</div>
+                <div className="text-on-primary-muted text-sm font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -499,7 +604,7 @@ export default async function HomePage() {
           <h2 className="font-serif text-white mb-5" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)' }}>
             {cta.headline}
           </h2>
-          <p className="text-blue-200 mb-10 max-w-xl mx-auto">{cta.subline}</p>
+          <p className="text-on-primary-muted mb-10 mx-auto max-w-xl">{cta.subline}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href={cta.primaryCta.href}

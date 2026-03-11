@@ -9,11 +9,11 @@ import fs from 'fs';
 import path from 'path';
 
 const categoryColors: Record<string, string> = {
-  'industry-trends': 'bg-blue-100 text-blue-800',
-  'print-tips': 'bg-green-100 text-green-800',
-  'our-services': 'bg-purple-100 text-purple-800',
-  'case-studies': 'bg-orange-100 text-orange-800',
-  'sustainability': 'bg-teal-100 text-teal-800',
+  'industry-trends': 'tag-theme',
+  'print-tips': 'tag-theme',
+  'our-services': 'tag-theme',
+  'case-studies': 'tag-theme',
+  'sustainability': 'tag-theme',
 };
 
 const blogPreviewImages: Record<string, string> = {
@@ -128,22 +128,22 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       {/* Hero */}
       <section className="bg-navy-gradient pt-36 md:pt-40 pb-16">
         <div className="container-content max-w-3xl">
-          <Link href="/blog" className="inline-flex items-center gap-1 text-blue-300 text-sm hover:text-white transition-colors mb-6">
+          <Link href="/blog" className="mb-6 inline-flex items-center gap-1 text-sm text-on-primary-subtle hover:text-white transition-colors">
             <ArrowLeft className="w-4 h-4" /> Back to Blog
           </Link>
           <div className="flex items-center gap-3 mb-5">
-            <span className={`text-xs font-semibold px-3 py-1.5 rounded-full ${categoryColors[post.category] || 'bg-white/10 text-white'}`}>
+            <span className={`rounded-full px-3 py-1.5 text-xs font-semibold ${categoryColors[post.category] || 'bg-white/10 text-white'}`}>
               {category?.name}
             </span>
-            <span className="text-blue-300 text-sm flex items-center gap-1">
+            <span className="flex items-center gap-1 text-sm text-on-primary-subtle">
               <Clock className="w-4 h-4" /> {post.readTime}
             </span>
           </div>
           <h1 className="font-serif text-white leading-tight mb-5" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)' }}>
             {post.title}
           </h1>
-          <p className="text-blue-200 text-lg leading-relaxed">{post.excerpt}</p>
-          <p className="text-blue-300 text-sm mt-5">
+          <p className="text-on-primary-muted text-lg leading-relaxed">{post.excerpt}</p>
+          <p className="mt-5 text-sm text-on-primary-subtle">
             {new Date(post.publishDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
           </p>
         </div>
@@ -222,7 +222,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             <div className="grid sm:grid-cols-3 gap-6">
               {related.map((rel) => (
                 <Link key={rel.slug} href={`/blog/${rel.slug}`} className="group bg-white rounded-2xl border border-[var(--border)] p-5 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5">
-                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${categoryColors[rel.category] || 'bg-gray-100 text-gray-700'}`}>
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${categoryColors[rel.category] || 'tag-theme'}`}>
                     {blogData.categories.find((c) => c.id === rel.category)?.name}
                   </span>
                   <h3 className="font-serif font-semibold text-[var(--navy)] text-sm mt-3 mb-2 group-hover:text-[var(--gold)] transition-colors leading-snug">
@@ -240,7 +240,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       <section className="bg-navy-gradient py-14">
         <div className="container-content text-center">
           <h2 className="font-serif text-white mb-4 text-xl">Ready to start your print project?</h2>
-          <p className="text-blue-200 mb-7 text-sm">Get a custom quote from our printing team.</p>
+          <p className="mb-7 text-sm text-on-primary-muted">Get a custom quote from our printing team.</p>
           <Link href="/quote" className="inline-flex items-center gap-2 bg-gold-gradient text-white font-semibold px-7 py-3.5 rounded-xl hover:opacity-90 transition-opacity shadow-gold">
             Request a Quote <ArrowRight className="w-4 h-4" />
           </Link>

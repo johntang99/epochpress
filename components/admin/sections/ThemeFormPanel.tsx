@@ -107,6 +107,30 @@ export function ThemeFormPanel({
           </div>
         </div>
       </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="space-y-3">
+          <div className="text-xs font-semibold text-gray-500 uppercase">Radius Tokens</div>
+          {(['card', 'photo', 'button', 'pill'] as const).map((key) => (
+            <div key={`radius-${key}`}>
+              <label className="block text-xs text-gray-500">{key}</label>
+              <input
+                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                value={String(getPathValue(['radii', key]) || '')}
+                onChange={(event) => updateFormValue(['radii', key], event.target.value)}
+                placeholder={key === 'pill' ? 'e.g. 9999px' : 'e.g. 1rem'}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="space-y-2 rounded-lg border border-gray-200 bg-gray-50 p-3 text-xs text-gray-600">
+          <p className="font-semibold text-gray-700">How radius tokens are used</p>
+          <p>`card` controls most panel/card corners (`rounded-2xl`).</p>
+          <p>`photo` controls rounded media containers (`rounded-2xl` + `overflow-hidden`).</p>
+          <p>`button` controls button/link corners (`rounded-xl`).</p>
+          <p>`pill` controls pills/chips (`rounded-full`).</p>
+        </div>
+      </div>
     </div>
   );
 }

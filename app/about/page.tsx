@@ -55,7 +55,7 @@ export default async function AboutPage() {
               <h1 className="font-serif text-white mb-5" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
                 {heroTitle}
               </h1>
-              <p className="text-blue-200 text-lg leading-relaxed">{heroSubtitle}</p>
+              <p className="text-on-primary-muted text-lg leading-relaxed">{heroSubtitle}</p>
             </div>
             {heroImage && (
               <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/20">
@@ -135,7 +135,7 @@ export default async function AboutPage() {
               <div key={cert.name} className="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
                 <Award className="w-8 h-8 text-[var(--gold)] mx-auto mb-3" />
                 <h3 className="font-serif font-semibold text-white text-sm mb-2">{cert.name}</h3>
-                <p className="text-xs text-blue-200">{cert.desc}</p>
+                <p className="text-on-primary-muted text-xs">{cert.desc}</p>
               </div>
             ))}
           </div>

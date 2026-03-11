@@ -45,6 +45,12 @@ export interface ThemeConfig {
     to?: string;
     opacity?: number;
   };
+  radii?: {
+    card?: string;
+    photo?: string;
+    button?: string;
+    pill?: string;
+  };
   typography: {
     display: string;
     heading: string;

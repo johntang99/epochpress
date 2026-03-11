@@ -80,7 +80,7 @@ export default function FAQPage() {
           {/* CTA */}
           <div className="bg-navy-gradient rounded-2xl p-8 text-center">
             <h2 className="font-serif text-white text-xl mb-3">Still have questions?</h2>
-            <p className="text-blue-200 text-sm mb-6">Our team is happy to help with any project-specific questions.</p>
+            <p className="mb-6 text-sm text-on-primary-muted">Our team is happy to help with any project-specific questions.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact" className="inline-flex items-center gap-2 bg-gold-gradient text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition-opacity shadow-gold">
                 Contact Us <ArrowRight className="w-4 h-4" />

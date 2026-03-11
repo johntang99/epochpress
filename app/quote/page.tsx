@@ -58,8 +58,8 @@ export default function QuotePage() {
     return (
       <section className="min-h-screen bg-[var(--surface)] pt-28 pb-16 flex items-center">
         <div className="container-content text-center max-w-xl mx-auto">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-8 h-8 text-green-600" />
+          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[var(--status-positive-bg)]">
+            <CheckCircle className="h-8 w-8 text-[var(--status-positive-text)]" />
           </div>
           <h1 className="font-serif text-[var(--navy)] text-2xl mb-4">Thank You!</h1>
           <p className="text-[var(--text-secondary)] mb-4">
@@ -280,7 +280,7 @@ export default function QuotePage() {
                       <CheckCircle className="w-4 h-4 text-[var(--success)] flex-shrink-0" />
                       <span className="text-sm font-medium text-[var(--navy)] flex-1 truncate">{f.name}</span>
                       <span className="text-xs text-[var(--text-secondary)]">{(f.size / 1024 / 1024).toFixed(1)} MB</span>
-                      <button onClick={() => setFiles((prev) => prev.filter((_, j) => j !== i))} className="text-gray-400 hover:text-red-500 transition-colors">
+                      <button onClick={() => setFiles((prev) => prev.filter((_, j) => j !== i))} className="text-[var(--text-secondary)] hover:text-[var(--status-danger)] transition-colors">
                         <X className="w-4 h-4" />
                       </button>
                     </li>

@@ -203,7 +203,7 @@ export function Header({
         >
           <div className="container-content">
             <div className="flex min-h-10 items-center justify-between gap-4 py-1.5 text-xs">
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-blue-100">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-on-primary-muted">
                 {addressText && (
                   <a
                     href={addressHref || '#'}
@@ -295,7 +295,7 @@ export function Header({
                   <span
                     className={clsx(
                       'text-[10px] tracking-widest uppercase',
-                      isTransparentHeader ? 'text-blue-100' : 'text-[var(--text-secondary)]'
+                      isTransparentHeader ? 'text-on-primary-muted' : 'text-[var(--text-secondary)]'
                     )}
                   >
                     {logoSubtext}
@@ -323,7 +323,7 @@ export function Header({
                           ? 'font-semibold text-white bg-white/15'
                           : 'font-semibold text-[var(--navy)] bg-[var(--surface)]'
                         : isTransparentHeader
-                          ? 'font-medium text-blue-100 hover:text-white hover:bg-white/10'
+                          ? 'font-medium text-on-primary-muted hover:text-white hover:bg-white/10'
                           : 'font-medium text-[var(--charcoal)] hover:text-[var(--navy)] hover:bg-[var(--surface)]'
                     )}
                   >
@@ -379,7 +379,7 @@ export function Header({
                         ? 'font-semibold text-white bg-white/15'
                         : 'font-semibold text-[var(--navy)] bg-[var(--surface)]'
                       : isTransparentHeader
-                        ? 'font-medium text-blue-100 hover:text-white hover:bg-white/10'
+                        ? 'font-medium text-on-primary-muted hover:text-white hover:bg-white/10'
                         : 'font-medium text-[var(--charcoal)] hover:text-[var(--navy)] hover:bg-[var(--surface)]'
                   )}
                 >

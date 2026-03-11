@@ -19,7 +19,8 @@
     "badge": "Core Capabilities",
     "title": "Our Printing Solutions",
     "subtitle": "Comprehensive production across publications, commercial collateral, and specialty print.",
-    "featuredSlug": "newspaper-printing"
+    "featuredSlug": "newspaper-printing",
+    "variant": "featured-large"
   },
   "whyChooseUs": {
     "badge": "Why Choose Us",

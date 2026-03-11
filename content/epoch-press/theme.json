@@ -5,7 +5,7 @@
       "100": "#D0D9E6",
       "dark": "#080F1A",
       "light": "#1A2E4A",
-      "DEFAULT": "#1b3255"
+      "DEFAULT": "#11284b"
     },
     "backdrop": {
       "primary": "#F8F9FA",
@@ -15,7 +15,7 @@
       "50": "#FDF8EC",
       "dark": "#8B6508",
       "light": "#D4A843",
-      "DEFAULT": "#B8860B"
+      "DEFAULT": "#ba8c17"
     }
   },
   "typography": {

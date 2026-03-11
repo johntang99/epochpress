@@ -263,14 +263,14 @@ export default async function ProductDetailPage({ params }: { params: { slug: st
             }
           >
             <div className={showSideImage && isSplitLeft ? 'lg:order-2' : ''}>
-              <Link href="/products" className="inline-flex items-center gap-1 text-blue-300 text-sm hover:text-white transition-colors mb-6">
+              <Link href="/products" className="mb-6 inline-flex items-center gap-1 text-sm text-on-primary-subtle hover:text-white transition-colors">
                 ← All Products
               </Link>
               <h1 className="font-serif text-white mb-4" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
                 {heroTitle}
               </h1>
               <p className="text-[var(--gold-light)] text-lg font-medium mb-4">{heroSubtitle}</p>
-              <p className="text-blue-200 leading-relaxed mb-8 max-w-2xl">{heroDescription}</p>
+              <p className="text-on-primary-muted mb-8 max-w-2xl leading-relaxed">{heroDescription}</p>
               <div
                 className={`flex flex-col sm:flex-row gap-4 ${
                   isCenteredVariant || useBackgroundOnlyVariant ? 'justify-center' : ''

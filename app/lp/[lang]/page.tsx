@@ -10,12 +10,12 @@ import { getRequestSiteId } from '@/lib/content';
 import { canUseContentDb, fetchContentEntry } from '@/lib/contentDb';
 
 const caseStudyTone: Record<string, string> = {
-  Newspapers: 'bg-blue-100 text-blue-800',
-  Magazines: 'bg-purple-100 text-purple-800',
-  Books: 'bg-green-100 text-green-800',
-  'Marketing Print': 'bg-orange-100 text-orange-800',
-  'Direct Mail': 'bg-rose-100 text-rose-800',
-  'Multi-Location Rollout': 'bg-teal-100 text-teal-800',
+  Newspapers: 'tag-theme',
+  Magazines: 'tag-theme',
+  Books: 'tag-theme',
+  'Marketing Print': 'tag-theme',
+  'Direct Mail': 'tag-theme',
+  'Multi-Location Rollout': 'tag-theme',
 };
 
 type LandingData = typeof zhData;
@@ -228,7 +228,7 @@ export default async function LandingPage({ params }: { params: { lang: string }
               <h1 className="mt-5 font-serif text-white" style={{ fontSize: 'clamp(2.3rem, 5vw, 4rem)' }}>
                 {data.hero.headline}
               </h1>
-              <p className={`mt-5 text-lg text-blue-100 ${heroCentered ? 'mx-auto max-w-2xl' : 'max-w-xl'}`}>{data.hero.subline}</p>
+              <p className={`mt-5 text-lg text-on-primary-muted ${heroCentered ? 'mx-auto max-w-2xl' : 'max-w-xl'}`}>{data.hero.subline}</p>
               <div
                 className={`mt-8 flex flex-wrap gap-3 ${
                   heroCentered ? 'justify-center' : isRtl ? 'justify-end' : 'justify-start'
@@ -458,7 +458,7 @@ export default async function LandingPage({ params }: { params: { lang: string }
                   <div className="mb-3 flex items-center justify-between gap-3">
                     <span
                       className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold ${
-                        caseStudyTone[item.category] || 'bg-gray-100 text-gray-700'
+                        caseStudyTone[item.category] || 'tag-theme'
                       }`}
                     >
                       {item.category}
@@ -511,7 +511,7 @@ export default async function LandingPage({ params }: { params: { lang: string }
         </div>
       </section>
 
-      <section id="gallery" className="scroll-mt-32 bg-gray-100 py-14">
+      <section id="gallery" className="scroll-mt-32 bg-[var(--backdrop-primary)] py-14">
         <div className={`container-content ${align}`}>
           <h2 className="font-serif text-[var(--navy)]" style={{ fontSize: 'clamp(1.8rem, 3vw, 2.6rem)' }}>
             {data.galleryRail.title}
@@ -683,7 +683,7 @@ export default async function LandingPage({ params }: { params: { lang: string }
           <h2 className="font-serif text-white" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
             {data.finalCta.title}
           </h2>
-          <p className="mt-4 text-blue-100">{data.finalCta.subline}</p>
+          <p className="mt-4 text-on-primary-muted">{data.finalCta.subline}</p>
           <div className={`mt-8 flex flex-wrap gap-3 ${isRtl ? 'justify-end' : 'justify-start'}`}>
             <Link href={data.finalCta.primaryHref} className="rounded-xl bg-gold-gradient px-6 py-3 font-semibold text-white">
               {data.finalCta.primaryText}
