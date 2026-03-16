@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { ArrowRight, Clock, Mail, MapPin, Phone, Quote } from 'lucide-react';
 import esData from '@/data/landing/es.json';
-import zhData from '@/data/landing/zh.json';
-import heData from '@/data/landing/he.json';
+import zhData from '@/data/landing/zh-hant.json';
+import yiData from '@/data/landing/yi.json';
 import productsData from '@/data/products.json';
 import { AutoScrollGallery } from '@/components/landing/AutoScrollGallery';
 import { getRequestSiteId } from '@/lib/content';
@@ -21,8 +21,13 @@ const caseStudyTone: Record<string, string> = {
 type LandingData = typeof zhData;
 const LANDINGS: Record<string, LandingData> = {
   es: esData,
-  zh: zhData,
-  he: heData,
+  'zh-hant': zhData,
+  yi: yiData,
+};
+const LANDING_FILE_LANG_MAP: Record<string, string> = {
+  es: 'es',
+  'zh-hant': 'zh-hant',
+  yi: 'yi',
 };
 
 export const dynamic = 'force-dynamic';
@@ -72,7 +77,7 @@ const CONTACT_COPY: Record<
     addressLabel: 'Direccion',
     hoursLabel: 'Horario',
   },
-  zh: {
+  'zh-hant': {
     formTitle: '给我们留言',
     infoTitle: '联系信息',
     fullName: '姓名',
@@ -93,7 +98,7 @@ const CONTACT_COPY: Record<
     addressLabel: '地址',
     hoursLabel: '营业时间',
   },
-  he: {
+  yi: {
     formTitle: 'שלחו לנו הודעה',
     infoTitle: 'פרטי יצירת קשר',
     fullName: 'שם מלא',
@@ -117,7 +122,7 @@ const CONTACT_COPY: Record<
 };
 
 export function generateStaticParams() {
-  return [{ lang: 'es' }, { lang: 'zh' }, { lang: 'he' }];
+  return [{ lang: 'es' }, { lang: 'zh-hant' }, { lang: 'yi' }];
 }
 
 async function loadLandingData(lang: string): Promise<LandingData | null> {
@@ -126,7 +131,9 @@ async function loadLandingData(lang: string): Promise<LandingData | null> {
   if (!canUseContentDb()) return fallback;
 
   const siteId = await getRequestSiteId();
-  const path = `landing/${lang}.json`;
+  const fileLang = LANDING_FILE_LANG_MAP[lang];
+  if (!fileLang) return fallback;
+  const path = `landing/${fileLang}.json`;
   // Landing files are site-scoped; admin/import currently writes them under canonical locale.
   // Prefer canonical 'en' row for determinism, then allow locale row only if it is newer.
   const [canonicalEntry, localeEntry] = await Promise.all([
@@ -159,6 +166,8 @@ async function loadLandingData(lang: string): Promise<LandingData | null> {
 }
 
 export default async function LandingPage({ params }: { params: { lang: string } }) {
+  if (params.lang === 'zh') redirect('/lp/zh-hant');
+  if (params.lang === 'he') redirect('/lp/yi');
   if (params.lang === 'en') redirect('/');
   const data = await loadLandingData(params.lang);
   if (!data) notFound();

@@ -755,6 +755,7 @@ For now, this is a starter layout body. Replace it with your full article conten
   const normalizeMarkdown = (text: string) =>
     text
       .replace(/\r\n/g, '\n')
+      .replace(/\|\s+\|(?=(?:-+:?|:?-+|[A-Za-z0-9"']))/g, '|\n|')
       .replace(/([^\n])\n-\s+/g, '$1\n\n- ')
       .replace(/([^\n])\n\*\s+/g, '$1\n\n- ');
 

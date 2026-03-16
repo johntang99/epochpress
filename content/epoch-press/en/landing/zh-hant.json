@@ -1,0 +1,354 @@
+{
+  "faq": {
+    "items": [
+      {
+        "a": "依據品類與數量而定，符合條件的項目可支持 48 小時加急。",
+        "q": "交付週期多久？"
+      },
+      {
+        "a": "支持。可根據項目目標提供小批量或大批量方案。",
+        "q": "支持小批量嗎？"
+      },
+      {
+        "a": "建議提供含出血和嵌入字體的印刷級 PDF。",
+        "q": "文件格式要求？"
+      },
+      {
+        "a": "可以，支持多門店/多地點協同履約。",
+        "q": "可多地配送嗎？"
+      },
+      {
+        "a": "提供，量產前可進行內容與色彩確認。",
+        "q": "是否提供打樣？"
+      },
+      {
+        "a": "可通過校準流程提升跨批次一致性。",
+        "q": "能否保證色彩一致？"
+      },
+      {
+        "a": "覆蓋出版、零售、餐飲、教育、醫療等行業。",
+        "q": "服務哪些行業？"
+      },
+      {
+        "a": "提交項目需求後，我們將提供範圍、週期與報價建議。",
+        "q": "如何開始合作？"
+      }
+    ],
+    "title": "常見問題"
+  },
+  "hero": {
+    "badge": "爲高標準項目而生",
+    "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1400&q=80",
+    "subline": "當時間與品質都不能妥協時，Epoch Press 以流程與標準保障每一次交付。",
+    "headline": "高端印刷，穩健交付。",
+    "primaryCta": {
+      "href": "/quote",
+      "text": "獲取報價"
+    },
+    "secondaryCta": {
+      "href": "tel:+19736943600",
+      "text": "立即致電"
+    },
+    "backgroundImage": "https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=2200&q=80"
+  },
+  "meta": {
+    "rtl": false,
+    "title": "高端商業印刷落地頁",
+    "locale": "zh-hant",
+    "description": "用於中文投放的單頁落地頁，突出產能、質量、速度與可信結果。"
+  },
+  "proof": {
+    "items": [
+      {
+        "label": "準時發佈率",
+        "detail": "區域媒體項目一季度內顯著提升。",
+        "metric": "98%"
+      },
+      {
+        "label": "庫存浪費下降",
+        "detail": "短版圖書項目實現更優成本結構。",
+        "metric": "32%"
+      },
+      {
+        "label": "全國活動交付",
+        "detail": "多物料協同上線，按期落地。",
+        "metric": "10天"
+      }
+    ],
+    "title": "可量化結果"
+  },
+  "contact": {
+    "formTitle": "給我們留言",
+    "infoTitle": "聯繫信息",
+    "emailLabel": "郵箱",
+    "emailValue": "info@epochpress.com",
+    "hoursLines": [
+      "Mon - Fri: 8:00 AM - 6:00 PM",
+      "Sat: 9:00 AM - 2:00 PM",
+      "Sun: Closed"
+    ],
+    "phoneLabel": "電話",
+    "phoneValue": "973-694-3600",
+    "addressLine1": "7 Highpoint Drive",
+    "addressLine2": "Wayne, NJ 07470",
+    "companyLabel": "公司",
+    "messageLabel": "留言",
+    "fullNameLabel": "姓名",
+    "sendButtonText": "發送消息",
+    "emailPlaceholder": "your@email.com",
+    "phonePlaceholder": "(212) 000-0000",
+    "companyPlaceholder": "公司名稱",
+    "messagePlaceholder": "請告訴我們您的項目需求...",
+    "fullNamePlaceholder": "您的姓名",
+    "productInterestLabel": "產品需求",
+    "productInterestPlaceholder": "請選擇產品..."
+  },
+  "process": {
+    "steps": [
+      {
+        "desc": "明確範圍、時程與質量標準。",
+        "title": "需求梳理"
+      },
+      {
+        "desc": "文件檢查與色彩校準。",
+        "title": "預印處理"
+      },
+      {
+        "desc": "按標準化流程進行生產與質檢。",
+        "title": "生產執行"
+      },
+      {
+        "desc": "按計劃發運並提供交付支持。",
+        "title": "交付落地"
+      }
+    ],
+    "title": "服務流程"
+  },
+  "finalCta": {
+    "title": "準備好升級您的印刷項目了嗎？",
+    "subline": "告訴我們您的目標與時程，我們會給出清晰可執行的印刷方案。",
+    "primaryHref": "/quote",
+    "primaryText": "獲取報價",
+    "secondaryHref": "tel:+19736943600",
+    "secondaryText": "聯繫顧問"
+  },
+  "trustBar": [
+    "25+ 年行業經驗",
+    "年產 5000萬+ 頁",
+    "500+ 企業客戶",
+    "48小時加急選項"
+  ],
+  "caseStudies": {
+    "items": [
+      {
+        "quote": "在最看重時效的時候，Epoch Press 讓我們重新建立了運營信心。",
+        "title": "區域日報交付節奏穩定提升",
+        "author": "運營總監",
+        "client": "東北媒體集團",
+        "result": "一個季度內，準時發行率從 86% 提升至 98%。",
+        "category": "報紙",
+        "featured": true,
+        "solution": "Epoch Press 建立更嚴格的印前校驗流程，優化截稿機制，並配置專用加急通道。",
+        "challenge": "深夜編輯改稿頻繁發生，持續衝擊印刷截稿與投遞窗口。"
+      },
+      {
+        "quote": "每一期的色彩一致性都非常明顯，品牌質感立刻提升。",
+        "title": "跨期刊色彩一致性全面提升",
+        "author": "出版人",
+        "client": "Avenue Living 雜誌",
+        "result": "品牌色差顯著下降，廣告客戶滿意度同步提升。",
+        "category": "雜誌",
+        "featured": true,
+        "solution": "採用 G7 色彩校準與更嚴格的打樣檢查點，覆蓋封面與內文關鍵頁。",
+        "challenge": "月刊各期品牌色不穩定，影響廣告版面的視覺連續性。"
+      },
+      {
+        "quote": "我們以更低風險實現了更快推進，單本經濟性也更好。",
+        "title": "短版圖書項目實現可盈利擴容",
+        "author": "生產負責人",
+        "client": "獨立教育出版社",
+        "result": "在保證發行節奏的前提下，庫存浪費降低 32%。",
+        "category": "圖書",
+        "solution": "Epoch Press 設計分階段數量與標準化後道參數的混合短版方案。",
+        "challenge": "內容頻繁修訂使大批量印刷的風險和成本持續上升。"
+      },
+      {
+        "quote": "執行速度很快且質量不打折，完全符合我們的目標。",
+        "title": "高端品牌活動 10 天完成交付",
+        "author": "品牌營銷負責人",
+        "client": "全國零售品牌",
+        "result": "活動按計劃在全部目標市場同步上線。",
+        "category": "營銷物料",
+        "featured": true,
+        "solution": "對手冊、夾頁與門店物料進行並行排產，並統一質檢節奏。",
+        "challenge": "多品類同步上線且時間緊迫，同時必須保證高端印刷品質。"
+      },
+      {
+        "quote": "流程標準化後，我們團隊的投放預測變得更輕鬆、更準確。",
+        "title": "獲客直郵項目顯著提升響應效率",
+        "author": "活動經理",
+        "client": "醫療服務網絡",
+        "result": "投遞穩定性提升，活動響應效率同步增長。",
+        "category": "直郵",
+        "solution": "Epoch Press 將印刷、個性化與投遞節奏打通，並按 USPS 就緒流程執行。",
+        "challenge": "以往供應商在多批次投遞中存在質量波動與到達延遲。"
+      },
+      {
+        "quote": "Epoch Press 把分散的印刷執行變成了一套可複製、可依賴的系統。",
+        "title": "連鎖品牌多門店印刷標準化落地",
+        "author": "採購總監",
+        "client": "酒店餐飲連鎖集團",
+        "result": "一個部署週期內，40+ 門店的視覺一致性顯著提升。",
+        "category": "多門店部署",
+        "solution": "統一模板、生產參數與分店履約節奏，實現按門店同步交付。",
+        "challenge": "各地區門店印刷質量不一，持續削弱品牌呈現。"
+      }
+    ],
+    "title": "案例結果"
+  },
+  "galleryRail": {
+    "items": [
+      {
+        "alt": "印刷設備運轉",
+        "image": "https://images.unsplash.com/photo-1586953983027-d750b9d95f95?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "團隊項目討論",
+        "image": "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "成品準備發運",
+        "image": "https://images.unsplash.com/photo-1524758870432-af57e54afa26?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "後道工藝",
+        "image": "https://images.unsplash.com/photo-1554774853-b414d2a2b7c0?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "色彩校對",
+        "image": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1800&q=80"
+      },
+      {
+        "alt": "客戶溝通",
+        "image": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1800&q=80"
+      }
+    ],
+    "title": "圖片展示"
+  },
+  "capabilities": {
+    "items": [
+      {
+        "desc": "從預檢到成品複覈，穩定還原品牌標準。",
+        "title": "全流程質量控制"
+      },
+      {
+        "desc": "支持從小批量到高頻大批量的連續交付。",
+        "title": "大規模產能"
+      },
+      {
+        "desc": "以運營紀律保障上線節點與分發時效。",
+        "title": "關鍵節點準時"
+      },
+      {
+        "desc": "資深團隊前置識別風險，降低返工成本。",
+        "title": "專業項目支持"
+      }
+    ],
+    "title": "爲什麼選擇我們"
+  },
+  "productGallery": {
+    "items": [
+      {
+        "desc": "面向日報、週報與社區報紙的輪轉膠印方案，支持大報與小報版式，黑白或全綵，印量從 500 到 500,000+ 份。",
+        "href": "/products/newspaper-printing",
+        "name": "報紙印刷",
+        "image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "輪轉膠印與數字印刷",
+          "500 到 500,000+ 份印量",
+          "標準交期 3-5 天"
+        ]
+      },
+      {
+        "desc": "雜誌與畫冊印刷支持騎馬釘與膠裝，提供標準成品尺寸、封面紙張與後道工藝，適配期刊與高端刊物。",
+        "href": "/products/magazine-printing",
+        "name": "雜誌印刷",
+        "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "雜誌與畫冊",
+          "騎馬釘與膠裝",
+          "標準化成品尺寸"
+        ]
+      },
+      {
+        "desc": "平裝與精裝圖書印刷，支持不同開本、頁數、封面材質和後道工藝，適用於出版社、機構與品牌定製版。",
+        "href": "/products/book-printing",
+        "name": "圖書印刷",
+        "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "平裝與精裝",
+          "筆記本與畫冊",
+          "紙張與工藝可選"
+        ]
+      },
+      {
+        "desc": "桌曆與掛曆印刷，支持封面、內頁與後道工藝組合，適用於品牌贈品、辦公場景與零售季節性活動。",
+        "href": "/products/calendar-printing",
+        "name": "日曆印刷",
+        "image": "https://images.unsplash.com/photo-1506784693919-ef06d93c28d2?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "桌曆與掛曆規格",
+          "Wire-O 裝訂與後道工藝",
+          "季節性品牌項目支持"
+        ]
+      },
+      {
+        "desc": "將傳單、摺頁、海報和明信片整合爲同一營銷物料體系，統一尺寸、折法、紙張與後道標準。",
+        "href": "/products/marketing-print",
+        "name": "營銷印刷",
+        "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "傳單、摺頁、海報、明信片",
+          "統一折法與後道方案",
+          "活動項目快速交付"
+        ]
+      },
+      {
+        "desc": "餐廳菜單印刷支持摺頁與單頁版本，可配置頁數、紙張、色彩模式與後道工藝，適配不同餐飲場景。",
+        "href": "/products/menu-printing",
+        "name": "菜單印刷",
+        "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "摺頁與單頁菜單",
+          "可配置頁數方案",
+          "穩定可複用後道標準"
+        ]
+      },
+      {
+        "desc": "從標準到高端的名片印刷，支持燙金、壓凹凸、局部 UV、立體油墨與模切，幫助品牌建立高質量第一印象。",
+        "href": "/products/business-cards",
+        "name": "名片印刷",
+        "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "14pt、16pt、32pt 紙張",
+          "燙金、壓凹凸、局部 UV",
+          "250 張起印"
+        ]
+      },
+      {
+        "desc": "大幅面產品包括橫幅、展會物料、牆面畫面與戶外標識，支持 PVC、布料、KT 板與亞克力等材質，適配室內外場景。",
+        "href": "/products/large-format",
+        "name": "大幅面印刷",
+        "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1400&q=80",
+        "highlights": [
+          "尺寸可定製",
+          "室內外均可使用",
+          "支持安裝與落地"
+        ]
+      }
+    ],
+    "title": "印刷品類",
+    "variant": "grid-3x"
+  },
+  "relatedProducts": []
+}

@@ -5,7 +5,7 @@ import { getSessionFromRequest } from '@/lib/admin/auth';
 import { listContentEntries, upsertContentEntry } from '@/lib/contentDb';
 import { canWriteContent, requireSiteAccess } from '@/lib/admin/permissions';
 import { writeAuditLog } from '@/lib/admin/audit';
-const LANDING_PATHS = ['landing/es.json', 'landing/zh.json', 'landing/he.json'] as const;
+const LANDING_PATHS = ['landing/es.json', 'landing/zh-hant.json', 'landing/yi.json'] as const;
 
 async function collectJsonPathsRecursive(
   rootDir: string,

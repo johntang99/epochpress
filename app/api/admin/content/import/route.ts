@@ -9,7 +9,7 @@ import { writeAuditLog } from '@/lib/admin/audit';
 import { normalizeContentMediaUrls } from '@/lib/admin/mediaUrlNormalizer';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
-const LANDING_PATHS = ['landing/es.json', 'landing/zh.json', 'landing/he.json'] as const;
+const LANDING_PATHS = ['landing/es.json', 'landing/zh-hant.json', 'landing/yi.json'] as const;
 
 async function readJson(filePath: string) {
   const raw = await fs.readFile(filePath, 'utf-8');

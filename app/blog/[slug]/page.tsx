@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Clock, ArrowLeft, ArrowRight, Tag as TagIcon } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import blogData from '@/data/blog.json';
 import productsDataFallback from '@/data/products.json';
 import { loadAllItems, getRequestSiteId, loadPageContent } from '@/lib/content';
@@ -70,6 +71,14 @@ function resolveArticleBody(post: Record<string, unknown>): string {
   }
   const excerpt = typeof post.excerpt === 'string' ? post.excerpt.trim() : '';
   return buildDefaultArticleBody(excerpt);
+}
+
+function normalizeMarkdown(text: string): string {
+  return text
+    .replace(/\r\n/g, '\n')
+    .replace(/\|\s+\|(?=(?:-+:?|:?-+|[A-Za-z0-9"']))/g, '|\n|')
+    .replace(/([^\n])\n-\s+/g, '$1\n\n- ')
+    .replace(/([^\n])\n\*\s+/g, '$1\n\n- ');
 }
 
 function getRelatedProductSlugs(post: Record<string, unknown>): string[] {
@@ -173,7 +182,26 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       <section className="section-padding bg-white">
         <div className="container-content max-w-3xl mx-auto">
           <article className="prose prose-lg max-w-none">
-            <ReactMarkdown>{articleBody}</ReactMarkdown>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                table: (props) => (
+                  <div className="my-6 overflow-x-auto">
+                    <table className="min-w-full border border-gray-200 rounded-lg" {...props} />
+                  </div>
+                ),
+                thead: (props) => <thead className="bg-gray-50" {...props} />,
+                tr: (props) => <tr className="border-b border-gray-200" {...props} />,
+                th: (props) => (
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 align-top border-r border-gray-200 last:border-r-0" {...props} />
+                ),
+                td: (props) => (
+                  <td className="px-4 py-3 text-sm text-gray-700 align-top border-r border-gray-200 last:border-r-0" {...props} />
+                ),
+              }}
+            >
+              {normalizeMarkdown(articleBody)}
+            </ReactMarkdown>
           </article>
 
           {/* Tags */}

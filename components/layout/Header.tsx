@@ -39,7 +39,7 @@ const landingNavLinksByLocale: Record<string, Array<{ name: string; href: string
     { name: 'Galeria', href: '#gallery', hasDropdown: false },
     { name: 'Contacto', href: '#contact', hasDropdown: false },
   ],
-  zh: [
+  'zh-hant': [
     { name: '为什么选择我们', href: '#why-us', hasDropdown: false },
     { name: '产品', href: '#products', hasDropdown: false },
     { name: '流程', href: '#process', hasDropdown: false },
@@ -47,7 +47,7 @@ const landingNavLinksByLocale: Record<string, Array<{ name: string; href: string
     { name: '图片展示', href: '#gallery', hasDropdown: false },
     { name: '联系', href: '#contact', hasDropdown: false },
   ],
-  he: [
+  yi: [
     { name: 'למה אנחנו', href: '#why-us', hasDropdown: false },
     { name: 'מוצרים', href: '#products', hasDropdown: false },
     { name: 'תהליך', href: '#process', hasDropdown: false },
@@ -147,8 +147,8 @@ export function Header({
   const landingLanguages = [
     { id: 'en', label: 'EN' },
     { id: 'es', label: 'ES' },
-    { id: 'zh', label: '中文' },
-    { id: 'he', label: 'עברית' },
+    { id: 'zh-hant', label: '繁中' },
+    { id: 'yi', label: 'ייִדיש' },
   ];
   const isLinkActive = (href: string) => {
     if (!pathname) return false;

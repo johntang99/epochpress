@@ -15,8 +15,8 @@ const CONTENT_DIR = path.join(process.cwd(), 'content');
 const LANDING_DIR = path.join(process.cwd(), 'data', 'landing');
 const LANDING_FILE_MAP: Record<string, { id: string; label: string }> = {
   'landing/es.json': { id: 'landing-es', label: 'Landing Page: ES' },
-  'landing/zh.json': { id: 'landing-zh', label: 'Landing Page: ZH' },
-  'landing/he.json': { id: 'landing-he', label: 'Landing Page: HE' },
+  'landing/zh-hant.json': { id: 'landing-zh-hant', label: 'Landing Page: ZH-HANT' },
+  'landing/yi.json': { id: 'landing-yi', label: 'Landing Page: YI (Yiddish)' },
 };
 
 function titleCase(value: string) {
