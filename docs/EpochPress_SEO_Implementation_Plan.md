@@ -11,13 +11,18 @@
 
 ## Phase Overview
 
-| Phase | What | Pages | Timeline |
-|-------|------|-------|----------|
+| Phase | What | Pages / Actions | Timeline |
+|-------|------|----------------|----------|
 | **Phase 0** | Validate keywords + audit existing pages + add seo to LPs | 0 new (4 LP audits) | Week 1 |
-| **Phase 1** | Build P1 pages (core landings + top 4 services) | 6 new | Week 2–3 |
-| **Phase 1.5** | Multi-language LP SEO (ES, YI, ZH-HANT seo objects + meta) | 3 LP optimizations | Week 3 |
-| **Phase 2** | Build P2 pages (remaining services + resources) | 7 new | Week 4–5 |
-| **Phase 3** | Near-location pages + language-specific service pages | 4+ new | Week 6+ |
+| **Phase 1** | Build P1 pages (core landings + top 4 services) | 6 new pages | Week 2–3 |
+| **Phase 1.5** | Multi-language LP SEO (ES, YI, ZH-HANT seo objects + hreflang) | 3 LP optimizations | Week 3 |
+| **Phase 2** | Build P2 pages (remaining services + resources) | 7 new pages | Week 4–5 |
+| **Phase 3** | Near-location pages + language-specific service pages | 4+ new pages | Week 6+ |
+| **Phase 4** | Backlink building (directories, client asks, industry associations) | 15–20 links target | Week 4 → ongoing |
+| **Phase 5** | Content marketing / blog SEO (2 EN posts/month + multi-language) | 6+ blog posts | Week 5 → ongoing |
+| **Phase 6** | Review & reputation system (email/SMS automation, QR cards) | 25+ reviews target | Week 4 setup → ongoing |
+| **Phase 7** | Technical SEO (Core Web Vitals, crawl errors, speed) | Audit + fixes | Week 2, then quarterly |
+| **Phase 8** | AI Search / AEO (content structure, schema expansion, monitoring) | All money pages | Week 3 → monthly |
 
 ---
 
@@ -337,6 +342,118 @@ After EN service pages are live and GSC data shows which services each language 
 
 ---
 
+## Phase 8 — AI Search Optimization / AEO (Week 3, then ongoing)
+
+> **Why this matters:** AI-powered search (ChatGPT Search, Google AI Overviews, Perplexity) is rapidly taking search share. By 2026, 40%+ of Google queries trigger an AI Overview. Sites that structure content for AI citation get referenced in answers — sites that don't become invisible. AEO is not separate from SEO — it's the next layer on top of it.
+
+### 8.1 The AI Search Landscape
+
+| AI Search Engine | How It Cites Sources | What It Prefers |
+|-----------------|---------------------|-----------------|
+| **Google AI Overviews** | Pulls from top-ranked pages, shows source links below summary | Structured data, direct answers, FAQ schema, E-E-A-T |
+| **ChatGPT Search** | Cites sources inline with clickable links | Clear H2 headings, direct Q&A format, tables, recent content |
+| **Perplexity** | Full citation model with numbered references | Factual density, structured data, authority signals |
+| **Bing Copilot** | Cites Bing-indexed sources | Schema markup, Bing Webmaster Tools submission |
+
+### 8.2 Content Structure Rules for AI Citation
+
+**Every money page (service, landing, resource) must follow these rules:**
+
+| Rule | What to do | Why AI picks it up |
+|------|-----------|-------------------|
+| **Direct answer in first paragraph** | Answer the page's core question in the first 2 sentences | AI extracts the first clear answer it finds |
+| **"What is [X]?" section** | Add an H2 with a definitional paragraph | AI loves citing definitions — highest citation rate |
+| **FAQ with schema** | Use FAQPage JSON-LD — already doing this | AI reads schema before body content |
+| **Short paragraphs** | Max 3-4 sentences per paragraph | AI truncates long blocks — short = higher citation chance |
+| **Tables for comparisons** | Use markdown/HTML tables for pricing, specs, comparisons | AI presents tables directly in answers |
+| **Bullet lists for steps/features** | Use ordered lists for processes, unordered for features | AI prefers scannable formats over prose |
+| **H2 = question format** | "How Much Does Newspaper Printing Cost?" not "Pricing" | Matches how users ask AI questions |
+| **Stats and numbers** | Include specific numbers: "48-hour turnaround", "$X per 1,000 copies" | AI prefers concrete facts over vague claims |
+
+### 8.3 Schema Markup Expansion for AI
+
+Add these schema types beyond what traditional SEO requires:
+
+| Schema Type | Where to Add | AI Benefit |
+|-------------|-------------|-----------|
+| `FAQPage` | All service + resource pages | Already implemented — AI reads FAQ schema directly |
+| `HowTo` | Process pages (file prep, how printing works) | Cited in "how to" AI answers |
+| `Product` | Each service page (treat services as products) | Cited in comparison/shopping queries |
+| `Organization` | Site-wide | Establishes entity identity for AI knowledge |
+| `LocalBusiness` | Core landing pages | Local AI answers cite this |
+| `Article` | Blog posts | Blog content gets cited in informational queries |
+| `Review` / `AggregateRating` | Pages with testimonials | AI shows ratings in answers |
+
+### 8.4 AI-Specific Monitoring
+
+| Tool | What to Track | Frequency |
+|------|--------------|-----------|
+| **Google Search Console** | "AI Overviews" appearance (GSC now reports this) | Weekly |
+| **Perplexity** | Search your brand + key services, check if cited | Monthly |
+| **ChatGPT** | Ask ChatGPT your target questions, check if your site appears | Monthly |
+| **Bing Webmaster Tools** | Submit sitemap, monitor Copilot citations | Monthly |
+
+**Monthly AEO check — ask these questions in ChatGPT + Perplexity:**
+1. "Best commercial printing company in Wayne NJ"
+2. "Newspaper printing services near New York"
+3. "How much does magazine printing cost?"
+4. "Offset vs digital printing for newspapers"
+
+Track: Are we cited? If not, what source IS cited and what do they do differently?
+
+### 8.5 AI-Optimized Content Templates
+
+**For each service page, add this block structure:**
+
+```
+H2: What Is [Service Name]?
+→ 2-3 sentence definition. Factual, authoritative, no fluff.
+
+H2: How Much Does [Service] Cost?
+→ Direct price range in first sentence. Table breakdown below.
+
+H2: How Does [Service] Work?
+→ Numbered steps (1. Submit files → 2. Proof review → 3. Print → 4. Delivery)
+
+H2: [Service] vs [Alternative]
+→ Comparison table. AI loves presenting these.
+
+H2: Frequently Asked Questions
+→ FAQ with schema. 4-6 questions.
+```
+
+This structure maps exactly to how AI search engines parse and cite content.
+
+### 8.6 Epoch Press AEO Action Items
+
+| Week | Action | Pages Affected |
+|------|--------|---------------|
+| Week 3 | Add "What is [X]?" H2 section to all service pages | 8 service pages |
+| Week 3 | Add `Product` schema to all service pages | 8 service pages |
+| Week 3 | Add `HowTo` schema to file guidelines page | 1 page |
+| Week 4 | Ensure first paragraph of every page directly answers the core question | All money pages |
+| Week 5 | Convert long prose paragraphs to short paragraphs + bullet lists | All pages |
+| Week 5 | Add comparison tables where applicable (offset vs digital, binding options) | 3-4 pages |
+| Week 6 | First AEO monitoring check — search brand + services in ChatGPT/Perplexity | — |
+| Monthly | Repeat AEO monitoring, adjust content based on what gets cited | — |
+
+### 8.7 AEO vs Traditional SEO — What Changes
+
+| Aspect | Traditional SEO | AEO (AI Search) |
+|--------|----------------|-----------------|
+| **Goal** | Rank on page 1 of Google | Get **cited** in AI-generated answers |
+| **Content format** | Long-form, keyword-dense | Short paragraphs, tables, direct answers |
+| **Schema** | Title, meta, FAQPage | FAQPage + HowTo + Product + Article + Review |
+| **Keyword targeting** | Exact match + variations | **Question-format** queries ("how much", "what is", "best for") |
+| **Freshness** | Important but not critical | **Very important** — AI prefers recent content |
+| **Authority signals** | Backlinks, domain age | E-E-A-T: author expertise, credentials, real data, citations |
+| **Monitoring** | GSC, rank tracking | GSC + manually check AI answers + citation tracking |
+| **Update cycle** | Quarterly refresh | **Monthly content freshness** — update stats, prices, dates |
+
+> **Key insight:** AEO doesn't replace SEO — it layers on top. A page that ranks well in Google AND is structured for AI citation captures both channels. The work we're already doing (FAQ schema, direct answers, structured headings) is 70% of AEO. The remaining 30% is schema expansion, question-format H2s, and AI monitoring.
+
+---
+
 ## SEO Score Targets
 
 | Date | Target Score | Key Milestone |
@@ -350,7 +467,8 @@ After EN service pages are live and GSC data shows which services each language 
 | After Phase 4 (backlinks) | ~82/102 | 15+ quality backlinks acquired |
 | After Phase 5 (content) | ~86/102 | 6+ blog posts live, internal link network |
 | After Phase 6 (reviews) | ~92/102 | 25+ Google reviews, GBP optimized |
-| After Phase 7 (technical) | ~96/102 | Core Web Vitals green, no crawl errors |
+| After Phase 7 (technical) | ~96/112 | Core Web Vitals green, no crawl errors |
+| After Phase 8 (AEO) | ~106/112 | AI citation structure + monitoring active |
 
 ### What Drives the Score (Approximate Breakdown)
 
@@ -363,7 +481,8 @@ After EN service pages are live and GSC data shows which services each language 
 | Reviews & reputation | 10 | 25+ reviews, 4.7+ rating, response protocol |
 | Citations & off-page (backlinks) | 10 | 15+ quality links from directories + industry |
 | Search Console & analytics | 5 | Verified, monitored monthly, keyword map refreshed |
-| **Total** | **102** | |
+| **AI Search / AEO** | **10** | **Direct-answer structure, expanded schema, AI monitoring** |
+| **Total** | **112** | |
 
 ---
 
