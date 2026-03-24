@@ -18,6 +18,8 @@ const navigation: Array<{
   { name: 'Bookings', href: '/admin/bookings', iconKey: 'calendar', group: 'site' },
   { name: 'Booking Settings', href: '/admin/booking-settings', iconKey: 'slidersHorizontal', group: 'site' },
   { name: 'Media', href: '/admin/media', iconKey: 'image', group: 'site' },
+  { name: 'Keyword Map', href: '/admin/keyword-map', iconKey: 'search', group: 'site' },
+  { name: 'SEO Plan', href: '/admin/seo-plan', iconKey: 'barChart', group: 'site' },
 
   { name: 'Sites', href: '/admin/sites', iconKey: 'building2', group: 'system', preserveContext: false },
   { name: 'Components', href: '/admin/components', iconKey: 'layoutGrid', group: 'system', preserveContext: false },

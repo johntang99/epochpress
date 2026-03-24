@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import {
+  BarChart3,
   BookOpen,
   Building2,
   Calendar,
@@ -10,12 +11,14 @@ import {
   Image,
   Layers,
   LayoutGrid,
+  Search,
   Settings,
   SlidersHorizontal,
   Users,
 } from 'lucide-react';
 
 export type IconKey =
+  | 'barChart'
   | 'bookOpen'
   | 'building2'
   | 'calendar'
@@ -23,11 +26,13 @@ export type IconKey =
   | 'image'
   | 'layers'
   | 'layoutGrid'
+  | 'search'
   | 'settings'
   | 'slidersHorizontal'
   | 'users';
 
 const ICONS: Record<IconKey, React.ComponentType<{ className?: string }>> = {
+  barChart: BarChart3,
   bookOpen: BookOpen,
   building2: Building2,
   calendar: Calendar,
@@ -35,6 +40,7 @@ const ICONS: Record<IconKey, React.ComponentType<{ className?: string }>> = {
   image: Image,
   layers: Layers,
   layoutGrid: LayoutGrid,
+  search: Search,
   settings: Settings,
   slidersHorizontal: SlidersHorizontal,
   users: Users,

@@ -226,18 +226,18 @@ export default async function LandingPage({ params }: { params: { lang: string }
   });
 
   return (
-    <main dir={isRtl ? 'rtl' : 'ltr'}>
+    <main dir={isRtl ? 'rtl' : 'ltr'} className="overflow-x-hidden">
       <section className="relative min-h-[88vh] overflow-hidden bg-navy-gradient pt-40 md:pt-44 pb-20">
         <div className="container-content relative z-10">
           <div className={heroCentered ? 'mx-auto max-w-4xl text-center' : 'grid gap-10 lg:grid-cols-2 items-center'}>
             <div className={heroCentered ? '' : align}>
-              <span className="inline-block rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-semibold text-[var(--gold-light)]">
+              <span className="inline-block max-w-full break-words rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-semibold text-[var(--gold-light)]">
                 {data.hero.badge}
               </span>
-              <h1 className="mt-5 font-serif text-white" style={{ fontSize: 'clamp(2.3rem, 5vw, 4rem)' }}>
+              <h1 className="mt-5 break-words font-serif text-white" style={{ fontSize: 'clamp(2.3rem, 5vw, 4rem)' }}>
                 {data.hero.headline}
               </h1>
-              <p className={`mt-5 text-lg text-on-primary-muted ${heroCentered ? 'mx-auto max-w-2xl' : 'max-w-xl'}`}>{data.hero.subline}</p>
+              <p className={`mt-5 break-words text-lg text-on-primary-muted ${heroCentered ? 'mx-auto max-w-2xl' : 'max-w-xl'}`}>{data.hero.subline}</p>
               <div
                 className={`mt-8 flex flex-wrap gap-3 ${
                   heroCentered ? 'justify-center' : isRtl ? 'justify-end' : 'justify-start'

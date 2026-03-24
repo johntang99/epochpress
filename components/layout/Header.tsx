@@ -48,13 +48,18 @@ const landingNavLinksByLocale: Record<string, Array<{ name: string; href: string
     { name: '联系', href: '#contact', hasDropdown: false },
   ],
   yi: [
-    { name: 'למה אנחנו', href: '#why-us', hasDropdown: false },
-    { name: 'מוצרים', href: '#products', hasDropdown: false },
-    { name: 'תהליך', href: '#process', hasDropdown: false },
-    { name: 'סיפורי הצלחה', href: '#case-studies', hasDropdown: false },
-    { name: 'גלריה', href: '#gallery', hasDropdown: false },
-    { name: 'צור קשר', href: '#contact', hasDropdown: false },
+    { name: 'פֿאַרוואָס אונדז אויסקלײַבן', href: '#why-us', hasDropdown: false },
+    { name: 'פּראָדוקטן', href: '#products', hasDropdown: false },
+    { name: 'פּראָצעס', href: '#process', hasDropdown: false },
+    { name: 'הצלחה־געשיכטעס', href: '#case-studies', hasDropdown: false },
+    { name: 'גאַלעריע', href: '#gallery', hasDropdown: false },
+    { name: 'קאָנטאַקט', href: '#contact', hasDropdown: false },
   ],
+};
+const landingCtaTextByLocale: Record<string, string> = {
+  es: 'Obtenga una cotizacion',
+  'zh-hant': '立即獲取報價',
+  yi: 'באַקומט אַ פּרײַז־אָפֿער',
 };
 
 type HeaderConfig = {
@@ -107,7 +112,6 @@ export function Header({
   const phoneHref =
     config?.topbar?.phoneHref ||
     (phoneText ? `tel:${phoneText.replace(/[^\d+]/g, '')}` : 'tel:+12125550100');
-  const ctaText = config?.cta?.text || 'Get a Quote';
   const ctaHref = config?.cta?.link || '/quote';
   const emailText = config?.topbar?.email || siteInfo?.email || '';
   const emailHref = config?.topbar?.emailHref || (emailText ? `mailto:${emailText}` : '');
@@ -130,6 +134,9 @@ export function Header({
     Boolean(socialLinks.facebook || socialLinks.instagram || socialLinks.linkedin || socialLinks.youtube);
   const isLandingPage = pathname?.startsWith('/lp/');
   const landingLang = isLandingPage ? pathname.split('/')[2] || '' : '';
+  const ctaText = isLandingPage
+    ? landingCtaTextByLocale[landingLang] || config?.cta?.text || 'Get a Quote'
+    : config?.cta?.text || 'Get a Quote';
   const navLinks = isLandingPage
     ? landingNavLinksByLocale[landingLang] || landingNavLinksByLocale.es
     : config?.menu?.items?.length

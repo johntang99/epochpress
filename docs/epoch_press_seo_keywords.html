@@ -1,0 +1,131 @@
+
+<style>
+  body { margin: 0; padding: 0; }
+  .wrap { padding: 1rem 0.5rem; }
+  .section-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 1.4rem 0 0.5rem;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--color-border-tertiary);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--color-border-tertiary);
+  }
+  td { padding: 6px 8px; vertical-align: top; border-bottom: 1px solid var(--color-border-tertiary); color: var(--color-text-primary); }
+  tr:last-child td { border-bottom: none; }
+  .kw { font-weight: 500; color: var(--color-text-primary); }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 7px;
+    border-radius: 20px;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+  .badge-high { background: #E1F5EE; color: #0F6E56; }
+  .badge-mid  { background: #FAEEDA; color: #854F0B; }
+  .badge-low  { background: #F1EFE8; color: #5F5E5A; }
+  .badge-local { background: #E6F1FB; color: #185FA5; }
+  @media (prefers-color-scheme: dark) {
+    .badge-high { background: #085041; color: #9FE1CB; }
+    .badge-mid  { background: #633806; color: #FAC775; }
+    .badge-low  { background: #444441; color: #D3D1C7; }
+    .badge-local { background: #0C447C; color: #B5D4F4; }
+  }
+  .note { font-size: 12px; color: var(--color-text-secondary); }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 1rem; font-size: 12px; color: var(--color-text-secondary); }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+</style>
+<div class="wrap">
+
+<div class="section-title">① 核心产品关键词（高搜索量）</div>
+<table>
+  <thead><tr><th>关键词</th><th>意图</th><th>优先级</th></tr></thead>
+  <tbody>
+    <tr><td class="kw">newspaper printing</td><td class="note">商业/出版</td><td><span class="badge badge-high">高</span></td></tr>
+    <tr><td class="kw">magazine printing</td><td class="note">商业/出版</td><td><span class="badge badge-high">高</span></td></tr>
+    <tr><td class="kw">book printing services</td><td class="note">自助出版 / 商业</td><td><span class="badge badge-high">高</span></td></tr>
+    <tr><td class="kw">commercial printing company</td><td class="note">广泛商业</td><td><span class="badge badge-high">高</span></td></tr>
+    <tr><td class="kw">offset printing services</td><td class="note">技术型买家</td><td><span class="badge badge-high">高</span></td></tr>
+    <tr><td class="kw">flyer printing</td><td class="note">营销/活动</td><td><span class="badge badge-high">高</span></td></tr>
+    <tr><td class="kw">poster printing</td><td class="note">营销/活动</td><td><span class="badge badge-high">高</span></td></tr>
+    <tr><td class="kw">brochure printing</td><td class="note">B2B 营销</td><td><span class="badge badge-high">高</span></td></tr>
+    <tr><td class="kw">large format printing</td><td class="note">展览/品牌</td><td><span class="badge badge-high">高</span></td></tr>
+    <tr><td class="kw">menu printing</td><td class="note">餐厅行业</td><td><span class="badge badge-mid">中</span></td></tr>
+  </tbody>
+</table>
+
+<div class="section-title">② 本地地理关键词（Wayne NJ）</div>
+<table>
+  <thead><tr><th>关键词</th><th>目标</th><th>类型</th></tr></thead>
+  <tbody>
+    <tr><td class="kw">printing company Wayne NJ</td><td class="note">本地直接搜索</td><td><span class="badge badge-local">本地</span></td></tr>
+    <tr><td class="kw">commercial printer Wayne NJ</td><td class="note">B2B 决策者</td><td><span class="badge badge-local">本地</span></td></tr>
+    <tr><td class="kw">newspaper printing New Jersey</td><td class="note">NJ 出版客户</td><td><span class="badge badge-local">本地</span></td></tr>
+    <tr><td class="kw">magazine printing NJ</td><td class="note">NJ 出版客户</td><td><span class="badge badge-local">本地</span></td></tr>
+    <tr><td class="kw">offset printing NJ</td><td class="note">企业/机构</td><td><span class="badge badge-local">本地</span></td></tr>
+    <tr><td class="kw">printing services Passaic County NJ</td><td class="note">县域覆盖</td><td><span class="badge badge-local">本地</span></td></tr>
+    <tr><td class="kw">print shop near me Wayne NJ</td><td class="note">移动/即时需求</td><td><span class="badge badge-local">本地</span></td></tr>
+  </tbody>
+</table>
+
+<div class="section-title">③ 本地地理关键词（Middletown NY）</div>
+<table>
+  <thead><tr><th>关键词</th><th>目标</th><th>类型</th></tr></thead>
+  <tbody>
+    <tr><td class="kw">printing company Middletown NY</td><td class="note">本地直接搜索</td><td><span class="badge badge-local">本地</span></td></tr>
+    <tr><td class="kw">commercial printer Orange County NY</td><td class="note">县域覆盖</td><td><span class="badge badge-local">本地</span></td></tr>
+    <tr><td class="kw">newspaper printing Hudson Valley</td><td class="note">区域出版</td><td><span class="badge badge-local">本地</span></td></tr>
+    <tr><td class="kw">printing services Hudson Valley NY</td><td class="note">区域广泛覆盖</td><td><span class="badge badge-local">本地</span></td></tr>
+    <tr><td class="kw">magazine printing Upstate NY</td><td class="note">上州覆盖</td><td><span class="badge badge-local">本地</span></td></tr>
+    <tr><td class="kw">print shop Middletown NY</td><td class="note">即时/本地需求</td><td><span class="badge badge-local">本地</span></td></tr>
+  </tbody>
+</table>
+
+<div class="section-title">④ 长尾 / 高转化关键词</div>
+<table>
+  <thead><tr><th>关键词</th><th>意图</th><th>优先级</th></tr></thead>
+  <tbody>
+    <tr><td class="kw">community newspaper printing</td><td class="note">小型出版商</td><td><span class="badge badge-mid">中</span></td></tr>
+    <tr><td class="kw">tabloid newspaper printing</td><td class="note">格式专项</td><td><span class="badge badge-mid">中</span></td></tr>
+    <tr><td class="kw">broadsheet newspaper printing</td><td class="note">格式专项</td><td><span class="badge badge-mid">中</span></td></tr>
+    <tr><td class="kw">saddle stitch magazine printing</td><td class="note">装订方式</td><td><span class="badge badge-mid">中</span></td></tr>
+    <tr><td class="kw">perfect bound magazine printing</td><td class="note">装订方式</td><td><span class="badge badge-mid">中</span></td></tr>
+    <tr><td class="kw">high volume printing services</td><td class="note">大客户采购</td><td><span class="badge badge-mid">中</span></td></tr>
+    <tr><td class="kw">rush printing service NJ</td><td class="note">紧急需求</td><td><span class="badge badge-mid">中</span></td></tr>
+    <tr><td class="kw">48 hour printing turnaround</td><td class="note">紧急需求</td><td><span class="badge badge-mid">中</span></td></tr>
+    <tr><td class="kw">print ready file submission</td><td class="note">内容营销/教育</td><td><span class="badge badge-low">辅助</span></td></tr>
+    <tr><td class="kw">restaurant menu printing NJ NY</td><td class="note">餐饮行业细分</td><td><span class="badge badge-mid">中</span></td></tr>
+    <tr><td class="kw">catalog printing New Jersey</td><td class="note">B2B 目录</td><td><span class="badge badge-mid">中</span></td></tr>
+    <tr><td class="kw">trade publication printing</td><td class="note">行业出版</td><td><span class="badge badge-mid">中</span></td></tr>
+  </tbody>
+</table>
+
+<div class="section-title">⑤ 竞争对手切入 / 品牌对比词</div>
+<table>
+  <thead><tr><th>关键词</th><th>用途</th><th>类型</th></tr></thead>
+  <tbody>
+    <tr><td class="kw">Evergreen Printing alternative</td><td class="note">竞品替代</td><td><span class="badge badge-low">辅助</span></td></tr>
+    <tr><td class="kw">commercial printing near NYC</td><td class="note">NYC 溢出流量</td><td><span class="badge badge-mid">中</span></td></tr>
+    <tr><td class="kw">printing company NJ NY tristate</td><td class="note">三州市场</td><td><span class="badge badge-mid">中</span></td></tr>
+    <tr><td class="kw">publication printing northeast US</td><td class="note">区域 B2B</td><td><span class="badge badge-low">辅助</span></td></tr>
+  </tbody>
+</table>
+
+<div class="legend">
+  <span><span class="badge badge-high">高</span> 高搜索量/高优先级</span>
+  <span><span class="badge badge-mid">中</span> 中等搜索量/高转化</span>
+  <span><span class="badge badge-local">本地</span> 本地 SEO 重点</span>
+  <span><span class="badge badge-low">辅助</span> 内容营销/博客辅助词</span>
+</div>
+</div>
