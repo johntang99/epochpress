@@ -37,6 +37,8 @@ export default function QuotePage() {
   const [files, setFiles] = useState<File[]>([]);
   const [contact, setContact] = useState({ name: '', company: '', email: '', phone: '', deadline: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [dragging, setDragging] = useState(false);
 
   const productConfig = quoteConfig.products[selectedProduct as keyof typeof quoteConfig.products] as ProductConfig | undefined;
@@ -49,9 +51,44 @@ export default function QuotePage() {
     setFiles((prev) => [...prev, ...dropped].slice(0, 5));
   }, []);
 
-  const handleSubmit = () => {
-    console.log({ selectedProduct, specs, files: files.map((f) => f.name), contact });
-    setSubmitted(true);
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    setSubmitError('');
+    try {
+      const productLabel = products.find((p) => p.id === selectedProduct)?.label || selectedProduct || '';
+      const specsFlat: Record<string, string> = {};
+      for (const [k, v] of Object.entries(specs)) {
+        specsFlat[k] = Array.isArray(v) ? v.join(', ') : String(v);
+      }
+      if (contact.deadline) specsFlat.deadline = contact.deadline;
+
+      const response = await fetch('/api/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          product: selectedProduct,
+          productLabel,
+          specs: specsFlat,
+          files: files.map((f) => ({ name: f.name, size: f.size })),
+          name: contact.name,
+          email: contact.email,
+          phone: contact.phone || undefined,
+          company: contact.company || undefined,
+          message: contact.notes || undefined,
+        }),
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error || 'Failed to submit quote');
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again or call us.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -125,11 +162,11 @@ export default function QuotePage() {
                   <button
                     key={product.id}
                     onClick={() => setSelectedProduct(product.id)}
-                    className={`p-5 rounded-2xl border-2 text-center transition-all ${selectedProduct === product.id ? 'border-[var(--gold)] bg-[var(--gold-50)]' : 'border-[var(--border)] hover:border-[var(--gold)] hover:bg-[var(--gold-50)]'}`}
+                    className={`flex flex-col items-center justify-start p-6 rounded-2xl border-2 text-center transition-all ${selectedProduct === product.id ? 'border-[var(--gold)] bg-[var(--gold-50)]' : 'border-[var(--border)] hover:border-[var(--gold)] hover:bg-[var(--gold-50)]'}`}
                   >
-                    <div className="text-3xl mb-2">{product.icon}</div>
-                    <div className="font-semibold text-[var(--navy)] text-xs">{product.label}</div>
-                    <div className="text-xs text-[var(--text-secondary)] mt-1 leading-tight">{product.desc}</div>
+                    <div className="text-4xl mb-3">{product.icon}</div>
+                    <div className="font-semibold text-[var(--navy)] text-sm mb-1">{product.label}</div>
+                    <div className="text-xs text-[var(--text-secondary)] leading-tight">{product.desc}</div>
                   </button>
                 ))}
               </div>
@@ -343,16 +380,21 @@ export default function QuotePage() {
                 <p className="text-sm text-[var(--text-secondary)]">Product: <strong>{products.find((p) => p.id === selectedProduct)?.label}</strong></p>
                 {files.length > 0 && <p className="text-sm text-[var(--text-secondary)]">Files: {files.length} file(s) attached</p>}
               </div>
+              {submitError && (
+                <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+                  {submitError}
+                </div>
+              )}
               <div className="flex justify-between">
                 <button onClick={() => setStep(2)} className="inline-flex items-center gap-2 border-2 border-[var(--border)] text-[var(--navy)] font-semibold px-6 py-3 rounded-xl hover:border-[var(--navy)] transition-colors">
                   <ArrowLeft className="w-4 h-4" /> Back
                 </button>
                 <button
                   onClick={handleSubmit}
-                  disabled={!contact.name || !contact.email || !contact.phone}
+                  disabled={!contact.name || !contact.email || !contact.phone || submitting}
                   className="inline-flex items-center gap-2 bg-gold-gradient text-white font-semibold px-8 py-3.5 rounded-xl hover:opacity-90 transition-opacity shadow-gold disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                  Submit Quote Request <ArrowRight className="w-4 h-4" />
+                  {submitting ? 'Submitting...' : 'Submit Quote Request'} {!submitting && <ArrowRight className="w-4 h-4" />}
                 </button>
               </div>
             </div>

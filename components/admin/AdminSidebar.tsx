@@ -16,6 +16,7 @@ const navigation: Array<{
   { name: 'Portfolio', href: '/admin/portfolio', iconKey: 'layoutGrid', group: 'site' },
   { name: 'Case Studies', href: '/admin/case-studies', iconKey: 'fileText', group: 'site' },
   { name: 'Bookings', href: '/admin/bookings', iconKey: 'calendar', group: 'site' },
+  { name: 'Quotes', href: '/admin/quotes', iconKey: 'fileText', group: 'site' },
   { name: 'Booking Settings', href: '/admin/booking-settings', iconKey: 'slidersHorizontal', group: 'site' },
   { name: 'Media', href: '/admin/media', iconKey: 'image', group: 'site' },
   { name: 'Keyword Map', href: '/admin/keyword-map', iconKey: 'search', group: 'site' },

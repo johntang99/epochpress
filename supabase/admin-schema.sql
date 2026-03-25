@@ -118,3 +118,25 @@ alter table public.bookings
   add column if not exists service_type text;
 alter table public.bookings
   add column if not exists details jsonb not null default '{}'::jsonb;
+
+-- Quotes table (V3.9 — quote request tracking)
+create table if not exists public.quotes (
+  id uuid primary key default gen_random_uuid(),
+  site_id text not null,
+  product text not null,
+  specs jsonb not null default '{}'::jsonb,
+  files jsonb not null default '[]'::jsonb,
+  name text not null,
+  email text not null,
+  phone text,
+  company text,
+  message text,
+  status text not null default 'new',
+  notes text,
+  quoted_amount text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists quotes_site_status_idx on public.quotes (site_id, status);
+create index if not exists quotes_created_idx on public.quotes (created_at desc);
