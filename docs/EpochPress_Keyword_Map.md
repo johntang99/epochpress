@@ -41,37 +41,37 @@ The initial keyword list was obtained from an AI-generated brainstorm (likely Ch
 
 | # | Cluster | Representative Phrase | Canonical URL | Page Type | Title Tag (≤60 chars) | H1 | Intent | Priority | Status |
 |---|---------|----------------------|---------------|-----------|----------------------|-----|--------|----------|--------|
-| **Core Service Keywords** |
-| 1 | Core local — Wayne | commercial printing Wayne NJ | `/printing-wayne-nj` | seo-local-landing | Commercial Printing in Wayne, NJ \| Epoch Press | Commercial Printing in Wayne, NJ | Transactional | **P1** | Build |
-| 2 | Core local — Middletown | printing company Middletown NY | `/printing-middletown-ny` | seo-local-landing | Printing Company in Middletown, NY \| Epoch Press | Printing Services in Middletown, NY | Transactional | **P1** | Build |
-| **Service Keywords** |
-| 3 | Newspaper printing | newspaper printing services | `/newspaper-printing` | seo-service | Newspaper Printing Services \| Epoch Press | Newspaper Printing Services | Commercial | **P1** | Build |
-| 4 | Magazine printing | magazine printing services | `/magazine-printing` | seo-service | Magazine Printing Services \| Epoch Press | Magazine Printing Services | Commercial | **P1** | Build |
-| 5 | Book printing | book printing services | `/book-printing` | seo-service | Book Printing Services \| Epoch Press | Book Printing Services | Commercial | **P1** | Build |
-| 6 | Offset printing | offset printing services NJ | `/offset-printing` | seo-service | Offset Printing Services \| Epoch Press NJ | Offset Printing Services | Commercial | **P1** | Build |
-| 7 | Large format | large format printing | `/large-format-printing` | seo-service | Large Format Printing \| Epoch Press | Large Format Printing | Commercial | **P2** | Build |
-| 8 | Brochure/flyer | brochure printing services | `/brochure-flyer-printing` | seo-service | Brochure & Flyer Printing \| Epoch Press | Brochure & Flyer Printing | Commercial | **P2** | Build |
-| 9 | Direct mail | direct mail printing NJ | `/direct-mail-printing` | seo-service | Direct Mail Printing \| Epoch Press NJ | Direct Mail Printing | Commercial | **P2** | Build |
-| 10 | Menu printing | restaurant menu printing NJ NY | `/menu-printing` | seo-service | Menu Printing for Restaurants \| Epoch Press | Restaurant Menu Printing | Commercial | **P2** | Build |
-| 11 | Catalog printing | catalog printing services | `/catalog-printing` | seo-service | Catalog Printing Services \| Epoch Press | Catalog Printing | Commercial | **P3** | Phase 2 |
+| **State / Regional Landing Pages** |
+| 1 | NJ state | commercial printing company NJ | `/commercial-printing-new-jersey` | seo-local-landing | Commercial Printing in New Jersey \| Epoch Press | Commercial Printing Company in New Jersey | Transactional | **P1** | Build |
+| 2 | NY state | commercial printing New York | `/commercial-printing-new-york` | seo-local-landing | Commercial Printing in New York \| Epoch Press | Commercial Printing Services in New York | Transactional | **P1** | Build |
+| 3 | Tri-state | printing company NJ NY tri-state | `/commercial-printing-tri-state` | seo-local-landing | Tri-State Commercial Printing \| Epoch Press | Commercial Printing for the Tri-State Area | Transactional | **P1** | Build |
+| **Service Keywords (existing product pages — optimize SEO)** |
+| 4 | Newspaper printing | newspaper printing services | `/products/newspaper-printing` | product (existing) | Newspaper Printing Services \| Epoch Press | Newspaper Printing Services | Commercial | **P1** | Optimize |
+| 5 | Magazine printing | magazine printing services | `/products/magazine-printing` | product (existing) | Magazine Printing Services \| Epoch Press | Magazine Printing Services | Commercial | **P1** | Optimize |
+| 6 | Book printing | book printing services | `/products/book-printing` | product (existing) | Book Printing Services \| Epoch Press | Book Printing Services | Commercial | **P1** | Optimize |
+| 7 | Large format | large format printing NJ | `/products/large-format` | product (existing) | Large Format Printing \| Epoch Press NJ | Large Format Printing | Commercial | **P1** | Optimize |
+| 8 | Marketing print | brochure flyer printing NJ | `/products/marketing-print` | product (existing) | Marketing Print Services \| Epoch Press NJ | Marketing Print — Flyers, Brochures & More | Commercial | **P1** | Optimize |
+| 9 | Menu printing | restaurant menu printing NJ NY | `/products/menu-printing` | product (existing) | Menu Printing for Restaurants \| Epoch Press | Restaurant Menu Printing | Commercial | **P2** | Optimize |
+| 10 | Business cards | business card printing NJ | `/products/business-cards` | product (existing) | Business Card Printing \| Epoch Press NJ | Business Card Printing | Commercial | **P2** | Optimize |
+| 11 | Calendar printing | calendar printing NJ | `/products/calendar-printing` | product (existing) | Calendar Printing \| Epoch Press Wayne NJ | Calendar Printing | Commercial | **P2** | Optimize |
+| **New Service Page (not in existing products)** |
+| 12 | Offset printing | offset printing services NJ NY | `/offset-printing` | seo-service | Offset Printing Services NJ & NY \| Epoch Press | Offset Printing Services | Commercial | **P1** | Build |
 | **Resource / Decision Keywords** |
-| 12 | Printing cost | commercial printing cost NJ | `/printing-cost` | seo-resource | Printing Costs & Pricing \| Epoch Press | How Much Does Commercial Printing Cost? | Transactional | **P2** | Build |
-| 13 | File guidelines | print ready file submission | `/file-guidelines` | seo-resource | Print-Ready File Guidelines \| Epoch Press | How to Prepare Print-Ready Files | Informational | **P2** | Exists |
-| **Long-tail / Format Keywords** |
-| 14 | Tabloid format | tabloid newspaper printing | `/newspaper-printing#tabloid` | — (anchor) | — | — | Commercial | **P2** | Anchor |
-| 15 | Broadsheet format | broadsheet newspaper printing | `/newspaper-printing#broadsheet` | — (anchor) | — | — | Commercial | **P2** | Anchor |
-| 16 | Saddle stitch | saddle stitch magazine printing | `/magazine-printing#binding` | — (anchor) | — | — | Commercial | **P2** | Anchor |
-| 17 | Perfect bound | perfect bound magazine printing | `/magazine-printing#binding` | — (anchor) | — | — | Commercial | **P2** | Anchor |
-| 18 | Rush printing | rush printing service NJ | `/rush-printing` | seo-resource | Rush Printing \| 48-Hour Turnaround \| Epoch Press | Rush Printing & Fast Turnaround | Transactional | **P2** | Build |
-| **Near-Location Keywords** |
-| 19 | Passaic County | printing services Passaic County NJ | `/printing-passaic-county-nj` | seo-near-location | Printing Near Passaic County, NJ \| Epoch Press | Printing Services Near Passaic County, NJ | Transactional | **P3** | Phase 2 |
-| 20 | Orange County NY | commercial printer Orange County NY | `/printing-orange-county-ny` | seo-near-location | Printing Near Orange County, NY \| Epoch Press | Printing Services Near Orange County, NY | Transactional | **P3** | Phase 2 |
-| 21 | Hudson Valley | printing services Hudson Valley NY | `/printing-hudson-valley-ny` | seo-near-location | Printing in Hudson Valley, NY \| Epoch Press | Printing Services in the Hudson Valley | Transactional | **P3** | Phase 2 |
-| 22 | Near NYC | commercial printing near NYC | `/printing-near-nyc` | seo-near-location | Commercial Printing Near NYC \| Epoch Press | Commercial Printing Near New York City | Transactional | **P3** | Phase 2 |
+| 13 | Printing cost | commercial printing cost | `/printing-cost` | seo-resource | Printing Costs & Pricing \| Epoch Press | How Much Does Commercial Printing Cost? | Transactional | **P2** | Build |
+| 14 | File guidelines | print ready file submission | `/file-guidelines` | seo-resource | Print-Ready File Guidelines \| Epoch Press | How to Prepare Print-Ready Files | Informational | **P2** | Exists |
+| 15 | Rush printing | rush printing service NJ NY | `/rush-printing` | seo-resource | Rush Printing \| 48-Hour Turnaround \| Epoch Press | Rush Printing & Fast Turnaround | Transactional | **P2** | Build |
+| **Long-tail / Format Keywords (anchors on product pages)** |
+| 16 | Tabloid format | tabloid newspaper printing | `/products/newspaper-printing#tabloid` | — (anchor) | — | — | Commercial | **P2** | Anchor |
+| 17 | Broadsheet format | broadsheet newspaper printing | `/products/newspaper-printing#broadsheet` | — (anchor) | — | — | Commercial | **P2** | Anchor |
+| 18 | Saddle stitch | saddle stitch magazine printing | `/products/magazine-printing#binding` | — (anchor) | — | — | Commercial | **P2** | Anchor |
+| 19 | Perfect bound | perfect bound magazine printing | `/products/magazine-printing#binding` | — (anchor) | — | — | Commercial | **P2** | Anchor |
+| **Regional / County Keywords (secondary landing pages)** |
+| 20 | North Jersey | printing company North Jersey | `/commercial-printing-new-jersey#north` | — (anchor on NJ page) | — | — | Transactional | **P2** | Anchor |
+| 21 | Hudson Valley | printing services Hudson Valley | `/commercial-printing-new-york#hudson-valley` | — (anchor on NY page) | — | — | Transactional | **P2** | Anchor |
+| 22 | Near NYC | commercial printing near NYC | `/commercial-printing-tri-state` | — (covered) | — | — | Transactional | **P1** | Covered |
 | **Competitor / Comparison Keywords** |
 | 23 | Competitor alt | Evergreen Printing alternative | — | — (blog) | — | — | Navigational | **P3** | Blog |
-| 24 | Tri-state | printing company NJ NY tristate | `/printing-wayne-nj` | — (covered by core) | — | — | Transactional | **P1** | Covered |
-| **Existing Pages** |
+| **Existing Pages (optimize SEO objects)** |
 | 25 | Homepage | epoch press / commercial printing | `/` | Homepage | Epoch Press \| Commercial Printing, Wayne NJ | — | Brand | Optimize | Audit |
 | 26 | About | about epoch press | `/about` | Standard | About Epoch Press \| Our Story | — | Informational | Optimize | Audit |
 | 27 | Contact | contact epoch press | `/contact` | Standard | Contact Epoch Press \| Wayne, NJ | — | Transactional | Optimize | Audit |
@@ -98,20 +98,16 @@ Homepage (/)
   │
   ├── Resource: Printing Cost (/printing-cost)                       ← P2
   ├── Resource: Rush Printing (/rush-printing)                       ← P2
-  ├── Resource: File Guidelines (/file-guidelines)                   ← Exists
-  │
-  ├── Near-location: Passaic County (/printing-passaic-county-nj)   ← P3
-  ├── Near-location: Orange County NY (/printing-orange-county-ny)  ← P3
-  ├── Near-location: Hudson Valley (/printing-hudson-valley-ny)     ← P3
-  └── Near-location: Near NYC (/printing-near-nyc)                  ← P3
+  └── Resource: File Guidelines (/file-guidelines)                   ← Exists
 ```
 
 **Required link rules:**
-- Homepage → both core landing pages with keyword-rich anchors
-- Core landing pages → all service pages with service name anchors
-- All service pages → core landing page(s) + /quote
+- Homepage → all 3 state/regional landing pages ("Serving NJ, NY, and the tri-state area")
+- State landing pages → all product/service pages with service name anchors
+- State landing pages → each other ("Also serving New York" / "Also serving New Jersey")
+- All product pages → state landing pages + /quote
 - All pages → /quote CTA ("Request a Quote")
-- Footer: NAP block matching GBP exactly
+- Footer: NAP block for both facilities (Wayne NJ + Middletown NY)
 
 ---
 
@@ -120,12 +116,13 @@ Homepage (/)
 | Page Type | Count | Priority |
 |-----------|-------|----------|
 | Homepage | 1 | Optimize existing |
-| Core local landing pages | 2 (Wayne + Middletown) | P1 — Build |
-| Service landing pages | 8 (4 P1 + 4 P2) | P1/P2 — Build |
-| Resource pages | 3 (cost, rush, file guidelines) | P2 — Build |
-| Near-location pages | 4 | P3 — Phase 2 |
-| Standard pages (about, contact, products, quote) | 4 | Optimize existing |
-| **Total new SEO pages** | **13** (P1 + P2) | |
+| **State/Regional landing pages** | **3** (NJ + NY + Tri-State) | **P1 — Build** |
+| Service page (new) | 1 (Offset Printing) | P1 — Build |
+| Product pages (existing) | 8 | P1 — Optimize SEO |
+| Resource pages | 3 (cost, rush, file guidelines) | P2 — Build/Optimize |
+| Standard pages (about, contact, products, quote) | 4+ | Optimize existing |
+| **Total new pages to build** | **7** (3 landings + 1 service + 3 resources) | |
+| **Total pages to optimize** | **12+** (8 products + 4 standard) | |
 
 ---
 

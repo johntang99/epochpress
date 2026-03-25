@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { ArrowRight, Phone, CheckCircle, ChevronDown, Clock } from 'lucide-react';
 import blogData from '@/data/blog.json';
 import { loadPageContent, getRequestSiteId, loadAllItems } from '@/lib/content';
+import { buildPageMetadata } from '@/lib/seo';
 import { resolveRenderableImageUrl } from '@/lib/renderableImage';
 import fs from 'fs';
 import path from 'path';
@@ -179,11 +180,17 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const loader = productFiles[params.slug];
   if (!loader) return { title: 'Product Not Found' };
+  const siteId = await getRequestSiteId();
   const { default: data } = await loader();
-  return {
-    title: data.name,
-    description: data.description,
-  };
+  // seo.json titles take priority, product JSON name is fallback
+  return buildPageMetadata({
+    siteId,
+    locale: 'en',
+    slug: params.slug,
+    title: undefined,
+    description: undefined,
+    pathWithoutLocale: `/products/${params.slug}`,
+  });
 }
 
 export default async function ProductDetailPage({ params }: { params: { slug: string } }) {
@@ -233,8 +240,48 @@ export default async function ProductDetailPage({ params }: { params: { slug: st
   const showSideImage = Boolean(heroImage) && !isCenteredVariant && !useBackgroundOnlyVariant;
   const hasHeroMedia = Boolean(heroBackgroundImage || heroImage);
 
+  // FAQ schema JSON-LD
+  const faqSchemaData = product.faq?.length ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: product.faq.map((item: { q: string; a: string }) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  } : null;
+
+  // Product/Service schema JSON-LD (AEO)
+  const productSchemaData = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: heroTitle || product.name,
+    description: heroDescription || product.description,
+    provider: {
+      '@type': 'LocalBusiness',
+      name: 'Epoch Press',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '7 Highpoint Drive',
+        addressLocality: 'Wayne',
+        addressRegion: 'NJ',
+        postalCode: '07470',
+      },
+      telephone: '973.694.3600',
+    },
+    areaServed: [
+      { '@type': 'State', name: 'New Jersey' },
+      { '@type': 'State', name: 'New York' },
+    ],
+    url: `https://epoch-press.com/products/${product.slug}`,
+  };
+
   return (
     <>
+      {faqSchemaData && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaData) }} />
+      )}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchemaData) }} />
       {/* Hero */}
       <section
         className={`relative pt-36 md:pt-40 pb-16 overflow-hidden ${
@@ -488,6 +535,29 @@ export default async function ProductDetailPage({ params }: { params: { slug: st
                 </div>
               </details>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Service Areas — Visible Internal Links */}
+      <section className="section-padding bg-[var(--surface)] border-t border-[var(--border)]">
+        <div className="container-content text-center">
+          <h2 className="font-serif text-xl font-bold text-[var(--text-primary)] mb-4">
+            Available Across the Northeast
+          </h2>
+          <p className="text-[var(--text-secondary)] mb-6 text-sm">
+            Epoch Press serves publishers, brands, and organizations from two production facilities.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/commercial-printing-new-jersey" className="inline-flex items-center gap-2 border border-[var(--border)] bg-white rounded-lg px-5 py-3 text-sm font-semibold text-[var(--text-primary)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-all">
+              Printing in New Jersey <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link href="/commercial-printing-new-york" className="inline-flex items-center gap-2 border border-[var(--border)] bg-white rounded-lg px-5 py-3 text-sm font-semibold text-[var(--text-primary)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-all">
+              Printing in New York <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link href="/commercial-printing-tri-state" className="inline-flex items-center gap-2 border border-[var(--border)] bg-white rounded-lg px-5 py-3 text-sm font-semibold text-[var(--text-primary)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-all">
+              Tri-State Printing <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

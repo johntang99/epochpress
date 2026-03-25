@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
+import type { Metadata } from 'next';
 import { ArrowRight, Clock, Mail, MapPin, Phone, Quote } from 'lucide-react';
 import esData from '@/data/landing/es.json';
 import zhData from '@/data/landing/zh-hant.json';
@@ -29,6 +30,63 @@ const LANDING_FILE_LANG_MAP: Record<string, string> = {
   'zh-hant': 'zh-hant',
   yi: 'yi',
 };
+
+const LP_SEO: Record<string, { title: string; description: string; ogLocale: string; hreflang: string }> = {
+  en: {
+    title: 'Full-Service Commercial Printing, Wayne NJ',
+    description: 'Premium commercial printing for publishers, brands, and agencies. Newspapers, magazines, books, and more. Wayne, NJ.',
+    ogLocale: 'en_US',
+    hreflang: 'en',
+  },
+  es: {
+    title: 'Imprenta Comercial NJ — Impresión Profesional',
+    description: 'Impresión comercial de periódicos, revistas y libros en Nueva Jersey. Servicio en español. Solicite su cotización.',
+    ogLocale: 'es_US',
+    hreflang: 'es',
+  },
+  yi: {
+    title: 'Yiddish Printing Services — דרוקעריי',
+    description: 'Professional printing for the Yiddish community. Newspapers, books, community materials. Serving Brooklyn, Monsey, Lakewood & NJ.',
+    ogLocale: 'yi',
+    hreflang: 'yi',
+  },
+  'zh-hant': {
+    title: '商業印刷服務 — 紐約新澤西專業印刷',
+    description: 'Epoch Press 提供報紙、雜誌、書籍等專業印刷服務。服務紐約、新澤西華人社區。立即索取報價。',
+    ogLocale: 'zh_TW',
+    hreflang: 'zh-Hant',
+  },
+};
+
+const BASE_URL = 'https://www.epoch-press.com';
+
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
+  const seo = LP_SEO[params.lang];
+  if (!seo) return {};
+
+  const hreflangLinks: Record<string, string> = {};
+  for (const [lang, info] of Object.entries(LP_SEO)) {
+    hreflangLinks[info.hreflang] = `${BASE_URL}/lp/${lang}`;
+  }
+  hreflangLinks['x-default'] = `${BASE_URL}/lp/en`;
+
+  return {
+    title: seo.title,
+    description: seo.description,
+    alternates: {
+      canonical: `${BASE_URL}/lp/${params.lang}`,
+      languages: hreflangLinks,
+    },
+    openGraph: {
+      type: 'website',
+      siteName: 'Epoch Press',
+      title: seo.title,
+      description: seo.description,
+      locale: seo.ogLocale,
+      url: `${BASE_URL}/lp/${params.lang}`,
+    },
+  };
+}
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;

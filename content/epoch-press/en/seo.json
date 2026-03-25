@@ -1,30 +1,102 @@
 {
   "home": {
     "title": "Epoch Press | Full-Service Commercial Printing in Wayne, NJ",
-    "description": "From prepress to post press, Epoch Press helps publishers, organizations, and brands produce high-impact print with modern workflows, consistent color, and on-time delivery."
+    "description": "Epoch Press delivers high-quality commercial printing for publishers, brands, and agencies. Newspapers, magazines, books, and more. Wayne, NJ."
   },
   "pages": {
     "about": {
       "title": "About Epoch Press | 25+ Years of Printing Excellence",
-      "description": "Learn how Epoch Press combines experienced press teams, advanced equipment, and responsive support to deliver dependable commercial print outcomes."
+      "description": "Epoch Press combines experienced press teams, advanced equipment, and responsive support to deliver dependable commercial print outcomes."
     },
     "quote": {
-      "title": "Request a Print Quote | Epoch Press",
-      "description": "Get a custom quote for your printing project. We respond within 24 hours."
+      "title": "Request a Print Quote",
+      "description": "Get a custom quote for your printing project. Newspapers, magazines, books, marketing materials. We respond within 24 hours."
     },
     "contact": {
-      "title": "Contact Epoch Press | Get a Custom Quote",
+      "title": "Contact Epoch Press | Wayne, NJ Commercial Printer",
       "description": "Contact Epoch Press at 7 Highpoint Drive, Wayne, NJ 07470 or call 973.694.3600 to discuss your project and timeline."
     },
     "products": {
-      "title": "Printing Services | Epoch Press",
-      "description": "Explore Epoch Press printing services including newspapers, magazines, books, marketing print, menus, business cards, and large-format applications."
+      "title": "Printing Services & Capabilities",
+      "description": "Full-service printing: newspapers, magazines, books, marketing collateral, menus, business cards, and large-format. Wayne, NJ."
     },
     "portfolio": {
-      "title": "Our Work | Epoch Press Portfolio",
-      "description": "Review selected projects that show the quality, consistency, and versatility of Epoch Press production capabilities."
+      "title": "Our Work | Epoch Press Portfolio & Case Studies",
+      "description": "See selected projects showing the quality, consistency, and versatility of Epoch Press commercial printing capabilities."
+    },
+    "faq": {
+      "title": "Printing FAQ | Epoch Press — Common Questions",
+      "description": "Answers to common questions about commercial printing, turnaround times, file preparation, pricing, and working with Epoch Press."
+    },
+    "file-guidelines": {
+      "title": "Print-Ready File Guidelines",
+      "description": "How to prepare print-ready files for Epoch Press. File formats, resolution, bleed, color profiles, and submission guidelines."
+    },
+    "blog": {
+      "title": "Printing Industry Blog",
+      "description": "Insights on commercial printing, publishing trends, print technology, and production tips from the Epoch Press team."
+    },
+    "case-studies": {
+      "title": "Case Studies | Epoch Press Print Projects",
+      "description": "Real-world printing projects from Epoch Press. See how we help publishers, brands, and organizations achieve their print goals."
+    },
+    "commercial-printing-new-jersey": {
+      "title": "Commercial Printing in New Jersey",
+      "description": "Full-service commercial printing in New Jersey. Newspapers, magazines, books, marketing materials. Two NJ/NY facilities, fast turnaround."
+    },
+    "commercial-printing-new-york": {
+      "title": "Commercial Printing in New York",
+      "description": "Full-service commercial printing in New York. Newspapers, magazines, books, marketing materials. Two NJ/NY facilities, fast turnaround."
+    },
+    "commercial-printing-tri-state": {
+      "title": "Tri-State Commercial Printing | Epoch Press NJ & NY",
+      "description": "Commercial printing serving NJ, NY & the tri-state area. Newspapers, magazines, books, marketing materials. Two facilities."
+    },
+    "offset-printing": {
+      "title": "Offset Printing Services NJ & NY",
+      "description": "High-volume offset printing at Epoch Press. Superior color accuracy, consistent quality. Newspapers, magazines, books. NJ & NY."
+    },
+    "printing-cost": {
+      "title": "Printing Costs & Pricing",
+      "description": "How much does commercial printing cost? See pricing for newspapers, magazines, books, marketing materials. Request a custom quote."
+    },
+    "rush-printing": {
+      "title": "Rush Printing | 48-Hour Turnaround",
+      "description": "Need printing fast? 48-hour rush service for flyers, business cards, posters, and more. NJ & NY facilities. Call 973.694.3600."
+    },
+    "newspaper-printing": {
+      "title": "Newspaper Printing Services",
+      "description": "Professional newspaper printing — tabloid, broadsheet, community papers. Offset and digital. Fast turnaround. Epoch Press, Wayne NJ."
+    },
+    "magazine-printing": {
+      "title": "Magazine Printing Services",
+      "description": "High-quality magazine printing — saddle stitch, perfect bound. Full color, premium paper options. Epoch Press, Wayne NJ."
+    },
+    "book-printing": {
+      "title": "Book Printing Services",
+      "description": "Professional book printing for publishers and self-publishers. Softcover, hardcover, perfect bound. Short and long runs."
+    },
+    "calendar-printing": {
+      "title": "Calendar Printing",
+      "description": "Custom calendar printing for businesses and organizations. Wall, desk, and promotional calendars. High-quality production."
+    },
+    "marketing-print": {
+      "title": "Marketing Print Services",
+      "description": "Flyers, brochures, postcards, and direct mail printing for marketing campaigns. Full-service production at Epoch Press."
+    },
+    "menu-printing": {
+      "title": "Menu Printing for Restaurants",
+      "description": "Professional restaurant menu printing — laminated, folded, multi-page. Durable finishes, fast turnaround. Serving NJ and NY."
+    },
+    "business-cards": {
+      "title": "Business Card Printing",
+      "description": "Premium business card printing — standard, thick stock, specialty finishes. Fast turnaround at Epoch Press, Wayne NJ."
+    },
+    "large-format": {
+      "title": "Large Format Printing",
+      "description": "Banners, posters, signage, and trade show graphics. Large format printing at Epoch Press, Wayne NJ. High resolution output."
     }
   },
   "title": "Epoch Press",
-  "description": "Epoch Press is a full-service commercial printing company in Wayne, NJ. We print newspapers, magazines, books, marketing collateral, and more with dependable quality and turnaround."
+  "description": "Epoch Press is a full-service commercial printing company in Wayne, NJ. Newspapers, magazines, books, marketing materials, and more."
 }

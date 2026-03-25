@@ -13,8 +13,8 @@
 
 | Phase | What | Pages / Actions | Timeline |
 |-------|------|----------------|----------|
-| **Phase 0** | Validate keywords + audit existing pages + add seo to LPs | 0 new (4 LP audits) | Week 1 |
-| **Phase 1** | Build P1 pages (core landings + top 4 services) | 6 new pages | Week 2–3 |
+| **Phase 0** | Validate keywords + audit existing pages + add seo to LPs | 0 new (17 seo.json entries + 4 LPs) | Week 1 |
+| **Phase 1** | Build state/regional landings + offset page + optimize 8 product pages | 4 new + 8 optimized | Week 2–3 |
 | **Phase 1.5** | Multi-language LP SEO (ES, YI, ZH-HANT seo objects + hreflang) | 3 LP optimizations | Week 3 |
 | **Phase 2** | Build P2 pages (remaining services + resources) | 7 new pages | Week 4–5 |
 | **Phase 3** | Near-location pages + language-specific service pages | 4+ new pages | Week 6+ |
@@ -26,37 +26,86 @@
 
 ---
 
+## Architecture Findings (Pre-Implementation Review)
+
+> **Reviewed March 2026.** These findings affect the implementation approach.
+
+### Key Findings
+
+| Finding | Impact |
+|---------|--------|
+| **8 product pages already exist** at `/products/[slug]` (newspaper, magazine, book, calendar, marketing, menu, business-cards, large-format) | Do NOT create duplicate service pages — optimize existing product pages instead |
+| **Standalone Next.js app** — not multi-site like TCM | Use static route folders, not dynamic `[slug]` route |
+| **Content is file-based** (`/data/pages/` and `/content/epoch-press/en/`) with DB fallback | Create content JSON files + add to seo.json |
+| **No seo objects** on any product page or landing page | Phase 0 priority |
+| **seo.json** only covers home, about, contact, products, portfolio | Need to add entries for all product pages + LPs + new pages |
+| **4 landing pages** exist at `/lp/es`, `/lp/yi`, `/lp/zh-hant` (no seo objects) | Phase 0 priority |
+| **Two locations**: Wayne NJ (primary) + Middletown NY | Need 2 core landing pages |
+
+### Revised Page Strategy
+
+| Page Type | Approach | Route |
+|-----------|----------|-------|
+| Core local landing (Wayne) | **Create new** | `/printing-wayne-nj` |
+| Core local landing (Middletown) | **Create new** | `/printing-middletown-ny` |
+| Service pages (newspaper, magazine, etc.) | **Optimize existing** `/products/[slug]` | Already at `/products/*` |
+| Offset printing | **Create new** (not in products) | `/offset-printing` |
+| Resource: cost | **Create new** | `/printing-cost` |
+| Resource: rush printing | **Create new** | `/rush-printing` |
+| Resource: file guidelines | **Optimize existing** | `/file-guidelines` (exists) |
+| Near-location pages | **Create new** (Phase 3) | `/printing-passaic-county-nj` etc. |
+
+### What This Means
+
+- **Fewer new pages needed** than originally planned — product pages cover most services
+- **Focus shifts** to: 2 core landing pages + 2-3 resource pages + SEO optimization of 8 existing product pages
+- **Architecture**: static routes + file-based content (simple, matches existing pattern)
+
+---
+
 ## Phase 0 — Validate & Audit (Week 1)
 
-### 0.1 Keyword Validation
+### 0.1 Keyword Validation (Human — before pipeline)
 - [ ] Run top 30 keywords through Google Keyword Planner → get actual search volumes
 - [ ] Identify any keywords with 0 volume → remove or replace
 - [ ] Confirm top 10 keywords by volume × intent match
 - [ ] Complete 3 competitor audits (Evergreen Printing + 2 more NJ printers)
 
 ### 0.2 Existing Page SEO Audit
-- [ ] Add `seo` objects to existing pages: homepage, about, contact, products, quote, faq, file-guidelines
-- [ ] Fix any title tags > 60 chars
-- [ ] Fix any meta descriptions > 155 chars
-- [ ] Ensure homepage H1 contains "printing" + "Wayne" or "NJ"
-- [ ] Verify NAP in footer matches GBP exactly
-- [ ] Submit current sitemap to Google Search Console
+Add SEO entries to `seo.json` for all pages that are missing:
 
-### 0.3 Multi-Language LP Audit
-- [ ] Add `seo` objects to all 4 landing pages: `/lp/en`, `/lp/es`, `/lp/yi`, `/lp/zh-hant`
-- [ ] ES LP: title in Spanish, description in Spanish, `lang="es"` meta
-- [ ] YI LP: title in Yiddish+English, description targeting English searchers + Yiddish community
-- [ ] ZH-HANT LP: title in Chinese, description in Chinese, target 法拉盛/紐約 keywords
-- [ ] Verify `hreflang` tags link all 4 LPs together for language alternates
-- [ ] Add `og:locale` tags: `en_US`, `es_US`, `yi`, `zh_TW`
+**Pages needing seo.json entries:**
+- [ ] homepage (exists — verify title ≤60, desc ≤155)
+- [ ] about (exists — verify)
+- [ ] contact (exists — verify)
+- [ ] products (exists — verify)
+- [ ] quote (exists — verify)
+- [ ] portfolio (exists — verify)
+- [ ] faq (missing — add)
+- [ ] file-guidelines (missing — add)
+- [ ] blog (missing — add)
+- [ ] case-studies (missing — add)
 
-### 0.3 Architecture Decision
-- [ ] Decide: adapt the TCM dynamic `[slug]` route pattern, or use static route folders?
-  - **Recommendation:** If epochpress is a standalone Next.js app (not multi-site), static route folders are simpler. If it will become multi-site later, use the `[slug]` pattern.
-- [ ] Set up `site_seo_pages` table if using dynamic routing
-- [ ] Create layout components (or adapt from TCM system)
+**Product pages needing seo.json entries (8 pages):**
+- [ ] newspaper-printing: "Newspaper Printing Services | Epoch Press"
+- [ ] magazine-printing: "Magazine Printing Services | Epoch Press"
+- [ ] book-printing: "Book Printing Services | Epoch Press"
+- [ ] calendar-printing: "Calendar Printing | Epoch Press"
+- [ ] marketing-print: "Marketing Print Services | Epoch Press"
+- [ ] menu-printing: "Menu Printing for Restaurants | Epoch Press"
+- [ ] business-cards: "Business Card Printing | Epoch Press"
+- [ ] large-format: "Large Format Printing | Epoch Press"
 
-### 0.4 GBP Setup
+### 0.3 Multi-Language LP SEO
+- [ ] Add `seo` objects to all 4 landing page JSON files
+- [ ] EN LP: "Commercial Printing Wayne NJ | Epoch Press"
+- [ ] ES LP: "Imprenta Comercial NJ | Epoch Press — Impresión Profesional"
+- [ ] YI LP: "Yiddish Printing Services | Epoch Press — דרוקעריי"
+- [ ] ZH-HANT LP: "商業印刷服務 | Epoch Press 紐約新澤西專業印刷"
+- [ ] Add `hreflang` tags linking all 4 LPs
+- [ ] Add `og:locale` tags per language
+
+### 0.4 GBP Setup (Human)
 - [ ] Verify GBP listing for Wayne, NJ location
 - [ ] Create/verify GBP listing for Middletown, NY location (if applicable)
 - [ ] Ensure NAP consistency across both listings
@@ -65,45 +114,54 @@
 
 ## Phase 1 — P1 Pages (Week 2–3)
 
-### 1.1 Core Local Landing Pages (2 pages)
+### 1.1 State/Regional Landing Pages (3 NEW pages)
+
+| Page | URL | Target Keyword | H1 |
+|------|-----|----------------|-----|
+| New Jersey | `/commercial-printing-new-jersey` | commercial printing company NJ | Commercial Printing Company in New Jersey |
+| New York | `/commercial-printing-new-york` | commercial printing New York | Commercial Printing Services in New York |
+| Tri-State | `/commercial-printing-tri-state` | printing company NJ NY tri-state | Commercial Printing for the Tri-State Area |
+
+**Layout for state/regional landing pages:**
+1. Hero — H1 + state/region, subheading, 2-sentence intro, CTA "Request a Quote"
+2. What We Print — services grid linking to `/products/*` pages
+3. Industries We Serve — publishers, agencies, brands, restaurants, schools, nonprofits
+4. Our Facilities — Wayne NJ (primary) + Middletown NY, equipment highlights, capacity
+5. Why Choose Epoch Press — turnaround, quality, experience, service area coverage
+6. FAQ accordion (4–6 questions) — FAQPage schema
+7. CTA — "Get a Custom Quote" → /quote
+
+**Key content differences per page:**
+- **NJ page:** Emphasize Wayne facility, serve all of NJ, proximity to NYC
+- **NY page:** Emphasize Middletown facility, serve NYC metro + Hudson Valley + upstate
+- **Tri-State page:** Both facilities, full regional coverage, logistics advantage
+
+### 1.2 Offset Printing Page (1 NEW page)
 
 | Page | URL | Target Keyword |
 |------|-----|----------------|
-| Wayne NJ | `/printing-wayne-nj` | commercial printing Wayne NJ |
-| Middletown NY | `/printing-middletown-ny` | printing company Middletown NY |
+| Offset Printing | `/offset-printing` | offset printing services NJ NY |
 
-**Layout (per BAAM SOP `seo-local-landing`):**
-1. Hero — H1 + city, subheading, intro, CTA "Request a Quote"
-2. Services grid — links to each service page
-3. Why Choose Us — equipment, turnaround, client logos
-4. FAQ accordion (4–6 questions) — FAQPage schema
-5. Location + map — NAP block, hours, directions
+> This service doesn't have an existing `/products/*` page. Follows the product page layout pattern.
 
-### 1.2 Top 4 Service Pages (4 pages)
+### 1.3 Optimize Existing Product Pages (8 pages — SEO only, no new routes)
 
-| Page | URL | Target Keyword |
-|------|-----|----------------|
-| Newspaper Printing | `/newspaper-printing` | newspaper printing services |
-| Magazine Printing | `/magazine-printing` | magazine printing services |
-| Book Printing | `/book-printing` | book printing services |
-| Offset Printing | `/offset-printing` | offset printing services |
+Product pages already exist at `/products/[slug]`. Optimization means:
+- [ ] Verify seo.json entries are applied as `<title>` and `<meta description>`
+- [ ] Ensure each product page H1 contains the target keyword
+- [ ] Add FAQ schema (JSON-LD) to product pages that have FAQ sections
+- [ ] Add internal links from product pages → state landing pages
+- [ ] Add "Request a Quote" CTA if missing
 
-**Layout (per BAAM SOP `seo-service`):**
-1. Hero — H1 + service name, description, CTA
-2. What is it — process explanation, paper types, binding options
-3. Specifications — sizes, page counts, paper stock, finishes
-4. Who it's for — target customers, use cases
-5. FAQ accordion (4 questions) — FAQPage schema
-6. CTA — "Request a Quote for [Service]"
-
-### 1.3 Phase 1 Done-Gate
-- [ ] All 6 pages return HTTP 200
+### 1.4 Phase 1 Done-Gate
+- [ ] All 4 new pages return HTTP 200 (3 landings + 1 offset)
 - [ ] All title tags ≤ 60 chars, descriptions ≤ 155 chars
 - [ ] All H1s unique and contain target keyword
-- [ ] FAQ schema present on all pages
-- [ ] Homepage links to both core landing pages
-- [ ] Core landing pages link to all 4 service pages
-- [ ] All pages have "Request a Quote" CTA
+- [ ] FAQ schema present on all landing pages
+- [ ] Homepage links to state landing pages
+- [ ] State landing pages link to all product/service pages
+- [ ] All pages have "Request a Quote" CTA → /quote
+- [ ] Product pages have internal links to state landing pages
 - [ ] Sitemap updated, GSC notified
 
 ---

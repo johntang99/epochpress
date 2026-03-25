@@ -72,6 +72,12 @@ export function Footer({
   const services = footer.services?.length
     ? footer.services.map((item) => ({ name: item.text, href: item.url }))
     : productLinks;
+  const resources = (footer as any).resources?.length
+    ? (footer as any).resources.map((item: any) => ({ name: item.text, href: item.url }))
+    : [];
+  const serviceAreas = (footer as any).serviceAreas?.length
+    ? (footer as any).serviceAreas.map((item: any) => ({ name: item.text, href: item.url }))
+    : [];
   const legalLinks = footer.legalLinks?.length
     ? footer.legalLinks.map((item) => ({ name: item.text, href: item.url }))
     : [
@@ -86,7 +92,7 @@ export function Footer({
   return (
     <footer className="bg-[var(--navy)] text-white">
       <div className="container-content py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-5">
@@ -159,6 +165,50 @@ export function Footer({
               ))}
             </ul>
           </div>
+
+          {/* Resources & Service Areas */}
+          {(resources.length > 0 || serviceAreas.length > 0) && (
+            <div>
+              {resources.length > 0 && (
+                <>
+                  <h4 className="font-serif font-semibold text-white mb-5 text-sm tracking-wider uppercase">
+                    Resources
+                  </h4>
+                  <ul className="space-y-1.5 mb-6">
+                    {resources.map((link: { name: string; href: string }) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="inline-flex min-h-0 py-0.5 text-sm text-on-primary-muted hover:text-[var(--gold-light)] transition-colors"
+                        >
+                          {link.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              {serviceAreas.length > 0 && (
+                <>
+                  <h4 className="font-serif font-semibold text-white mb-5 text-sm tracking-wider uppercase">
+                    Service Areas
+                  </h4>
+                  <ul className="space-y-1.5">
+                    {serviceAreas.map((link: { name: string; href: string }) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="inline-flex min-h-0 py-0.5 text-sm text-on-primary-muted hover:text-[var(--gold-light)] transition-colors"
+                        >
+                          {link.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </div>
+          )}
 
           {/* CTA */}
           <div>

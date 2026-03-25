@@ -416,6 +416,81 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Everything You Need to Know — SEO Hub */}
+      <section className="section-padding bg-white border-t border-[var(--border)]">
+        <div className="container-content">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-[var(--gold-50)] text-[var(--gold)] text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full mb-4">
+              Explore
+            </span>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-3">
+              Everything You Need to Know
+            </h2>
+            <p className="text-[var(--text-secondary)] max-w-2xl mx-auto">
+              Whether you&apos;re looking for regional printing services, need to understand pricing, or have a rush deadline — start here.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                icon: '🗺️',
+                title: 'Printing in New Jersey',
+                description: 'Full-service commercial printing from our Wayne, NJ facility. Serving all of New Jersey.',
+                href: '/commercial-printing-new-jersey',
+              },
+              {
+                icon: '🏙️',
+                title: 'Printing in New York',
+                description: 'Commercial printing for NYC metro, Hudson Valley, and upstate NY from our Middletown facility.',
+                href: '/commercial-printing-new-york',
+              },
+              {
+                icon: '🌐',
+                title: 'Tri-State Printing',
+                description: 'Two production facilities serving NJ, NY, and CT with capacity for any project size.',
+                href: '/commercial-printing-tri-state',
+              },
+              {
+                icon: '⚙️',
+                title: 'Offset Printing',
+                description: 'High-volume offset printing with precise color control. Best value above 1,000 copies.',
+                href: '/offset-printing',
+              },
+              {
+                icon: '💰',
+                title: 'Pricing Guide',
+                description: 'How much does commercial printing cost? See ranges by product, volume, and specs.',
+                href: '/printing-cost',
+              },
+              {
+                icon: '⚡',
+                title: 'Rush Printing',
+                description: '48-hour turnaround available for most products. When your deadline can\'t move.',
+                href: '/rush-printing',
+              },
+            ].map((card) => (
+              <Link
+                key={card.href}
+                href={card.href}
+                className="group flex flex-col items-center text-center border border-[var(--border)] rounded-xl p-8 hover:border-[var(--gold)] hover:shadow-lg transition-all bg-[var(--surface)]"
+              >
+                <div className="text-4xl mb-5">{card.icon}</div>
+                <h3 className="font-serif font-bold text-xl text-[var(--text-primary)] mb-3 group-hover:text-[var(--gold)] transition-colors">
+                  {card.title}
+                </h3>
+                <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5">
+                  {card.description}
+                </p>
+                <span className="inline-flex items-center gap-1 text-sm font-semibold text-[var(--gold)] group-hover:gap-2 transition-all mt-auto">
+                  Learn more <ArrowRight className="w-4 h-4" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose Us */}
       <section className="section-padding bg-white border-t border-[var(--border)]">
         <div className="container-content">

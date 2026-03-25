@@ -5,21 +5,28 @@ import { getRequestSiteId, loadTheme, loadSeo, loadContent, loadFooter, loadSite
 import type { SeoConfig, SiteInfo } from '@/lib/types';
 import { SiteChrome } from '@/components/layout/SiteChrome';
 
+const SITE_URL = 'https://www.epoch-press.com';
+
 export async function generateMetadata(): Promise<Metadata> {
   const siteId = await getRequestSiteId();
   const seo = await loadSeo(siteId, 'en') as SeoConfig | null;
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: {
-      default: seo?.title || 'Epoch Press — Premium Commercial Printing',
+      default: seo?.home?.title || seo?.title || 'Epoch Press — Full-Service Commercial Printing in Wayne, NJ',
       template: `%s | ${seo?.title || 'Epoch Press'}`,
     },
     description:
-      seo?.description ||
-      'Full-service commercial printing. Newspapers, magazines, books, marketing print, menus, business cards, and large format.',
+      seo?.home?.description || seo?.description ||
+      'Full-service commercial printing in Wayne, NJ. Newspapers, magazines, books, marketing materials, and more.',
+    alternates: {
+      canonical: '/',
+    },
     openGraph: {
       type: 'website',
-      siteName: seo?.title || 'Epoch Press',
+      siteName: 'Epoch Press',
+      url: SITE_URL,
     },
   };
 }
@@ -84,7 +91,37 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <head>{cssVars && <style dangerouslySetInnerHTML={{ __html: cssVars }} />}</head>
+      <head>
+        {cssVars && <style dangerouslySetInnerHTML={{ __html: cssVars }} />}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Epoch Press',
+              url: 'https://epoch-press.com',
+              logo: 'https://epoch-press.com/logo.png',
+              description: 'Full-service commercial printing company in Wayne, NJ. Newspapers, magazines, books, marketing materials.',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: '7 Highpoint Drive',
+                addressLocality: 'Wayne',
+                addressRegion: 'NJ',
+                postalCode: '07470',
+                addressCountry: 'US',
+              },
+              telephone: '+19736943600',
+              email: 'info@epochpress.com',
+              areaServed: [
+                { '@type': 'State', name: 'New Jersey' },
+                { '@type': 'State', name: 'New York' },
+              ],
+              sameAs: [],
+            }),
+          }}
+        />
+      </head>
       <body className="bg-white text-[var(--text-primary)] font-sans antialiased">
         <SiteChrome
           headerConfig={headerConfig as Record<string, unknown> | null}

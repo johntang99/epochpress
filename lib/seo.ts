@@ -99,6 +99,8 @@ export async function buildPageMetadata({
       },
     },
     openGraph: {
+      type: 'website',
+      siteName: getSiteDisplayName(siteInfo, 'Business') || 'Epoch Press',
       title: resolvedTitle,
       description: resolvedDescription || undefined,
       url: canonical,

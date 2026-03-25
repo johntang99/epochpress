@@ -46,6 +46,42 @@
     {
       "url": "/products/large-format",
       "text": "Large Format"
+    },
+    {
+      "url": "/offset-printing",
+      "text": "Offset Printing"
+    }
+  ],
+  "resources": [
+    {
+      "url": "/printing-cost",
+      "text": "Printing Costs & Pricing"
+    },
+    {
+      "url": "/rush-printing",
+      "text": "Rush Printing (48hr)"
+    },
+    {
+      "url": "/file-guidelines",
+      "text": "File Guidelines"
+    },
+    {
+      "url": "/quote",
+      "text": "Request a Quote"
+    }
+  ],
+  "serviceAreas": [
+    {
+      "url": "/commercial-printing-new-jersey",
+      "text": "Printing in New Jersey"
+    },
+    {
+      "url": "/commercial-printing-new-york",
+      "text": "Printing in New York"
+    },
+    {
+      "url": "/commercial-printing-tri-state",
+      "text": "Tri-State Printing"
     }
   ],
   "copyright": "© {year} Epoch Press. All rights reserved.",

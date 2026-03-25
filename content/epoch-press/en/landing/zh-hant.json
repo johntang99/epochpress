@@ -350,5 +350,10 @@
     "title": "印刷品類",
     "variant": "grid-3x"
   },
-  "relatedProducts": []
+  "relatedProducts": [],
+  "seo": {
+    "title": "商業印刷服務 | Epoch Press 紐約新澤西專業印刷",
+    "description": "Epoch Press 提供報紙、雜誌、書籍等專業印刷服務。服務紐約、新澤西華人社區。立即索取報價。",
+    "h1": "高端印刷，穩健交付。"
+  }
 }
