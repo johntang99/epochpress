@@ -273,7 +273,7 @@ export default async function ProductDetailPage({ params }: { params: { slug: st
       { '@type': 'State', name: 'New Jersey' },
       { '@type': 'State', name: 'New York' },
     ],
-    url: `https://epoch-press.com/products/${product.slug}`,
+    url: `https://nyprintinghub.com/products/${product.slug}`,
   };
 
   return (

@@ -5,7 +5,7 @@ import { getRequestSiteId, loadTheme, loadSeo, loadContent, loadFooter, loadSite
 import type { SeoConfig, SiteInfo } from '@/lib/types';
 import { SiteChrome } from '@/components/layout/SiteChrome';
 
-const SITE_URL = 'https://www.epoch-press.com';
+const SITE_URL = 'https://www.nyprintinghub.com';
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteId = await getRequestSiteId();
@@ -100,8 +100,8 @@ export default async function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Organization',
               name: 'Epoch Press',
-              url: 'https://epoch-press.com',
-              logo: 'https://epoch-press.com/logo.png',
+              url: 'https://nyprintinghub.com',
+              logo: 'https://nyprintinghub.com/logo.png',
               description: 'Full-service commercial printing company in Wayne, NJ. Newspapers, magazines, books, marketing materials.',
               address: {
                 '@type': 'PostalAddress',

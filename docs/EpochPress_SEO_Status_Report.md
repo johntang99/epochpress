@@ -1,10 +1,10 @@
 # Epoch Press — SEO Status Report
-## Site: epoch-press.com
+## Site: nyprintinghub.com
 
 | | |
 |---|---|
 | **Report Date** | April 4, 2026 |
-| **Site** | epoch-press.com |
+| **Site** | nyprintinghub.com |
 | **Industry** | Commercial Printing |
 | **Primary Location** | Wayne, NJ |
 | **Secondary Location** | Middletown, NY |
@@ -194,23 +194,23 @@ All 4 LPs have: seo objects, 5 hreflang tags (4 languages + x-default), og:local
 ### URLs to Submit to Google Search Console
 
 ```
-https://epoch-press.com/commercial-printing-new-jersey
-https://epoch-press.com/commercial-printing-new-york
-https://epoch-press.com/commercial-printing-tri-state
-https://epoch-press.com/offset-printing
-https://epoch-press.com/printing-cost
-https://epoch-press.com/rush-printing
-https://epoch-press.com/lp/es
-https://epoch-press.com/lp/yi
-https://epoch-press.com/lp/zh-hant
-https://epoch-press.com/magazine-printing-new-jersey    ← NEW April 2026
-https://epoch-press.com/magazine-printing-new-york      ← NEW April 2026
-https://epoch-press.com/book-printing-new-jersey        ← NEW April 2026
-https://epoch-press.com/book-printing-new-york          ← NEW April 2026
-https://epoch-press.com/marketing-printing-new-jersey   ← NEW April 2026
-https://epoch-press.com/marketing-printing-new-york     ← NEW April 2026
-https://epoch-press.com/menu-printing-new-jersey        ← NEW April 2026
-https://epoch-press.com/menu-printing-new-york          ← NEW April 2026
+https://nyprintinghub.com/commercial-printing-new-jersey
+https://nyprintinghub.com/commercial-printing-new-york
+https://nyprintinghub.com/commercial-printing-tri-state
+https://nyprintinghub.com/offset-printing
+https://nyprintinghub.com/printing-cost
+https://nyprintinghub.com/rush-printing
+https://nyprintinghub.com/lp/es
+https://nyprintinghub.com/lp/yi
+https://nyprintinghub.com/lp/zh-hant
+https://nyprintinghub.com/magazine-printing-new-jersey    ← NEW April 2026
+https://nyprintinghub.com/magazine-printing-new-york      ← NEW April 2026
+https://nyprintinghub.com/book-printing-new-jersey        ← NEW April 2026
+https://nyprintinghub.com/book-printing-new-york          ← NEW April 2026
+https://nyprintinghub.com/marketing-printing-new-jersey   ← NEW April 2026
+https://nyprintinghub.com/marketing-printing-new-york     ← NEW April 2026
+https://nyprintinghub.com/menu-printing-new-jersey        ← NEW April 2026
+https://nyprintinghub.com/menu-printing-new-york          ← NEW April 2026
 ```
 
 ---

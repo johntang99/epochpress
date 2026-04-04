@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin/', '/api/'],
       },
     ],
-    sitemap: 'https://www.epoch-press.com/sitemap.xml',
+    sitemap: 'https://www.nyprintinghub.com/sitemap.xml',
   };
 }

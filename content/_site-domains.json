@@ -2,7 +2,7 @@
   "domains": [
     {
       "siteId": "epoch-press",
-      "domain": "epoch-press.com",
+      "domain": "nyprintinghub.com",
       "environment": "prod",
       "enabled": true
     },

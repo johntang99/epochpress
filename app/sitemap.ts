@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const BASE_URL = 'https://www.epoch-press.com';
+const BASE_URL = 'https://www.nyprintinghub.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

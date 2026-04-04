@@ -58,7 +58,7 @@ const LP_SEO: Record<string, { title: string; description: string; ogLocale: str
   },
 };
 
-const BASE_URL = 'https://www.epoch-press.com';
+const BASE_URL = 'https://www.nyprintinghub.com';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const seo = LP_SEO[params.lang];

@@ -3,7 +3,7 @@
     {
       "id": "epoch-press",
       "name": "Epoch Press",
-      "domain": "epoch-press.com",
+      "domain": "nyprintinghub.com",
       "enabled": true,
       "defaultLocale": "en",
       "supportedLocales": ["en"],
