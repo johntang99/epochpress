@@ -548,6 +548,29 @@ export default async function ProductDetailPage({ params }: { params: { slug: st
           <p className="text-[var(--text-secondary)] mb-6 text-sm">
             Epoch Press serves publishers, brands, and organizations from two production facilities.
           </p>
+          {/* Product-specific geo links */}
+          {(() => {
+            const geoLinks: Record<string, { nj: { href: string; label: string }; ny: { href: string; label: string } }> = {
+              'magazine-printing': { nj: { href: '/magazine-printing-new-jersey', label: 'Magazine Printing in NJ' }, ny: { href: '/magazine-printing-new-york', label: 'Magazine Printing in NY' } },
+              'book-printing': { nj: { href: '/book-printing-new-jersey', label: 'Book Printing in NJ' }, ny: { href: '/book-printing-new-york', label: 'Book Printing in NY' } },
+              'marketing-print': { nj: { href: '/marketing-printing-new-jersey', label: 'Marketing Print in NJ' }, ny: { href: '/marketing-printing-new-york', label: 'Marketing Print in NY' } },
+              'menu-printing': { nj: { href: '/menu-printing-new-jersey', label: 'Menu Printing in NJ' }, ny: { href: '/menu-printing-new-york', label: 'Menu Printing in NY' } },
+            };
+            const geo = geoLinks[params.slug];
+            if (geo) {
+              return (
+                <div className="flex flex-wrap justify-center gap-4 mb-4">
+                  <Link href={geo.nj.href} className="inline-flex items-center gap-2 border border-[var(--gold)] bg-[var(--gold-50)] rounded-lg px-5 py-3 text-sm font-semibold text-[var(--navy)] hover:bg-[var(--gold)] hover:text-white transition-all">
+                    {geo.nj.label} <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link href={geo.ny.href} className="inline-flex items-center gap-2 border border-[var(--gold)] bg-[var(--gold-50)] rounded-lg px-5 py-3 text-sm font-semibold text-[var(--navy)] hover:bg-[var(--gold)] hover:text-white transition-all">
+                    {geo.ny.label} <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              );
+            }
+            return null;
+          })()}
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/commercial-printing-new-jersey" className="inline-flex items-center gap-2 border border-[var(--border)] bg-white rounded-lg px-5 py-3 text-sm font-semibold text-[var(--text-primary)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-all">
               Printing in New Jersey <ArrowRight className="w-4 h-4" />

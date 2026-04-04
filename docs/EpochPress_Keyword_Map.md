@@ -65,6 +65,15 @@ The initial keyword list was obtained from an AI-generated brainstorm (likely Ch
 | 17 | Broadsheet format | broadsheet newspaper printing | `/products/newspaper-printing#broadsheet` | — (anchor) | — | — | Commercial | **P2** | Anchor |
 | 18 | Saddle stitch | saddle stitch magazine printing | `/products/magazine-printing#binding` | — (anchor) | — | — | Commercial | **P2** | Anchor |
 | 19 | Perfect bound | perfect bound magazine printing | `/products/magazine-printing#binding` | — (anchor) | — | — | Commercial | **P2** | Anchor |
+| **Product × Geo Landing Pages (NEW — April 2026)** |
+| 30 | Magazine NJ | magazine printing New Jersey | `/magazine-printing-new-jersey` | seo-product-geo | Magazine Printing in New Jersey \| Epoch Press | Magazine Printing Services in New Jersey | Transactional | **P1** | ✅ Live |
+| 31 | Magazine NY | magazine printing New York | `/magazine-printing-new-york` | seo-product-geo | Magazine Printing in New York \| Epoch Press | Magazine Printing Services in New York | Transactional | **P1** | ✅ Live |
+| 32 | Book NJ | book printing New Jersey | `/book-printing-new-jersey` | seo-product-geo | Book Printing in New Jersey \| Epoch Press | Book Printing Services in New Jersey | Transactional | **P1** | ✅ Live |
+| 33 | Book NY | book printing New York | `/book-printing-new-york` | seo-product-geo | Book Printing in New York \| Epoch Press | Book Printing Services in New York | Transactional | **P1** | ✅ Live |
+| 34 | Marketing NJ | marketing printing New Jersey | `/marketing-printing-new-jersey` | seo-product-geo | Marketing Printing in NJ \| Flyers & Direct Mail | Marketing Print Services in New Jersey | Transactional | **P1** | ✅ Live |
+| 35 | Marketing NY | marketing printing New York | `/marketing-printing-new-york` | seo-product-geo | Marketing Printing in NY \| Flyers & Direct Mail | Marketing Print Services in New York | Transactional | **P1** | ✅ Live |
+| 36 | Menu NJ | menu printing New Jersey | `/menu-printing-new-jersey` | seo-product-geo | Menu Printing in NJ \| Restaurant Menus | Restaurant Menu Printing in New Jersey | Transactional | **P1** | ✅ Live |
+| 37 | Menu NY | menu printing New York | `/menu-printing-new-york` | seo-product-geo | Menu Printing in NY \| Restaurant Menus | Restaurant Menu Printing in New York | Transactional | **P1** | ✅ Live |
 | **Regional / County Keywords (secondary landing pages)** |
 | 20 | North Jersey | printing company North Jersey | `/commercial-printing-new-jersey#north` | — (anchor on NJ page) | — | — | Transactional | **P2** | Anchor |
 | 21 | Hudson Valley | printing services Hudson Valley | `/commercial-printing-new-york#hudson-valley` | — (anchor on NY page) | — | — | Transactional | **P2** | Anchor |
@@ -84,17 +93,30 @@ The initial keyword list was obtained from an AI-generated brainstorm (likely Ch
 
 ```
 Homepage (/)
-  ├── Core Landing: Wayne NJ (/printing-wayne-nj)                    ← P1
-  ├── Core Landing: Middletown NY (/printing-middletown-ny)          ← P1
+  ├── Core Landing: NJ (/commercial-printing-new-jersey)             ← P1
+  ├── Core Landing: NY (/commercial-printing-new-york)               ← P1
+  ├── Core Landing: Tri-State (/commercial-printing-tri-state)       ← P1
   │
-  ├── Service: Newspaper Printing (/newspaper-printing)              ← P1
-  ├── Service: Magazine Printing (/magazine-printing)                ← P1
-  ├── Service: Book Printing (/book-printing)                        ← P1
+  ├── Service: Newspaper Printing (/products/newspaper-printing)     ← P1
+  ├── Service: Magazine Printing (/products/magazine-printing)       ← P1
+  ├── Service: Book Printing (/products/book-printing)               ← P1
+  ├── Service: Marketing Print (/products/marketing-print)           ← P1
+  ├── Service: Menu Printing (/products/menu-printing)               ← P1
   ├── Service: Offset Printing (/offset-printing)                    ← P1
-  ├── Service: Large Format (/large-format-printing)                 ← P2
-  ├── Service: Brochure & Flyer (/brochure-flyer-printing)          ← P2
-  ├── Service: Direct Mail (/direct-mail-printing)                   ← P2
-  ├── Service: Menu Printing (/menu-printing)                        ← P2
+  ├── Service: Large Format (/products/large-format)                 ← P2
+  ├── Service: Business Cards (/products/business-cards)             ← P2
+  │
+  ├── Product × Geo (NJ):                                           ← P1 (NEW April 2026)
+  │   ├── Magazine Printing NJ (/magazine-printing-new-jersey)
+  │   ├── Book Printing NJ (/book-printing-new-jersey)
+  │   ├── Marketing Print NJ (/marketing-printing-new-jersey)
+  │   └── Menu Printing NJ (/menu-printing-new-jersey)
+  │
+  ├── Product × Geo (NY):                                           ← P1 (NEW April 2026)
+  │   ├── Magazine Printing NY (/magazine-printing-new-york)
+  │   ├── Book Printing NY (/book-printing-new-york)
+  │   ├── Marketing Print NY (/marketing-printing-new-york)
+  │   └── Menu Printing NY (/menu-printing-new-york)
   │
   ├── Resource: Printing Cost (/printing-cost)                       ← P2
   ├── Resource: Rush Printing (/rush-printing)                       ← P2
@@ -103,11 +125,15 @@ Homepage (/)
 
 **Required link rules:**
 - Homepage → all 3 state/regional landing pages ("Serving NJ, NY, and the tri-state area")
-- State landing pages → all product/service pages with service name anchors
+- Homepage → all 8 product × geo pages ("Printing Services by Location" section)
+- State landing pages → product × geo pages (4 products per state link to geo-specific pages)
 - State landing pages → each other ("Also serving New York" / "Also serving New Jersey")
+- Product pages → product × geo pages (highlighted NJ/NY links for magazine, book, marketing, menu)
+- Product × geo pages → generic product page + other product × geo pages + state landing pages (cross-links)
 - All product pages → state landing pages + /quote
 - All pages → /quote CTA ("Request a Quote")
-- Footer: NAP block for both facilities (Wayne NJ + Middletown NY)
+- Footer: NAP block for both facilities + all 8 product × geo links in Service Areas
+- Products listing page → "Printing by Location" section with all 8 product × geo links
 
 ---
 
@@ -116,13 +142,14 @@ Homepage (/)
 | Page Type | Count | Priority |
 |-----------|-------|----------|
 | Homepage | 1 | Optimize existing |
-| **State/Regional landing pages** | **3** (NJ + NY + Tri-State) | **P1 — Build** |
-| Service page (new) | 1 (Offset Printing) | P1 — Build |
-| Product pages (existing) | 8 | P1 — Optimize SEO |
-| Resource pages | 3 (cost, rush, file guidelines) | P2 — Build/Optimize |
+| **State/Regional landing pages** | **3** (NJ + NY + Tri-State) | **P1 — Built** ✅ |
+| **Product × Geo landing pages** | **8** (4 products × 2 states) | **P1 — Built** ✅ (April 2026) |
+| Service page (new) | 1 (Offset Printing) | P1 — Built ✅ |
+| Product pages (existing) | 8 | P1 — Optimized ✅ |
+| Resource pages | 3 (cost, rush, file guidelines) | P2 — Built ✅ |
 | Standard pages (about, contact, products, quote) | 4+ | Optimize existing |
-| **Total new pages to build** | **7** (3 landings + 1 service + 3 resources) | |
-| **Total pages to optimize** | **12+** (8 products + 4 standard) | |
+| **Total new pages built** | **15** (3 state + 8 product×geo + 1 service + 3 resources) | |
+| **Total pages optimized** | **12+** (8 products + 4 standard) | |
 
 ---
 

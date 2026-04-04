@@ -16,6 +16,7 @@
 | **Phase 0** | Validate keywords + audit existing pages + add seo to LPs | 0 new (17 seo.json entries + 4 LPs) | Week 1 |
 | **Phase 1** | Build state/regional landings + offset page + optimize 8 product pages | 4 new + 8 optimized | Week 2–3 |
 | **Phase 1.5** | Multi-language LP SEO (ES, YI, ZH-HANT seo objects + hreflang) | 3 LP optimizations | Week 3 |
+| **Phase 1.7** | **Product × Geo landing pages (4 products × 2 states)** | **8 new pages** | **April 2026** ✅ |
 | **Phase 2** | Build P2 pages (remaining services + resources) | 7 new pages | Week 4–5 |
 | **Phase 3** | Near-location pages + language-specific service pages | 4+ new pages | Week 6+ |
 | **Phase 4** | Backlink building (directories, client asks, industry associations) | 15–20 links target | Week 4 → ongoing |
@@ -153,8 +154,52 @@ Product pages already exist at `/products/[slug]`. Optimization means:
 - [ ] Add internal links from product pages → state landing pages
 - [ ] Add "Request a Quote" CTA if missing
 
-### 1.4 Phase 1 Done-Gate
-- [ ] All 4 new pages return HTTP 200 (3 landings + 1 offset)
+### 1.4 Product × Geo Landing Pages (8 NEW pages — April 2026) ✅
+
+> **Rationale:** Generic product pages target national keywords. Generic geo pages target broad location queries. Product × geo pages target the high-intent **intersection** — "magazine printing New Jersey", "book printing New York" — which is where actual purchase decisions happen. These pages stand out from competitor thin pages by including real specs, case studies, certifications, city-level coverage, and stacked schema markup.
+
+| Page | URL | Target Keyword | H1 | Schema |
+|------|-----|----------------|-----|--------|
+| Magazine NJ | `/magazine-printing-new-jersey` | magazine printing New Jersey | Magazine Printing Services in New Jersey | FAQPage + Service + LocalBusiness |
+| Magazine NY | `/magazine-printing-new-york` | magazine printing New York | Magazine Printing Services in New York | FAQPage + Service + LocalBusiness |
+| Book NJ | `/book-printing-new-jersey` | book printing New Jersey | Book Printing Services in New Jersey | FAQPage + Service + LocalBusiness |
+| Book NY | `/book-printing-new-york` | book printing New York | Book Printing Services in New York | FAQPage + Service + LocalBusiness |
+| Marketing NJ | `/marketing-printing-new-jersey` | marketing printing New Jersey | Marketing Print Services in New Jersey | FAQPage + Service + LocalBusiness |
+| Marketing NY | `/marketing-printing-new-york` | marketing printing New York | Marketing Print Services in New York | FAQPage + Service + LocalBusiness |
+| Menu NJ | `/menu-printing-new-jersey` | menu printing New Jersey | Restaurant Menu Printing in New Jersey | FAQPage + Service + LocalBusiness |
+| Menu NY | `/menu-printing-new-york` | menu printing New York | Restaurant Menu Printing in New York | FAQPage + Service + LocalBusiness |
+
+**Each page includes:**
+1. Hero — product icon, H1, subheading with certifications, facility-specific intro
+2. Specs table — binding, paper stocks, trim sizes, finishing options, minimums, turnaround
+3. Case study — named client with challenge/result/quote (e.g., Avenue Living Magazine, Independent Education Publisher)
+4. Certifications — ISO 9001, G7 Color / USPS Certified / FSC with descriptions
+5. Facility details — equipment list, address, phone, hours
+6. Cities served — 20 cities per state with geographic coverage tags
+7. FAQ (6 questions) — product × location specific with FAQPage schema
+8. Cross-links — generic product page, other product × geo pages, state landing page
+9. CTA — product-specific quote link
+
+**Differentiation strategy vs competitors:**
+- Specs-heavy content (competitors use 200 words of fluff)
+- Named case studies with measurable outcomes
+- Certification badges with schema markup (ISO, G7, FSC, USPS)
+- City-level geographic targeting (20 cities per page)
+- Triple schema stack (FAQPage + Service + LocalBusiness)
+- Internal linking web building topical clusters
+
+**Integration points (all completed):**
+- [x] Homepage "Printing Services by Location" section (2-column NJ/NY grid)
+- [x] Products listing page "Printing by Location" section
+- [x] Product detail pages — highlighted NJ/NY links for magazine, book, marketing, menu
+- [x] NJ geo page — service cards link to product-geo pages instead of generic products
+- [x] NY geo page — service cards link to product-geo pages instead of generic products
+- [x] Footer — all 8 pages added to Service Areas column
+- [x] Sitemap — all 8 pages at priority 0.9
+- [x] seo.json — titles and descriptions for all 8 pages
+
+### 1.5 Phase 1 Done-Gate (Updated)
+- [x] All 12 new pages return HTTP 200 (3 state landings + 8 product×geo + 1 offset)
 - [ ] All title tags ≤ 60 chars, descriptions ≤ 155 chars
 - [ ] All H1s unique and contain target keyword
 - [ ] FAQ schema present on all landing pages

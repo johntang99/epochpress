@@ -491,6 +491,59 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Printing Services by Location */}
+      <section className="section-padding-sm bg-[var(--surface)] border-t border-[var(--border)]">
+        <div className="container-content">
+          <div className="text-center mb-10">
+            <h2 className="font-serif text-[var(--navy)] mb-3" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)' }}>
+              Printing Services by Location
+            </h2>
+            <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
+              Specialized printing for magazines, books, marketing materials, and restaurant menus — produced at our NJ and NY facilities.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {([
+              {
+                state: 'New Jersey',
+                facility: 'Wayne, NJ Facility',
+                links: [
+                  { href: '/magazine-printing-new-jersey', label: 'Magazine Printing in NJ' },
+                  { href: '/book-printing-new-jersey', label: 'Book Printing in NJ' },
+                  { href: '/marketing-printing-new-jersey', label: 'Marketing Print in NJ' },
+                  { href: '/menu-printing-new-jersey', label: 'Menu Printing in NJ' },
+                ],
+              },
+              {
+                state: 'New York',
+                facility: 'Middletown, NY Facility',
+                links: [
+                  { href: '/magazine-printing-new-york', label: 'Magazine Printing in NY' },
+                  { href: '/book-printing-new-york', label: 'Book Printing in NY' },
+                  { href: '/marketing-printing-new-york', label: 'Marketing Print in NY' },
+                  { href: '/menu-printing-new-york', label: 'Menu Printing in NY' },
+                ],
+              },
+            ] as const).map((region) => (
+              <div key={region.state} className="bg-white rounded-2xl border border-[var(--border)] p-6 shadow-card">
+                <h3 className="font-serif font-bold text-[var(--navy)] text-lg mb-1">{region.state}</h3>
+                <p className="text-xs text-[var(--text-secondary)] mb-5">{region.facility}</p>
+                <ul className="space-y-3">
+                  {region.links.map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href} className="group flex items-center justify-between text-sm text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors">
+                        <span className="font-medium">{link.label}</span>
+                        <ArrowRight className="w-4 h-4 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose Us */}
       <section className="section-padding bg-white border-t border-[var(--border)]">
         <div className="container-content">

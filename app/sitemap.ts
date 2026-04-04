@@ -44,6 +44,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/offset-printing`, changeFrequency: 'monthly' as const, priority: 0.8 },
     { url: `${BASE_URL}/printing-cost`, changeFrequency: 'monthly' as const, priority: 0.7 },
     { url: `${BASE_URL}/rush-printing`, changeFrequency: 'monthly' as const, priority: 0.7 },
+    { url: `${BASE_URL}/magazine-printing-new-jersey`, changeFrequency: 'monthly' as const, priority: 0.9 },
+    { url: `${BASE_URL}/magazine-printing-new-york`, changeFrequency: 'monthly' as const, priority: 0.9 },
+    { url: `${BASE_URL}/book-printing-new-jersey`, changeFrequency: 'monthly' as const, priority: 0.9 },
+    { url: `${BASE_URL}/book-printing-new-york`, changeFrequency: 'monthly' as const, priority: 0.9 },
+    { url: `${BASE_URL}/marketing-printing-new-jersey`, changeFrequency: 'monthly' as const, priority: 0.9 },
+    { url: `${BASE_URL}/marketing-printing-new-york`, changeFrequency: 'monthly' as const, priority: 0.9 },
+    { url: `${BASE_URL}/menu-printing-new-jersey`, changeFrequency: 'monthly' as const, priority: 0.9 },
+    { url: `${BASE_URL}/menu-printing-new-york`, changeFrequency: 'monthly' as const, priority: 0.9 },
   ];
 
   // Multi-language landing pages

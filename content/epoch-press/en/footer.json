@@ -82,6 +82,38 @@
     {
       "url": "/commercial-printing-tri-state",
       "text": "Tri-State Printing"
+    },
+    {
+      "url": "/magazine-printing-new-jersey",
+      "text": "Magazine Printing NJ"
+    },
+    {
+      "url": "/magazine-printing-new-york",
+      "text": "Magazine Printing NY"
+    },
+    {
+      "url": "/book-printing-new-jersey",
+      "text": "Book Printing NJ"
+    },
+    {
+      "url": "/book-printing-new-york",
+      "text": "Book Printing NY"
+    },
+    {
+      "url": "/marketing-printing-new-jersey",
+      "text": "Marketing Print NJ"
+    },
+    {
+      "url": "/marketing-printing-new-york",
+      "text": "Marketing Print NY"
+    },
+    {
+      "url": "/menu-printing-new-jersey",
+      "text": "Menu Printing NJ"
+    },
+    {
+      "url": "/menu-printing-new-york",
+      "text": "Menu Printing NY"
     }
   ],
   "copyright": "© {year} Epoch Press. All rights reserved.",

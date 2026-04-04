@@ -171,6 +171,40 @@ export default async function ProductsPage() {
         </div>
       </section>
 
+      {/* Service Areas */}
+      <section className="py-16 bg-[var(--surface)] border-t border-[var(--border)]">
+        <div className="container-content">
+          <h2 className="font-serif text-[var(--navy)] mb-3 text-center" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)' }}>
+            Printing by Location
+          </h2>
+          <p className="text-[var(--text-secondary)] text-center mb-10 max-w-2xl mx-auto">
+            Find product-specific printing services near you. Epoch Press serves New Jersey and New York from two production facilities.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div>
+              <h3 className="font-bold text-[var(--navy)] mb-4 text-lg">New Jersey</h3>
+              <ul className="space-y-2">
+                <li><Link href="/magazine-printing-new-jersey" className="text-sm text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors flex items-center gap-2"><ArrowRight className="w-3 h-3" />Magazine Printing in NJ</Link></li>
+                <li><Link href="/book-printing-new-jersey" className="text-sm text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors flex items-center gap-2"><ArrowRight className="w-3 h-3" />Book Printing in NJ</Link></li>
+                <li><Link href="/marketing-printing-new-jersey" className="text-sm text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors flex items-center gap-2"><ArrowRight className="w-3 h-3" />Marketing Print in NJ</Link></li>
+                <li><Link href="/menu-printing-new-jersey" className="text-sm text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors flex items-center gap-2"><ArrowRight className="w-3 h-3" />Menu Printing in NJ</Link></li>
+                <li><Link href="/commercial-printing-new-jersey" className="text-sm text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors flex items-center gap-2"><ArrowRight className="w-3 h-3" />All NJ Printing Services</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold text-[var(--navy)] mb-4 text-lg">New York</h3>
+              <ul className="space-y-2">
+                <li><Link href="/magazine-printing-new-york" className="text-sm text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors flex items-center gap-2"><ArrowRight className="w-3 h-3" />Magazine Printing in NY</Link></li>
+                <li><Link href="/book-printing-new-york" className="text-sm text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors flex items-center gap-2"><ArrowRight className="w-3 h-3" />Book Printing in NY</Link></li>
+                <li><Link href="/marketing-printing-new-york" className="text-sm text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors flex items-center gap-2"><ArrowRight className="w-3 h-3" />Marketing Print in NY</Link></li>
+                <li><Link href="/menu-printing-new-york" className="text-sm text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors flex items-center gap-2"><ArrowRight className="w-3 h-3" />Menu Printing in NY</Link></li>
+                <li><Link href="/commercial-printing-new-york" className="text-sm text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors flex items-center gap-2"><ArrowRight className="w-3 h-3" />All NY Printing Services</Link></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="bg-[var(--surface)] py-16 border-t border-[var(--border)]">
         <div className="container-content text-center">
