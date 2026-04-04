@@ -194,23 +194,23 @@ All 4 LPs have: seo objects, 5 hreflang tags (4 languages + x-default), og:local
 ### URLs to Submit to Google Search Console
 
 ```
-https://nyprintinghub.com/commercial-printing-new-jersey
-https://nyprintinghub.com/commercial-printing-new-york
-https://nyprintinghub.com/commercial-printing-tri-state
-https://nyprintinghub.com/offset-printing
-https://nyprintinghub.com/printing-cost
-https://nyprintinghub.com/rush-printing
-https://nyprintinghub.com/lp/es
-https://nyprintinghub.com/lp/yi
-https://nyprintinghub.com/lp/zh-hant
-https://nyprintinghub.com/magazine-printing-new-jersey    ← NEW April 2026
-https://nyprintinghub.com/magazine-printing-new-york      ← NEW April 2026
-https://nyprintinghub.com/book-printing-new-jersey        ← NEW April 2026
-https://nyprintinghub.com/book-printing-new-york          ← NEW April 2026
-https://nyprintinghub.com/marketing-printing-new-jersey   ← NEW April 2026
-https://nyprintinghub.com/marketing-printing-new-york     ← NEW April 2026
-https://nyprintinghub.com/menu-printing-new-jersey        ← NEW April 2026
-https://nyprintinghub.com/menu-printing-new-york          ← NEW April 2026
+https://www.nyprintinghub.com/commercial-printing-new-jersey
+https://www.nyprintinghub.com/commercial-printing-new-york
+https://www.nyprintinghub.com/commercial-printing-tri-state
+https://www.nyprintinghub.com/offset-printing
+https://www.nyprintinghub.com/printing-cost
+https://www.nyprintinghub.com/rush-printing
+https://www.nyprintinghub.com/lp/es
+https://www.nyprintinghub.com/lp/yi
+https://www.nyprintinghub.com/lp/zh-hant
+https://www.nyprintinghub.com/magazine-printing-new-jersey    ← NEW April 2026
+https://www.nyprintinghub.com/magazine-printing-new-york      ← NEW April 2026
+https://www.nyprintinghub.com/book-printing-new-jersey        ← NEW April 2026
+https://www.nyprintinghub.com/book-printing-new-york          ← NEW April 2026
+https://www.nyprintinghub.com/marketing-printing-new-jersey   ← NEW April 2026
+https://www.nyprintinghub.com/marketing-printing-new-york     ← NEW April 2026
+https://www.nyprintinghub.com/menu-printing-new-jersey        ← NEW April 2026
+https://www.nyprintinghub.com/menu-printing-new-york          ← NEW April 2026
 ```
 
 ---

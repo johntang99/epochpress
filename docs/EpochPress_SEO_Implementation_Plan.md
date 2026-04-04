@@ -225,11 +225,11 @@ Product pages already exist at `/products/[slug]`. Optimization means:
 ### 1.5.2 hreflang Tags (Cross-Language Linking)
 Add to all 4 LPs so Google knows they're language alternatives of the same page:
 ```html
-<link rel="alternate" hreflang="en" href="https://nyprintinghub.com/lp/en" />
-<link rel="alternate" hreflang="es" href="https://nyprintinghub.com/lp/es" />
-<link rel="alternate" hreflang="yi" href="https://nyprintinghub.com/lp/yi" />
-<link rel="alternate" hreflang="zh-Hant" href="https://nyprintinghub.com/lp/zh-hant" />
-<link rel="alternate" hreflang="x-default" href="https://nyprintinghub.com/lp/en" />
+<link rel="alternate" hreflang="en" href="https://www.nyprintinghub.com/lp/en" />
+<link rel="alternate" hreflang="es" href="https://www.nyprintinghub.com/lp/es" />
+<link rel="alternate" hreflang="yi" href="https://www.nyprintinghub.com/lp/yi" />
+<link rel="alternate" hreflang="zh-Hant" href="https://www.nyprintinghub.com/lp/zh-hant" />
+<link rel="alternate" hreflang="x-default" href="https://www.nyprintinghub.com/lp/en" />
 ```
 
 ### 1.5.3 Language-Specific GBP Considerations

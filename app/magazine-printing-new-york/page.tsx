@@ -110,7 +110,7 @@ export default async function MagazinePrintingNYPage() {
         postalCode: '07470',
       },
       telephone: '973.694.3600',
-      url: 'https://nyprintinghub.com',
+      url: 'https://www.nyprintinghub.com',
     },
     areaServed: { '@type': 'State', name: 'New York' },
     hasOfferCatalog: {
@@ -130,7 +130,7 @@ export default async function MagazinePrintingNYPage() {
     name: 'Epoch Press',
     address: { '@type': 'PostalAddress', streetAddress: '7 Highpoint Drive', addressLocality: 'Wayne', addressRegion: 'NJ', postalCode: '07470' },
     telephone: '973.694.3600',
-    url: 'https://nyprintinghub.com',
+    url: 'https://www.nyprintinghub.com',
     areaServed: { '@type': 'State', name: 'New York' },
   };
 

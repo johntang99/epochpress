@@ -144,7 +144,7 @@ export default async function CommercialPrintingTriStatePage() {
       postalCode: '07470',
     },
     telephone: '973.694.3600',
-    url: 'https://nyprintinghub.com',
+    url: 'https://www.nyprintinghub.com',
     areaServed: [{ '@type': 'State', name: 'New Jersey' }, { '@type': 'State', name: 'New York' }],
   };
 

@@ -100,8 +100,8 @@ export default async function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Organization',
               name: 'Epoch Press',
-              url: 'https://nyprintinghub.com',
-              logo: 'https://nyprintinghub.com/logo.png',
+              url: 'https://www.nyprintinghub.com',
+              logo: 'https://www.nyprintinghub.com/logo.png',
               description: 'Full-service commercial printing company in Wayne, NJ. Newspapers, magazines, books, marketing materials.',
               address: {
                 '@type': 'PostalAddress',
