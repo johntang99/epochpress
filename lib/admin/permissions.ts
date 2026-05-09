@@ -42,6 +42,10 @@ export function canManageBookings(user: User) {
   return ['super_admin', 'site_admin'].includes(user.role);
 }
 
+export function canManageQuotes(user: User) {
+  return ['super_admin', 'site_admin'].includes(user.role);
+}
+
 export function canManageMedia(user: User) {
   return ['super_admin', 'site_admin', 'editor'].includes(user.role);
 }

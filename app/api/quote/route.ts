@@ -2,8 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { getDefaultSite, getSiteByHost } from '@/lib/sites';
+import { loadQuoteSettings } from '@/lib/quote/storage';
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+const ALLOWED_QUOTE_STATUSES = new Set(['new', 'reviewing', 'quoted']);
 
 interface QuoteFormData {
   product: string;
@@ -15,6 +17,20 @@ interface QuoteFormData {
   phone?: string;
   company?: string;
   message?: string;
+}
+
+function parseEmailList(value: string | null | undefined): string[] {
+  if (!value) return [];
+  return value
+    .split(',')
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+}
+
+function applyTemplate(template: string, data: QuoteFormData): string {
+  return template
+    .replaceAll('{{product}}', data.productLabel || data.product)
+    .replaceAll('{{name}}', data.name);
 }
 
 function specsToHTML(specs: Record<string, string>): string {
@@ -69,7 +85,10 @@ function createCompanyEmailHTML(data: QuoteFormData): string {
 </body></html>`;
 }
 
-function createCustomerEmailHTML(data: QuoteFormData): string {
+function createCustomerEmailHTML(
+  data: QuoteFormData,
+  options: { intro: string; responseHours: number }
+): string {
   return `
 <!DOCTYPE html>
 <html><body style="margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background-color:#f3f4f6;">
@@ -81,10 +100,10 @@ function createCustomerEmailHTML(data: QuoteFormData): string {
   <div style="background:white;padding:24px;border-radius:0 0 12px 12px;border:1px solid #e5e7eb;border-top:none;">
     <p style="color:#374151;font-size:15px;line-height:1.6;">Hi ${data.name},</p>
     <p style="color:#374151;font-size:15px;line-height:1.6;">
-      Thank you for requesting a quote for <strong>${data.productLabel}</strong>. We've received your project details and our team will review them carefully.
+      ${options.intro}
     </p>
     <p style="color:#374151;font-size:15px;line-height:1.6;">
-      You can expect a detailed quote from us within <strong>24 hours</strong>. If we need any additional information, we'll reach out to you directly.
+      You can expect a detailed quote from us within <strong>${options.responseHours} hours</strong>. If we need any additional information, we'll reach out to you directly.
     </p>
 
     ${Object.keys(data.specs).length > 0 ? `
@@ -121,6 +140,11 @@ export async function POST(request: NextRequest) {
     const host = request.headers.get('host');
     const site = (await getSiteByHost(host)) || (await getDefaultSite());
     const siteId = site?.id || 'epoch-press';
+    const quoteSettings = await loadQuoteSettings(siteId);
+    const defaultStatus =
+      quoteSettings.defaultQuoteStatus && ALLOWED_QUOTE_STATUSES.has(quoteSettings.defaultQuoteStatus)
+        ? quoteSettings.defaultQuoteStatus
+        : 'new';
 
     // Save to database
     const supabase = getSupabaseServerClient();
@@ -139,7 +163,7 @@ export async function POST(request: NextRequest) {
           phone: data.phone || null,
           company: data.company || null,
           message: data.message || null,
-          status: 'new',
+          status: defaultStatus,
         })
         .select('id')
         .single();
@@ -153,16 +177,53 @@ export async function POST(request: NextRequest) {
 
     // Send emails
     if (resend) {
-      const fromAddress = process.env.RESEND_FROM || 'Epoch Press <no-reply@epochpress.com>';
-      const companyEmail = process.env.QUOTE_NOTIFICATION_TO || process.env.CONTACT_FALLBACK_TO || 'info@epochpress.com';
+      const fromAddress =
+        quoteSettings.fromEmail && quoteSettings.fromName
+          ? `${quoteSettings.fromName} <${quoteSettings.fromEmail}>`
+          : process.env.RESEND_FROM || 'Epoch Press <no-reply@epochpress.com>';
+      const configuredRecipients = (quoteSettings.notificationEmails || [])
+        .map((entry) => String(entry).trim())
+        .filter(Boolean);
+      const configuredCc = (quoteSettings.ccEmails || [])
+        .map((entry) => String(entry).trim())
+        .filter(Boolean);
+      const configuredBcc = (quoteSettings.bccEmails || [])
+        .map((entry) => String(entry).trim())
+        .filter(Boolean);
+      const fallbackRecipients = parseEmailList(
+        process.env.QUOTE_NOTIFICATION_TO ||
+          process.env.CONTACT_FALLBACK_TO ||
+          'info@epochpress.com'
+      );
+      const companyRecipients =
+        configuredRecipients.length > 0 ? configuredRecipients : fallbackRecipients;
+      const adminSubjectPrefix = quoteSettings.adminSubjectPrefix
+        ? `${quoteSettings.adminSubjectPrefix} `
+        : '';
+      const customerSubject = applyTemplate(
+        quoteSettings.autoReplySubject || 'Quote Request Received — {{product}} | Epoch Press',
+        data
+      );
+      const customerIntro = applyTemplate(
+        quoteSettings.autoReplyIntro ||
+          "Thank you for requesting a quote. We've received your project details and our team will review them carefully.",
+        data
+      );
+      const responseHours =
+        Number.isFinite(quoteSettings.autoReplyResponseHours) &&
+        Number(quoteSettings.autoReplyResponseHours) > 0
+          ? Number(quoteSettings.autoReplyResponseHours)
+          : 24;
 
       // Email 1: Notify company
       try {
         await resend.emails.send({
           from: fromAddress,
-          to: companyEmail,
-          reply_to: data.email,
-          subject: `New Quote: ${data.productLabel} — ${data.name}${data.company ? ` (${data.company})` : ''}`,
+          to: companyRecipients,
+          cc: configuredCc.length > 0 ? configuredCc : undefined,
+          bcc: configuredBcc.length > 0 ? configuredBcc : undefined,
+          reply_to: quoteSettings.replyToEmail || data.email,
+          subject: `${adminSubjectPrefix}New Quote: ${data.productLabel} — ${data.name}${data.company ? ` (${data.company})` : ''}`,
           html: createCompanyEmailHTML(data),
         });
       } catch (emailErr) {
@@ -170,22 +231,27 @@ export async function POST(request: NextRequest) {
       }
 
       // Email 2: Auto-reply to customer
-      try {
-        await resend.emails.send({
-          from: fromAddress,
-          to: data.email,
-          subject: `Quote Request Received — ${data.productLabel} | Epoch Press`,
-          html: createCustomerEmailHTML(data),
-        });
-      } catch (emailErr) {
-        console.error('Customer auto-reply email failed:', emailErr);
+      if (quoteSettings.autoReplyEnabled !== false) {
+        try {
+          await resend.emails.send({
+            from: fromAddress,
+            to: data.email,
+            subject: customerSubject,
+            html: createCustomerEmailHTML(data, {
+              intro: customerIntro,
+              responseHours,
+            }),
+          });
+        } catch (emailErr) {
+          console.error('Customer auto-reply email failed:', emailErr);
+        }
       }
     }
 
     return NextResponse.json({
       success: true,
       quoteId,
-      message: 'Quote request received. We will respond within 24 hours.',
+      message: `Quote request received. We will respond within ${Number.isFinite(quoteSettings.autoReplyResponseHours) && Number(quoteSettings.autoReplyResponseHours) > 0 ? Number(quoteSettings.autoReplyResponseHours) : 24} hours.`,
     });
   } catch (err) {
     console.error('Quote API error:', err);

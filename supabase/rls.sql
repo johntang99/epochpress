@@ -49,6 +49,13 @@ create policy "deny_public" on public.booking_settings for all
   to anon, authenticated
   using (false) with check (false);
 
+-- Quote settings
+alter table public.quote_settings enable row level security;
+drop policy if exists "deny_public" on public.quote_settings;
+create policy "deny_public" on public.quote_settings for all
+  to anon, authenticated
+  using (false) with check (false);
+
 -- Bookings
 alter table public.bookings enable row level security;
 drop policy if exists "deny_public" on public.bookings;

@@ -468,7 +468,7 @@ For now, this is a starter layout body. Replace it with your full article conten
 
   const handleImport = async (
     mode: 'missing' | 'overwrite' = 'missing',
-    options?: { dryRun?: boolean; force?: boolean }
+    options?: { dryRun?: boolean; force?: boolean; includePaths?: string[]; source?: string }
   ) => {
     setStatus(null);
     setLoading(true);
@@ -483,6 +483,8 @@ For now, this is a starter layout body. Replace it with your full article conten
           mode,
           dryRun: Boolean(options?.dryRun),
           force: Boolean(options?.force),
+          includePaths: options?.includePaths || undefined,
+          source: options?.source || undefined,
         }),
       });
       const payload = await response.json();
@@ -527,7 +529,7 @@ For now, this is a starter layout body. Replace it with your full article conten
         setStatus('Overwrite cancelled due to newer DB entries.');
         return;
       }
-      await handleImport('overwrite', { force: true });
+      await handleImport('overwrite', { force: true, source: 'admin-overwrite-button' });
       return;
     }
 
@@ -545,7 +547,7 @@ For now, this is a starter layout body. Replace it with your full article conten
         'Proceed with overwrite import?'
     );
     if (!confirmed) return;
-    await handleImport('overwrite');
+    await handleImport('overwrite', { source: 'admin-overwrite-button' });
   };
 
   const handleCheckUpdateFromDb = async () => {
@@ -1601,11 +1603,14 @@ For now, this is a starter layout body. Replace it with your full article conten
           <div className="flex items-end gap-2 pt-4 sm:pt-0">
             <button
               type="button"
-              onClick={() => handleImport('missing')}
-              disabled={importing || loading}
+              onClick={() => {
+                if (!activeFile) return;
+                handleImport('missing', { includePaths: [activeFile.path] });
+              }}
+              disabled={importing || loading || !activeFile}
               className="px-3 py-2 rounded-md border border-gray-200 text-xs text-gray-700 hover:bg-gray-50 disabled:opacity-60"
             >
-              {importing ? 'Importing…' : 'Import JSON'}
+              {importing ? 'Syncing…' : 'Sync Current File to DB'}
             </button>
             <button
               type="button"
@@ -1634,6 +1639,9 @@ For now, this is a starter layout body. Replace it with your full article conten
           </div>
         </div>
       </div>
+      <p className="text-xs text-gray-500 -mt-3">
+        Overwrite Import is locale-wide. Sync Current File is scoped to the selected file only.
+      </p>
 
       <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
         <ContentEditorModuleSidebar

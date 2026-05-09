@@ -453,6 +453,23 @@ export interface BookingSettings {
   notificationPhones?: string[];
 }
 
+export interface QuoteSettings {
+  notificationEmails: string[];
+  ccEmails?: string[];
+  bccEmails?: string[];
+  fromName?: string;
+  fromEmail?: string;
+  replyToEmail?: string;
+  autoReplyEnabled?: boolean;
+  autoReplySubject?: string;
+  autoReplyIntro?: string;
+  autoReplyResponseHours?: number;
+  adminSubjectPrefix?: string;
+  defaultQuoteStatus?: 'new' | 'reviewing' | 'quoted';
+  quoteValidityDays?: number;
+  internalOwnerName?: string;
+}
+
 export interface BookingRecord {
   id: string;
   siteId: string;

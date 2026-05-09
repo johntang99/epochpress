@@ -59,6 +59,12 @@ create table if not exists public.booking_settings (
   updated_at timestamptz not null default now()
 );
 
+create table if not exists public.quote_settings (
+  site_id text primary key,
+  settings jsonb not null default '{}'::jsonb,
+  updated_at timestamptz not null default now()
+);
+
 create table if not exists public.bookings (
   id text primary key,
   site_id text not null,

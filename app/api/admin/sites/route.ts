@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createSite, getSiteById, getSites } from '@/lib/sites';
 import { getSessionFromRequest } from '@/lib/admin/auth';
 import { getDefaultFooter } from '@/lib/footer';
-import type { BookingSettings, BookingService } from '@/lib/types';
+import type { BookingSettings, BookingService, QuoteSettings } from '@/lib/types';
 import type { SiteConfig } from '@/lib/types';
 import fs from 'fs/promises';
 import path from 'path';
@@ -18,6 +18,7 @@ import {
   saveBookingServicesDb,
   saveBookingSettingsDb,
 } from '@/lib/booking/db';
+import { loadQuoteSettingsDb, saveQuoteSettingsDb } from '@/lib/quote/db';
 import { listMediaDb, upsertMediaDb } from '@/lib/admin/mediaDb';
 import { filterSitesForUser, isSuperAdmin } from '@/lib/admin/permissions';
 import { writeAuditLog } from '@/lib/admin/audit';
@@ -270,9 +271,48 @@ export async function POST(request: NextRequest) {
       }
     };
 
+    const ensureQuoteSettings = async () => {
+      const quoteRoot = path.join(process.cwd(), 'content', created.id, 'quote');
+      const quoteSettingsPath = path.join(quoteRoot, 'settings.json');
+      const defaultQuoteSettings: QuoteSettings = {
+        notificationEmails: [],
+        ccEmails: [],
+        bccEmails: [],
+        fromName: '',
+        fromEmail: '',
+        replyToEmail: '',
+        autoReplyEnabled: true,
+        autoReplySubject: 'Quote Request Received — {{product}} | Epoch Press',
+        autoReplyIntro:
+          "Thank you for requesting a quote. We've received your project details and our team will review them carefully.",
+        autoReplyResponseHours: 24,
+        adminSubjectPrefix: '',
+        defaultQuoteStatus: 'new',
+        quoteValidityDays: 14,
+        internalOwnerName: '',
+      };
+
+      if (canUseContentDb()) {
+        if (payload.cloneFrom) {
+          const existingQuoteSettings = await loadQuoteSettingsDb(created.id);
+          if (existingQuoteSettings) return;
+        }
+        await saveQuoteSettingsDb(created.id, defaultQuoteSettings);
+        return;
+      }
+
+      await fs.mkdir(quoteRoot, { recursive: true });
+      try {
+        await fs.access(quoteSettingsPath);
+      } catch {
+        await fs.writeFile(quoteSettingsPath, JSON.stringify(defaultQuoteSettings, null, 2));
+      }
+    };
+
     await ensureSeoFiles();
     await ensureFooterFiles();
     await ensureBookingFiles();
+    await ensureQuoteSettings();
 
     const cloneStats = {
       clonedFrom: payload.cloneFrom || null,

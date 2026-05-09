@@ -1,8 +1,14 @@
 # Epoch Press
 
+admin@epochpress.com / admin123
+
+
 
 lsof -ti:3010 | xargs kill -9
 rm -rf .next
+npm run dev
+
+kill -9 $(lsof -tiTCP:3010 -sTCP:LISTEN)
 npm run dev
 
 npm install
@@ -246,6 +252,8 @@ Default credentials (file fallback, no DB):
 | Content | `/admin/content` | Edit all page JSON files (Form + JSON dual mode) |
 | Blog Posts | `/admin/blog-posts` | Create and edit blog articles |
 | Bookings | `/admin/bookings` | View and manage booking records |
+| Quotes | `/admin/quotes` | View and manage quote requests |
+| Quote Settings | `/admin/quote-settings` | Configure quote email recipients and auto-reply |
 | Booking Settings | `/admin/booking-settings` | Configure services, hours, capacity |
 | Media | `/admin/media` | Upload and organize media assets |
 | Users | `/admin/users` | Manage admin users and roles |
@@ -316,6 +324,7 @@ Required variables:
 | `RESEND_API_KEY` | Email delivery (resend.com) |
 | `RESEND_FROM` | From address for contact/notification emails |
 | `CONTACT_FALLBACK_TO` | Email address for contact form submissions |
+| `QUOTE_NOTIFICATION_TO` | Optional fallback recipient(s) for quote notifications (comma-separated) |
 | `UNSPLASH_ACCESS_KEY` | Optional Unsplash search/import key |
 | `PEXELS_API_KEY` | Optional Pexels search/import key |
 

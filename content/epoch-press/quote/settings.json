@@ -1,0 +1,22 @@
+{
+  "notificationEmails": [
+    "wolfgang.lian@epochpress.com"
+  ],
+  "ccEmails": [
+    "hans.he@epochpress.com"
+  ],
+  "bccEmails": [
+    "baamplatform@gmail.com"
+  ],
+  "fromName": "Epoch Press",
+  "fromEmail": "no-reply@baamplatform.com",
+  "replyToEmail": "",
+  "autoReplyEnabled": true,
+  "autoReplySubject": "Quote Request Received — {{product}} | Epoch Press",
+  "autoReplyIntro": "Thank you for requesting a quote. We've received your project details and our team will review them carefully.",
+  "autoReplyResponseHours": 24,
+  "adminSubjectPrefix": "Epoch Press",
+  "defaultQuoteStatus": "new",
+  "quoteValidityDays": 14,
+  "internalOwnerName": ""
+}
